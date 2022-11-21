@@ -1,0 +1,10 @@
+# Installazione
+Per prima cosa, dobbiamo installare R, in modo tale da poterlo usare sul pc. Per fare ciò, collegati a questo <a href="https://cran.r-project.org/bin/windows/base/" target="_blank">sito</a> e procedi con l'installazione come da istruzioni. <br>
+
+... <br>
+
+Fatto?! Ottimo, ora sei pronta ad usare R sul tuo pc, direttamente dal terminale; ma visto che è un modo scomodo e antico, sfruttiamo le potenzialità e le funzianalità di RStudio per essere dei veri professionisti. <br>
+Collegati <a href="https://posit.co/download/rstudio-desktop/" target="_blank">qui</a> e scarica questo fantastico programma.<br>
+
+... <br>
+Fatto?! Perfetto, ora lanciamoci in questo mondo e apriamo RStudio.
