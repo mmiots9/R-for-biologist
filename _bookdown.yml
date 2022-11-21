@@ -1,5 +1,11 @@
 delete_merged_file: true
 language:
+  label:
+    fig: 'Figura '
+    tab: 'Tabella '
+    eq: 'Equazione '
+    exm: 'Esempio '
+    exr: 'Esercizio '
   ui:
     chapter_name: ""
 output_dir: "docs"

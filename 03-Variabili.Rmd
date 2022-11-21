@@ -1,7 +1,7 @@
 # Variabili
 Come detto, spesso abbiamo bisogno che qualche numero (es una concentrazione), qualche tabella (es tabella dei differenziali), informazione (es il nome di una proteina) ecc siano salvati in R per poterli utilizzare successivamente nell'analisi. Ecco che entrano in gioco le <em>variabili</em>, e ora vedremo come salvarle, come riutilizzarle, e che tupi di variabili esistono.
 
-## Salvare una variabile {-}
+## Creare una variabile {-}
 Per salvare una variabile si usa questa dicitura `nome_della_variabile <- cosa_salvare` (al posto di `<-` si può usare anche `=`, ma spesso questo viene usato all'interno delle funzioni per definire un argomento, ma lo vedremo più avanti). 
 <br>
 Scriviamo questo sulla console e vediamo cosa succede:
@@ -22,6 +22,15 @@ Sulla console nulla, ma è apparso qualcosa nella finestra chiamata Environment 
   <li><strong>Size</strong>: quanta memoria occupa quella variabile</li>
   <li><strong>Value</strong>: il valore della variabile, in questo caso 5</li>
 </ul>
+
+Se vogliamo creare più variabili con lo stesso valore possiamo fare così:
+```{r}
+var1 <- var2 <- var3 <- 20
+print(var1)
+print(var2)
+print(var3)
+```
+
 
 ## Usare una variabile {-}
 Per usare una variabile, ci basterà scrivere il nome della variabile nella console. Se, per esempio, volessimo calcolare il quadrato di 5, scriveremmo questo ora:
@@ -62,13 +71,136 @@ Attenzione! Le variabili possono essere sovrascritte (azione <strong>irrimediabi
 Per sovrascrivere una variabile, basta assegnare a quella variabile un nuovo valore:
 ```{r}
 print(myvar)
-```
 
+myvar <- 9
+
+print(myvar)
+```
+Ora `myvar` è uguale a 9, e non c'è alcun modo di tornare indietro...
+<br>
+Questa caratteristica è utile per salvare spazio e non occuparne troppo con variabili che va bene che cambino spesso, ma può essere rischiosa. Bisogna quindi stare attenti quando si nominano le variabili.
 
 ## Elencare le variabili {-}
+Un modo utile per evitare di sovrascrivere una variabile importante è elencare le variabili. Sappiamo che su RStudio sono tutte presenti nella finestra <i>Environment</i>, ma se non fossimo su RStudio ma da altre parti (per esempio sul terminale)?
+<br>
+La risposta è semplice, usiamo la funzione `ls()`
+```{r}
+ls()
+```
+
+Ecco elencate le nostre variabili.
+<br>
+Nota come ho chiamato questo comando col nome <em>funzione</em>: questo concetto lo vedremo bene più avanti, per ora ti basta sapere che esistono e che si possono individuare subito dal fatto che dopo il nome c'è una coppia di patentesi tonde.
+<br>
+
 
 ## Eliminare le variabili {-}
+Per eliminare una variabile si usa la funzione `rm()` e si inserisce la variabile da eliminare:
+```{r}
+# creiamo una variabile
+to_remove <- 1213
+
+# elenchiamo le variabili attuali
+ls()
+
+# rimuoviamo la variabile appena create
+rm(to_remove)
+
+# elenchiamo di nuovo le variabili
+ls()
+```
+Come vediamo, nel secondo caso è stata rimossa la variabile `to_remove`. 
+<br>
+E se volessi rimuovere più variabili? Inseriamo più nomi di variabili dentro la funzione `rm()` separati da virgole:
+
+```{r}
+# creiamo più variabili
+to_remove <- 1213
+to_remove2 <- 685
+
+# elenchiamo le variabili attuali
+ls()
+
+# rimuoviamo le variabili appena create
+rm(to_remove, to_remove2)
+
+# elenchiamo di nuovo le variabili
+ls()
+```
+
+Le due variabili sono state rimosse. 
+<br>
+Ma guardando bene questi codici, vediamo che alcuni iniziano con `#` e non vengono valutati. Cosa sono? Sono i <strong>commenti</strong>, ovvero messaggi che ti scriverai negli script (e vedremo a breve come crearli) per facilitarti nel capire cosa stai facendo. Sono dei veri e propri commenti che puoi aggiungere, e non verranno "valutati" come codice in quanto la riga inizia con `#`. 
+<br>
+
+## Tipi di variabile {-}
+Finora tutto lineare, vero? Benissimo, continuerà ad esserlo tranquilla 🙃. 
+<br>
+<p class="plist">Vediamo quali sono i basilari tipi di variabili che esistono in R, perchè non esistono mica solo i numeri:</p>
+<ul>
+  <li><strong>Numeric</strong>: numeri, possono essere <em>integer</em> (numeri interi) o <i>double</i> (numeri decimali)</li>
+  <li><strong>Character</strong>: caratteri, quindi stringhe di lettere (parole, frasi ecc)</li>
+  <li><strong>Boolean</strong>: `TRUE` o `FALSE`, sono un particolare tipo di variabile che R interpreta a modo suo, ma super super super utile</li>
+</ul>
+
+Vedremo bene nel dettaglio ogni tipo di variabile nei prossimi capitoli. Per sapere di che tipo è una variabile usiamo la funzione `typeof()`:
+```{r}
+typeof(myvar)
+```
+Vediamo che myvar è un double (nonostante sia un valore intero), questo perchè R di base interpreta ogni numero come double, in modo tale da aumentarne la precisione e la possibilità di interagire tra vari numeri senza avre problemi di tipo.
 
 ## Esercizi {-}
+Ok, questa lezione è stata abbastanza lunga, facciamo qualche esercizio per fissare questi concetti bene.
 
-Tipi di variabile nel prossimo
+::: {.exercise #crea-variabili-data-nascita}
+Crea 3 variabili che indicano il giorno, il mese e l'anno della tua nascita (tutti numeri) e vedi i loro valori
+:::
+
+<details>
+  <summary>Soluzione</summary>
+```{r}
+day <- 17
+month <- 4
+year <- 1996
+
+print(day)
+print(month)
+print(year)
+```
+</details>
+
+::: {.exercise #somma-data-nascita}
+Crea una variabile `sum_birth` che contiene la somma delle variabili create nell'esercizio \@ref(exr:crea-variabili-data-nascita) e vedi il risultato.
+:::
+
+<details>
+  <summary>Soluzione</summary>
+```{r}
+sum_birth <- day + month + year
+print(sum_birth)
+```
+</details>
+
+::: {.exercise #creazione-rimozione-variabili}
+Crea 4 variabili (chiamale come vuoi) che contengono il valore 14. Visualizza i nomi di tutte le variabili, elimina due delle variabili appena create e poi visualizza di nuovo i nomi delle variabili.
+:::
+
+<details>
+  <summary>Soluzione</summary>
+```{r}
+# creo 4 variabili con lo stesso valore
+varA <- varB <- varC <- varD <- 14
+
+# visualizzo i nomi di tutte le variabili
+ls()
+
+# elimino due delle variabili appena create
+rm(varA, varC)
+
+# visualizzo i nomi delle variabili appena create
+ls()
+```
+</details>
+
+
+Ottimo, se sei riuscita a fare tutti gli esercizi (e sono sicuro sia così), passa al prossimo capitolo dove inizieremo a guarare nel dettaglio i numeri, come maneggiarli e le operazioni che ci possiamo fare sopra.

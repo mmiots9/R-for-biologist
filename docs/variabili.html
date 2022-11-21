@@ -145,12 +145,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="variabili.html#variabili" id="toc-variabili"><span class="toc-section-number">3</span> Variabili</a>
 <ul>
-<li><a href="variabili.html#salvare-una-variabile" id="toc-salvare-una-variabile">Salvare una variabile</a></li>
+<li><a href="variabili.html#creare-una-variabile" id="toc-creare-una-variabile">Creare una variabile</a></li>
 <li><a href="variabili.html#usare-una-variabile" id="toc-usare-una-variabile">Usare una variabile</a></li>
 <li><a href="variabili.html#nomenclatura-delle-variabili" id="toc-nomenclatura-delle-variabili">Nomenclatura delle variabili</a></li>
 <li><a href="variabili.html#sovrascrittura-delle-variabili" id="toc-sovrascrittura-delle-variabili">Sovrascrittura delle variabili</a></li>
 <li><a href="variabili.html#elencare-le-variabili" id="toc-elencare-le-variabili">Elencare le variabili</a></li>
 <li><a href="variabili.html#eliminare-le-variabili" id="toc-eliminare-le-variabili">Eliminare le variabili</a></li>
+<li><a href="variabili.html#tipi-di-variabile" id="toc-tipi-di-variabile">Tipi di variabile</a></li>
 <li><a href="variabili.html#esercizi" id="toc-esercizi">Esercizi</a></li>
 </ul></li>
 </ul>
@@ -173,8 +174,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="variabili" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Variabili</h1>
 <p>Come detto, spesso abbiamo bisogno che qualche numero (es una concentrazione), qualche tabella (es tabella dei differenziali), informazione (es il nome di una proteina) ecc siano salvati in R per poterli utilizzare successivamente nell’analisi. Ecco che entrano in gioco le <em>variabili</em>, e ora vedremo come salvarle, come riutilizzarle, e che tupi di variabili esistono.</p>
-<div id="salvare-una-variabile" class="section level2 unnumbered">
-<h2>Salvare una variabile</h2>
+<div id="creare-una-variabile" class="section level2 unnumbered">
+<h2>Creare una variabile</h2>
 <p>Per salvare una variabile si usa questa dicitura <code>nome_della_variabile &lt;- cosa_salvare</code> (al posto di <code>&lt;-</code> si può usare anche <code>=</code>, ma spesso questo viene usato all’interno delle funzioni per definire un argomento, ma lo vedremo più avanti).
 <br>
 Scriviamo questo sulla console e vediamo cosa succede:</p>
@@ -202,17 +203,25 @@ Vediamo nel dettaglio queste informazioni:
 <strong>Value</strong>: il valore della variabile, in questo caso 5
 </li>
 </ul>
+<p>Se vogliamo creare più variabili con lo stesso valore possiamo fare così:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="variabili.html#cb4-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> var2 <span class="ot">&lt;-</span> var3 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb4-2"><a href="variabili.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var1)</span></code></pre></div>
+<pre><code>[1] 20</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="variabili.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var2)</span></code></pre></div>
+<pre><code>[1] 20</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="variabili.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var3)</span></code></pre></div>
+<pre><code>[1] 20</code></pre>
 </div>
 <div id="usare-una-variabile" class="section level2 unnumbered">
 <h2>Usare una variabile</h2>
 <p>Per usare una variabile, ci basterà scrivere il nome della variabile nella console. Se, per esempio, volessimo calcolare il quadrato di 5, scriveremmo questo ora:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="variabili.html#cb4-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="sc">**</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="variabili.html#cb10-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="sc">**</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>[1] 25</code></pre>
 <p>Ed ecco che ci viene mostrato il risultato (per calcolare la potenza si può usare sia <code>**</code> sia <code>^</code>).
 <br>
 E se volessimo salvare il risultato? Detto fatto, come prima:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="variabili.html#cb6-1" aria-hidden="true" tabindex="-1"></a>myvar_power <span class="ot">&lt;-</span> myvar <span class="sc">**</span> <span class="dv">2</span></span>
-<span id="cb6-2"><a href="variabili.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar_power)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="variabili.html#cb12-1" aria-hidden="true" tabindex="-1"></a>myvar_power <span class="ot">&lt;-</span> myvar <span class="sc">**</span> <span class="dv">2</span></span>
+<span id="cb12-2"><a href="variabili.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar_power)</span></code></pre></div>
 <pre><code>[1] 25</code></pre>
 <p>Usiamo <code>print(myvar_power)</code> per vedere qui il valore della variabile, avremmo potuto amche scrivere direttamente <code>myvar_power</code>. Vedremo più avanti quando è necessario usare print.</p>
 </div>
@@ -260,18 +269,149 @@ sii coerente all’interno dello script: se decidi di usare il Pascal case, usa 
 <p>Attenzione! Le variabili possono essere sovrascritte (azione <strong>irrimediabile</strong>).
 <br>
 Per sovrascrivere una variabile, basta assegnare a quella variabile un nuovo valore:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="variabili.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="variabili.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
 <pre><code>[1] 5</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="variabili.html#cb16-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb16-2"><a href="variabili.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="variabili.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
+<pre><code>[1] 9</code></pre>
+<p>Ora <code>myvar</code> è uguale a 9, e non c’è alcun modo di tornare indietro…
+<br>
+Questa caratteristica è utile per salvare spazio e non occuparne troppo con variabili che va bene che cambino spesso, ma può essere rischiosa. Bisogna quindi stare attenti quando si nominano le variabili.</p>
 </div>
 <div id="elencare-le-variabili" class="section level2 unnumbered">
 <h2>Elencare le variabili</h2>
+<p>Un modo utile per evitare di sovrascrivere una variabile importante è elencare le variabili. Sappiamo che su RStudio sono tutte presenti nella finestra <i>Environment</i>, ma se non fossimo su RStudio ma da altre parti (per esempio sul terminale)?
+<br>
+La risposta è semplice, usiamo la funzione <code>ls()</code></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="variabili.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code> [1] &quot;a&quot;           &quot;b&quot;           &quot;day&quot;         &quot;month&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_birth&quot;  
+ [8] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;        &quot;varB&quot;        &quot;varD&quot;        &quot;year&quot;       </code></pre>
+<p>Ecco elencate le nostre variabili.
+<br>
+Nota come ho chiamato questo comando col nome <em>funzione</em>: questo concetto lo vedremo bene più avanti, per ora ti basta sapere che esistono e che si possono individuare subito dal fatto che dopo il nome c’è una coppia di patentesi tonde.
+<br></p>
 </div>
 <div id="eliminare-le-variabili" class="section level2 unnumbered">
 <h2>Eliminare le variabili</h2>
+<p>Per eliminare una variabile si usa la funzione <code>rm()</code> e si inserisce la variabile da eliminare:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="variabili.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creiamo una variabile</span></span>
+<span id="cb20-2"><a href="variabili.html#cb20-2" aria-hidden="true" tabindex="-1"></a>to_remove <span class="ot">&lt;-</span> <span class="dv">1213</span></span>
+<span id="cb20-3"><a href="variabili.html#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="variabili.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># elenchiamo le variabili attuali</span></span>
+<span id="cb20-5"><a href="variabili.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code> [1] &quot;a&quot;           &quot;b&quot;           &quot;day&quot;         &quot;month&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_birth&quot;  
+ [8] &quot;to_remove&quot;   &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;        &quot;varB&quot;        &quot;varD&quot;        &quot;year&quot;       </code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="variabili.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rimuoviamo la variabile appena create</span></span>
+<span id="cb22-2"><a href="variabili.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove)</span>
+<span id="cb22-3"><a href="variabili.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="variabili.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># elenchiamo di nuovo le variabili</span></span>
+<span id="cb22-5"><a href="variabili.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code> [1] &quot;a&quot;           &quot;b&quot;           &quot;day&quot;         &quot;month&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_birth&quot;  
+ [8] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;        &quot;varB&quot;        &quot;varD&quot;        &quot;year&quot;       </code></pre>
+<p>Come vediamo, nel secondo caso è stata rimossa la variabile <code>to_remove</code>.
+<br>
+E se volessi rimuovere più variabili? Inseriamo più nomi di variabili dentro la funzione <code>rm()</code> separati da virgole:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="variabili.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creiamo più variabili</span></span>
+<span id="cb24-2"><a href="variabili.html#cb24-2" aria-hidden="true" tabindex="-1"></a>to_remove <span class="ot">&lt;-</span> <span class="dv">1213</span></span>
+<span id="cb24-3"><a href="variabili.html#cb24-3" aria-hidden="true" tabindex="-1"></a>to_remove2 <span class="ot">&lt;-</span> <span class="dv">685</span></span>
+<span id="cb24-4"><a href="variabili.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="variabili.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># elenchiamo le variabili attuali</span></span>
+<span id="cb24-6"><a href="variabili.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code> [1] &quot;a&quot;           &quot;b&quot;           &quot;day&quot;         &quot;month&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_birth&quot;  
+ [8] &quot;to_remove&quot;   &quot;to_remove2&quot;  &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;        &quot;varB&quot;        &quot;varD&quot;       
+[15] &quot;year&quot;       </code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="variabili.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rimuoviamo le variabili appena create</span></span>
+<span id="cb26-2"><a href="variabili.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove, to_remove2)</span>
+<span id="cb26-3"><a href="variabili.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="variabili.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># elenchiamo di nuovo le variabili</span></span>
+<span id="cb26-5"><a href="variabili.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code> [1] &quot;a&quot;           &quot;b&quot;           &quot;day&quot;         &quot;month&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_birth&quot;  
+ [8] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;        &quot;varB&quot;        &quot;varD&quot;        &quot;year&quot;       </code></pre>
+<p>Le due variabili sono state rimosse.
+<br>
+Ma guardando bene questi codici, vediamo che alcuni iniziano con <code>#</code> e non vengono valutati. Cosa sono? Sono i <strong>commenti</strong>, ovvero messaggi che ti scriverai negli script (e vedremo a breve come crearli) per facilitarti nel capire cosa stai facendo. Sono dei veri e propri commenti che puoi aggiungere, e non verranno “valutati” come codice in quanto la riga inizia con <code>#</code>.
+<br></p>
+</div>
+<div id="tipi-di-variabile" class="section level2 unnumbered">
+<h2>Tipi di variabile</h2>
+Finora tutto lineare, vero? Benissimo, continuerà ad esserlo tranquilla 🙃.
+<br>
+<p class="plist">
+Vediamo quali sono i basilari tipi di variabili che esistono in R, perchè non esistono mica solo i numeri:
+</p>
+<ul>
+<li>
+<strong>Numeric</strong>: numeri, possono essere <em>integer</em> (numeri interi) o <i>double</i> (numeri decimali)
+</li>
+<li>
+<strong>Character</strong>: caratteri, quindi stringhe di lettere (parole, frasi ecc)
+</li>
+<li>
+<strong>Boolean</strong>: <code>TRUE</code> o <code>FALSE</code>, sono un particolare tipo di variabile che R interpreta a modo suo, ma super super super utile
+</li>
+</ul>
+<p>Vedremo bene nel dettaglio ogni tipo di variabile nei prossimi capitoli. Per sapere di che tipo è una variabile usiamo la funzione <code>typeof()</code>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="variabili.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(myvar)</span></code></pre></div>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<p>Vediamo che myvar è un double (nonostante sia un valore intero), questo perchè R di base interpreta ogni numero come double, in modo tale da aumentarne la precisione e la possibilità di interagire tra vari numeri senza avre problemi di tipo.</p>
 </div>
 <div id="esercizi" class="section level2 unnumbered">
 <h2>Esercizi</h2>
-<p>Tipi di variabile nel prossimo</p>
+<p>Ok, questa lezione è stata abbastanza lunga, facciamo qualche esercizio per fissare questi concetti bene.</p>
+<div class="exercise">
+<p><span id="exr:crea-variabili-data-nascita" class="exercise"><strong>Esercizio 3.1  </strong></span>Crea 3 variabili che indicano il giorno, il mese e l’anno della tua nascita (tutti numeri) e vedi i loro valori</p>
+</div>
+<details>
+<summary>
+Soluzione
+</summary>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="variabili.html#cb30-1" aria-hidden="true" tabindex="-1"></a>day <span class="ot">&lt;-</span> <span class="dv">17</span></span>
+<span id="cb30-2"><a href="variabili.html#cb30-2" aria-hidden="true" tabindex="-1"></a>month <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb30-3"><a href="variabili.html#cb30-3" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="dv">1996</span></span>
+<span id="cb30-4"><a href="variabili.html#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="variabili.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(day)</span></code></pre></div>
+<pre><code>[1] 17</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="variabili.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(month)</span></code></pre></div>
+<pre><code>[1] 4</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="variabili.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(year)</span></code></pre></div>
+<pre><code>[1] 1996</code></pre>
+</details>
+<div class="exercise">
+<p><span id="exr:somma-data-nascita" class="exercise"><strong>Esercizio 3.2  </strong></span>Crea una variabile <code>sum_birth</code> che contiene la somma delle variabili create nell’esercizio <a href="variabili.html#exr:crea-variabili-data-nascita">3.1</a> e vedi il risultato.</p>
+</div>
+<details>
+<summary>
+Soluzione
+</summary>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="variabili.html#cb36-1" aria-hidden="true" tabindex="-1"></a>sum_birth <span class="ot">&lt;-</span> day <span class="sc">+</span> month <span class="sc">+</span> year</span>
+<span id="cb36-2"><a href="variabili.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum_birth)</span></code></pre></div>
+<pre><code>[1] 2017</code></pre>
+</details>
+<div class="exercise">
+<p><span id="exr:creazione-rimozione-variabili" class="exercise"><strong>Esercizio 3.3  </strong></span>Crea 4 variabili (chiamale come vuoi) che contengono il valore 14. Visualizza i nomi di tutte le variabili, elimina due delle variabili appena create e poi visualizza di nuovo i nomi delle variabili.</p>
+</div>
+<details>
+<summary>
+Soluzione
+</summary>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="variabili.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creo 4 variabili con lo stesso valore</span></span>
+<span id="cb38-2"><a href="variabili.html#cb38-2" aria-hidden="true" tabindex="-1"></a>varA <span class="ot">&lt;-</span> varB <span class="ot">&lt;-</span> varC <span class="ot">&lt;-</span> varD <span class="ot">&lt;-</span> <span class="dv">14</span></span>
+<span id="cb38-3"><a href="variabili.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="variabili.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># visualizzo i nomi di tutte le variabili</span></span>
+<span id="cb38-5"><a href="variabili.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code> [1] &quot;a&quot;           &quot;b&quot;           &quot;day&quot;         &quot;month&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_birth&quot;  
+ [8] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;        &quot;varA&quot;        &quot;varB&quot;        &quot;varC&quot;        &quot;varD&quot;       
+[15] &quot;year&quot;       </code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="variabili.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># elimino due delle variabili appena create</span></span>
+<span id="cb40-2"><a href="variabili.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(varA, varC)</span>
+<span id="cb40-3"><a href="variabili.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="variabili.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># visualizzo i nomi delle variabili appena create</span></span>
+<span id="cb40-5"><a href="variabili.html#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code> [1] &quot;a&quot;           &quot;b&quot;           &quot;day&quot;         &quot;month&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_birth&quot;  
+ [8] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;        &quot;varB&quot;        &quot;varD&quot;        &quot;year&quot;       </code></pre>
+</details>
+<p>Ottimo, se sei riuscita a fare tutti gli esercizi (e sono sicuro sia così), passa al prossimo capitolo dove inizieremo a guarare nel dettaglio i numeri, come maneggiarli e le operazioni che ci possiamo fare sopra.</p>
 
 </div>
 </div>
