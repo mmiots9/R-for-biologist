@@ -1,0 +1,25 @@
+--- 
+title: "Impariamo R, senza paura"
+author: "Matteo Miotto"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+description: |
+ A te, che sei una forza, per il tuo futuro 
+link-citations: yes
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  comment = ""
+)
+```
+
+# About {-}
+Ciao Fede, eccoci arrivati a questo punto. Non sai quanto io sia contento, sia per me che per te: io imparerò man mano ad "insegnare", e tu imparerai un linguaggio che ti rivoluzionerà la vita, ne sono sicuro ahahah
+
+Vedremo come accelerare le analisi, come automatizzarle, come slegarci da quel cancro che è Excel, come fare bei grafici e come guadagnare tempo per fare altre cose.
+
+Per prima cosa però, bisogna partire con l'installazione e qualche concetto base.
+
+Buon viaggio!
