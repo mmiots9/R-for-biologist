@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2022-11-20" />
+<meta name="date" content="2022-11-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="installazione.html"/>
-
+<link rel="next" href="variabili.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -143,6 +143,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="i-primi-passi-su-rstudio.html#console" id="toc-console">Console</a></li>
 </ul></li>
+<li><a href="variabili.html#variabili" id="toc-variabili"><span class="toc-section-number">3</span> Variabili</a>
+<ul>
+<li><a href="variabili.html#salvare-una-variabile" id="toc-salvare-una-variabile">Salvare una variabile</a></li>
+<li><a href="variabili.html#usare-una-variabile" id="toc-usare-una-variabile">Usare una variabile</a></li>
+<li><a href="variabili.html#nomenclatura-delle-variabili" id="toc-nomenclatura-delle-variabili">Nomenclatura delle variabili</a></li>
+<li><a href="variabili.html#sovrascrittura-delle-variabili" id="toc-sovrascrittura-delle-variabili">Sovrascrittura delle variabili</a></li>
+<li><a href="variabili.html#elencare-le-variabili" id="toc-elencare-le-variabili">Elencare le variabili</a></li>
+<li><a href="variabili.html#eliminare-le-variabili" id="toc-eliminare-le-variabili">Eliminare le variabili</a></li>
+<li><a href="variabili.html#esercizi" id="toc-esercizi">Esercizi</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -167,9 +177,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Console</h2>
 <p><img src="images/png/rstudio-console.png" height=30%></p>
 <p>Partiamo dalla console, ovvero lo spazio dove inizieremo a scrivere i primi comandi e dove vengono esposti gli output dei comandi.</p>
-<p>Proviamo subito con una cosa base, usando R come una calcolatrice, scrivendo sulla console</p>
+<p>Proviamo subito con una cosa base, usando R come una calcolatrice, scrivendo sulla console <code>2 + 2</code> e premendo invio.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="i-primi-passi-su-rstudio.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>[1] 4</code></pre>
+<p><br>
+Vediamo che ci consegna come risultato <code>4</code>.
+<br>
+Ora puoi iniziare a giocare un po’ con le varie operazioni, puoi scrivere anche lunghe espressioni e vedrai come immediatamente ti verrà mostrato il risultato.</p>
+<p>… <br>
+Ok, ma ora?! Beh, spesso ci serve che i risultati di alcune operazioni siano salvati, o spesso vogliamo usare lo stesso numero più volte senza dovercelo ricordare, e qui entra in gioco il concetto di <em>variabile</em>.</p>
 
 </div>
 </div>
@@ -178,8 +194,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="installazione.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="installazione.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="variabili.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

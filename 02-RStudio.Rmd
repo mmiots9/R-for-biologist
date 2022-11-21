@@ -15,9 +15,7 @@ Proviamo subito con una cosa base, usando R come una calcolatrice, scrivendo sul
 <br>
 Vediamo che ci consegna come risultato `4`.
 <br>
-Puoi giocare un po' con le varie operazioni, puoi scrivere anche lunghe espressioni e vedrai come immediatamente ti verrà mostrato il risultato.
+Ora puoi iniziare a giocare un po' con le varie operazioni, puoi scrivere anche lunghe espressioni e vedrai come immediatamente ti verrà mostrato il risultato.
 
 ... <br>
 Ok, ma ora?! Beh, spesso ci serve che i risultati di alcune operazioni siano salvati, o spesso vogliamo usare lo stesso numero più volte senza dovercelo ricordare, e qui entra in gioco il concetto di <em>variabile</em>.
-
-

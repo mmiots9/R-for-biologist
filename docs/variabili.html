@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Impariamo R, senza paura</title>
+  <title>3 Variabili | Impariamo R, senza paura</title>
   <meta name="description" content="A te, che sei una forza, per il tuo futuro" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Impariamo R, senza paura" />
+  <meta property="og:title" content="3 Variabili | Impariamo R, senza paura" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Impariamo R, senza paura" />
+  <meta name="twitter:title" content="3 Variabili | Impariamo R, senza paura" />
   
   <meta name="twitter:description" content="A te, che sei una forza, per il tuo futuro" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="i-primi-passi-su-rstudio.html"/>
 
-<link rel="next" href="installazione.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -170,26 +170,118 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Impariamo R, senza paura</h1>
-<p class="author"><em>Matteo Miotto</em></p>
-<p class="date"><em>2022-11-21</em></p>
+<div id="variabili" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Variabili</h1>
+<p>Come detto, spesso abbiamo bisogno che qualche numero (es una concentrazione), qualche tabella (es tabella dei differenziali), informazione (es il nome di una proteina) ecc siano salvati in R per poterli utilizzare successivamente nell’analisi. Ecco che entrano in gioco le <em>variabili</em>, e ora vedremo come salvarle, come riutilizzarle, e che tupi di variabili esistono.</p>
+<div id="salvare-una-variabile" class="section level2 unnumbered">
+<h2>Salvare una variabile</h2>
+<p>Per salvare una variabile si usa questa dicitura <code>nome_della_variabile &lt;- cosa_salvare</code> (al posto di <code>&lt;-</code> si può usare anche <code>=</code>, ma spesso questo viene usato all’interno delle funzioni per definire un argomento, ma lo vedremo più avanti).
+<br>
+Scriviamo questo sulla console e vediamo cosa succede:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="variabili.html#cb3-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
+<p><img src="images/png/rstudio-environment.png" height=30%></p>
+Sulla console nulla, ma è apparso qualcosa nella finestra chiamata Environment (se la tua è diversa, può essere che ci sia l’impostazione vista “Lista” al posto di “Grid” nel riquadro azzurrino, puoi cambiarla a tuo piacimento).
+<br>
+<p class="plist">
+Vediamo nel dettaglio queste informazioni:
+<p>
+<ul>
+<li>
+<strong>Name</strong>: il nome della variabile
+</li>
+<li>
+<strong>Type</strong>: il tipo di variabile (vedremo più avanti di cosa si tratta)
+</li>
+<li>
+<strong>Length:</strong>: la lunghezza della variabile (quanti elementi contiene)
+</li>
+<li>
+<strong>Size</strong>: quanta memoria occupa quella variabile
+</li>
+<li>
+<strong>Value</strong>: il valore della variabile, in questo caso 5
+</li>
+</ul>
 </div>
-<div id="about" class="section level1 unnumbered">
-<h1>About</h1>
-<p>Ciao Fede, eccoci arrivati a questo punto. Non sai quanto io sia contento, sia per me che per te: io imparerò man mano ad “insegnare”, e tu imparerai un linguaggio che ti rivoluzionerà la vita, ne sono sicuro ahahah</p>
-<p>Vedremo come accelerare le analisi, come automatizzarle, come slegarci da quel cancro che è Excel, come fare bei grafici e come guadagnare tempo per fare altre cose.</p>
-<p>Per prima cosa però, bisogna partire con l’installazione e qualche concetto base.</p>
-<p>Buon viaggio!</p>
+<div id="usare-una-variabile" class="section level2 unnumbered">
+<h2>Usare una variabile</h2>
+<p>Per usare una variabile, ci basterà scrivere il nome della variabile nella console. Se, per esempio, volessimo calcolare il quadrato di 5, scriveremmo questo ora:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="variabili.html#cb4-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="sc">**</span> <span class="dv">2</span></span></code></pre></div>
+<pre><code>[1] 25</code></pre>
+<p>Ed ecco che ci viene mostrato il risultato (per calcolare la potenza si può usare sia <code>**</code> sia <code>^</code>).
+<br>
+E se volessimo salvare il risultato? Detto fatto, come prima:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="variabili.html#cb6-1" aria-hidden="true" tabindex="-1"></a>myvar_power <span class="ot">&lt;-</span> myvar <span class="sc">**</span> <span class="dv">2</span></span>
+<span id="cb6-2"><a href="variabili.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar_power)</span></code></pre></div>
+<pre><code>[1] 25</code></pre>
+<p>Usiamo <code>print(myvar_power)</code> per vedere qui il valore della variabile, avremmo potuto amche scrivere direttamente <code>myvar_power</code>. Vedremo più avanti quando è necessario usare print.</p>
+</div>
+<div id="nomenclatura-delle-variabili" class="section level2 unnumbered">
+<h2>Nomenclatura delle variabili</h2>
+Come in ogni cosa, anche nel nominare le variabili ci sono regole e linee guida. Non spaventarti, sono semplici e ti faciliteranno la vita, vediamole insieme.
+<br>
+<p class="plist">
+Regole:
+<p>
+<ul>
+<li>
+il nome della variabile <strong>NON</strong> può iniziare con un carattere diverso da una lettera
+</li>
+<li>
+il nome può contenere sia lettere che numeri (case sensitive, maiuscole e minuscole contano)
+</li>
+<li>
+il nome può contenere come caratteri speciali <strong>solo</strong> il punto <code>.</code> o l’underscore <code>_</code>
+</li>
+</ul>
+<p class="plist">
+Linee guida:
+<p>
+<ul>
+<li>
+dal momento che il nome delle variabili deve essere utile, il suo nome deve suggerire qualcosa: per esempio, precedentemente era stata definita la variabile <code>myvar</code>, il cui significato è pari a 0 (evita dunque questi nomi), mentre <code>myvar_power</code> è già più indicativo, in quanto ci dice che è elevato ad una potenza
+</li>
+<li>
+normalmente le variabili si scrivono con le lettere minuscole, tranne quelle che vuoi che rimangano costanti nella tua analisi, che in altri linguaggi si scrivono in maiuscolo (questo non le fa diventare immutabili, ma ci suggerisce questa caratteristica all’interno dello script)
+</li>
+<li>
+tra i caratteri speciali, usa l’underscore piuttosto che il punto se puoi
+</li>
+<li>
+se il nome della variabile contiene più di una parola, puoi separarle con l’underscore (come nell’esempio) o usare il camel case (myvarPower) o il Pascal case (MyvarPower)
+</li>
+<li>
+sii coerente all’interno dello script: se decidi di usare il Pascal case, usa sempre il Pascal case in quello script
+</li>
+</ul>
+</div>
+<div id="sovrascrittura-delle-variabili" class="section level2 unnumbered">
+<h2>Sovrascrittura delle variabili</h2>
+<p>Attenzione! Le variabili possono essere sovrascritte (azione <strong>irrimediabile</strong>).
+<br>
+Per sovrascrivere una variabile, basta assegnare a quella variabile un nuovo valore:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="variabili.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
+<pre><code>[1] 5</code></pre>
+</div>
+<div id="elencare-le-variabili" class="section level2 unnumbered">
+<h2>Elencare le variabili</h2>
+</div>
+<div id="eliminare-le-variabili" class="section level2 unnumbered">
+<h2>Eliminare le variabili</h2>
+</div>
+<div id="esercizi" class="section level2 unnumbered">
+<h2>Esercizi</h2>
+<p>Tipi di variabile nel prossimo</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="i-primi-passi-su-rstudio.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="installazione.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
