@@ -1,6 +1,6 @@
-exr:crea-variabili-data-nascita
-exr:somma-data-nascita
-exr:creazione-rimozione-variabili
-installazione
-i-primi-passi-su-rstudio
-variabili
+exr:create-variables
+exr:sum-weights
+exr:remove-variables
+installation
+first-step-in-rstudio
+variables

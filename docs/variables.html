@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Variables | Learn R for biologist, with no fear</title>
+  <meta name="description" content="For you, who never gives up, for your future" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Variables | Learn R for biologist, with no fear" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="For you, who never gives up, for your future" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Variables | Learn R for biologist, with no fear" />
+  
+  <meta name="twitter:description" content="For you, who never gives up, for your future" />
+  
+
+<meta name="author" content="Matteo Miotto" />
+
+
+<meta name="date" content="2022-11-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="first-step-in-rstudio.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Impariamo R</a></li>
+<li class="divider"></li>
+<li><a href="index.html#about" id="toc-about">About</a></li>
+<li><a href="installation.html#installation" id="toc-installation"><span class="toc-section-number">1</span> Installation</a></li>
+<li><a href="first-step-in-rstudio.html#first-step-in-rstudio" id="toc-first-step-in-rstudio"><span class="toc-section-number">2</span> First step in RStudio</a>
+<ul>
+<li><a href="first-step-in-rstudio.html#console" id="toc-console">Console</a></li>
+</ul></li>
+<li><a href="variables.html#variables" id="toc-variables"><span class="toc-section-number">3</span> Variables</a>
+<ul>
+<li><a href="variables.html#create-a-variable" id="toc-create-a-variable">Create a variable</a></li>
+<li><a href="variables.html#use-a-variable" id="toc-use-a-variable">Use a variable</a></li>
+<li><a href="variables.html#variable-names" id="toc-variable-names">Variable names</a></li>
+<li><a href="variables.html#overwriting-variables" id="toc-overwriting-variables">Overwriting variables</a></li>
+<li><a href="variables.html#list-all-variables" id="toc-list-all-variables">List all variables</a></li>
+<li><a href="variables.html#delete-variables" id="toc-delete-variables">Delete variables</a></li>
+<li><a href="variables.html#type-of-variables" id="toc-type-of-variables">Type of variables</a></li>
+<li><a href="variables.html#exercises" id="toc-exercises">Exercises</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learn R for biologist, with no fear</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="variables" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Variables</h1>
+<p>As mentioned, we often need some number (eg a concentration), some table (eg table of differentially expressed genes), information (eg the name of a protein) etc. to be saved in R to be able to use them later in the analysis. This is where <em>variables</em> come into play, and now we’ll see how to create them, how to reuse them, and what kinds of variables exist.</p>
+<div id="create-a-variable" class="section level2 unnumbered">
+<h2>Create a variable</h2>
+<p>To create a variable we write <code>name_of_the_variable &lt;- what_to_save</code> (you can either use <code>=</code> instead of <code>&lt;-</code>, even if the former is usually used for declaring arguments in a function, but we’ll see it later).
+<br>
+Now, write this to the console, click Return/send on the keyborard, and see what happens:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="variables.html#cb3-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
+<p><img src="images/png/rstudio-environment.png" height=30%></p>
+On the console nothing happens, but something appeared in the window called Environment (if yours is different, it may be that there is the “List” view setting instead of “Grid” in the blue box, you can change it to your liking).
+<br>
+<p class="plist">
+Here in details the info given for each variable:
+<p>
+<ul>
+<li>
+<strong>Name</strong>: name of the variable
+</li>
+<li>
+<strong>Type</strong>: type of the variable (don’t worry, we’ll see in a minute what this means)
+</li>
+<li>
+<strong>Length:</strong>: the length of the variable (how many items it contains)
+</li>
+<li>
+<strong>Size</strong>: how much memory that variable occupies
+</li>
+<li>
+<strong>Value</strong>: the value of our variable
+</li>
+</ul>
+<p>If we want to create multiple variables with the same value we can do this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="variables.html#cb4-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> var2 <span class="ot">&lt;-</span> var3 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb4-2"><a href="variables.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var1)</span></code></pre></div>
+<pre><code>[1] 20</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="variables.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var2)</span></code></pre></div>
+<pre><code>[1] 20</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="variables.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var3)</span></code></pre></div>
+<pre><code>[1] 20</code></pre>
+</div>
+<div id="use-a-variable" class="section level2 unnumbered">
+<h2>Use a variable</h2>
+<p>Ok, but once stored, how to we use a variable? Easy, we just need to type it in the console (or start writing the first letters of its name and press Tab to show RStudio suggestions). If, for example, we want to calculate the power of our variable we should write:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="variables.html#cb10-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="sc">**</span> <span class="dv">2</span></span></code></pre></div>
+<pre><code>[1] 25</code></pre>
+<p>And here is the result (to elevate to the power we can either use <code>**</code> or <code>^</code>).
+<br>
+And what if we want to store this result? As before:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="variables.html#cb12-1" aria-hidden="true" tabindex="-1"></a>myvar_power <span class="ot">&lt;-</span> myvar <span class="sc">**</span> <span class="dv">2</span></span>
+<span id="cb12-2"><a href="variables.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar_power)</span></code></pre></div>
+<pre><code>[1] 25</code></pre>
+<p>Here we use <code>print()</code> function, but in R we can also just write the name of the variable to see it.</p>
+</div>
+<div id="variable-names" class="section level2 unnumbered">
+<h2>Variable names</h2>
+As in everything, even in naming variables there are rules and guidelines. Don’t be scared, they are simple and will make your life easier, let’s see them together.
+<br>
+<p class="plist">
+Rules:
+<p>
+<ul>
+<li>
+Variable name <strong>CANNOT</strong> start with a character other than a letter
+</li>
+<li>
+Variable name can contain both letters and numbers (case sensitive, uppercase and lowercase matter)
+</li>
+<li>
+Variable name may contain as special characters <strong>only</strong> the dot <code>.</code> or the underscore <code>_</code>
+</li>
+</ul>
+<p class="plist">
+Guidelines:
+<p>
+<ul>
+<li>
+Since the name of the variable must be useful, its name must suggest something: for example, the variable <code>myvar</code> was previously defined, whose meaning is equal to 0 (so avoid these names), while <code>myvar_power</code> is more indicative, as it tells us that it is raised to a power
+</li>
+<li>
+Variables are normally written in lowercase letters, except for those you want to remain constant in your analysis, which in other languages are written in uppercase (this does not make them immutable, but suggests this feature within the script)
+</li>
+<li>
+Use underscores rather than periods as special characters in variable names if you can
+</li>
+<li>
+If the variable name contains more than one word, you can separate them with an underscore (as in the example) or use the camel case (myvarPower) or the Pascal case (MyvarPower)
+</li>
+<li>
+Be consistent within the script: if you decide to use the Pascal case, always use the Pascal case in that script
+</li>
+</ul>
+</div>
+<div id="overwriting-variables" class="section level2 unnumbered">
+<h2>Overwriting variables</h2>
+<p>Attention! Variables can be overwritten (<strong>unrecoverable</strong> action).
+<br>
+To override a variable, simply assign that variable a new value:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="variables.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
+<pre><code>[1] 5</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="variables.html#cb16-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb16-2"><a href="variables.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="variables.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
+<pre><code>[1] 9</code></pre>
+<p>Now <code>myvar</code> is equal to 9, and there is no way back…
+<br>
+This feature is useful for saving space and not cluttering up too much with variables that are okay to change often, but it can be risky. So be careful when naming variables.</p>
+</div>
+<div id="list-all-variables" class="section level2 unnumbered">
+<h2>List all variables</h2>
+<p>A useful way to avoid overwriting an important variable is to list the variables. We know that in RStudio they are all present in the <i>Environment</i> window, but what if we weren’t in RStudio but elsewhere (for example in the terminal)?
+<br>
+The answer is simple, let’s use the <code>ls()</code> function</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="variables.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<p>Here are our variables.
+<br>
+Note how I called this command with the name <em>function</em>: we will cover this concept later, for now you just need to know that they exist and that they can be identified immediately by the fact that after the name there is a pair of round brackets.
+<br></p>
+</div>
+<div id="delete-variables" class="section level2 unnumbered">
+<h2>Delete variables</h2>
+<p>To delete a variable, use the <code>rm()</code> function and insert the variable to be deleted:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="variables.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a variable</span></span>
+<span id="cb20-2"><a href="variables.html#cb20-2" aria-hidden="true" tabindex="-1"></a>to_remove <span class="ot">&lt;-</span> <span class="dv">1213</span></span>
+<span id="cb20-3"><a href="variables.html#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="variables.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
+<span id="cb20-5"><a href="variables.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;to_remove&quot;   &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="variables.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variable</span></span>
+<span id="cb22-2"><a href="variables.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove)</span>
+<span id="cb22-3"><a href="variables.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="variables.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
+<span id="cb22-5"><a href="variables.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<p>As we see, in the second case the <code>to_remove</code> variable has been removed.
+<br>
+What if I want to remove multiple variables? Let’s put multiple variable names inside the <code>rm()</code> function separated by commas:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="variables.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create various variables</span></span>
+<span id="cb24-2"><a href="variables.html#cb24-2" aria-hidden="true" tabindex="-1"></a>to_remove <span class="ot">&lt;-</span> <span class="dv">1213</span></span>
+<span id="cb24-3"><a href="variables.html#cb24-3" aria-hidden="true" tabindex="-1"></a>to_remove2 <span class="ot">&lt;-</span> <span class="dv">685</span></span>
+<span id="cb24-4"><a href="variables.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="variables.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
+<span id="cb24-6"><a href="variables.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;to_remove&quot;   &quot;to_remove2&quot;  &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="variables.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variables</span></span>
+<span id="cb26-2"><a href="variables.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove, to_remove2)</span>
+<span id="cb26-3"><a href="variables.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="variables.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
+<span id="cb26-5"><a href="variables.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<p>The two variables have been removed.
+<br>
+But looking closely at these codes, we see that some start with <code>#</code> and are not evaluated. What are they? These are the <strong>comments</strong>, i.e. messages that you will write in the scripts (and we will see later how to create them) to help you understand what you are doing. They are actual comments that you can add, and will not be “evaluated” as code as the line starts with <code>#</code>.
+<br></p>
+</div>
+<div id="type-of-variables" class="section level2 unnumbered">
+<h2>Type of variables</h2>
+So far so linear, right? Great, it will continue to be as easy 🙃.
+<br>
+<p class="plist">
+Let’s see what are the basic types of variables that exist in R:
+</p>
+<ul>
+<li>
+<strong>Numeric</strong>: numbers, can be <em>integer</em> (whole numbers) or <i>double</i> (decimal numbers)
+</li>
+<li>
+<strong>Character</strong>: characters, therefore strings of letters (words, sentences, etc.)
+</li>
+<li>
+<strong>Boolean</strong>: <code>TRUE</code> or <code>FALSE</code>, are a special type of variable that R interprets in its own way, but super super super useful
+</li>
+<li>
+<strong>Factor</strong>: similar to character, but with peculiar features (and memory saving), often used for categorical variables such as male/female, heterozygous/wild-type
+</li>
+</ul>
+<p>We will see each type of variable in detail in next chapters. To find out what type a variable is we use the <code>typeof()</code> function:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="variables.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(myvar)</span></code></pre></div>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<p>We see that myvar is a double (although it is an integer value), this is because R basically interprets every number as a double, so as to increase its precision and the possibility of operations between various numbers without having type problems.</p>
+</div>
+<div id="exercises" class="section level2 unnumbered">
+<h2>Exercises</h2>
+<p>Ok, this chapter was long enough, let’s do some exercises to fix well these concepts.</p>
+<div class="exercise">
+<p><span id="exr:create-variables" class="exercise"><strong>Exercise 3.1  </strong></span>Create 3 variables indicating the weights of 3 mice.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="variables.html#cb30-1" aria-hidden="true" tabindex="-1"></a>mice1 <span class="ot">&lt;-</span> <span class="fl">5.8</span></span>
+<span id="cb30-2"><a href="variables.html#cb30-2" aria-hidden="true" tabindex="-1"></a>mice2 <span class="ot">&lt;-</span> <span class="fl">4.8</span></span>
+<span id="cb30-3"><a href="variables.html#cb30-3" aria-hidden="true" tabindex="-1"></a>mice3 <span class="ot">&lt;-</span> <span class="fl">7.5</span></span>
+<span id="cb30-4"><a href="variables.html#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="variables.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice1)</span></code></pre></div>
+<pre><code>[1] 5.8</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="variables.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice2)</span></code></pre></div>
+<pre><code>[1] 4.8</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="variables.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice3)</span></code></pre></div>
+<pre><code>[1] 7.5</code></pre>
+</details>
+<div class="exercise">
+<p><span id="exr:sum-weights" class="exercise"><strong>Exercise 3.2  </strong></span>Create the variable <code>sum_weights</code> as the sum of the weights of those 3 mice.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="variables.html#cb36-1" aria-hidden="true" tabindex="-1"></a>sum_weights <span class="ot">&lt;-</span> mice1 <span class="sc">+</span> mice2 <span class="sc">+</span> mice3</span>
+<span id="cb36-2"><a href="variables.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum_weights)</span></code></pre></div>
+<pre><code>[1] 18.1</code></pre>
+</details>
+<div class="exercise">
+<p><span id="exr:remove-variables" class="exercise"><strong>Exercise 3.3  </strong></span>Create 4 other variables for other 4 mice that weight 20 g. Then you realize you did a mistake and you choose to delete 3 of them and change the fourth to 7.7.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="variables.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create 4 variables</span></span>
+<span id="cb38-2"><a href="variables.html#cb38-2" aria-hidden="true" tabindex="-1"></a>mice4 <span class="ot">&lt;-</span> mice5 <span class="ot">&lt;-</span> mice6 <span class="ot">&lt;-</span> mice7 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb38-3"><a href="variables.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="variables.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
+<span id="cb38-5"><a href="variables.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;mice5&quot;       &quot;mice6&quot;       &quot;mice7&quot;      
+ [8] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="variables.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete 3 of the just-created variables</span></span>
+<span id="cb40-2"><a href="variables.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(mice5, mice6, mice7)</span>
+<span id="cb40-3"><a href="variables.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="variables.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
+<span id="cb40-5"><a href="variables.html#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot;
+ [8] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="variables.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change the value of one variable</span></span>
+<span id="cb42-2"><a href="variables.html#cb42-2" aria-hidden="true" tabindex="-1"></a>mice4 <span class="ot">&lt;-</span> <span class="fl">7.7</span></span>
+<span id="cb42-3"><a href="variables.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="variables.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice4)</span></code></pre></div>
+<pre><code>[1] 7.7</code></pre>
+</details>
+<p>Alright, if you have done all the exercises (and I’m sure you have), we can move on to the next chapter in which we briefly talk about scripts and saving the environment.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="first-step-in-rstudio.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

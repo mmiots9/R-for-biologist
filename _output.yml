@@ -4,4 +4,3 @@ bookdown::gitbook:
     toc:
       before: |
         <li><a href="./">Impariamo R</a></li>
-    download: ["pdf", "epub"]

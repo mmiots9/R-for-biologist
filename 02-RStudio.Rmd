@@ -1,21 +1,21 @@
-# I primi passi su RStudio
+# First step in RStudio
 
-Non farti intimidire da queste finestre che vedi aperte, pian piano le vedremo una ad una.
+Don't be intimidated by all these windows that you see open, we will slowly dig into them one by one.
 
 ## Console {.unnumbered}
 <img src="images/png/rstudio-console.png" height=30%>
 
-Partiamo dalla console, ovvero lo spazio dove inizieremo a scrivere i primi comandi e dove vengono esposti gli output dei comandi.
+Let's start from the console, that is the space where we will start writing the first commands and where their outputs are displayed.
 
-Proviamo subito con una cosa base, usando R come una calcolatrice, scrivendo sulla console `2 + 2` e premendo invio.
+Let's try a basic thing right away, using R as a calculator, type `2 + 2` on the console and press enter.
 
 ```{r}
 2+2
 ```
 <br>
-Vediamo che ci consegna come risultato `4`.
+Easy right? It returns `4`.
 <br>
-Ora puoi iniziare a giocare un po' con le varie operazioni, puoi scrivere anche lunghe espressioni e vedrai come immediatamente ti verrà mostrato il risultato.
+Now you can start playing a bit with the various operations, you can also write long expressions and you will see how the result will be shown immediately.
 
 ... <br>
-Ok, ma ora?! Beh, spesso ci serve che i risultati di alcune operazioni siano salvati, o spesso vogliamo usare lo stesso numero più volte senza dovercelo ricordare, e qui entra in gioco il concetto di <em>variabile</em>.
+Ok, but... usually we need the results of some operation to be saved, or often we want to use the same number several times without having to remember it, and this is where the concept of <em>variable</em> comes into play.

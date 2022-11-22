@@ -1,11 +1,11 @@
 --- 
-title: "Impariamo R, senza paura"
+title: "Learn R for biologist, with no fear"
 author: "Matteo Miotto"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 description: |
- A te, che sei una forza, per il tuo futuro 
+ For you, who never gives up, for your future
 link-citations: yes
 ---
 
@@ -16,10 +16,10 @@ knitr::opts_chunk$set(
 ```
 
 # About {-}
-Ciao Fede, eccoci arrivati a questo punto. Non sai quanto io sia contento, sia per me che per te: io imparerò man mano ad "insegnare", e tu imparerai un linguaggio che ti rivoluzionerà la vita, ne sono sicuro ahahah
+Ciao Fede, here we are. You really don't know how happy I am for both of us: I'll learn how to "teach", while you'll learn a coding language that will revolutionize your life, I'm sure of it hahaha
 
-Vedremo come accelerare le analisi, come automatizzarle, come slegarci da quel cancro che è Excel, come fare bei grafici e come guadagnare tempo per fare altre cose.
+We'll see how to speed up analyses, how to automate them, how to untie ourselves from that cancer that is Excel, how to make beautiful graphs and how to gain time to do other things.
 
-Per prima cosa però, bisogna partire con l'installazione e qualche concetto base.
+First, you need to start with the installation and some basic concepts.
 
-Buon viaggio!
+Let's start this beautiful journey!
