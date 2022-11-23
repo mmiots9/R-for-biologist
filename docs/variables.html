@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2022-11-22" />
+<meta name="date" content="2022-11-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="first-step-in-rstudio.html"/>
-
+<link rel="next" href="scripts.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="variables.html#type-of-variables" id="toc-type-of-variables">Type of variables</a></li>
 <li><a href="variables.html#exercises" id="toc-exercises">Exercises</a></li>
 </ul></li>
+<li><a href="scripts.html#scripts" id="toc-scripts"><span class="toc-section-number">4</span> Scripts</a></li>
 </ul>
 
       </nav>
@@ -284,7 +285,8 @@ This feature is useful for saving space and not cluttering up too much with vari
 <br>
 The answer is simple, let’s use the <code>ls()</code> function</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="variables.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<pre><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot;
+ [8] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
 <p>Here are our variables.
 <br>
 Note how I called this command with the name <em>function</em>: we will cover this concept later, for now you just need to know that they exist and that they can be identified immediately by the fact that after the name there is a pair of round brackets.
@@ -298,13 +300,15 @@ Note how I called this command with the name <em>function</em>: we will cover th
 <span id="cb20-3"><a href="variables.html#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-4"><a href="variables.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb20-5"><a href="variables.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;to_remove&quot;   &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<pre><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot;
+ [8] &quot;to_remove&quot;   &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="variables.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variable</span></span>
 <span id="cb22-2"><a href="variables.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove)</span>
 <span id="cb22-3"><a href="variables.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-4"><a href="variables.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb22-5"><a href="variables.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<pre><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot;
+ [8] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
 <p>As we see, in the second case the <code>to_remove</code> variable has been removed.
 <br>
 What if I want to remove multiple variables? Let’s put multiple variable names inside the <code>rm()</code> function separated by commas:</p>
@@ -314,13 +318,15 @@ What if I want to remove multiple variables? Let’s put multiple variable names
 <span id="cb24-4"><a href="variables.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-5"><a href="variables.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb24-6"><a href="variables.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;to_remove&quot;   &quot;to_remove2&quot;  &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<pre><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot;
+ [8] &quot;to_remove&quot;   &quot;to_remove2&quot;  &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="variables.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variables</span></span>
 <span id="cb26-2"><a href="variables.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove, to_remove2)</span>
 <span id="cb26-3"><a href="variables.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-4"><a href="variables.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb26-5"><a href="variables.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<pre><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot;
+ [8] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
 <p>The two variables have been removed.
 <br>
 But looking closely at these codes, we see that some start with <code>#</code> and are not evaluated. What are they? These are the <strong>comments</strong>, i.e. messages that you will write in the scripts (and we will see later how to create them) to help you understand what you are doing. They are actual comments that you can add, and will not be “evaluated” as code as the line starts with <code>#</code>.
@@ -420,8 +426,8 @@ Solution
           </div>
         </div>
       </div>
-<a href="first-step-in-rstudio.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="first-step-in-rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="scripts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

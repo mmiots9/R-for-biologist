@@ -4,3 +4,4 @@ exr:remove-variables
 installation
 first-step-in-rstudio
 variables
+scripts
