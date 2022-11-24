@@ -1,0 +1,122 @@
+# Numbers
+I know you know what numbers are, and we've already seen that we have two types of numbers in R: integers and doubles; so, let's move to see them in action.
+
+## Operations {-}
+First of all, here is  how to do basic mathematical operation in R:
+```{r}
+# Plus, minus, multiply, divide
+5 + 4 - 2 * 3 / 2
+
+# Power
+4 ** 3
+
+# Logarithm
+log(100) # base e
+log10(100) # base 10
+log2(100) # base 2
+log(100, base = 3) # choose the base
+
+# Natural exponential
+exp(2)
+
+# Square root
+sqrt(9)
+```
+
+An interesting operator is the modulus (%%) which returns the remainder of a division, for example:
+
+```{r}
+7 %% 3
+```
+
+This can be useful to evaluate if a number is even or odd by calculating the remainder of the division x / 2 (so using x %% 2): if it is 0, the number x is even, otherwise it is odd.
+```{r}
+11 %% 2
+12 %% 2
+```
+
+## Rounding {-}
+Another thing that we usually want to do is to round decimal number, especially after log transformation or division. To do so, we have 3 functions:
+
+```{r}
+# Round to n decimal places
+round(x = 1/3, digits = 2)
+
+# Round to upper integer
+ceiling(10.2)
+
+
+# Round to lower integer
+floor(14.9)
+```
+
+Look how ceiling and floor do not take into account the decimal part, even if it is greater or lower than 0.5.
+
+## Tranform to type number {-}
+Sometimes you want to transform a string that contains a number to a numeric type in R. I know we haven't covered strings yet (next chapter will be on them), but let's do a bit step forward now just to see this super useful function, that we use a lot when dealing with dataframes.
+<br>
+To do so, we'll use the function called `as.numeric()`
+```{r}
+mystring <- "15" # This is a string, can you guess why R interpret it as a string?
+typeof(mystring)
+
+mynumber <- as.numeric(mystring)
+typeof(mynumber)
+```
+Wow, you will find this super super super useful.
+
+## Exercises {-}
+Let's now put in practice what we have seen in this chapter and in the previous (remember? the script... I want you to write a script with these exercises and save it)
+
+::: {.exercise #mean-calc}
+The results of a Real-Time PCR indicate that your triplicates for FOXP1 have these Ct: 22.4, 22.31, 22.24. Calculate the mean value and print it rounded to 2 decimal places.
+:::
+
+<details>
+  <summary>Solution</summary>
+```{r}
+# calculator solution
+mean_result_calc <- (22.4 + 22.31 + 22.24) / 3
+mean_result_calc <- round(mean_result_calc, digits = 2)
+print(mean_result_calc)
+
+# BETTER solution
+rep1 <- 22.4
+rep2 <- 22.31
+rep3 <- 22.24
+n_rep <- 3
+
+mean_res_better <- (rep1 + rep2 + rep3) / n_rep
+mean_res_better_round <- round(mean_res_better, digits = 2)
+print(mean_res_better_round)
+```
+
+The second solution is better because every number is stored in a variable, that you then use to calculate the mean value.
+</details>
+
+
+::: {.exercise #sd-calc}
+Now calculate the sd of the data of exercise \@ref(exr:mean-calc) and print the value rounded to upper integer, to lower integer and to a 4-digit decimal.
+:::
+
+<details>
+  <summary>Solution</summary>
+```{r}
+# Use only better solution, first calculate the variance
+var_calc <- ((rep1 - mean_res_better)^2 + (rep2 - mean_res_better)^2 + (rep3 - mean_res_better)^2) / (n_rep - 1)
+
+# Now let's calculate sd
+sd_calc <- sqrt(var_calc)
+
+sd_calc_ceil <- ceiling(sd_calc)
+print(sd_calc_ceil)
+
+sd_calc_floor <- floor(sd_calc)
+print(sd_calc_floor)
+
+sd_calc_round <- round(sd_calc, digits = 4)
+print(sd_calc_round)
+```
+</details>
+
+Ok, now you're ready to learn about strings, let's go.

@@ -1,7 +1,10 @@
 exr:create-variables
 exr:sum-weights
 exr:remove-variables
+exr:mean-calc
+exr:sd-calc
 installation
 first-step-in-rstudio
 variables
 scripts
+numbers

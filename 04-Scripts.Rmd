@@ -24,7 +24,13 @@ Let's see how to create a script, write some code in it and run part of the scri
 
 <strong>Suggetion</strong>: Comment, comment, comment everything. I know it is time consuming, but you will be so happy and greatful to read comments that help you understand what you've done months (or weeks) before.
 <br>
-P.S. To save a script "File -> Save" or the usual shortcut "Ctrl-S" (Windows) or "Cmd-S" (MacOS). Use them for all the exercise from now on!
+
+
+## Save {-}
+To save a script "File -> Save" or the usual shortcut "Ctrl-S" (Windows) or "Cmd-S" (MacOS). Use them for all the exercise from now on!
+
+## Source a script {-}
+Source a script from the console instead of having to open it and source from RStudio is very useful when you want to save time and create re-usable pipelines or analysis. Sourcing a script means to execute all the line of codes in that script. It can be archieved by doing `source("path_to_file")`.
 <br>
 <br>
 Now, head to the next chapter in which we will talk about numbers.
