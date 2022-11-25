@@ -11,7 +11,8 @@ link-citations: yes
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(
-  comment = ""
+  comment = "",
+  class.output = "code-out"
 )
 ```
 

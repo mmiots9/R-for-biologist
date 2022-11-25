@@ -57,7 +57,7 @@ Sometimes you want to transform a string that contains a number to a numeric typ
 <br>
 To do so, we'll use the function called `as.numeric()`
 ```{r}
-mystring <- "15" # This is a string, can you guess why R interpret it as a string?
+mystring <- "15" # This is a character, can you guess why R interpret it as a character?
 typeof(mystring)
 
 mynumber <- as.numeric(mystring)

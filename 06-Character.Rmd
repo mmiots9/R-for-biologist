@@ -1,0 +1,168 @@
+# Character
+When you analyze a dataset, you don't have only numbers: you'll have gene names, protein names, mouse strains and other variables that R calls <em>character</em> (I will alsways call them strings, but remember that for R they are character).
+<br>
+A character can be a single letter, a word or even a whole text. To create a character variable you have to include it in `""` (double quotes) or in `''`(single quotes):
+```{r}
+mychar_d <- "SEC24C" 
+typeof(mychar_d)
+
+mychar_s <- 'SEC24C' 
+typeof(mychar_s)
+```
+Even numbers can be considered as character if included by "":
+```{r}
+weight_n <- 12
+typeof(weight_n)
+
+weight_c <- "12"
+typeof(weight_c)
+```
+See? Just adding the double/single quotes it changes everything.
+<br>
+<strong>IMPORTANT</strong>: R interprets <u>everything</u> that is between a pair of single/double quotes as character, so if you forget to close a quote, nothing will work. Moreover, you can't use a single quote to close a character opened with a double quote and <em>vice versa</em>.
+
+## Concatenate strings {-}
+Sometimes you want to concatenate different string into one single string, and we can to it with two similar functions: `paste()` and `paste0()`. The unique difference among them is that in the former you can decide what character to use to separate what you are concatenating (default is a white space), while the latter do not insert any character.
+<br>
+For example, let's say you have a variable `condition` and a variable `treatment`, and you want to concatenate them to create the variable `sample`; you will do:
+```{r}
+condition <- "control"
+treatment <- "vector"
+
+sample <- paste(condition, 
+                treatment, 
+                sep = ".") # default is " "
+
+print(sample)
+
+sample0 <- paste0(condition, 
+                  treatment)
+
+print(sample0)
+```
+
+You concatenate as many character as you want, just put them all inside that function.
+
+## Substring {-}
+I have to tell you about substring, but I never used this function in my life. It is used to slice the character and take only a part of it. The function is called `substr()`, let's see how it works:
+```{r}
+substr(mychar_s, start = 2, stop = 4)
+```
+It needs a start and a stop value, they are both included in the result (in this case, character at position 2, 3 and 4 are sliced). 
+<br>
+<strong>Remember</strong>: in R everything starts at 1, so the first element is at position 1. In other languages it starts from 0, but in R it starts from 1.
+<br>
+Extra funtcion never used but that can be important if we use substr and we don't know how long is a character is `nchar()`
+```{r}
+nchar(mychar_s)
+```
+Let's say we want to take from position 3 until the end, but we don't know how long is a character, we can do it with:
+```{r}
+substr(mychar_s, start = 3, stop = nchar(mychar_s))
+```
+What happened here is that the result of the function `nchar(mychar_s)` is used as the value to indicate the stop. We will usually use these method in R, especially when we don't want to use memory to store a value that is used only once (as in this case).
+
+## Substitution {-}
+Alright, let's move to something way more useful for our analysis: the function `sub()`, and its big brother `gsub()`. They are used to substitute part of a character with another, the only difference is that the former changes only the <u>first</u> occurrence, while the latter every occurrence.
+<br>
+Let's say we have the sample variable written as `"control_vector_3"` and we want to get rid of the underscores, we will do:
+```{r}
+sample2 <- "control_variable_2"
+
+sub_only <- sub(pattern = "_", # the part of the string to search to substitute
+                replacement = " ", # what to use to replace it
+                x = sample2) # variable in which to search
+
+print(sub_only)
+
+gsub_all <- gsub(pattern = "_", # the part of the string to search to substitute
+                replacement = " ", # what to use to replace it
+                x = sample2) # variable in which to search
+
+print(gsub_all)
+```
+This is the basic way of using these functions, but they can be very useful in complex analysis, but we will see them later on.
+
+## Grep {-}
+Further parents of substitution, are `grep()` and its brother `grepl()`: they are used to check if a particular pattern is present in a character variable. The first one returns the index (we'll see this concept in few chapters) or the value of the variable that match the pattern, the second one returns a boolean value (TRUE or FALSE) indicatung the presence of the pattern in the variable.
+<br>
+Let's see few example right away:
+```{r}
+gene_to_test <- "GAPDH"
+pattern_to_check_1 <- "GA"
+pattern_to_check_2 <- "PH"
+
+grep_1 <- grep(pattern = pattern_to_check_1, 
+               x = gene_to_test,
+               value = T) # default is FALSE (returns index)
+print(grep_1)
+
+grep_2 <- grep(pattern = pattern_to_check_2, 
+               x = gene_to_test,
+               value = T) # default is FALSE (returns index)
+print(grep_2)
+
+grepl_1 <- grepl(pattern = pattern_to_check_1, 
+               x = gene_to_test)
+print(grepl_1)
+
+grepl_2 <- grepl(pattern = pattern_to_check_2, 
+               x = gene_to_test)
+print(grepl_2)
+```
+We can see that the `grep_2` gives `character(0)` as result, meaning that it is an empty character variable.
+<br>
+You are going to use grep a lot during the analysis, even if you find it not so interesting now, trust me 😉.
+
+## Transform to type character {-}
+As for numbers, we can also convert a variable into a string: we use the function `as.character()`. You will use this function when a column of a dataframe is read as numeric while you want it to be read as character instead.
+```{r}
+ml_to_add <- 35
+typeof(ml_to_add)
+
+ml_to_add <- as.character(ml_to_add)
+typeof(ml_to_add)
+```
+This is an important lesson: in R variables can be overwritten with other types of data (this can't be done in other languages such as Java, C++, ecc.). This can be both handy and risky at the same time: handy because we can save memory by overwriting useless variables, risky because we can overwrite a variable without checking if the type is maintained (maybe it is important).
+
+## Exercises {-}
+::: {.exercise #sd-calc}
+In a list of genes to test, you found a gene called "NRG_1" and one called "SST R". In the report you have to present you want to print out "Involved genes are NRG1 and SSTR2". How to do it?
+:::
+
+<details>
+  <summary>Solution</summary>
+```{r}
+gene1 <- "NRG_1"
+gene2 <- "SST R"
+
+# correct gene names
+gene1 <- gsub(pattern = "_", replacement = "", gene1)
+gene2 <- gsub(pattern = " R", replacement = " R2", gene1)
+
+# concatenate all the string
+all_string <- paste("Involved genes are", gene1, "and", gene2)
+print(all_string)
+```
+</details>
+
+::: {.exercise #sd-calc}
+In a variable you have the gene name "HCN1" and in another you have its number of aa (890, as numeric!!!). Print out the string "HCN1 protein is 890 aa long"
+:::
+
+<details>
+  <summary>Solution</summary>
+```{r}
+gene <- "HCN1"
+aa_num <- 890
+
+# one string solution
+to_print <- paste(gene, "protein is", as.character(aa_num), "aa long")
+print(to_print)
+```
+</details>
+
+Don't worry if you had done it in another way or if it didn't work. We are here to learn, and these exercises are done to challenge you on things you have seen in different pieces.
+<br>
+Head on to the next lesson, in which we are going to talk about vectors (yes, we will skip for now type factor and boolean, we'll see them when they will be more useful).
+

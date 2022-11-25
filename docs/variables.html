@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2022-11-24" />
+<meta name="date" content="2022-11-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -165,6 +165,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="numbers.html#tranform-to-type-number" id="toc-tranform-to-type-number">Tranform to type number</a></li>
 <li><a href="numbers.html#exercises-1" id="toc-exercises-1">Exercises</a></li>
 </ul></li>
+<li><a href="character.html#character" id="toc-character"><span class="toc-section-number">6</span> Character</a>
+<ul>
+<li><a href="character.html#concatenate-strings" id="toc-concatenate-strings">Concatenate strings</a></li>
+<li><a href="character.html#substring" id="toc-substring">Substring</a></li>
+<li><a href="character.html#substitution" id="toc-substitution">Substitution</a></li>
+<li><a href="character.html#grep" id="toc-grep">Grep</a></li>
+<li><a href="character.html#transform-to-type-character" id="toc-transform-to-type-character">Transform to type character</a></li>
+<li><a href="character.html#exercises-2" id="toc-exercises-2">Exercises</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -217,23 +226,23 @@ Here in details the info given for each variable:
 <p>If we want to create multiple variables with the same value we can do this:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="variables.html#cb4-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> var2 <span class="ot">&lt;-</span> var3 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
 <span id="cb4-2"><a href="variables.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var1)</span></code></pre></div>
-<pre><code>[1] 20</code></pre>
+<pre class="code-out"><code>[1] 20</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="variables.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var2)</span></code></pre></div>
-<pre><code>[1] 20</code></pre>
+<pre class="code-out"><code>[1] 20</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="variables.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var3)</span></code></pre></div>
-<pre><code>[1] 20</code></pre>
+<pre class="code-out"><code>[1] 20</code></pre>
 </div>
 <div id="use-a-variable" class="section level2 unnumbered">
 <h2>Use a variable</h2>
 <p>Ok, but once stored, how to we use a variable? Easy, we just need to type it in the console (or start writing the first letters of its name and press Tab to show RStudio suggestions). If, for example, we want to calculate the power of our variable we should write:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="variables.html#cb10-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="sc">**</span> <span class="dv">2</span></span></code></pre></div>
-<pre><code>[1] 25</code></pre>
+<pre class="code-out"><code>[1] 25</code></pre>
 <p>And here is the result (to elevate to the power we can either use <code>**</code> or <code>^</code>).
 <br>
 And what if we want to store this result? As before:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="variables.html#cb12-1" aria-hidden="true" tabindex="-1"></a>myvar_power <span class="ot">&lt;-</span> myvar <span class="sc">**</span> <span class="dv">2</span></span>
 <span id="cb12-2"><a href="variables.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar_power)</span></code></pre></div>
-<pre><code>[1] 25</code></pre>
+<pre class="code-out"><code>[1] 25</code></pre>
 <p>Here we use <code>print()</code> function, but in R we can also just write the name of the variable to see it.</p>
 </div>
 <div id="variable-names" class="section level2 unnumbered">
@@ -281,11 +290,11 @@ Be consistent within the script: if you decide to use the Pascal case, always us
 <br>
 To override a variable, simply assign that variable a new value:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="variables.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
-<pre><code>[1] 5</code></pre>
+<pre class="code-out"><code>[1] 5</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="variables.html#cb16-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="ot">&lt;-</span> <span class="dv">9</span></span>
 <span id="cb16-2"><a href="variables.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="variables.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
-<pre><code>[1] 9</code></pre>
+<pre class="code-out"><code>[1] 9</code></pre>
 <p>Now <code>myvar</code> is equal to 9, and there is no way back…
 <br>
 This feature is useful for saving space and not cluttering up too much with variables that are okay to change often, but it can be risky. So be careful when naming variables.</p>
@@ -296,12 +305,19 @@ This feature is useful for saving space and not cluttering up too much with vari
 <br>
 The answer is simple, let’s use the <code>ls()</code> function</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="variables.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code> [1] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
- [5] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;mynumber&quot;             
- [9] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
-[13] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;sd_calc&quot;              
-[17] &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;         &quot;sum_weights&quot;          
-[21] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 </code></pre>
+<pre class="code-out"><code> [1] &quot;aa_num&quot;                &quot;all_string&quot;            &quot;condition&quot;             &quot;gene&quot;                 
+ [5] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;grep_1&quot;               
+ [9] &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+[13] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
+[17] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;ml_to_add&quot;            
+[21] &quot;mychar&quot;                &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;             
+[25] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
+[29] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;rep1&quot;                  &quot;rep2&quot;                 
+[33] &quot;rep3&quot;                  &quot;sample&quot;                &quot;sample0&quot;               &quot;sample2&quot;              
+[37] &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;        
+[41] &quot;sub_only&quot;              &quot;sum_weights&quot;           &quot;to_print&quot;              &quot;treatment&quot;            
+[45] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 
+[49] &quot;weight_c&quot;              &quot;weight_n&quot;             </code></pre>
 <p>Here are our variables.
 <br>
 Note how I called this command with the name <em>function</em>: we will cover this concept later, for now you just need to know that they exist and that they can be identified immediately by the fact that after the name there is a pair of round brackets.
@@ -315,24 +331,37 @@ Note how I called this command with the name <em>function</em>: we will cover th
 <span id="cb20-3"><a href="variables.html#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-4"><a href="variables.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb20-5"><a href="variables.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code> [1] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
- [5] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;mynumber&quot;             
- [9] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
-[13] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;sd_calc&quot;              
-[17] &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;         &quot;sum_weights&quot;          
-[21] &quot;to_remove&quot;             &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                 
-[25] &quot;var3&quot;                 </code></pre>
+<pre class="code-out"><code> [1] &quot;aa_num&quot;                &quot;all_string&quot;            &quot;condition&quot;             &quot;gene&quot;                 
+ [5] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;grep_1&quot;               
+ [9] &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+[13] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
+[17] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;ml_to_add&quot;            
+[21] &quot;mychar&quot;                &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;             
+[25] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
+[29] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;rep1&quot;                  &quot;rep2&quot;                 
+[33] &quot;rep3&quot;                  &quot;sample&quot;                &quot;sample0&quot;               &quot;sample2&quot;              
+[37] &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;        
+[41] &quot;sub_only&quot;              &quot;sum_weights&quot;           &quot;to_print&quot;              &quot;to_remove&quot;            
+[45] &quot;treatment&quot;             &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                 
+[49] &quot;var3&quot;                  &quot;weight_c&quot;              &quot;weight_n&quot;             </code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="variables.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variable</span></span>
 <span id="cb22-2"><a href="variables.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove)</span>
 <span id="cb22-3"><a href="variables.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-4"><a href="variables.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb22-5"><a href="variables.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code> [1] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
- [5] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;mynumber&quot;             
- [9] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
-[13] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;sd_calc&quot;              
-[17] &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;         &quot;sum_weights&quot;          
-[21] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 </code></pre>
+<pre class="code-out"><code> [1] &quot;aa_num&quot;                &quot;all_string&quot;            &quot;condition&quot;             &quot;gene&quot;                 
+ [5] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;grep_1&quot;               
+ [9] &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+[13] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
+[17] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;ml_to_add&quot;            
+[21] &quot;mychar&quot;                &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;             
+[25] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
+[29] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;rep1&quot;                  &quot;rep2&quot;                 
+[33] &quot;rep3&quot;                  &quot;sample&quot;                &quot;sample0&quot;               &quot;sample2&quot;              
+[37] &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;        
+[41] &quot;sub_only&quot;              &quot;sum_weights&quot;           &quot;to_print&quot;              &quot;treatment&quot;            
+[45] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 
+[49] &quot;weight_c&quot;              &quot;weight_n&quot;             </code></pre>
 <p>As we see, in the second case the <code>to_remove</code> variable has been removed.
 <br>
 What if I want to remove multiple variables? Let’s put multiple variable names inside the <code>rm()</code> function separated by commas:</p>
@@ -342,24 +371,37 @@ What if I want to remove multiple variables? Let’s put multiple variable names
 <span id="cb24-4"><a href="variables.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-5"><a href="variables.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb24-6"><a href="variables.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code> [1] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
- [5] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;mynumber&quot;             
- [9] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
-[13] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;sd_calc&quot;              
-[17] &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;         &quot;sum_weights&quot;          
-[21] &quot;to_remove&quot;             &quot;to_remove2&quot;            &quot;var_calc&quot;              &quot;var1&quot;                 
-[25] &quot;var2&quot;                  &quot;var3&quot;                 </code></pre>
+<pre class="code-out"><code> [1] &quot;aa_num&quot;                &quot;all_string&quot;            &quot;condition&quot;             &quot;gene&quot;                 
+ [5] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;grep_1&quot;               
+ [9] &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+[13] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
+[17] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;ml_to_add&quot;            
+[21] &quot;mychar&quot;                &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;             
+[25] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
+[29] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;rep1&quot;                  &quot;rep2&quot;                 
+[33] &quot;rep3&quot;                  &quot;sample&quot;                &quot;sample0&quot;               &quot;sample2&quot;              
+[37] &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;        
+[41] &quot;sub_only&quot;              &quot;sum_weights&quot;           &quot;to_print&quot;              &quot;to_remove&quot;            
+[45] &quot;to_remove2&quot;            &quot;treatment&quot;             &quot;var_calc&quot;              &quot;var1&quot;                 
+[49] &quot;var2&quot;                  &quot;var3&quot;                  &quot;weight_c&quot;              &quot;weight_n&quot;             </code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="variables.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variables</span></span>
 <span id="cb26-2"><a href="variables.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove, to_remove2)</span>
 <span id="cb26-3"><a href="variables.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-4"><a href="variables.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb26-5"><a href="variables.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code> [1] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
- [5] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;mynumber&quot;             
- [9] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
-[13] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;sd_calc&quot;              
-[17] &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;         &quot;sum_weights&quot;          
-[21] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 </code></pre>
+<pre class="code-out"><code> [1] &quot;aa_num&quot;                &quot;all_string&quot;            &quot;condition&quot;             &quot;gene&quot;                 
+ [5] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;grep_1&quot;               
+ [9] &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+[13] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
+[17] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;ml_to_add&quot;            
+[21] &quot;mychar&quot;                &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;             
+[25] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
+[29] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;rep1&quot;                  &quot;rep2&quot;                 
+[33] &quot;rep3&quot;                  &quot;sample&quot;                &quot;sample0&quot;               &quot;sample2&quot;              
+[37] &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;        
+[41] &quot;sub_only&quot;              &quot;sum_weights&quot;           &quot;to_print&quot;              &quot;treatment&quot;            
+[45] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 
+[49] &quot;weight_c&quot;              &quot;weight_n&quot;             </code></pre>
 <p>The two variables have been removed.
 <br>
 But looking closely at these codes, we see that some start with <code>#</code> and are not evaluated. What are they? These are the <strong>comments</strong>, i.e. messages that you will write in the scripts (and we will see later how to create them) to help you understand what you are doing. They are actual comments that you can add, and will not be “evaluated” as code as the line starts with <code>#</code>.
@@ -388,7 +430,7 @@ Let’s see what are the basic types of variables that exist in R:
 </ul>
 <p>We will see each type of variable in detail in next chapters. To find out what type a variable is we use the <code>typeof()</code> function:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="variables.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(myvar)</span></code></pre></div>
-<pre><code>[1] &quot;double&quot;</code></pre>
+<pre class="code-out"><code>[1] &quot;double&quot;</code></pre>
 <p>We see that myvar is a double (although it is an integer value), this is because R basically interprets every number as a double, so as to increase its precision and the possibility of operations between various numbers without having type problems.</p>
 </div>
 <div id="exercises" class="section level2 unnumbered">
@@ -406,11 +448,11 @@ Solution
 <span id="cb30-3"><a href="variables.html#cb30-3" aria-hidden="true" tabindex="-1"></a>mice3 <span class="ot">&lt;-</span> <span class="fl">7.5</span></span>
 <span id="cb30-4"><a href="variables.html#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-5"><a href="variables.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice1)</span></code></pre></div>
-<pre><code>[1] 5.8</code></pre>
+<pre class="code-out"><code>[1] 5.8</code></pre>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="variables.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice2)</span></code></pre></div>
-<pre><code>[1] 4.8</code></pre>
+<pre class="code-out"><code>[1] 4.8</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="variables.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice3)</span></code></pre></div>
-<pre><code>[1] 7.5</code></pre>
+<pre class="code-out"><code>[1] 7.5</code></pre>
 </details>
 <div class="exercise">
 <p><span id="exr:sum-weights" class="exercise"><strong>Exercise 3.2  </strong></span>Create the variable <code>sum_weights</code> as the sum of the weights of those 3 mice.</p>
@@ -421,7 +463,7 @@ Solution
 </summary>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="variables.html#cb36-1" aria-hidden="true" tabindex="-1"></a>sum_weights <span class="ot">&lt;-</span> mice1 <span class="sc">+</span> mice2 <span class="sc">+</span> mice3</span>
 <span id="cb36-2"><a href="variables.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum_weights)</span></code></pre></div>
-<pre><code>[1] 18.1</code></pre>
+<pre class="code-out"><code>[1] 18.1</code></pre>
 </details>
 <div class="exercise">
 <p><span id="exr:remove-variables" class="exercise"><strong>Exercise 3.3  </strong></span>Create 4 other variables for other 4 mice that weight 20 g. Then you realize you did a mistake and you choose to delete 3 of them and change the fourth to 7.7.</p>
@@ -435,29 +477,43 @@ Solution
 <span id="cb38-3"><a href="variables.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-4"><a href="variables.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb38-5"><a href="variables.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code> [1] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
- [5] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;mice5&quot;                
- [9] &quot;mice6&quot;                 &quot;mice7&quot;                 &quot;mynumber&quot;              &quot;mystring&quot;             
-[13] &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                 &quot;rep1&quot;                 
-[17] &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;         
-[21] &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;         &quot;sum_weights&quot;           &quot;var_calc&quot;             
-[25] &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 </code></pre>
+<pre class="code-out"><code> [1] &quot;aa_num&quot;                &quot;all_string&quot;            &quot;condition&quot;             &quot;gene&quot;                 
+ [5] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;grep_1&quot;               
+ [9] &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+[13] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
+[17] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;mice5&quot;                
+[21] &quot;mice6&quot;                 &quot;mice7&quot;                 &quot;ml_to_add&quot;             &quot;mychar&quot;               
+[25] &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;              &quot;mystring&quot;             
+[29] &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                 &quot;pattern_to_check_1&quot;   
+[33] &quot;pattern_to_check_2&quot;    &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                 
+[37] &quot;sample&quot;                &quot;sample0&quot;               &quot;sample2&quot;               &quot;sd_calc&quot;              
+[41] &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;         &quot;sub_only&quot;             
+[45] &quot;sum_weights&quot;           &quot;to_print&quot;              &quot;treatment&quot;             &quot;var_calc&quot;             
+[49] &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                  &quot;weight_c&quot;             
+[53] &quot;weight_n&quot;             </code></pre>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="variables.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete 3 of the just-created variables</span></span>
 <span id="cb40-2"><a href="variables.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(mice5, mice6, mice7)</span>
 <span id="cb40-3"><a href="variables.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-4"><a href="variables.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb40-5"><a href="variables.html#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code> [1] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
- [5] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;mynumber&quot;             
- [9] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
-[13] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;sd_calc&quot;              
-[17] &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;         &quot;sum_weights&quot;          
-[21] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 </code></pre>
+<pre class="code-out"><code> [1] &quot;aa_num&quot;                &quot;all_string&quot;            &quot;condition&quot;             &quot;gene&quot;                 
+ [5] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;grep_1&quot;               
+ [9] &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+[13] &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mice1&quot;                
+[17] &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                 &quot;ml_to_add&quot;            
+[21] &quot;mychar&quot;                &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;             
+[25] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
+[29] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;rep1&quot;                  &quot;rep2&quot;                 
+[33] &quot;rep3&quot;                  &quot;sample&quot;                &quot;sample0&quot;               &quot;sample2&quot;              
+[37] &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;        
+[41] &quot;sub_only&quot;              &quot;sum_weights&quot;           &quot;to_print&quot;              &quot;treatment&quot;            
+[45] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 
+[49] &quot;weight_c&quot;              &quot;weight_n&quot;             </code></pre>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="variables.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change the value of one variable</span></span>
 <span id="cb42-2"><a href="variables.html#cb42-2" aria-hidden="true" tabindex="-1"></a>mice4 <span class="ot">&lt;-</span> <span class="fl">7.7</span></span>
 <span id="cb42-3"><a href="variables.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-4"><a href="variables.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice4)</span></code></pre></div>
-<pre><code>[1] 7.7</code></pre>
+<pre class="code-out"><code>[1] 7.7</code></pre>
 </details>
 <p>Alright, if you have done all the exercises (and I’m sure you have), we can move on to the next chapter in which we briefly talk about scripts and saving the environment.</p>
 

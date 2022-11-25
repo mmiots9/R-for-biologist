@@ -8,3 +8,4 @@ first-step-in-rstudio
 variables
 scripts
 numbers
+character
