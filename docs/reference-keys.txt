@@ -3,9 +3,11 @@ exr:sum-weights
 exr:remove-variables
 exr:mean-calc
 exr:sd-calc
+exr:expr-write
 installation
 first-step-in-rstudio
 variables
 scripts
 numbers
 character
+boolean

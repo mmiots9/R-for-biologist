@@ -164,5 +164,5 @@ print(to_print)
 
 Don't worry if you had done it in another way or if it didn't work. We are here to learn, and these exercises are done to challenge you on things you have seen in different pieces.
 <br>
-Head on to the next lesson, in which we are going to talk about vectors (yes, we will skip for now type factor and boolean, we'll see them when they will be more useful).
+Head on to the next lesson, in which we are going to talk about booleans.
 
