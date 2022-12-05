@@ -124,6 +124,7 @@ Write the expression you would use to evaluate the following statement: we want 
 <br>
 Tip: here we have 8 variables. I know I didn't give neither the age nor the weight nor the nationality; you can create these variables and give the values you want. This exercise is to practice the writing and logical part.
 :::
+
 <details>
   <summary>Solution</summary>
 ```{r}

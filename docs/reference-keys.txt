@@ -4,6 +4,11 @@ exr:remove-variables
 exr:mean-calc
 exr:sd-calc
 exr:expr-write
+exm:mice-cage
+exm:logical-sum
+exm:operations-vectors
+exr:mito-expr
+exr:multiple-vectors
 installation
 first-step-in-rstudio
 variables
@@ -11,3 +16,14 @@ scripts
 numbers
 character
 boolean
+vectors
+slicing
+use-logicals
+sorting-a-vector
+unique-values
+logical-vectors-sum-and-mean
+mathematical
+different-and-common-elements
+in
+match
+exercise

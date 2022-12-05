@@ -1,0 +1,461 @@
+# Vectors
+I know that in the previous chapters you were thinking "ok, but I rarely have one data for a variable, I usually have multiple data", and you are right, so let's see the first form of data organization in R, the base of all: the <strong>vector</strong>.
+<br>
+A vector is a collection of data of the <strong>same type</strong>, for example all the weights of a group of people, all the names of your genes of interest, the expression levels of your genes of interest. 
+<br>
+To create a vector in R is simple, just use the function `c()` and put inside every data you need:
+```{r}
+heights <- c(160, 148, 158, 170)
+genes <- c("Adcyp1", "Tle4", "Psd95", "Bip", "Sst")
+
+heights
+genes
+```
+
+I told you that the data inside of a vector must be of the same type, in fact 
+```{r}
+my_info <- c(14, "Most", 45, 5, TRUE)
+my_info
+```
+Transforms everything into strings because we have a string in it. To confirm it, we can ask R to tell us the type of data we have in a vector by using the function `typeof()`:
+```{r}
+typeof(heights)
+typeof(my_info)
+```
+
+## Named vectors {-}
+There is a particular type of vectors called <em>named vectors</em> that come in handy especially when creating graphs: every value in the vector has a "name" associated to it. Imagine like giving a unique name-tag to each value; for example, associate an expression value to each gene. 
+<br>
+There are 3 ways of creating a named vector, I will show you here from the most fast to the most complex:
+```{r}
+# 1st method (the best)
+# create gene and value vector first
+genes <- c("Adcyp1", "Tle4", "Psd95", "Bip", "Sst")
+expr_values <- c(12, 200, 40, 1, 129)
+
+# assign names to the vector
+names(expr_values) <- genes
+expr_values
+```
+You can see here that every expression value has its own name.
+<br>
+```{r}
+# 2nd method (as good as the first)
+# create gene and value vector first
+genes <- c("Adcyp1", "Tle4", "Psd95", "Bip", "Sst")
+expr_values <- c(12, 200, 40, 1, 129)
+
+# create a structure 
+expr_values <- structure(genes, names = expr_values)
+expr_values
+```
+This is the preferred method when the values are not in a standalone vectors but, for example, are a column of a dataframe.
+<br>
+```{r}
+# 3rd method, the worst
+# directly create the named vector
+expr_values <- c("Adcyp1" = 12, "Tle4" = 200, "Psd95" = 40, "Bip" = 1, "Sst" = 129)
+expr_values
+```
+This takes so long to write and it is never used, as you will always have the values and the names as columns of a dataframe or individual vectors already defined or obtained through a function.
+<br>
+But, what is the main advantage of using named vectors? The possibility of extracting values of interest, this is called <strong>indexing</strong>.
+
+## Indexing {-}
+Indexing is one of the most used features, if not the used one, to retrieve data from vector, matrix, dataframes, ecc. There are many ways, let's start with the named vectors and then move on with other strategies.
+<br>
+But first, a <b>tip</b>: the <em>key</em> element in indexing is a pair of squared bracket `[]`, in which you specify what to retrieve. So, remember: <u>parenthesis after a function, square brackets to index</u>.
+
+### Named vectors {-}
+To extract values from a named vector, we can put inside the square brackets a character (even a character vector or a character variable) with the name of the value we want to extract:
+```{r}
+# one value
+expr_values["Tle4"]
+
+# a vector
+expr_values[c("Tle4", "Psd95")]
+
+# a variable
+to_extract <- "Bip"
+expr_values[to_extract]
+```
+
+### Slicing
+<p class="plist">Another method is to specify the position of the values we want to extract. First, there are two things to keep in mind:</p>
+<ol>
+  <li>In R numeration of index <u>starts at 1</u>, so the first element is at position 1, the second 2 ecc (in other programming language it starts at 0)</li>
+  <li>The length of a vector, meaning the number of items it is composed by can be extrapolate using the function `length()`</li>
+</ol>
+<br>
+Having set these concepts, let's do some examples (I know it can be boring, but these are the fundamentals of data analysis. you really thank me in the future).
+```{r}
+# get the length of a vector
+print(length(expr_values))
+```
+Now we know that our expression values vector contains 5 elements, we can now start to index it:
+```{r}
+# get first element
+expr_values[1]
+
+# get first and third element
+expr_values[c(1, 3)]
+
+# get from element 2 to 4
+expr_values[2:4] 
+
+# get from element 3 to the end
+expr_values[3:length(expr_values)]
+
+# get every element but the third
+expr_values[-3]
+```
+<p class="plist">Ok, now that we have seen some example, we can look at some of them in more details:</p>
+<ul>
+  <li>`expr_values[2:4]`: we haven't seen this yes, but the expression `<value1>:<value2>` creates a vector with numbers from value1 to value2</li>
+  <li>`expr_values[3:length(expr_values)]`: since the function `length()` returns a value, we can use this function directly into the square brackets</li>
+  <li>`expr_values[-3]`: the minus indicates <b>except</b></li>
+</ul>
+
+### Use logicals
+We can also use logical and boolean values to index a vector. This is one of the most used way, and you will use it quite a lot. Why? Let's see it in action.
+<br>
+```{r}
+expr_values[c(T, F, F, T, T)]
+```
+What has happened?
+<br>
+When indexed with boolean, only the values in which is `TRUE` (`T`) are returned, and this is super cool. Do you remember in the previous chapter how we get boolean as results from an expression?! Great, so we can use expressions that returns TRUE or FALSE and use them to index a vector:
+```{r}
+# retrieve values < 59
+expr_values[expr_values < 59]
+```
+We can use also a more complicated expression:
+```{r}
+# retrieve values < 30 or > 150
+expr_values[(expr_values < 30) | (expr_values > 150)]
+```
+Do you see how useful it could be in an analysis? I'm sure you do, so let's move on!
+
+## One function can be applied to all elements {-}
+We've just seen a feature of the vectors: we can apply a function to each element of the vector. Previously we have evaluated if each element of the vector was < 59 (or < 30 or > 150). 
+<br>
+Now, we will see more examples, starting from numeric vectors.
+```{r}
+# operations can be performed to each value
+expr_values * 2
+expr_values / 10
+
+# tranform a numeric vector to a character one
+as.character(expr_values)
+```
+
+With character vectors we can do:
+```{r}
+# calculate number of characters
+nchar(genes)
+
+# use grep to see which genes start with letter T
+grep(pattern = "^T", x = genes, value = T) # ^ indicates the start of the line, can you guess why we used it?
+```
+
+## Function specific of vectors {-}
+Up to now nothing new, we have not seen any new function. But now we will see some new functions specific for vectors, starting, as always, from numbers:
+<br>
+
+::: {.example #mice-cage}
+Let's say we have a mice and we want to test the time spent in a cage, in particular we want to calculate the sum, the mean and the sd of the time spent not in the center of the cage.
+:::
+
+```{r}
+# create the named vector
+areas <- c("center", "top", "right", "bottom", "left")
+time <- c(14, 22, 29, 12, 2)
+names(time) <- areas
+
+# extrapolate data not in center
+not_center <- time[-(names(time) == "center")]
+
+# calculate mean, sum and sd
+sum_time <- sum(not_center)
+mean_time <- mean(not_center)
+sd_time <- sd(not_center)
+
+# print results
+print(paste("The mice spent", sum_time, 
+            "seconds not in the center of the cage, with a mean of", mean_time, 
+            "seconds in each area and a sd of", sd_time))
+```
+
+This example implemented lots of things we have seen up to now, and it shows how on numerical vectors we can calculate sum, mean and sd; but these are not the only functions, we have also var (variance), min, max and others. We are going to see them later when needed.
+
+### Sorting a vector
+Another important function is `sort()` as it gives us the possibility to sort the values of the vectors.
+```{r}
+sort(expr_values)
+sort(expr_values, decreasing = T)
+```
+By default, it sorts in ascending order, we can change the behavior by setting `decreasing = T`.
+
+Let's see a couple of trick with sorting:
+```{r}
+features <- paste0("gene", 1:20)
+features
+
+sort(features)
+```
+
+What can we see here? First of all, a cool method to create a vector of words with increasing numbers (the combination paste and 1:20); then, we see that sorting has put "gene2" after all "gene1X", because it sorts in alphabetical order. For this reason, it is recommended to use 01, 02, 03 ecc if we know that we have more than 9 elements (this works also for computer file names).
+<br>
+::: {.example #sort-names}
+Here we want to sort the expression levels based on their names.
+:::
+```{r}
+expr_values[sort(names(expr_values))]
+```
+Tadaaa, we used sort on the names of expression levels and used the sorted names to index the named vector.
+
+### Unique values
+As the title suggests, there is a function (`unique()`) that returns tha unique values of a vector. It is useful in different situations, we will use it a lot. The usage is so simple:
+
+```{r}
+# create a vector with repeated values
+my_vector <- c(1:10, 2:4, 3:6) # can you guess the values of this vector without typing it in R?
+
+unique(my_vector)
+
+```
+
+### Logical vectors sum and mean
+In the example \@ref(exm:mice-cage) we have seen how to calculate the sum and the mean of numerical vectors, but it can be done also on vectors full of boolean, and it can be very useful. I'll show you this example:
+
+::: {.example #logical-sum}
+We have a vector representing the response to a treatment of different patient, the vector is coded by logicals. Here is the vector: c(T, F, T, T, T, F, T, F, F, T, F, F, F, F, F, T, T). Calculate the number and the percentage of responders (2 decimal places).
+:::
+
+```{r}
+# 1. Create the vector
+response <- c(T, F, T, T, T, F, T, F, F, T, F, F, F, F, F, T, T)
+
+# 2. Calculate the number of responders
+n_responders <- sum(response)
+
+# 3. Calculate the percentage of responders
+p_responders <- mean(response) * 100
+p_responders <- round(p_responders, 2)
+
+print(paste("There are", n_responders, "responders, corresponding to", p_responders, "% of total patients."))
+
+```
+What happened here? The trick is that R interprets TRUE as 1 and FALSE as 0. <b>Remember this also for future applications</b>.
+
+## Operations between vectors {-}
+Don't give up, I know this chapter ha been so long, but now we will see the last part: the most important operations we can do <i>between</i> vectors.
+
+### Mathematical
+First of all, mathematical operations: we can do mathematical operations between vectors <strong>only if the vectors are the same size</strong>, otherwise it will raise an error. This because each operation is performed one element by the corrisponding element of the other vector.
+
+::: {.example #operations-vectors}
+Let's say we have 3 vectors representing the total amount of aminoacids found in three different samples for 5 proteins. We want to calculate, for each protein, the fraction of aminoacids in each sample.
+:::
+
+```{r}
+# 1. Define starting vectors
+proteins <- c("SEC24C", "BIP", "CD4", "RSPO2", "LDB2")
+sample1 <- c(12, 52, 14, 33, 22)
+sample2 <- c(5, 69, 26, 45, 3)
+sample3 <- c(8, 20, 5, 39, 48)
+
+names(sample1) <- names(sample2) <- names(sample3) <- proteins
+
+# 2. Calculate sum of aa for each protein
+sum_aa <- sample1 + sample2 + sample3
+
+# 3. Calculate the fraction for each sample
+sample1_fr <- sample1 / sum_aa * 100
+sample2_fr <- sample2 / sum_aa * 100
+sample3_fr <- sample3 / sum_aa * 100
+
+# 4. Print the results
+sample1_fr
+sample2_fr
+sample3_fr
+```
+<p class="plist">Ok, I know it seems difficult, but let's analyze each step:</p>
+<ol>
+  <li>Here the new step is that we can assign the same values to multiple variables by chaining assignment statements</li>
+  <li>Since the vectors have the same size, we can sum them together. <strong>IMPORTANT</strong>: the operation is performed based on position, NOT names. So if our vectors would have had the names in different order, we should have ordered them</li>
+</ol>
+
+### Different and common elements
+Usually we want to compare two vectors to find distinct and common elements (eg. upregulated genes in two analysis). To do it, we can use two functions: `intersect()` (which find the common elements between two vectors), and `setdiff()` (which returns the element in the first vector not present in the second).
+
+```{r}
+# 1. Define 2 vectors
+upregulated_1 <- c("NCOA1", "CENPO", "ASXL2", "HADHA", "ADGRF3")
+upregulated_2 <- c("ADGRF3", "SLC5A6", "NRBP1", "NCOA1", "HADHA")
+
+# 2. Find common genes
+common <- intersect(upregulated_1, upregulated_2)
+
+# 3. Find different genes
+only_1 <- setdiff(upregulated_1, upregulated_2)
+only_2 <- setdiff(upregulated_2, upregulated_1)
+
+# 4. Print results
+print(cat("Common genes are:", paste(common, collapse = ", "), "\n", 
+          "Genes specifically upregulated in analysis 1 are:", paste(only_1, collapse = ", "), "\n",
+          "Genes specifically upregulated in analysis 2 are:", paste(only_2, collapse = ", "), "\n")
+      )
+```
+<p class="plist">Here you are. We can add three more notions:</p>
+<ol>
+  <li>`cat()` is like print, but it accept special characters</li>
+  <li>when pasting a vector, an additional argument `collapse = "<chr>"` can be added. It tells R to collapse all the element of a vector in a single character element and separate them through <chr> (", " for us)</li>
+  <li>`"\n"` means <em>add a new line</em>, so it tells to print the next sentence in a new line. It is a special character, so it works with cat/li>
+</ol>
+
+### %in%
+A slightly different function (if we can call it this way) is `%in%`. When comparing two vectors, it returns TRUE or FALSE for each element of the first vector based on the presence of that element in the second vector:
+```{r}
+upregulated_1 %in% upregulated_2
+```
+Sometimes it is useful to index a vector based on another vector. We will see some usages.
+
+### Match
+Last but not least, the `match()` function. It takes two vectors into consideration and returns, for each element of the first vector, the position of that element in the second vector. If an element is not present, it will return `NA`, we will describe this element in a dedicated chapter.
+<br>
+So, how can it be useful? Usually it is done to rearrange and reorder a vector to match another vector. For example, let's say that two vectors of example \@ref(exm:operations-vectors) have names in different order; prior to do all calculation we need to match the names order.
+```{r}
+# 1. Define starting vectors
+proteins1 <- c("SEC24C", "BIP", "CD4", "RSPO2", "LDB2")
+proteins2 <- c("CD4", "RSPO2", "BIP", "LDB2", "SEC24C")
+sample1 <- c(12, 52, 14, 33, 22)
+sample2 <- c(5, 69, 26, 45, 3)
+
+names(sample1) <- proteins1
+names(sample2) <- proteins2
+
+sample1
+sample2
+```
+As we can see, the names are in different order, so we want to fix this:
+```{r}
+idx <- match(names(sample1), names(sample2))
+
+idx
+```
+We can use these indexes to index our sample2.
+
+```{r}
+sample2 <- sample2[idx]
+
+sample1
+sample2
+```
+Now they are in the same order, so we can continue the analysis.
+
+## Exercise
+Great, let's do some exercises. They wrap up lots of concept we've just seen. However, I encourage you to try again every function we have studied so far.
+<br>
+It doesn't matter if you will do them in a different way, as long as the results are identical. In these chapters I want you to understand the steps, not to use the perfect and most efficient code.
+
+::: {.exercise #mito-expr}
+We have received the data of the expression levels (in reads) of some genes of interest. We are interested in the difference between expression levels of mitochondrial vs non-mitochondrial genes; in particular we want to see how many reads maps to those categories (both counts and percentage).
+
+The starting vector is the following: c("SEC24C" = 52, "MT-ATP8" = 14, "LDB2" = 22, "MT-CO3" = 16, "MT-ND4" = 2, "NTMT1" = 33, "BIP" = 20, "MT-ND5" = 42)
+
+PS: Mitochondrial genes starts with MT-.
+:::
+
+<details>
+  <summary>Solution</summary>
+```{r}
+# 1. Create the vector
+expr_levels <- c("SEC24C" = 52, "MT-ATP8" = 14, "LDB2" = 22, "MT-CO3" = 16, "MT-ND4" = 2, "NTMT1" = 33, "BIP" = 20, "MT-ND5" = 42)
+
+# 2. Get names of mitochondrial genes
+mito_genes <- grep(pattern = "^MT-", x = names(expr_levels), value = T)
+
+# 3. Calculate total number of counts for each category
+total_mito <- sum(expr_levels[mito_genes])
+total_no_mito <- sum(expr_levels[-(names(expr_levels) %in% (mito_genes))])
+
+# 4. Calculate %
+perc_mito <- round(total_mito / sum(expr_levels) * 100, 2)
+perc_no_mito <- round(total_no_mito / sum(expr_levels) * 100, 2)
+
+# 5. Print results
+cat("Reads mapping to mitochondrial genes are", total_mito, "(", perc_mito, "%), while the ones mapping to other genes are", total_no_mito, "(", perc_no_mito, "%)")
+```
+
+</details>
+
+::: {.exercise #multiple-vectors}
+You were given the mass spectrometry results of an analysis on 3 patients. These are the results: patient1 c("SEC24C" = 12, "CDH7" = 1, "LDB2" = 13, "SEM3A" = 16, "FEZF2" = 21, "NTMT1" = 43, "BIP" = 29, "HOMER" = 22), patient2 c("SEC24C" = 2, "CDH7" = 11, "SEM5A" = 13, "HCN1" = 22, "NTMT1" = 31, "BIP" = 12, "HOMER" = 8), patient3 c("SEC24B" = 20, "BIP" = 12, "HOMER" = 13, "SEM3A" = 49, "HCN1" = 16, "NTMT1" = 27). Calculate the expression mean of common genes.
+:::
+
+<details>
+  <summary>Solution</summary>
+```{r}
+# 1. Create the vectors
+patient1 <- c("SEC24C" = 12, "CDH7" = 1, "LDB2" = 13, "SEM3A" = 16, "FEZF2" = 21, "NTMT1" = 43, "BIP" = 29, "HOMER" = 22)
+patient2 <- c("SEC24C" = 2, "CDH7" = 11, "SEM5A" = 13, "HCN1" = 22, "NTMT1" = 31, "BIP" = 12, "HOMER" = 8)
+patient3 <- c("SEC24B" = 20, "BIP" = 12, "HOMER" = 13, "SEM3A" = 49, "HCN1" = 16, "NTMT1" = 27)
+
+# 2. Identify common genes
+common1_2 <- intersect(names(patient1), names(patient2))
+common_all <- intersect(common1_2, names(patient3))
+
+# 3. Subset for common genes
+patien1_sub <- patient1[common_all]
+patien2_sub <- patient2[common_all]
+patien3_sub <- patient3[common_all]
+
+# 4. Calculate the mean for each gene
+common_mean <- (patien1_sub + patien2_sub + patien3_sub) / 3
+
+common_mean
+```
+
+
+</details>
+
+<br>
+You can see how having the info for each patient in a different vector is not as convenient, for this reason for expression data we use matrix. In the next chapter we will talk about them.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
