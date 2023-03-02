@@ -27,10 +27,3 @@ different-and-common-elements
 in
 match
 matrices
-binding
-transform-into-a-matrix
-set-and-edit-row-and-column-names
-headtail
-dim-nrow-ncol
-summary-and-transpose
-sum-max-min

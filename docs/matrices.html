@@ -214,12 +214,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="matrices.html#create-a-matrix" id="toc-create-a-matrix">Create a matrix</a>
 <ul>
-<li><a href="matrices.html#binding" id="toc-binding"><span class="toc-section-number">9.0.1</span> Binding</a></li>
-<li><a href="matrices.html#transform-into-a-matrix" id="toc-transform-into-a-matrix"><span class="toc-section-number">9.0.2</span> Transform into a matrix</a></li>
+<li><a href="matrices.html#binding" id="toc-binding">Binding</a></li>
+<li><a href="matrices.html#transform-into-a-matrix" id="toc-transform-into-a-matrix">Transform into a matrix</a></li>
 </ul></li>
 <li><a href="matrices.html#rownames-and-colnames" id="toc-rownames-and-colnames">Rownames and colnames</a>
 <ul>
-<li><a href="matrices.html#set-and-edit-row-and-column-names" id="toc-set-and-edit-row-and-column-names"><span class="toc-section-number">9.0.3</span> Set and edit row and column names</a></li>
+<li><a href="matrices.html#set-and-edit-row-and-column-names" id="toc-set-and-edit-row-and-column-names">Set and edit row and column names</a></li>
 </ul></li>
 <li><a href="matrices.html#indexing-1" id="toc-indexing-1">Indexing</a>
 <ul>
@@ -229,10 +229,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="matrices.html#functions-for-all-matrix" id="toc-functions-for-all-matrix">Functions for all matrix</a>
 <ul>
-<li><a href="matrices.html#headtail" id="toc-headtail"><span class="toc-section-number">9.0.4</span> Head/Tail</a></li>
-<li><a href="matrices.html#dim-nrow-ncol" id="toc-dim-nrow-ncol"><span class="toc-section-number">9.0.5</span> Dim, nrow, ncol</a></li>
-<li><a href="matrices.html#summary-and-transpose" id="toc-summary-and-transpose"><span class="toc-section-number">9.0.6</span> Summary and transpose</a></li>
-<li><a href="matrices.html#sum-max-min" id="toc-sum-max-min"><span class="toc-section-number">9.0.7</span> Sum, Max, Min, …</a></li>
+<li><a href="matrices.html#headtail" id="toc-headtail">Head/Tail</a></li>
+<li><a href="matrices.html#dim-nrow-ncol" id="toc-dim-nrow-ncol">Dim, nrow, ncol</a></li>
+<li><a href="matrices.html#summary-and-transpose" id="toc-summary-and-transpose">Summary and transpose</a></li>
+<li><a href="matrices.html#sum-max-min" id="toc-sum-max-min">Sum, Max, Min, …</a></li>
 </ul></li>
 <li><a href="matrices.html#apply-a-function-to-all-rows-or-columns" id="toc-apply-a-function-to-all-rows-or-columns">Apply a function to all rows or columns</a></li>
 <li><a href="matrices.html#exercises-5" id="toc-exercises-5">Exercises</a></li>
@@ -289,8 +289,8 @@ If the length of the vector is not a multiple of nrow or ncol, it starts to repe
 It fills the matrix by column by default, we can change the behavior setting <code>byrow = T</code>, try it
 </li>
 </ul>
-<div id="binding" class="section level3" number="9.0.1">
-<h3><span class="header-section-number">9.0.1</span> Binding</h3>
+<div id="binding" class="section level3 unnumbered">
+<h3>Binding</h3>
 <p>Another method, usually used, is to “bind” two or more vectors to create a matrix through <code>rbind()</code> or <code>cbind()</code>. It is easier with an example.
 <br>
 Do you remember in exercise <a href="vectors.html#exr:multiple-vectors">8.2</a> that we had three patients’ expression levels in three different vectors?! Now we can comine them into a matrix in this way:</p>
@@ -332,8 +332,8 @@ What would have been messed up? The column names in the first matrix and the row
 </li>
 </ul>
 </div>
-<div id="transform-into-a-matrix" class="section level3" number="9.0.2">
-<h3><span class="header-section-number">9.0.2</span> Transform into a matrix</h3>
+<div id="transform-into-a-matrix" class="section level3 unnumbered">
+<h3>Transform into a matrix</h3>
 <p>One of the most used function to create a matrix is to transform a <code>data.frame</code> (next chapter) into a matrix using the function <code>as.matrix()</code>.
 <br>
 Let’s use <code>mtcars</code>, a <code>data.frame</code> available in R, and transform it in a matrix:</p>
@@ -366,8 +366,8 @@ Let’s start by visualizing the first matrix we have created:</p>
 <div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="matrices.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(my_matrix)</span></code></pre></div>
 <pre class="code-out"><code>NULL</code></pre>
 <p>They have not been set, as we can see by the fact that the output of these functions is <code>NULL</code> and that when we printed the matrix we had “[,1] [,2] [,3] [,4]”.</p>
-<div id="set-and-edit-row-and-column-names" class="section level3" number="9.0.3">
-<h3><span class="header-section-number">9.0.3</span> Set and edit row and column names</h3>
+<div id="set-and-edit-row-and-column-names" class="section level3 unnumbered">
+<h3>Set and edit row and column names</h3>
 <p>You have to think at row and column names as simple vectors, so we can create two vectors (on for rows and one for columns) and assign them to row and column names. <b>Remember</b>: they must be the same length as the rows and the columns.
 <br></p>
 <div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="matrices.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create vectors</span></span>
@@ -470,8 +470,8 @@ Let’s say we want to get the names of the rows in which the third column has a
 <div id="functions-for-all-matrix" class="section level2 unnumbered">
 <h2>Functions for all matrix</h2>
 <p>Alright, it is time for some practical applications to explore fundamental matrix functions.</p>
-<div id="headtail" class="section level3" number="9.0.4">
-<h3><span class="header-section-number">9.0.4</span> Head/Tail</h3>
+<div id="headtail" class="section level3 unnumbered">
+<h3>Head/Tail</h3>
 <p>The first functions are <code>head()</code> and <code>tail()</code>. Let’s say we receive an expression table but they didn’t tell us much about it; we can use these two functions to look up the first and the last rows respectively.
 <br>
 Here is how to use them:</p>
@@ -533,8 +533,8 @@ MIR1302-9    0   0   0   0   0   0   0   0   0   0   0   0
 MIR1302-10   0   0   0   0   0   0   0   0   0   0   0   0</code></pre>
 <p>Ok, fine. We are ready to go and explore our first expression matrix.</p>
 </div>
-<div id="dim-nrow-ncol" class="section level3" number="9.0.5">
-<h3><span class="header-section-number">9.0.5</span> Dim, nrow, ncol</h3>
+<div id="dim-nrow-ncol" class="section level3 unnumbered">
+<h3>Dim, nrow, ncol</h3>
 <p>Head and tail are great friends, but you always want to know the dimensions of the matrix. It can be done using <code>dim()</code> function, which returns the number of rows and columns (this order!), or <code>nrow()</code> and <code>ncol()</code>.</p>
 <div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="matrices.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dim</span></span>
 <span id="cb304-2"><a href="matrices.html#cb304-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(expr_data)</span></code></pre></div>
@@ -547,8 +547,8 @@ MIR1302-10   0   0   0   0   0   0   0   0   0   0   0   0</code></pre>
 <pre class="code-out"><code>[1] 12</code></pre>
 <p>We see that our matrix has 26475 rows and 12 columns.</p>
 </div>
-<div id="summary-and-transpose" class="section level3" number="9.0.6">
-<h3><span class="header-section-number">9.0.6</span> Summary and transpose</h3>
+<div id="summary-and-transpose" class="section level3 unnumbered">
+<h3>Summary and transpose</h3>
 <p>After having seen the basic structure of the first and last lines, the number of rows and columns, we usually want to have some info about the distribution of the genes, the counts ecc.
 <br>
 Here comes the function <code>summary()</code>:</p>
@@ -620,8 +620,8 @@ Here, just an example of the use of the seed.</p>
 <pre class="code-out"><code>[1]  6.463973 15.977798  8.770562 17.777331 18.868878</code></pre>
 <p>Great! Remember, setting the seed is fundamental in analysis in which randomness take place, so they will always return the same results.</p>
 </div>
-<div id="sum-max-min" class="section level3" number="9.0.7">
-<h3><span class="header-section-number">9.0.7</span> Sum, Max, Min, …</h3>
+<div id="sum-max-min" class="section level3 unnumbered">
+<h3>Sum, Max, Min, …</h3>
 <p>Alright, there are plenty of functions that returns useful values of all the data in a matrix, such as the max value, the min one, the sum of all the values, the mean of all the values etc.
 <br>
 There is nothing easier than watch them in action.</p>

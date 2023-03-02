@@ -23,7 +23,7 @@ my_matrix
   <li>It fills the matrix by column by default, we can change the behavior setting `byrow = T`, try it</li>
 </ul>
 
-### Binding
+### Binding {-}
 Another method, usually used, is to "bind" two or more vectors to create a matrix through `rbind()` or `cbind()`. It is easier with an example.
 <br>
 Do you remember in exercise \@ref(exr:multiple-vectors) that we had three patients' expression levels in three different vectors?! Now we can comine them into a matrix in this way:
@@ -48,7 +48,7 @@ c_patients
   <li>`rbind()` combine by rows, putting each vector in a row, while `cbind` does the opposite</li>
 </ul>
 
-### Transform into a matrix
+### Transform into a matrix {-}
 One of the most used function to create a matrix is to transform a `data.frame` (next chapter) into a matrix using the function `as.matrix()`.
 <br>
 Let's use `mtcars`, a `data.frame` available in R, and transform it in a matrix:
@@ -80,7 +80,7 @@ colnames(my_matrix)
 ```
 They have not been set, as we can see by the fact that the output of these functions is `NULL` and that when we printed the matrix we had "[,1] [,2] [,3] [,4]".
 
-### Set and edit row and column names
+### Set and edit row and column names {-}
 You have to think at row and column names as simple vectors, so we can create two vectors (on for rows and one for columns) and assign them to row and column names. <b>Remember</b>: they must be the same length as the rows and the columns.
 <br>
 ```{r}
@@ -167,7 +167,7 @@ This will be so useful when talking about expression matrix (e.g. when we want t
 ## Functions for all matrix {-}
 Alright, it is time for some practical applications to explore fundamental matrix functions.
 
-### Head/Tail
+### Head/Tail {-}
 The first functions are `head()` and `tail()`. Let's say we receive an expression table but they didn't tell us much about it; we can use these two functions to look up the first and the last rows respectively.
 <br>
 Here is how to use them:
@@ -207,7 +207,7 @@ head(expr_data, n = 10) # we can specify the number of rows we want
 ```
 Ok, fine. We are ready to go and explore our first expression matrix.
 
-### Dim, nrow, ncol
+### Dim, nrow, ncol {-}
 Head and tail are great friends, but you always want to know the dimensions of the matrix. It can be done using `dim()` function, which returns the number of rows and columns (this order!), or `nrow()` and `ncol()`. 
 ```{r}
 # dim
@@ -221,7 +221,7 @@ ncol(expr_data)
 ```
 We see that our matrix has `r nrow(expr_data)` rows and `r ncol(expr_data)` columns.
 
-### Summary and transpose
+### Summary and transpose {-}
 After having seen the basic structure of the first and last lines, the number of rows and columns, we usually want to have some info about the distribution of the genes, the counts ecc. 
 <br>
 Here comes the function `summary()`:
@@ -274,7 +274,7 @@ print(with_seed2)
 
 Great! Remember, setting the seed is fundamental in analysis in which randomness take place, so they will always return the same results.
 
-### Sum, Max, Min, ...
+### Sum, Max, Min, ... {-}
 Alright, there are plenty of functions that returns useful values of all the data in a matrix, such as the max value, the min one, the sum of all the values, the mean of all the values etc.
 <br>
 There is nothing easier than watch them in action.
