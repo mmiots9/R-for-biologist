@@ -9,6 +9,8 @@ exm:logical-sum
 exm:operations-vectors
 exr:mito-expr
 exr:multiple-vectors
+exr:calculate-read-sum
+exr:calculate-read-sum-filtered
 installation
 first-step-in-rstudio
 variables
@@ -17,8 +19,6 @@ numbers
 character
 boolean
 vectors
-slicing
-use-logicals
 sorting-a-vector
 unique-values
 logical-vectors-sum-and-mean
@@ -26,4 +26,11 @@ mathematical
 different-and-common-elements
 in
 match
-exercise
+matrices
+binding
+transform-into-a-matrix
+set-and-edit-row-and-column-names
+headtail
+dim-nrow-ncol
+summary-and-transpose
+sum-max-min

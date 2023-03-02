@@ -1,0 +1,378 @@
+# Matrices
+Here we are at the second basic form of data organization in R, and the most important one for expression data: the <strong>matrix</strong>.
+<br>
+As we have seen in the previous chapter, sometimes, especially for expression data, there is the need of having a more complex data structure than the vector. Matrices are 2-dimensional data objects containing the <b>same</b> type of data: usually we have features (genes, proteins, ecc) on rows and samples on columns.
+
+## Create a matrix {-}
+There are many ways to create a matrix, we will briefly see most of them (the ones we are going to use in real life).
+<br>
+The first one, that is not so used (I know I just told you the opposite, but...) is to change a vector into a matrix using the function `matrix()` and setting the number :
+```{r}
+# 1. create a vector
+my_vector <- 1:12
+my_vector
+
+# 2. create the matrix
+my_matrix <- matrix(my_vector, nrow = 3)
+my_matrix
+```
+<p class="plist">There are few things to notice here:</p>
+<ul>
+  <li>We can set `nrow` or `ncol`</li>
+  <li>If the length of the vector is not a multiple of nrow or ncol, it starts to repeat the vector from the beginning to fill the matrix (try using `matrix(my_vector, nrow = 5)`)</li>
+  <li>It fills the matrix by column by default, we can change the behavior setting `byrow = T`, try it</li>
+</ul>
+
+### Binding
+Another method, usually used, is to "bind" two or more vectors to create a matrix through `rbind()` or `cbind()`. It is easier with an example.
+<br>
+Do you remember in exercise \@ref(exr:multiple-vectors) that we had three patients' expression levels in three different vectors?! Now we can comine them into a matrix in this way:
+
+```{r}
+# 1. Create the vectors
+patient1 <- c("SEC24C" = 12, "CDH7" = 1, "LDB2" = 13, "SEM3A" = 16, "FEZF2" = 21, "NTMT1" = 43, "BIP" = 29, "HOMER" = 22)
+patient2 <- c("SEC24C" = 2, "CDH7" = 11, "LDB2" = 13, "SEM3A" = 22, "FEZF2" = 21, "NTMT1" = 31, "BIP" = 12, "HOMER" = 8)
+patient3 <- c("SEC24C" = 8, "CDH7" = 3, "LDB2" = 22, "SEM3A" = 14, "FEZF2" = 13, "NTMT1" = 45, "BIP" = 37, "HOMER" = 2)
+
+# 2. Bind vectors
+r_patients <- rbind(patient1, patient2, patient3)
+c_patients <- cbind(patient1, patient2, patient3)
+
+r_patients
+c_patients
+```
+<p class="plist">Wow, those matrices are really cool! Let's analyze the code:</p>
+<ul>
+  <li>First of all, we have modified the vectors to be the <b>same size</b> and with the <b>same order for the genes</b>. This is crucial, otherwise we will mess up/li>
+  <li>What would have been messed up? The column names in the first matrix and the row names in the second matrix. We will see these two features in a while. Just keep in mind that when you have to combine different named vectors, they should be in the same order. Try it with vectors not in the same order and see</li>
+  <li>`rbind()` combine by rows, putting each vector in a row, while `cbind` does the opposite</li>
+</ul>
+
+### Transform into a matrix
+One of the most used function to create a matrix is to transform a `data.frame` (next chapter) into a matrix using the function `as.matrix()`.
+<br>
+Let's use `mtcars`, a `data.frame` available in R, and transform it in a matrix:
+```{r}
+# 1. See class of mtcars
+class(mtcars)
+
+# 2. Transform to a matrix
+mt_mat <- as.matrix(mtcars)
+
+# 3. See class of new variable
+class(mt_mat)
+```
+Here we introduced the concept of `class` in R. This is not important for us at the moment, neither will be in the future. Just think this way: `typeof()` is for the type of data inside a variable while the `class` is the "type" of the structure of the variable.
+
+Ok, now that we've seen how to create a matrix, we have to dig into some important concepts.
+  
+## Rownames and colnames {-}
+Matrices can have row names and column names (think as the extension of a named vector). We have already seen these features in [#Binding], and here we will see them in details.
+<br>
+Let's start by visualizing the first matrix we have created:
+```{r}
+my_matrix
+```
+We can extract row names and column names with `rownames()` and `colnames()` functions, respectively:
+```{r}
+rownames(my_matrix)
+colnames(my_matrix)
+```
+They have not been set, as we can see by the fact that the output of these functions is `NULL` and that when we printed the matrix we had "[,1] [,2] [,3] [,4]".
+
+### Set and edit row and column names
+You have to think at row and column names as simple vectors, so we can create two vectors (on for rows and one for columns) and assign them to row and column names. <b>Remember</b>: they must be the same length as the rows and the columns.
+<br>
+```{r}
+# 1. Create vectors
+my_row_names <- c("First row", "Second row", "Third row")
+my_col_names <- c("First column", "Second column", "Third column", "Fourth column")
+
+# 2. Assign vectors to row and column names
+rownames(my_matrix) <- my_row_names
+colnames(my_matrix) <- my_col_names
+
+# 3. Print result
+my_matrix
+rownames(my_matrix)
+colnames(my_matrix)
+```
+Tadaaa. Now we have a more complete matrix. As row names and column names are vectors, you can easily change them all (or part of them). For example:
+```{r}
+# 1. Change third row names
+rownames(my_matrix)[3] <- "3rd row"
+
+# 2. Print
+my_matrix
+```
+
+  
+## Indexing {-}
+As for vectors, we can extract values of the matrix by indexing: we can get a single value, a vector of values and either smaller matrices.
+<br>
+
+### Slicing {-}
+The first method is similar to vector slicing, the only exception here is that we have to set a value for the row/s and one for the column/s in the form `[row/s, column/s]`.
+<br>
+Here some examples:
+```{r}
+# Get only a value, from second row and third column
+my_matrix[2, 3] 
+
+# Get a vector of values, from first and third row and second column
+my_matrix[c(1, 3), 2]
+
+# Get a matrix, from second and third row and second and third column
+my_matrix[2:3, 2:3]
+
+# Get ALL elements of a row (leave the column part empty)
+my_matrix[2:3,]
+```
+You can use every slicing technique seen in [slicing section](#slicing-vectors) of vectors.
+
+### Using names {-}
+If we have set rownames and/or column names, we can use them to index a matrix (similarly to named vectors), in the form `[row/s, column/s]`.
+```{r}
+# Get only a value, from second row and third column
+my_matrix["Second row", "Third column"]
+
+# Get a vector of values, from first and third row and second column
+my_matrix[c("First row", "3rd row"), "Second column"]
+
+# Get a matrix, from second and third row and second and third column
+my_matrix[c("Second row", "3rd row"), c("Second column", "Third column")]
+
+# Get ALL elements of a row (leave the column part empty)
+my_matrix[c("Second row", "3rd row"),]
+```
+Here, you can't use expansions (`:`) to select from row with name X to row with name X+3, it is only possible with numbers. In fact, if you remember, the command n:n+m create a vector of numbers from n to n + m. Try it!
+
+### Using logicals {-}
+Again, as for vectors we can use logicals to extrapolate values of a matrix.
+<br>
+Let's say we want to get the names of the rows in which the third column has a odd number, we can do as follow:
+```{r}
+# 1. Create a boolean vector
+is_odd <- my_matrix[, "Third column"] %% 2 == 1
+
+# 2. Slice the matrix based on the boolean vector
+sliced_odd <- my_matrix[is_odd,]
+
+# 3. Get row names
+rownames(sliced_odd)
+```
+
+This will be so useful when talking about expression matrix (e.g. when we want to extrapolate genes that have tot expression in patient X or Y).
+
+## Functions for all matrix {-}
+Alright, it is time for some practical applications to explore fundamental matrix functions.
+
+### Head/Tail
+The first functions are `head()` and `tail()`. Let's say we receive an expression table but they didn't tell us much about it; we can use these two functions to look up the first and the last rows respectively.
+<br>
+Here is how to use them:
+```{r}
+# 1. Load data (first time we see it)
+expr_data <- read.csv(file = "data/All_counts.csv", # name of the file
+                      header = T # usually column names are in the first row
+                      )
+
+# 2. Type of
+class(expr_data)
+
+# 3. Head
+head(expr_data)
+```
+<p class="plist">Ok, this is a brief example in which we have loaded a data matrix with the function `read.csv()` (as we know that the file is a .csv, but there are plenty of functions for all different type of files). We then checked the class of the expr_data and we get `data.frame`; lastly we used `head()` to see the structure of the first rows and we can say that:</p>
+<ul>
+  <li>Gene symbols are in a column</li>
+  <li>We have 6 wt samples and 6 ko samples</li>
+  <li>Probably these are row counts as we do not have decimal values</li>
+</ul>
+
+We can edit the previous code to fix some issues we encounter
+```{r}
+# 1. Gene names as rownames
+expr_data <- read.csv(file = "data/All_counts.csv",
+                      header = T,
+                      row.names = 1 # first column
+                      )
+
+# 2. Transform to matrix
+expr_data <- as.matrix(expr_data)
+
+# Check
+class(expr_data)
+head(expr_data, n = 10) # we can specify the number of rows we want
+```
+Ok, fine. We are ready to go and explore our first expression matrix.
+
+### Dim, nrow, ncol
+Head and tail are great friends, but you always want to know the dimensions of the matrix. It can be done using `dim()` function, which returns the number of rows and columns (this order!), or `nrow()` and `ncol()`. 
+```{r}
+# dim
+dim(expr_data)
+
+# nrow
+nrow(expr_data)
+
+# ncol
+ncol(expr_data)
+```
+We see that our matrix has `r nrow(expr_data)` rows and `r ncol(expr_data)` columns.
+
+### Summary and transpose
+After having seen the basic structure of the first and last lines, the number of rows and columns, we usually want to have some info about the distribution of the genes, the counts ecc. 
+<br>
+Here comes the function `summary()`:
+```{r}
+summary(expr_data)
+```
+For each column it returns some descriptive. But, ehi, on the columns we have the samples, we want this statistics for the genes, how can we do it? Here comes `t()` that transpose the matrix so that rows became columns and <i>vice versa</i>.
+```{r}
+expr_data_t <- t(expr_data)
+
+expr_data_t[1:5, 1:8]
+```
+
+Perfect, now we can do summary again (we do a subset of the data because we don't want to do it for all genes, as it will be huge).
+
+```{r}
+set.seed(123)
+
+# 1. Get random numbers to select random genes
+r_numb <- runif(n = 7, min = 1, max = ncol(expr_data_t))
+
+# 2. Floor numbers to get integers
+r_numb <- floor(r_numb)
+
+# 3. Get the summary of sliced expr_data_t
+summary(expr_data_t[, r_numb])
+```
+Here we have some interesting descriptive for each gene: we can see, for example, that DBT has more counts than GPX2, or that PPM1B has the higher Max. counts of all these 7 genes.
+<br>
+There are two new functions here: `set.seed` and `runif`. Let's start from the latter, it returns `n` random number uniformly distributed between `min` and `max` included. Do you understand why I used `max = ncol(expr_data_t)`? I'm sure you do. But to be sure that it is clear, I did it because I don't want to hard code (insert the real number) of the number of columns of the expression matrix, because if I change matrix I have to change this number as well. So, I let R calculate it for me. As it is random, in order to let you have the same number as me, I set a seed. The theory behind "randomness" in computer science is complex, so I'm not going to deep it. If you want, there are plenty of resources on the internet on this topic.
+<br>
+Here, just an example of the use of the seed.
+```{r}
+# 1. Two random vectors of 5 numbers without set.seed
+no_seed1 <- runif(n = 5, min = 1, max = 20)
+no_seed2 <- runif(n = 5, min = 1, max = 20)
+
+# 2. Two random vectors setting the seed
+set.seed(123) # here you can place any number, each generate a unique random series
+with_seed1 <- runif(n = 5, min = 1, max = 20)
+set.seed(123) # here you can place any number, each generate a unique random series
+with_seed2 <- runif(n = 5, min = 1, max = 20)
+
+print(no_seed1)
+print(no_seed2)
+
+print(with_seed1)
+print(with_seed2)
+```
+
+Great! Remember, setting the seed is fundamental in analysis in which randomness take place, so they will always return the same results.
+
+### Sum, Max, Min, ...
+Alright, there are plenty of functions that returns useful values of all the data in a matrix, such as the max value, the min one, the sum of all the values, the mean of all the values etc.
+<br>
+There is nothing easier than watch them in action.
+```{r}
+# 1. create a random value matrix
+set.seed(214)
+my_matrix2 <- matrix(runif(n = 24, min = 1, max = 20), nrow = 4)
+my_matrix2
+
+# 2. Calculate sum
+my_sum <- sum(my_matrix2)
+print(paste("Sum of the values of my_matrix2:", my_sum))
+
+# 3. Calculate min
+my_min <- min(my_matrix2)
+print(paste("Min of the values of my_matrix2:", my_min))
+
+# 4. Calculate max
+my_max <- max(my_matrix2)
+print(paste("Max of the values of my_matrix2:", my_max))
+
+# 5. Calculate mean
+my_mean <- mean(my_matrix2)
+print(paste("Mean of the values of my_matrix2:", my_mean))
+```
+Here, we calculate these stats for all the data in the matrix, but if I want to calculate it by rows or columns? Here it is
+
+## Apply a function to all rows or columns {-}
+You can easily think about `summary` function to answer the previous question. Right, I'll give it to you, but how if you want to handle the result? How about having only the vector of the mean values for each row? This is achieved through `apply`. Let's see it in action, then I'll explain it.
+
+```{r}
+# 1. Calculate the mean for each column
+mean_col <- apply(X = expr_data_t[, r_numb], MARGIN = 1, FUN = mean)
+
+# 2. Calculate the mean for each column
+mean_row <- apply(X = expr_data_t[, r_numb], MARGIN = 2, FUN = mean)
+
+mean_col
+mean_row
+```
+
+See? It's super easy. It requires the matrix (X), the function (mean), and the margin used to calculate over (1 for rows, 2 for columns). You can apply all the functions that take as input numeric vectors. 
+<br>
+If the matrix has row names or column names set, it returns a named vactor, otherwise it returns a normal vector.
+
+
+## Exercises {-}
+Now it's you turn to familiarize with matrices.
+
+::: {.exercise #calculate-read-sum}
+You have collected expression levels of 4 genes of interest of 3 patients. Calculate the sum of the read for each patient, in order to normalize the values in further analysis.
+<br>
+I'll give you the data.
+:::
+
+```{r}
+CXCR4 <- c("P1" = 25, "P2" = 12, "P3" = 14)
+LCT <- c("P3" = 12, "P2" = 10, "P1" = 17)
+PTPN7 <- c("P1" = 2, "P3" = 3, "P2" = 4)
+LHX9 <- c("P2" = 20, "P1" = 28, "P3" = 11)
+```
+
+<details>
+  <summary>Solution</summary>
+```{r}
+# 1. Reorder the vectors to have the same order of patients
+LCT <- LCT[names(CXCR4)]
+PTPN7 <- PTPN7[names(CXCR4)]
+LHX9 <- LHX9[names(CXCR4)]
+
+# 2. Create the matrix
+expr_mat_pat <- rbind(CXCR4, LCT, PTPN7, LHX9)
+
+# 3. Calculate the sum of the reads for each patient
+read_sum_pat <- apply(expr_mat_pat, MARGIN = 2, mean)
+
+print(read_sum_pat)
+```
+</details>
+
+::: {.exercise #calculate-read-sum-filtered}
+We know that genes which mean is < 5, they should be excluded from the analysis (it is an example). Re-do the calculation of exercise \@ref(exr:calculate-read-sum) excluding those genes.
+:::
+
+<details>
+  <summary>Solution</summary>
+```{r}
+# 1. Calculate the mean of the reads for each gene
+read_sum_gene <- apply(expr_mat_pat, MARGIN = 1, mean)
+
+# 2. Get the name of the genes to keep
+gene_2_keep <- names(read_sum_gene)[read_sum_gene > 5]
+
+# 3. Use genes_2_keep to subset matrix and calculate sum
+read_sum_pat_filt <- apply(expr_mat_pat[gene_2_keep, ], MARGIN = 2, mean)
+
+print(read_sum_pat_filt)
+```
+</details>
+
+Great, another big chapter has come to an end. We are closer and closer to your real world applications. For your expression (mRNA or proteins) data you could already start some analysis, but wait for the next chapter, in which we will talk about `data.frame`.
