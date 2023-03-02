@@ -19,11 +19,4 @@ numbers
 character
 boolean
 vectors
-sorting-a-vector
-unique-values
-logical-vectors-sum-and-mean
-mathematical
-different-and-common-elements
-in
-match
 matrices

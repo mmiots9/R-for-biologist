@@ -188,7 +188,7 @@ print(paste("The mice spent", sum_time,
 
 This example implemented lots of things we have seen up to now, and it shows how on numerical vectors we can calculate sum, mean and sd; but these are not the only functions, we have also var (variance), min, max and others. We are going to see them later when needed.
 
-### Sorting a vector
+### Sorting a vector {-}
 Another important function is `sort()` as it gives us the possibility to sort the values of the vectors.
 ```{r}
 sort(expr_values)
@@ -214,7 +214,7 @@ expr_values[sort(names(expr_values))]
 ```
 Tadaaa, we used sort on the names of expression levels and used the sorted names to index the named vector.
 
-### Unique values
+### Unique values {-}
 As the title suggests, there is a function (`unique()`) that returns tha unique values of a vector. It is useful in different situations, we will use it a lot. The usage is so simple:
 
 ```{r}
@@ -225,7 +225,7 @@ unique(my_vector)
 
 ```
 
-### Logical vectors sum and mean
+### Logical vectors sum and mean {-}
 In the example \@ref(exm:mice-cage) we have seen how to calculate the sum and the mean of numerical vectors, but it can be done also on vectors full of boolean, and it can be very useful. I'll show you this example:
 
 ::: {.example #logical-sum}
@@ -251,7 +251,7 @@ What happened here? The trick is that R interprets TRUE as 1 and FALSE as 0. <b>
 ## Operations between vectors {-}
 Don't give up, I know this chapter ha been so long, but now we will see the last part: the most important operations we can do <i>between</i> vectors.
 
-### Mathematical
+### Mathematical {-}
 First of all, mathematical operations: we can do mathematical operations between vectors <strong>only if the vectors are the same size</strong>, otherwise it will raise an error. This because each operation is performed one element by the corrisponding element of the other vector.
 
 ::: {.example #operations-vectors}
@@ -286,7 +286,7 @@ sample3_fr
   <li>Since the vectors have the same size, we can sum them together. <strong>IMPORTANT</strong>: the operation is performed based on position, NOT names. So if our vectors would have had the names in different order, we should have ordered them</li>
 </ol>
 
-### Different and common elements
+### Different and common elements {-}
 Usually we want to compare two vectors to find distinct and common elements (eg. upregulated genes in two analysis). To do it, we can use two functions: `intersect()` (which find the common elements between two vectors), and `setdiff()` (which returns the element in the first vector not present in the second).
 
 ```{r}
@@ -314,14 +314,14 @@ print(cat("Common genes are:", paste(common, collapse = ", "), "\n",
   <li>`"\n"` means <em>add a new line</em>, so it tells to print the next sentence in a new line. It is a special character, so it works with cat/li>
 </ol>
 
-### %in%
+### %in% {-}
 A slightly different function (if we can call it this way) is `%in%`. When comparing two vectors, it returns TRUE or FALSE for each element of the first vector based on the presence of that element in the second vector:
 ```{r}
 upregulated_1 %in% upregulated_2
 ```
 Sometimes it is useful to index a vector based on another vector. We will see some usages.
 
-### Match
+### Match {-}
 Last but not least, the `match()` function. It takes two vectors into consideration and returns, for each element of the first vector, the position of that element in the second vector. If an element is not present, it will return `NA`, we will describe this element in a dedicated chapter.
 <br>
 So, how can it be useful? Usually it is done to rearrange and reorder a vector to match another vector. For example, let's say that two vectors of example \@ref(exm:operations-vectors) have names in different order; prior to do all calculation we need to match the names order.
