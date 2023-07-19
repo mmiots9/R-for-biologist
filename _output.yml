@@ -3,4 +3,4 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">Impariamo R</a></li>
+        <li><a href="./">R for biologist</a></li>

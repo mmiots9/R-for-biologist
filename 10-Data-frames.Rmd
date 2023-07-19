@@ -1,0 +1,119 @@
+# Data frames
+Matrices can only be filled with the exact same type of data in all columns. This is useful when dealing with expression data that have to be manipulated for statistics, but usually we do not have only numbers in a table. For example, we could have all the meta data associated with different samples: age, treatment, sex, number of replicates, number of cells, etc. These are all different types of data, so we need a different "structure" that can store them for us. In R, this structure is called <strong>data.frame</strong>.
+
+## Create a data.frame {-}
+There are many ways to create a data.frame in R. We will explore them all, as you will use them in different situations.
+
+### From matrix {-}
+Let's start from the least commonly utilized one (I know, you want to ask me "So why are you annoying me with this stuff?!"). We can transform a matrix into a data.frame using the function `as.data.frame()`. Usually, you do so when you want to add a new column to the matrix with a data type that is different from the one of the matrix (e.g. add a character column to a numeric matrix).
+<br>
+Let's see a quick example:
+```{r}
+# 1. Create a matrix
+my_matrix <- matrix(rnorm(20), nrow = 4, ncol = 5)
+
+# 2. Check the class of my_matrix variable
+print(paste("Variable my_matrix is of class:", paste(class(my_matrix), collapse = ", ")))
+
+# 3. Transform the matrix into a data.frame
+my_df <- as.data.frame(my_matrix)
+
+# 4. Check the class of my_df variable
+print(paste("Variable my_df is of class:", paste(class(my_df), collapse = ", ")))
+```
+
+And now? How do we add a new column? Eheh, keep calm, we will answer this question in a moment...
+
+### From vectors {-}
+We have to first look at another method to create a data.frame, that is starting from different vectors (as for a matrix). The syntax is this: `data.frame("<name_of_the_column>" = <vector>, "<name_of_the_column2" = <vector2>, ...)`. This is useful when you have different information in different vectors and you want to merge them all, for example:
+```{r}
+# 1. Set the seed for sample function
+set.seed(362)
+
+# 2. Create vectors
+age <- c(33, 29, 32, 41, 45, 67, 44, 18, 22, 21, 37, 36, 39, 45, 19, 20, 28, 30, 48, 50, 66, 26, 55, 56)
+sex <- sample(x = c("M", "F"), size = length(age), replace = T)
+treatment <- rep(x = c("CTRL", "Inh1", "Inh2"), each = length(age)/3)
+weight <- round(c(rnorm(n = length(age)/3, mean = 85, sd = 20), 
+            rnorm(n = length(age)/3, mean = 75, sd = 5), 
+            rnorm(n = length(age)/3, mean = 65, sd = 12)), 1)
+
+# 3. Create the data.frame
+my_df <- data.frame("age" = age, "sex" = sex, treatment = treatment, weight = weight)
+
+# 4. Visualize first rows
+head(my_df)
+
+```
+
+### From file {-}
+You will usually load a table from a file (csv, txt, tsv, etc) that you have written or that someone has given you. We have already seen how to read a csv file in the previous [chapter](#head-tail-matrices), so let's do the same to load our weight data (<a href="data/Weights.csv" download>Download</a>).
+
+```{r}
+# 1. Load data
+weight_data <- read.csv("data/Weights.csv", header = T)
+
+# 2. Visualize first rows
+head(weight_data)
+```
+
+By default, the table is loaded as a data.frame.
+
+## Indexing {-}
+Indexing a data.frame is exactly the same as indexing a matrix. For this reason, I will only do some examples here, and invite you to look at the [indexing](#indexing-matrices) section in matrices chapter for a deeper explanation.
+
+```{r}
+# 1. Extract males data
+males_data <- weight_data[weight_data$sex == "M",]
+head(males_data)
+
+# 2. Extract controls sex and age
+ctrl_sex_age <- weight_data[weight_data$treatment == "CTRL", c("sex", "age")]
+head(ctrl_sex_age)
+```
+
+## Create a new column {-}
+I'm proud of you and your patience! Here we are to answer previous questions about how to add a new column to a data.frame. There are different ways to add a column to an existing database.
+<br>
+We can use the "$" operator in this way: `dataframe\$new_column <- vector`. In this way we are telling R to insert `vector` as `new_column` in the data.frame. Similarly, we can use `dataframe["<new_column>"] <- vector` to do the same.
+<br>
+Here an example:
+```{r}
+# 1. Add state column with value Italy for all rows
+weight_data$state <- "Italy"
+
+# 2. Add city column with value Milan for all rows
+weight_data["city"] <- "Milan"
+
+# 3. Visualize first rows
+head(weight_data)
+```
+
+## Delete a column {-}
+To delete a column from a data.frame, you should assign it the value NULL `dataframe$column <- NULL`. If you want to delete multiple columns, you could use this form `dataframe[, c("column1", "column2", ...)] <- NULL`.
+<br>
+Let's now delete state and city columns from our dataframe:
+```{r}
+# 1. Delete rows
+weight_data[, c("state", "city")] <- NULL
+
+# 2. Visualize first rows
+head(weight_data)
+```
+
+## Export a data frame {-}
+Lastly, let's imagine you have performed some operations on a data.frame (filtering, add columns, calculations etc) and you want to save it as a file, what you have to do is this:
+```{r, eval=FALSE}
+write.csv(x = weight_data, file = "output/weight_modified.csv", quote = F, row.names = F)
+```
+<p class="plist">Let's dissect this code:</p>
+<ul>
+  <li><em>write.csv</em> is the function used to save a csv file. You can also save a tsv file with write.tsv or write.table etc. There are plenty of them. I like csv so I'm using it.</li>
+  <li><em>x</em> is the data.frame to save</li>
+  <li><em>file</em> is the path were to save the dataframe</li>
+  <li><em>quote</em> is to tell whether to encapsulate each value into double quotes when saving (we don't want it so we set it to F)</li>
+  <li><em>row.names</em> is to tell whether to write a column of the row names when saving. It is useful when the row names store useful information, such as patient ID, gene name etc. As in our case there is no information in row names, we set it to F.</li>
+</ul>
+
+
+Great! We have now seen the basic operation to manipulate a data.frame object in R. Next step will be to do a real exploratory data analysis to discover new functions and start our real-world journey.

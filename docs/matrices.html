@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-03-02" />
+<meta name="date" content="2023-07-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="vectors.html"/>
-
+<link rel="next" href="data-frames.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Impariamo R</a></li>
+<li><a href="./">R for biologist</a></li>
 <li class="divider"></li>
 <li><a href="index.html#about" id="toc-about">About</a></li>
 <li><a href="installation.html#installation" id="toc-installation"><span class="toc-section-number">1</span> Installation</a></li>
@@ -221,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="matrices.html#set-and-edit-row-and-column-names" id="toc-set-and-edit-row-and-column-names">Set and edit row and column names</a></li>
 </ul></li>
-<li><a href="matrices.html#indexing-1" id="toc-indexing-1">Indexing</a>
+<li><a href="matrices.html#indexing-matrices" id="toc-indexing-matrices">Indexing</a>
 <ul>
 <li><a href="matrices.html#slicing" id="toc-slicing">Slicing</a></li>
 <li><a href="matrices.html#using-names" id="toc-using-names">Using names</a></li>
@@ -229,13 +229,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="matrices.html#functions-for-all-matrix" id="toc-functions-for-all-matrix">Functions for all matrix</a>
 <ul>
-<li><a href="matrices.html#headtail" id="toc-headtail">Head/Tail</a></li>
+<li><a href="matrices.html#head-tail-matrices" id="toc-head-tail-matrices">Head/Tail</a></li>
 <li><a href="matrices.html#dim-nrow-ncol" id="toc-dim-nrow-ncol">Dim, nrow, ncol</a></li>
 <li><a href="matrices.html#summary-and-transpose" id="toc-summary-and-transpose">Summary and transpose</a></li>
 <li><a href="matrices.html#sum-max-min" id="toc-sum-max-min">Sum, Max, Min, …</a></li>
 </ul></li>
 <li><a href="matrices.html#apply-a-function-to-all-rows-or-columns" id="toc-apply-a-function-to-all-rows-or-columns">Apply a function to all rows or columns</a></li>
 <li><a href="matrices.html#exercises-5" id="toc-exercises-5">Exercises</a></li>
+</ul></li>
+<li><a href="data-frames.html#data-frames" id="toc-data-frames"><span class="toc-section-number">10</span> Data frames</a>
+<ul>
+<li><a href="data-frames.html#create-a-data.frame" id="toc-create-a-data.frame">Create a data.frame</a>
+<ul>
+<li><a href="data-frames.html#from-matrix" id="toc-from-matrix">From matrix</a></li>
+<li><a href="data-frames.html#from-vectors" id="toc-from-vectors">From vectors</a></li>
+<li><a href="data-frames.html#from-file" id="toc-from-file">From file</a></li>
+</ul></li>
+<li><a href="data-frames.html#indexing-1" id="toc-indexing-1">Indexing</a></li>
+<li><a href="data-frames.html#create-a-new-column" id="toc-create-a-new-column">Create a new column</a></li>
+<li><a href="data-frames.html#delete-a-column" id="toc-delete-a-column">Delete a column</a></li>
+<li><a href="data-frames.html#export-a-data-frame" id="toc-export-a-data-frame">Export a data frame</a></li>
 </ul></li>
 </ul>
 
@@ -400,7 +413,7 @@ Second row            2             5            8            11
 3rd row               3             6            9            12</code></pre>
 </div>
 </div>
-<div id="indexing-1" class="section level2 unnumbered">
+<div id="indexing-matrices" class="section level2 unnumbered">
 <h2>Indexing</h2>
 <p>As for vectors, we can extract values of the matrix by indexing: we can get a single value, a vector of values and either smaller matrices.
 <br></p>
@@ -470,7 +483,7 @@ Let’s say we want to get the names of the rows in which the third column has a
 <div id="functions-for-all-matrix" class="section level2 unnumbered">
 <h2>Functions for all matrix</h2>
 <p>Alright, it is time for some practical applications to explore fundamental matrix functions.</p>
-<div id="headtail" class="section level3 unnumbered">
+<div id="head-tail-matrices" class="section level3 unnumbered">
 <h3>Head/Tail</h3>
 <p>The first functions are <code>head()</code> and <code>tail()</code>. Let’s say we receive an expression table but they didn’t tell us much about it; we can use these two functions to look up the first and the last rows respectively.
 <br>
@@ -553,20 +566,20 @@ MIR1302-10   0   0   0   0   0   0   0   0   0   0   0   0</code></pre>
 <br>
 Here comes the function <code>summary()</code>:</p>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="matrices.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(expr_data)</span></code></pre></div>
-<pre class="code-out"><code>      wt1                wt2                wt3                wt4             wt5                wt6          
- Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0   Min.   :     0.0   Min.   :     0.0  
- 1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0   1st Qu.:     0.0   1st Qu.:     0.0  
- Median :    19.0   Median :    16.0   Median :    16.0   Median :   15   Median :    16.0   Median :    17.0  
- Mean   :   411.4   Mean   :   324.4   Mean   :   326.7   Mean   :  274   Mean   :   317.3   Mean   :   316.6  
- 3rd Qu.:   272.0   3rd Qu.:   214.0   3rd Qu.:   218.0   3rd Qu.:  186   3rd Qu.:   212.0   3rd Qu.:   224.0  
- Max.   :327719.0   Max.   :536733.0   Max.   :377069.0   Max.   :90474   Max.   :352034.0   Max.   :209954.0  
-      ko1               ko2                ko3                ko4                ko5               ko6          
- Min.   :    0.0   Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0.0   Min.   :     0.0  
- 1st Qu.:    0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0.0   1st Qu.:     0.0  
- Median :   13.0   Median :    18.0   Median :    19.0   Median :    17.0   Median :   17.0   Median :    19.0  
- Mean   :  250.1   Mean   :   378.2   Mean   :   351.4   Mean   :   373.8   Mean   :  319.8   Mean   :   423.4  
- 3rd Qu.:  179.0   3rd Qu.:   245.0   3rd Qu.:   246.0   3rd Qu.:   255.0   3rd Qu.:  233.0   3rd Qu.:   288.0  
- Max.   :61650.0   Max.   :641616.0   Max.   :497463.0   Max.   :236803.0   Max.   :62660.0   Max.   :338679.0  </code></pre>
+<pre class="code-out"><code>      wt1                wt2                wt3                wt4             wt5                wt6                ko1         
+ Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0   Min.   :     0.0   Min.   :     0.0   Min.   :    0.0  
+ 1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0.0  
+ Median :    19.0   Median :    16.0   Median :    16.0   Median :   15   Median :    16.0   Median :    17.0   Median :   13.0  
+ Mean   :   411.4   Mean   :   324.4   Mean   :   326.7   Mean   :  274   Mean   :   317.3   Mean   :   316.6   Mean   :  250.1  
+ 3rd Qu.:   272.0   3rd Qu.:   214.0   3rd Qu.:   218.0   3rd Qu.:  186   3rd Qu.:   212.0   3rd Qu.:   224.0   3rd Qu.:  179.0  
+ Max.   :327719.0   Max.   :536733.0   Max.   :377069.0   Max.   :90474   Max.   :352034.0   Max.   :209954.0   Max.   :61650.0  
+      ko2                ko3                ko4                ko5               ko6          
+ Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0.0   Min.   :     0.0  
+ 1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0.0   1st Qu.:     0.0  
+ Median :    18.0   Median :    19.0   Median :    17.0   Median :   17.0   Median :    19.0  
+ Mean   :   378.2   Mean   :   351.4   Mean   :   373.8   Mean   :  319.8   Mean   :   423.4  
+ 3rd Qu.:   245.0   3rd Qu.:   246.0   3rd Qu.:   255.0   3rd Qu.:  233.0   3rd Qu.:   288.0  
+ Max.   :641616.0   Max.   :497463.0   Max.   :236803.0   Max.   :62660.0   Max.   :338679.0  </code></pre>
 <p>For each column it returns some descriptive. But, ehi, on the columns we have the samples, we want this statistics for the genes, how can we do it? Here comes <code>t()</code> that transpose the matrix so that rows became columns and <i>vice versa</i>.</p>
 <div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="matrices.html#cb312-1" aria-hidden="true" tabindex="-1"></a>expr_data_t <span class="ot">&lt;-</span> <span class="fu">t</span>(expr_data)</span>
 <span id="cb312-2"><a href="matrices.html#cb312-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -732,8 +745,8 @@ Solution
           </div>
         </div>
       </div>
-<a href="vectors.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="vectors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-frames.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

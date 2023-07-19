@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>10 Data frames | Learn R for biologist, with no fear</title>
+  <meta name="description" content="For you, who never gives up, for your future" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="10 Data frames | Learn R for biologist, with no fear" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="For you, who never gives up, for your future" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="10 Data frames | Learn R for biologist, with no fear" />
+  
+  <meta name="twitter:description" content="For you, who never gives up, for your future" />
+  
+
+<meta name="author" content="Matteo Miotto" />
+
+
+<meta name="date" content="2023-07-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="matrices.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for biologist</a></li>
+<li class="divider"></li>
+<li><a href="index.html#about" id="toc-about">About</a></li>
+<li><a href="installation.html#installation" id="toc-installation"><span class="toc-section-number">1</span> Installation</a></li>
+<li><a href="first-step-in-rstudio.html#first-step-in-rstudio" id="toc-first-step-in-rstudio"><span class="toc-section-number">2</span> First step in RStudio</a>
+<ul>
+<li><a href="first-step-in-rstudio.html#console" id="toc-console">Console</a></li>
+</ul></li>
+<li><a href="variables.html#variables" id="toc-variables"><span class="toc-section-number">3</span> Variables</a>
+<ul>
+<li><a href="variables.html#create-a-variable" id="toc-create-a-variable">Create a variable</a></li>
+<li><a href="variables.html#use-a-variable" id="toc-use-a-variable">Use a variable</a></li>
+<li><a href="variables.html#variable-names" id="toc-variable-names">Variable names</a></li>
+<li><a href="variables.html#overwriting-variables" id="toc-overwriting-variables">Overwriting variables</a></li>
+<li><a href="variables.html#list-all-variables" id="toc-list-all-variables">List all variables</a></li>
+<li><a href="variables.html#delete-variables" id="toc-delete-variables">Delete variables</a></li>
+<li><a href="variables.html#type-of-variables" id="toc-type-of-variables">Type of variables</a></li>
+<li><a href="variables.html#exercises" id="toc-exercises">Exercises</a></li>
+</ul></li>
+<li><a href="scripts.html#scripts" id="toc-scripts"><span class="toc-section-number">4</span> Scripts</a>
+<ul>
+<li><a href="scripts.html#save" id="toc-save">Save</a></li>
+<li><a href="scripts.html#source-a-script" id="toc-source-a-script">Source a script</a></li>
+</ul></li>
+<li><a href="numbers.html#numbers" id="toc-numbers"><span class="toc-section-number">5</span> Numbers</a>
+<ul>
+<li><a href="numbers.html#operations" id="toc-operations">Operations</a></li>
+<li><a href="numbers.html#rounding" id="toc-rounding">Rounding</a></li>
+<li><a href="numbers.html#tranform-to-type-number" id="toc-tranform-to-type-number">Tranform to type number</a></li>
+<li><a href="numbers.html#exercises-1" id="toc-exercises-1">Exercises</a></li>
+</ul></li>
+<li><a href="character.html#character" id="toc-character"><span class="toc-section-number">6</span> Character</a>
+<ul>
+<li><a href="character.html#concatenate-strings" id="toc-concatenate-strings">Concatenate strings</a></li>
+<li><a href="character.html#substring" id="toc-substring">Substring</a></li>
+<li><a href="character.html#substitution" id="toc-substitution">Substitution</a></li>
+<li><a href="character.html#grep" id="toc-grep">Grep</a></li>
+<li><a href="character.html#transform-to-type-character" id="toc-transform-to-type-character">Transform to type character</a></li>
+<li><a href="character.html#exercises-2" id="toc-exercises-2">Exercises</a></li>
+</ul></li>
+<li><a href="boolean.html#boolean" id="toc-boolean"><span class="toc-section-number">7</span> Boolean</a>
+<ul>
+<li><a href="boolean.html#boolean-as-results-of-comparison" id="toc-boolean-as-results-of-comparison">Boolean as results of comparison</a></li>
+<li><a href="boolean.html#logical-operator" id="toc-logical-operator">Logical operator</a>
+<ul>
+<li><a href="boolean.html#and" id="toc-and">AND</a></li>
+<li><a href="boolean.html#or" id="toc-or">OR</a></li>
+<li><a href="boolean.html#not" id="toc-not">NOT</a></li>
+</ul></li>
+<li><a href="boolean.html#exercises-3" id="toc-exercises-3">Exercises</a></li>
+</ul></li>
+<li><a href="vectors.html#vectors" id="toc-vectors"><span class="toc-section-number">8</span> Vectors</a>
+<ul>
+<li><a href="vectors.html#named-vectors" id="toc-named-vectors">Named vectors</a></li>
+<li><a href="vectors.html#indexing" id="toc-indexing">Indexing</a>
+<ul>
+<li><a href="vectors.html#named-vectors-1" id="toc-named-vectors-1">Named vectors</a></li>
+<li><a href="vectors.html#slicing-vectors" id="toc-slicing-vectors">Slicing</a></li>
+<li><a href="vectors.html#using-logicals" id="toc-using-logicals">Using logicals</a></li>
+</ul></li>
+<li><a href="vectors.html#one-function-can-be-applied-to-all-elements" id="toc-one-function-can-be-applied-to-all-elements">One function can be applied to all elements</a></li>
+<li><a href="vectors.html#functions-specific-of-vectors" id="toc-functions-specific-of-vectors">Functions specific of vectors</a>
+<ul>
+<li><a href="vectors.html#sorting-a-vector" id="toc-sorting-a-vector">Sorting a vector</a></li>
+<li><a href="vectors.html#unique-values" id="toc-unique-values">Unique values</a></li>
+<li><a href="vectors.html#logical-vectors-sum-and-mean" id="toc-logical-vectors-sum-and-mean">Logical vectors sum and mean</a></li>
+</ul></li>
+<li><a href="vectors.html#operations-between-vectors" id="toc-operations-between-vectors">Operations between vectors</a>
+<ul>
+<li><a href="vectors.html#mathematical" id="toc-mathematical">Mathematical</a></li>
+<li><a href="vectors.html#different-and-common-elements" id="toc-different-and-common-elements">Different and common elements</a></li>
+<li><a href="vectors.html#in" id="toc-in">%in%</a></li>
+<li><a href="vectors.html#match" id="toc-match">Match</a></li>
+</ul></li>
+<li><a href="vectors.html#exercises-4" id="toc-exercises-4">Exercises</a></li>
+</ul></li>
+<li><a href="matrices.html#matrices" id="toc-matrices"><span class="toc-section-number">9</span> Matrices</a>
+<ul>
+<li><a href="matrices.html#create-a-matrix" id="toc-create-a-matrix">Create a matrix</a>
+<ul>
+<li><a href="matrices.html#binding" id="toc-binding">Binding</a></li>
+<li><a href="matrices.html#transform-into-a-matrix" id="toc-transform-into-a-matrix">Transform into a matrix</a></li>
+</ul></li>
+<li><a href="matrices.html#rownames-and-colnames" id="toc-rownames-and-colnames">Rownames and colnames</a>
+<ul>
+<li><a href="matrices.html#set-and-edit-row-and-column-names" id="toc-set-and-edit-row-and-column-names">Set and edit row and column names</a></li>
+</ul></li>
+<li><a href="matrices.html#indexing-matrices" id="toc-indexing-matrices">Indexing</a>
+<ul>
+<li><a href="matrices.html#slicing" id="toc-slicing">Slicing</a></li>
+<li><a href="matrices.html#using-names" id="toc-using-names">Using names</a></li>
+<li><a href="matrices.html#using-logicals-1" id="toc-using-logicals-1">Using logicals</a></li>
+</ul></li>
+<li><a href="matrices.html#functions-for-all-matrix" id="toc-functions-for-all-matrix">Functions for all matrix</a>
+<ul>
+<li><a href="matrices.html#head-tail-matrices" id="toc-head-tail-matrices">Head/Tail</a></li>
+<li><a href="matrices.html#dim-nrow-ncol" id="toc-dim-nrow-ncol">Dim, nrow, ncol</a></li>
+<li><a href="matrices.html#summary-and-transpose" id="toc-summary-and-transpose">Summary and transpose</a></li>
+<li><a href="matrices.html#sum-max-min" id="toc-sum-max-min">Sum, Max, Min, …</a></li>
+</ul></li>
+<li><a href="matrices.html#apply-a-function-to-all-rows-or-columns" id="toc-apply-a-function-to-all-rows-or-columns">Apply a function to all rows or columns</a></li>
+<li><a href="matrices.html#exercises-5" id="toc-exercises-5">Exercises</a></li>
+</ul></li>
+<li><a href="data-frames.html#data-frames" id="toc-data-frames"><span class="toc-section-number">10</span> Data frames</a>
+<ul>
+<li><a href="data-frames.html#create-a-data.frame" id="toc-create-a-data.frame">Create a data.frame</a>
+<ul>
+<li><a href="data-frames.html#from-matrix" id="toc-from-matrix">From matrix</a></li>
+<li><a href="data-frames.html#from-vectors" id="toc-from-vectors">From vectors</a></li>
+<li><a href="data-frames.html#from-file" id="toc-from-file">From file</a></li>
+</ul></li>
+<li><a href="data-frames.html#indexing-1" id="toc-indexing-1">Indexing</a></li>
+<li><a href="data-frames.html#create-a-new-column" id="toc-create-a-new-column">Create a new column</a></li>
+<li><a href="data-frames.html#delete-a-column" id="toc-delete-a-column">Delete a column</a></li>
+<li><a href="data-frames.html#export-a-data-frame" id="toc-export-a-data-frame">Export a data frame</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learn R for biologist, with no fear</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-frames" class="section level1" number="10">
+<h1><span class="header-section-number">10</span> Data frames</h1>
+<p>Matrices can only be filled with the exact same type of data in all columns. This is useful when dealing with expression data that have to be manipulated for statistics, but usually we do not have only numbers in a table. For example, we could have all the meta data associated with different samples: age, treatment, sex, number of replicates, number of cells, etc. These are all different types of data, so we need a different “structure” that can store them for us. In R, this structure is called <strong>data.frame</strong>.</p>
+<div id="create-a-data.frame" class="section level2 unnumbered">
+<h2>Create a data.frame</h2>
+<p>There are many ways to create a data.frame in R. We will explore them all, as you will use them in different situations.</p>
+<div id="from-matrix" class="section level3 unnumbered">
+<h3>From matrix</h3>
+<p>Let’s start from the least commonly utilized one (I know, you want to ask me “So why are you annoying me with this stuff?!”). We can transform a matrix into a data.frame using the function <code>as.data.frame()</code>. Usually, you do so when you want to add a new column to the matrix with a data type that is different from the one of the matrix (e.g. add a character column to a numeric matrix).
+<br>
+Let’s see a quick example:</p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="data-frames.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create a matrix</span></span>
+<span id="cb343-2"><a href="data-frames.html#cb343-2" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb343-3"><a href="data-frames.html#cb343-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-4"><a href="data-frames.html#cb343-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check the class of my_matrix variable</span></span>
+<span id="cb343-5"><a href="data-frames.html#cb343-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Variable my_matrix is of class:&quot;</span>, <span class="fu">paste</span>(<span class="fu">class</span>(my_matrix), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)))</span></code></pre></div>
+<pre class="code-out"><code>[1] &quot;Variable my_matrix is of class: matrix, array&quot;</code></pre>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="data-frames.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Transform the matrix into a data.frame</span></span>
+<span id="cb345-2"><a href="data-frames.html#cb345-2" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(my_matrix)</span>
+<span id="cb345-3"><a href="data-frames.html#cb345-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb345-4"><a href="data-frames.html#cb345-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Check the class of my_df variable</span></span>
+<span id="cb345-5"><a href="data-frames.html#cb345-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Variable my_df is of class:&quot;</span>, <span class="fu">paste</span>(<span class="fu">class</span>(my_df), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)))</span></code></pre></div>
+<pre class="code-out"><code>[1] &quot;Variable my_df is of class: data.frame&quot;</code></pre>
+<p>And now? How do we add a new column? Eheh, keep calm, we will answer this question in a moment…</p>
+</div>
+<div id="from-vectors" class="section level3 unnumbered">
+<h3>From vectors</h3>
+<p>We have to first look at another method to create a data.frame, that is starting from different vectors (as for a matrix). The syntax is this: <code>data.frame("&lt;name_of_the_column&gt;" = &lt;vector&gt;, "&lt;name_of_the_column2" = &lt;vector2&gt;, ...)</code>. This is useful when you have different information in different vectors and you want to merge them all, for example:</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="data-frames.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Set the seed for sample function</span></span>
+<span id="cb347-2"><a href="data-frames.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">362</span>)</span>
+<span id="cb347-3"><a href="data-frames.html#cb347-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb347-4"><a href="data-frames.html#cb347-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create vectors</span></span>
+<span id="cb347-5"><a href="data-frames.html#cb347-5" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">33</span>, <span class="dv">29</span>, <span class="dv">32</span>, <span class="dv">41</span>, <span class="dv">45</span>, <span class="dv">67</span>, <span class="dv">44</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">21</span>, <span class="dv">37</span>, <span class="dv">36</span>, <span class="dv">39</span>, <span class="dv">45</span>, <span class="dv">19</span>, <span class="dv">20</span>, <span class="dv">28</span>, <span class="dv">30</span>, <span class="dv">48</span>, <span class="dv">50</span>, <span class="dv">66</span>, <span class="dv">26</span>, <span class="dv">55</span>, <span class="dv">56</span>)</span>
+<span id="cb347-6"><a href="data-frames.html#cb347-6" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>), <span class="at">size =</span> <span class="fu">length</span>(age), <span class="at">replace =</span> T)</span>
+<span id="cb347-7"><a href="data-frames.html#cb347-7" aria-hidden="true" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;CTRL&quot;</span>, <span class="st">&quot;Inh1&quot;</span>, <span class="st">&quot;Inh2&quot;</span>), <span class="at">each =</span> <span class="fu">length</span>(age)<span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb347-8"><a href="data-frames.html#cb347-8" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">length</span>(age)<span class="sc">/</span><span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">85</span>, <span class="at">sd =</span> <span class="dv">20</span>), </span>
+<span id="cb347-9"><a href="data-frames.html#cb347-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">length</span>(age)<span class="sc">/</span><span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">75</span>, <span class="at">sd =</span> <span class="dv">5</span>), </span>
+<span id="cb347-10"><a href="data-frames.html#cb347-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">length</span>(age)<span class="sc">/</span><span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">65</span>, <span class="at">sd =</span> <span class="dv">12</span>)), <span class="dv">1</span>)</span>
+<span id="cb347-11"><a href="data-frames.html#cb347-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb347-12"><a href="data-frames.html#cb347-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create the data.frame</span></span>
+<span id="cb347-13"><a href="data-frames.html#cb347-13" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;age&quot;</span> <span class="ot">=</span> age, <span class="st">&quot;sex&quot;</span> <span class="ot">=</span> sex, <span class="at">treatment =</span> treatment, <span class="at">weight =</span> weight)</span>
+<span id="cb347-14"><a href="data-frames.html#cb347-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb347-15"><a href="data-frames.html#cb347-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Visualize first rows</span></span>
+<span id="cb347-16"><a href="data-frames.html#cb347-16" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_df)</span></code></pre></div>
+<pre class="code-out"><code>  age sex treatment weight
+1  33   F      CTRL  108.9
+2  29   M      CTRL   98.1
+3  32   F      CTRL   76.1
+4  41   M      CTRL   92.9
+5  45   M      CTRL   69.0
+6  67   F      CTRL   93.4</code></pre>
+</div>
+<div id="from-file" class="section level3 unnumbered">
+<h3>From file</h3>
+<p>You will usually load a table from a file (csv, txt, tsv, etc) that you have written or that someone has given you. We have already seen how to read a csv file in the previous <a href="matrices.html#head-tail-matrices">chapter</a>, so let’s do the same to load our weight data (<a href="data/Weights.csv" download>Download</a>).</p>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="data-frames.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load data</span></span>
+<span id="cb349-2"><a href="data-frames.html#cb349-2" aria-hidden="true" tabindex="-1"></a>weight_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Weights.csv&quot;</span>, <span class="at">header =</span> T)</span>
+<span id="cb349-3"><a href="data-frames.html#cb349-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb349-4"><a href="data-frames.html#cb349-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Visualize first rows</span></span>
+<span id="cb349-5"><a href="data-frames.html#cb349-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(weight_data)</span></code></pre></div>
+<pre class="code-out"><code>  age sex treatment weight
+1  33   F      CTRL  108.9
+2  29   M      CTRL   98.1
+3  32   F      CTRL   76.1
+4  41   M      CTRL   92.9
+5  45   M      CTRL   69.0
+6  67   F      CTRL   93.4</code></pre>
+<p>By default, the table is loaded as a data.frame.</p>
+</div>
+</div>
+<div id="indexing-1" class="section level2 unnumbered">
+<h2>Indexing</h2>
+<p>Indexing a data.frame is exactly the same as indexing a matrix. For this reason, I will only do some examples here, and invite you to look at the <a href="matrices.html#indexing-matrices">indexing</a> section in matrices chapter for a deeper explanation.</p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="data-frames.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Extract males data</span></span>
+<span id="cb351-2"><a href="data-frames.html#cb351-2" aria-hidden="true" tabindex="-1"></a>males_data <span class="ot">&lt;-</span> weight_data[weight_data<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span>,]</span>
+<span id="cb351-3"><a href="data-frames.html#cb351-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(males_data)</span></code></pre></div>
+<pre class="code-out"><code>  age sex treatment weight
+2  29   M      CTRL   98.1
+4  41   M      CTRL   92.9
+5  45   M      CTRL   69.0
+7  44   M      CTRL   90.2
+8  18   M      CTRL   65.6
+9  22   M      Inh1   68.0</code></pre>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="data-frames.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Extract controls sex and age</span></span>
+<span id="cb353-2"><a href="data-frames.html#cb353-2" aria-hidden="true" tabindex="-1"></a>ctrl_sex_age <span class="ot">&lt;-</span> weight_data[weight_data<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;CTRL&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>)]</span>
+<span id="cb353-3"><a href="data-frames.html#cb353-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ctrl_sex_age)</span></code></pre></div>
+<pre class="code-out"><code>  sex age
+1   F  33
+2   M  29
+3   F  32
+4   M  41
+5   M  45
+6   F  67</code></pre>
+</div>
+<div id="create-a-new-column" class="section level2 unnumbered">
+<h2>Create a new column</h2>
+<p>I’m proud of you and your patience! Here we are to answer previous questions about how to add a new column to a data.frame. There are different ways to add a column to an existing database.
+<br>
+We can use the “$” operator in this way: <code>dataframe\$new_column &lt;- vector</code>. In this way we are telling R to insert <code>vector</code> as <code>new_column</code> in the data.frame. Similarly, we can use <code>dataframe["&lt;new_column&gt;"] &lt;- vector</code> to do the same.
+<br>
+Here an example:</p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="data-frames.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Add state column with value Italy for all rows</span></span>
+<span id="cb355-2"><a href="data-frames.html#cb355-2" aria-hidden="true" tabindex="-1"></a>weight_data<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="st">&quot;Italy&quot;</span></span>
+<span id="cb355-3"><a href="data-frames.html#cb355-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb355-4"><a href="data-frames.html#cb355-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Add city column with value Milan for all rows</span></span>
+<span id="cb355-5"><a href="data-frames.html#cb355-5" aria-hidden="true" tabindex="-1"></a>weight_data[<span class="st">&quot;city&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Milan&quot;</span></span>
+<span id="cb355-6"><a href="data-frames.html#cb355-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb355-7"><a href="data-frames.html#cb355-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Visualize first rows</span></span>
+<span id="cb355-8"><a href="data-frames.html#cb355-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(weight_data)</span></code></pre></div>
+<pre class="code-out"><code>  age sex treatment weight state  city
+1  33   F      CTRL  108.9 Italy Milan
+2  29   M      CTRL   98.1 Italy Milan
+3  32   F      CTRL   76.1 Italy Milan
+4  41   M      CTRL   92.9 Italy Milan
+5  45   M      CTRL   69.0 Italy Milan
+6  67   F      CTRL   93.4 Italy Milan</code></pre>
+</div>
+<div id="delete-a-column" class="section level2 unnumbered">
+<h2>Delete a column</h2>
+<p>To delete a column from a data.frame, you should assign it the value NULL <code>dataframe$column &lt;- NULL</code>. If you want to delete multiple columns, you could use this form <code>dataframe[, c("column1", "column2", ...)] &lt;- NULL</code>.
+<br>
+Let’s now delete state and city columns from our dataframe:</p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="data-frames.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Delete rows</span></span>
+<span id="cb357-2"><a href="data-frames.html#cb357-2" aria-hidden="true" tabindex="-1"></a>weight_data[, <span class="fu">c</span>(<span class="st">&quot;state&quot;</span>, <span class="st">&quot;city&quot;</span>)] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb357-3"><a href="data-frames.html#cb357-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb357-4"><a href="data-frames.html#cb357-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Visualize first rows</span></span>
+<span id="cb357-5"><a href="data-frames.html#cb357-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(weight_data)</span></code></pre></div>
+<pre class="code-out"><code>  age sex treatment weight
+1  33   F      CTRL  108.9
+2  29   M      CTRL   98.1
+3  32   F      CTRL   76.1
+4  41   M      CTRL   92.9
+5  45   M      CTRL   69.0
+6  67   F      CTRL   93.4</code></pre>
+</div>
+<div id="export-a-data-frame" class="section level2 unnumbered">
+<h2>Export a data frame</h2>
+<p>Lastly, let’s imagine you have performed some operations on a data.frame (filtering, add columns, calculations etc) and you want to save it as a file, what you have to do is this:</p>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="data-frames.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> weight_data, <span class="at">file =</span> <span class="st">&quot;output/weight_modified.csv&quot;</span>, <span class="at">quote =</span> F, <span class="at">row.names =</span> F)</span></code></pre></div>
+<p class="plist">
+Let’s dissect this code:
+</p>
+<ul>
+<li>
+<em>write.csv</em> is the function used to save a csv file. You can also save a tsv file with write.tsv or write.table etc. There are plenty of them. I like csv so I’m using it.
+</li>
+<li>
+<em>x</em> is the data.frame to save
+</li>
+<li>
+<em>file</em> is the path were to save the dataframe
+</li>
+<li>
+<em>quote</em> is to tell whether to encapsulate each value into double quotes when saving (we don’t want it so we set it to F)
+</li>
+<li>
+<em>row.names</em> is to tell whether to write a column of the row names when saving. It is useful when the row names store useful information, such as patient ID, gene name etc. As in our case there is no information in row names, we set it to F.
+</li>
+</ul>
+<p>Great! We have now seen the basic operation to manipulate a data.frame object in R. Next step will be to do a real exploratory data analysis to discover new functions and start our real-world journey.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="matrices.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

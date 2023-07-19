@@ -107,7 +107,7 @@ my_matrix
 ```
 
   
-## Indexing {-}
+## Indexing {- #indexing-matrices}
 As for vectors, we can extract values of the matrix by indexing: we can get a single value, a vector of values and either smaller matrices.
 <br>
 
@@ -167,7 +167,7 @@ This will be so useful when talking about expression matrix (e.g. when we want t
 ## Functions for all matrix {-}
 Alright, it is time for some practical applications to explore fundamental matrix functions.
 
-### Head/Tail {-}
+### Head/Tail {- #head-tail-matrices}
 The first functions are `head()` and `tail()`. Let's say we receive an expression table but they didn't tell us much about it; we can use these two functions to look up the first and the last rows respectively.
 <br>
 Here is how to use them:

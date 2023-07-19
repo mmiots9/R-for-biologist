@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-03-02" />
+<meta name="date" content="2023-07-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Impariamo R</a></li>
+<li><a href="./">R for biologist</a></li>
 <li class="divider"></li>
 <li><a href="index.html#about" id="toc-about">About</a></li>
 <li><a href="installation.html#installation" id="toc-installation"><span class="toc-section-number">1</span> Installation</a></li>
@@ -221,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="matrices.html#set-and-edit-row-and-column-names" id="toc-set-and-edit-row-and-column-names">Set and edit row and column names</a></li>
 </ul></li>
-<li><a href="matrices.html#indexing-1" id="toc-indexing-1">Indexing</a>
+<li><a href="matrices.html#indexing-matrices" id="toc-indexing-matrices">Indexing</a>
 <ul>
 <li><a href="matrices.html#slicing" id="toc-slicing">Slicing</a></li>
 <li><a href="matrices.html#using-names" id="toc-using-names">Using names</a></li>
@@ -229,13 +229,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="matrices.html#functions-for-all-matrix" id="toc-functions-for-all-matrix">Functions for all matrix</a>
 <ul>
-<li><a href="matrices.html#headtail" id="toc-headtail">Head/Tail</a></li>
+<li><a href="matrices.html#head-tail-matrices" id="toc-head-tail-matrices">Head/Tail</a></li>
 <li><a href="matrices.html#dim-nrow-ncol" id="toc-dim-nrow-ncol">Dim, nrow, ncol</a></li>
 <li><a href="matrices.html#summary-and-transpose" id="toc-summary-and-transpose">Summary and transpose</a></li>
 <li><a href="matrices.html#sum-max-min" id="toc-sum-max-min">Sum, Max, Min, …</a></li>
 </ul></li>
 <li><a href="matrices.html#apply-a-function-to-all-rows-or-columns" id="toc-apply-a-function-to-all-rows-or-columns">Apply a function to all rows or columns</a></li>
 <li><a href="matrices.html#exercises-5" id="toc-exercises-5">Exercises</a></li>
+</ul></li>
+<li><a href="data-frames.html#data-frames" id="toc-data-frames"><span class="toc-section-number">10</span> Data frames</a>
+<ul>
+<li><a href="data-frames.html#create-a-data.frame" id="toc-create-a-data.frame">Create a data.frame</a>
+<ul>
+<li><a href="data-frames.html#from-matrix" id="toc-from-matrix">From matrix</a></li>
+<li><a href="data-frames.html#from-vectors" id="toc-from-vectors">From vectors</a></li>
+<li><a href="data-frames.html#from-file" id="toc-from-file">From file</a></li>
+</ul></li>
+<li><a href="data-frames.html#indexing-1" id="toc-indexing-1">Indexing</a></li>
+<li><a href="data-frames.html#create-a-new-column" id="toc-create-a-new-column">Create a new column</a></li>
+<li><a href="data-frames.html#delete-a-column" id="toc-delete-a-column">Delete a column</a></li>
+<li><a href="data-frames.html#export-a-data-frame" id="toc-export-a-data-frame">Export a data frame</a></li>
 </ul></li>
 </ul>
 
@@ -476,11 +489,11 @@ Now, we will see more examples, starting from numeric vectors.</p>
 <p>Let’s see a couple of trick with sorting:</p>
 <div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="vectors.html#cb218-1" aria-hidden="true" tabindex="-1"></a>features <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;gene&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span>
 <span id="cb218-2"><a href="vectors.html#cb218-2" aria-hidden="true" tabindex="-1"></a>features</span></code></pre></div>
-<pre class="code-out"><code> [1] &quot;gene1&quot;  &quot;gene2&quot;  &quot;gene3&quot;  &quot;gene4&quot;  &quot;gene5&quot;  &quot;gene6&quot;  &quot;gene7&quot;  &quot;gene8&quot;  &quot;gene9&quot;  &quot;gene10&quot; &quot;gene11&quot; &quot;gene12&quot;
-[13] &quot;gene13&quot; &quot;gene14&quot; &quot;gene15&quot; &quot;gene16&quot; &quot;gene17&quot; &quot;gene18&quot; &quot;gene19&quot; &quot;gene20&quot;</code></pre>
+<pre class="code-out"><code> [1] &quot;gene1&quot;  &quot;gene2&quot;  &quot;gene3&quot;  &quot;gene4&quot;  &quot;gene5&quot;  &quot;gene6&quot;  &quot;gene7&quot;  &quot;gene8&quot;  &quot;gene9&quot;  &quot;gene10&quot; &quot;gene11&quot; &quot;gene12&quot; &quot;gene13&quot; &quot;gene14&quot; &quot;gene15&quot;
+[16] &quot;gene16&quot; &quot;gene17&quot; &quot;gene18&quot; &quot;gene19&quot; &quot;gene20&quot;</code></pre>
 <div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="vectors.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(features)</span></code></pre></div>
-<pre class="code-out"><code> [1] &quot;gene1&quot;  &quot;gene10&quot; &quot;gene11&quot; &quot;gene12&quot; &quot;gene13&quot; &quot;gene14&quot; &quot;gene15&quot; &quot;gene16&quot; &quot;gene17&quot; &quot;gene18&quot; &quot;gene19&quot; &quot;gene2&quot; 
-[13] &quot;gene20&quot; &quot;gene3&quot;  &quot;gene4&quot;  &quot;gene5&quot;  &quot;gene6&quot;  &quot;gene7&quot;  &quot;gene8&quot;  &quot;gene9&quot; </code></pre>
+<pre class="code-out"><code> [1] &quot;gene1&quot;  &quot;gene10&quot; &quot;gene11&quot; &quot;gene12&quot; &quot;gene13&quot; &quot;gene14&quot; &quot;gene15&quot; &quot;gene16&quot; &quot;gene17&quot; &quot;gene18&quot; &quot;gene19&quot; &quot;gene2&quot;  &quot;gene20&quot; &quot;gene3&quot;  &quot;gene4&quot; 
+[16] &quot;gene5&quot;  &quot;gene6&quot;  &quot;gene7&quot;  &quot;gene8&quot;  &quot;gene9&quot; </code></pre>
 <p>What can we see here? First of all, a cool method to create a vector of words with increasing numbers (the combination paste and 1:20); then, we see that sorting has put “gene2” after all “gene1X”, because it sorts in alphabetical order. For this reason, it is recommended to use 01, 02, 03 ecc if we know that we have more than 9 elements (this works also for computer file names).
 <br>
 ::: {.example #sort-names}

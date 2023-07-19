@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-03-02" />
+<meta name="date" content="2023-07-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Impariamo R</a></li>
+<li><a href="./">R for biologist</a></li>
 <li class="divider"></li>
 <li><a href="index.html#about" id="toc-about">About</a></li>
 <li><a href="installation.html#installation" id="toc-installation"><span class="toc-section-number">1</span> Installation</a></li>
@@ -221,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="matrices.html#set-and-edit-row-and-column-names" id="toc-set-and-edit-row-and-column-names">Set and edit row and column names</a></li>
 </ul></li>
-<li><a href="matrices.html#indexing-1" id="toc-indexing-1">Indexing</a>
+<li><a href="matrices.html#indexing-matrices" id="toc-indexing-matrices">Indexing</a>
 <ul>
 <li><a href="matrices.html#slicing" id="toc-slicing">Slicing</a></li>
 <li><a href="matrices.html#using-names" id="toc-using-names">Using names</a></li>
@@ -229,13 +229,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="matrices.html#functions-for-all-matrix" id="toc-functions-for-all-matrix">Functions for all matrix</a>
 <ul>
-<li><a href="matrices.html#headtail" id="toc-headtail">Head/Tail</a></li>
+<li><a href="matrices.html#head-tail-matrices" id="toc-head-tail-matrices">Head/Tail</a></li>
 <li><a href="matrices.html#dim-nrow-ncol" id="toc-dim-nrow-ncol">Dim, nrow, ncol</a></li>
 <li><a href="matrices.html#summary-and-transpose" id="toc-summary-and-transpose">Summary and transpose</a></li>
 <li><a href="matrices.html#sum-max-min" id="toc-sum-max-min">Sum, Max, Min, …</a></li>
 </ul></li>
 <li><a href="matrices.html#apply-a-function-to-all-rows-or-columns" id="toc-apply-a-function-to-all-rows-or-columns">Apply a function to all rows or columns</a></li>
 <li><a href="matrices.html#exercises-5" id="toc-exercises-5">Exercises</a></li>
+</ul></li>
+<li><a href="data-frames.html#data-frames" id="toc-data-frames"><span class="toc-section-number">10</span> Data frames</a>
+<ul>
+<li><a href="data-frames.html#create-a-data.frame" id="toc-create-a-data.frame">Create a data.frame</a>
+<ul>
+<li><a href="data-frames.html#from-matrix" id="toc-from-matrix">From matrix</a></li>
+<li><a href="data-frames.html#from-vectors" id="toc-from-vectors">From vectors</a></li>
+<li><a href="data-frames.html#from-file" id="toc-from-file">From file</a></li>
+</ul></li>
+<li><a href="data-frames.html#indexing-1" id="toc-indexing-1">Indexing</a></li>
+<li><a href="data-frames.html#create-a-new-column" id="toc-create-a-new-column">Create a new column</a></li>
+<li><a href="data-frames.html#delete-a-column" id="toc-delete-a-column">Delete a column</a></li>
+<li><a href="data-frames.html#export-a-data-frame" id="toc-export-a-data-frame">Export a data frame</a></li>
 </ul></li>
 </ul>
 
@@ -368,43 +381,37 @@ This feature is useful for saving space and not cluttering up too much with vari
 <br>
 The answer is simple, let’s use the <code>ls()</code> function</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="variables.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
-  [5] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                  
-  [9] &quot;ch3&quot;                   &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                  
- [13] &quot;common&quot;                &quot;common_all&quot;            &quot;common_mean&quot;           &quot;common1_2&quot;            
- [17] &quot;condition&quot;             &quot;CXCR4&quot;                 &quot;expr&quot;                  &quot;expr_data&quot;            
- [21] &quot;expr_data_t&quot;           &quot;expr_levels&quot;           &quot;expr_mat_pat&quot;          &quot;expr_values&quot;          
- [25] &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                  &quot;gene_2_keep&quot;          
- [29] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
- [33] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;              
- [37] &quot;gsub_all&quot;              &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;               
- [41] &quot;LCT&quot;                   &quot;LHX9&quot;                  &quot;mean_col&quot;              &quot;mean_res_better&quot;      
- [45] &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mean_row&quot;              &quot;mean_time&quot;            
- [49] &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                
- [53] &quot;mito_genes&quot;            &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;               
- [57] &quot;my_col_names&quot;          &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;           
- [61] &quot;my_max&quot;                &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;         
- [65] &quot;my_sum&quot;                &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;             
- [69] &quot;mynumber&quot;              &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;          
- [73] &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;           &quot;no_seed1&quot;             
- [77] &quot;no_seed2&quot;              &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                 
- [81] &quot;only_1&quot;                &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;          
- [85] &quot;patien2_sub&quot;           &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;        
- [89] &quot;patient_weight&quot;        &quot;patient1&quot;              &quot;patient2&quot;              &quot;patient3&quot;             
- [93] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;             &quot;perc_no_mito&quot;         
- [97] &quot;proteins&quot;              &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                
-[101] &quot;r_numb&quot;                &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;         
-[105] &quot;read_sum_pat_filt&quot;     &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                 
-[109] &quot;response&quot;              &quot;sample&quot;                &quot;sample0&quot;               &quot;sample1&quot;              
-[113] &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;            &quot;sample3&quot;              
-[117] &quot;sample3_fr&quot;            &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;        
-[121] &quot;sd_calc_round&quot;         &quot;sd_time&quot;               &quot;sliced_odd&quot;            &quot;sub_only&quot;             
-[125] &quot;sum_aa&quot;                &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;              
-[129] &quot;time&quot;                  &quot;to_extract&quot;            &quot;to_print&quot;              &quot;total_mito&quot;           
-[133] &quot;total_no_mito&quot;         &quot;treatment&quot;             &quot;upregulated_1&quot;         &quot;upregulated_2&quot;        
-[137] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 
-[141] &quot;weight_c&quot;              &quot;weight_n&quot;              &quot;weight_sup_threshold&quot;  &quot;with_seed1&quot;           
-[145] &quot;with_seed2&quot;           </code></pre>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age&quot;                   &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
+  [6] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                   &quot;ch3&quot;                  
+ [11] &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                   &quot;common&quot;                &quot;common_all&quot;           
+ [16] &quot;common_mean&quot;           &quot;common1_2&quot;             &quot;condition&quot;             &quot;ctrl_sex_age&quot;          &quot;CXCR4&quot;                
+ [21] &quot;df1&quot;                   &quot;expr&quot;                  &quot;expr_data&quot;             &quot;expr_data_t&quot;           &quot;expr_levels&quot;          
+ [26] &quot;expr_mat_pat&quot;          &quot;expr_values&quot;           &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                 
+ [31] &quot;gene_2_keep&quot;           &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
+ [36] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+ [41] &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;                &quot;LCT&quot;                   &quot;LHX9&quot;                 
+ [46] &quot;males_data&quot;            &quot;mean_col&quot;              &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;     
+ [51] &quot;mean_row&quot;              &quot;mean_time&quot;             &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                
+ [56] &quot;mice4&quot;                 &quot;mito_genes&quot;            &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;               
+ [61] &quot;my_col_names&quot;          &quot;my_df&quot;                 &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;           
+ [66] &quot;my_max&quot;                &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;          &quot;my_sum&quot;               
+ [71] &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;              &quot;mystring&quot;             
+ [76] &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;          
+ [81] &quot;no_seed1&quot;              &quot;no_seed2&quot;              &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                 
+ [86] &quot;only_1&quot;                &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;           &quot;patien2_sub&quot;          
+ [91] &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;         &quot;patient_weight&quot;        &quot;patient1&quot;             
+ [96] &quot;patient2&quot;              &quot;patient3&quot;              &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;            
+[101] &quot;perc_no_mito&quot;          &quot;proteins&quot;              &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                
+[106] &quot;r_numb&quot;                &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;          &quot;read_sum_pat_filt&quot;    
+[111] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;response&quot;              &quot;sample&quot;               
+[116] &quot;sample0&quot;               &quot;sample1&quot;               &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;           
+[121] &quot;sample3&quot;               &quot;sample3_fr&quot;            &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;        
+[126] &quot;sd_calc_round&quot;         &quot;sd_time&quot;               &quot;sex&quot;                   &quot;sliced_odd&quot;            &quot;sub_only&quot;             
+[131] &quot;sum_aa&quot;                &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;               &quot;time&quot;                 
+[136] &quot;to_extract&quot;            &quot;to_print&quot;              &quot;total_mito&quot;            &quot;total_no_mito&quot;         &quot;treatment&quot;            
+[141] &quot;upregulated_1&quot;         &quot;upregulated_2&quot;         &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                 
+[146] &quot;var3&quot;                  &quot;weight&quot;                &quot;weight_c&quot;              &quot;weight_data&quot;           &quot;weight_n&quot;             
+[151] &quot;weight_sup_threshold&quot;  &quot;weigth&quot;                &quot;with_seed1&quot;            &quot;with_seed2&quot;           </code></pre>
 <p>Here are our variables.
 <br>
 Note how I called this command with the name <em>function</em>: we will cover this concept later, for now you just need to know that they exist and that they can be identified immediately by the fact that after the name there is a pair of round brackets.
@@ -418,85 +425,73 @@ Note how I called this command with the name <em>function</em>: we will cover th
 <span id="cb20-3"><a href="variables.html#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-4"><a href="variables.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb20-5"><a href="variables.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
-  [5] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                  
-  [9] &quot;ch3&quot;                   &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                  
- [13] &quot;common&quot;                &quot;common_all&quot;            &quot;common_mean&quot;           &quot;common1_2&quot;            
- [17] &quot;condition&quot;             &quot;CXCR4&quot;                 &quot;expr&quot;                  &quot;expr_data&quot;            
- [21] &quot;expr_data_t&quot;           &quot;expr_levels&quot;           &quot;expr_mat_pat&quot;          &quot;expr_values&quot;          
- [25] &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                  &quot;gene_2_keep&quot;          
- [29] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
- [33] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;              
- [37] &quot;gsub_all&quot;              &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;               
- [41] &quot;LCT&quot;                   &quot;LHX9&quot;                  &quot;mean_col&quot;              &quot;mean_res_better&quot;      
- [45] &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mean_row&quot;              &quot;mean_time&quot;            
- [49] &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                
- [53] &quot;mito_genes&quot;            &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;               
- [57] &quot;my_col_names&quot;          &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;           
- [61] &quot;my_max&quot;                &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;         
- [65] &quot;my_sum&quot;                &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;             
- [69] &quot;mynumber&quot;              &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;          
- [73] &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;           &quot;no_seed1&quot;             
- [77] &quot;no_seed2&quot;              &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                 
- [81] &quot;only_1&quot;                &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;          
- [85] &quot;patien2_sub&quot;           &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;        
- [89] &quot;patient_weight&quot;        &quot;patient1&quot;              &quot;patient2&quot;              &quot;patient3&quot;             
- [93] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;             &quot;perc_no_mito&quot;         
- [97] &quot;proteins&quot;              &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                
-[101] &quot;r_numb&quot;                &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;         
-[105] &quot;read_sum_pat_filt&quot;     &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                 
-[109] &quot;response&quot;              &quot;sample&quot;                &quot;sample0&quot;               &quot;sample1&quot;              
-[113] &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;            &quot;sample3&quot;              
-[117] &quot;sample3_fr&quot;            &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;        
-[121] &quot;sd_calc_round&quot;         &quot;sd_time&quot;               &quot;sliced_odd&quot;            &quot;sub_only&quot;             
-[125] &quot;sum_aa&quot;                &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;              
-[129] &quot;time&quot;                  &quot;to_extract&quot;            &quot;to_print&quot;              &quot;to_remove&quot;            
-[133] &quot;total_mito&quot;            &quot;total_no_mito&quot;         &quot;treatment&quot;             &quot;upregulated_1&quot;        
-[137] &quot;upregulated_2&quot;         &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                 
-[141] &quot;var3&quot;                  &quot;weight_c&quot;              &quot;weight_n&quot;              &quot;weight_sup_threshold&quot; 
-[145] &quot;with_seed1&quot;            &quot;with_seed2&quot;           </code></pre>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age&quot;                   &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
+  [6] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                   &quot;ch3&quot;                  
+ [11] &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                   &quot;common&quot;                &quot;common_all&quot;           
+ [16] &quot;common_mean&quot;           &quot;common1_2&quot;             &quot;condition&quot;             &quot;ctrl_sex_age&quot;          &quot;CXCR4&quot;                
+ [21] &quot;df1&quot;                   &quot;expr&quot;                  &quot;expr_data&quot;             &quot;expr_data_t&quot;           &quot;expr_levels&quot;          
+ [26] &quot;expr_mat_pat&quot;          &quot;expr_values&quot;           &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                 
+ [31] &quot;gene_2_keep&quot;           &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
+ [36] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+ [41] &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;                &quot;LCT&quot;                   &quot;LHX9&quot;                 
+ [46] &quot;males_data&quot;            &quot;mean_col&quot;              &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;     
+ [51] &quot;mean_row&quot;              &quot;mean_time&quot;             &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                
+ [56] &quot;mice4&quot;                 &quot;mito_genes&quot;            &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;               
+ [61] &quot;my_col_names&quot;          &quot;my_df&quot;                 &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;           
+ [66] &quot;my_max&quot;                &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;          &quot;my_sum&quot;               
+ [71] &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;              &quot;mystring&quot;             
+ [76] &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;          
+ [81] &quot;no_seed1&quot;              &quot;no_seed2&quot;              &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                 
+ [86] &quot;only_1&quot;                &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;           &quot;patien2_sub&quot;          
+ [91] &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;         &quot;patient_weight&quot;        &quot;patient1&quot;             
+ [96] &quot;patient2&quot;              &quot;patient3&quot;              &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;            
+[101] &quot;perc_no_mito&quot;          &quot;proteins&quot;              &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                
+[106] &quot;r_numb&quot;                &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;          &quot;read_sum_pat_filt&quot;    
+[111] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;response&quot;              &quot;sample&quot;               
+[116] &quot;sample0&quot;               &quot;sample1&quot;               &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;           
+[121] &quot;sample3&quot;               &quot;sample3_fr&quot;            &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;        
+[126] &quot;sd_calc_round&quot;         &quot;sd_time&quot;               &quot;sex&quot;                   &quot;sliced_odd&quot;            &quot;sub_only&quot;             
+[131] &quot;sum_aa&quot;                &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;               &quot;time&quot;                 
+[136] &quot;to_extract&quot;            &quot;to_print&quot;              &quot;to_remove&quot;             &quot;total_mito&quot;            &quot;total_no_mito&quot;        
+[141] &quot;treatment&quot;             &quot;upregulated_1&quot;         &quot;upregulated_2&quot;         &quot;var_calc&quot;              &quot;var1&quot;                 
+[146] &quot;var2&quot;                  &quot;var3&quot;                  &quot;weight&quot;                &quot;weight_c&quot;              &quot;weight_data&quot;          
+[151] &quot;weight_n&quot;              &quot;weight_sup_threshold&quot;  &quot;weigth&quot;                &quot;with_seed1&quot;            &quot;with_seed2&quot;           </code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="variables.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variable</span></span>
 <span id="cb22-2"><a href="variables.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove)</span>
 <span id="cb22-3"><a href="variables.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-4"><a href="variables.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb22-5"><a href="variables.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
-  [5] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                  
-  [9] &quot;ch3&quot;                   &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                  
- [13] &quot;common&quot;                &quot;common_all&quot;            &quot;common_mean&quot;           &quot;common1_2&quot;            
- [17] &quot;condition&quot;             &quot;CXCR4&quot;                 &quot;expr&quot;                  &quot;expr_data&quot;            
- [21] &quot;expr_data_t&quot;           &quot;expr_levels&quot;           &quot;expr_mat_pat&quot;          &quot;expr_values&quot;          
- [25] &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                  &quot;gene_2_keep&quot;          
- [29] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
- [33] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;              
- [37] &quot;gsub_all&quot;              &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;               
- [41] &quot;LCT&quot;                   &quot;LHX9&quot;                  &quot;mean_col&quot;              &quot;mean_res_better&quot;      
- [45] &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mean_row&quot;              &quot;mean_time&quot;            
- [49] &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                
- [53] &quot;mito_genes&quot;            &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;               
- [57] &quot;my_col_names&quot;          &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;           
- [61] &quot;my_max&quot;                &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;         
- [65] &quot;my_sum&quot;                &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;             
- [69] &quot;mynumber&quot;              &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;          
- [73] &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;           &quot;no_seed1&quot;             
- [77] &quot;no_seed2&quot;              &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                 
- [81] &quot;only_1&quot;                &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;          
- [85] &quot;patien2_sub&quot;           &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;        
- [89] &quot;patient_weight&quot;        &quot;patient1&quot;              &quot;patient2&quot;              &quot;patient3&quot;             
- [93] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;             &quot;perc_no_mito&quot;         
- [97] &quot;proteins&quot;              &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                
-[101] &quot;r_numb&quot;                &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;         
-[105] &quot;read_sum_pat_filt&quot;     &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                 
-[109] &quot;response&quot;              &quot;sample&quot;                &quot;sample0&quot;               &quot;sample1&quot;              
-[113] &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;            &quot;sample3&quot;              
-[117] &quot;sample3_fr&quot;            &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;        
-[121] &quot;sd_calc_round&quot;         &quot;sd_time&quot;               &quot;sliced_odd&quot;            &quot;sub_only&quot;             
-[125] &quot;sum_aa&quot;                &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;              
-[129] &quot;time&quot;                  &quot;to_extract&quot;            &quot;to_print&quot;              &quot;total_mito&quot;           
-[133] &quot;total_no_mito&quot;         &quot;treatment&quot;             &quot;upregulated_1&quot;         &quot;upregulated_2&quot;        
-[137] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 
-[141] &quot;weight_c&quot;              &quot;weight_n&quot;              &quot;weight_sup_threshold&quot;  &quot;with_seed1&quot;           
-[145] &quot;with_seed2&quot;           </code></pre>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age&quot;                   &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
+  [6] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                   &quot;ch3&quot;                  
+ [11] &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                   &quot;common&quot;                &quot;common_all&quot;           
+ [16] &quot;common_mean&quot;           &quot;common1_2&quot;             &quot;condition&quot;             &quot;ctrl_sex_age&quot;          &quot;CXCR4&quot;                
+ [21] &quot;df1&quot;                   &quot;expr&quot;                  &quot;expr_data&quot;             &quot;expr_data_t&quot;           &quot;expr_levels&quot;          
+ [26] &quot;expr_mat_pat&quot;          &quot;expr_values&quot;           &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                 
+ [31] &quot;gene_2_keep&quot;           &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
+ [36] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+ [41] &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;                &quot;LCT&quot;                   &quot;LHX9&quot;                 
+ [46] &quot;males_data&quot;            &quot;mean_col&quot;              &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;     
+ [51] &quot;mean_row&quot;              &quot;mean_time&quot;             &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                
+ [56] &quot;mice4&quot;                 &quot;mito_genes&quot;            &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;               
+ [61] &quot;my_col_names&quot;          &quot;my_df&quot;                 &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;           
+ [66] &quot;my_max&quot;                &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;          &quot;my_sum&quot;               
+ [71] &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;              &quot;mystring&quot;             
+ [76] &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;          
+ [81] &quot;no_seed1&quot;              &quot;no_seed2&quot;              &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                 
+ [86] &quot;only_1&quot;                &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;           &quot;patien2_sub&quot;          
+ [91] &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;         &quot;patient_weight&quot;        &quot;patient1&quot;             
+ [96] &quot;patient2&quot;              &quot;patient3&quot;              &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;            
+[101] &quot;perc_no_mito&quot;          &quot;proteins&quot;              &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                
+[106] &quot;r_numb&quot;                &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;          &quot;read_sum_pat_filt&quot;    
+[111] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;response&quot;              &quot;sample&quot;               
+[116] &quot;sample0&quot;               &quot;sample1&quot;               &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;           
+[121] &quot;sample3&quot;               &quot;sample3_fr&quot;            &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;        
+[126] &quot;sd_calc_round&quot;         &quot;sd_time&quot;               &quot;sex&quot;                   &quot;sliced_odd&quot;            &quot;sub_only&quot;             
+[131] &quot;sum_aa&quot;                &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;               &quot;time&quot;                 
+[136] &quot;to_extract&quot;            &quot;to_print&quot;              &quot;total_mito&quot;            &quot;total_no_mito&quot;         &quot;treatment&quot;            
+[141] &quot;upregulated_1&quot;         &quot;upregulated_2&quot;         &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                 
+[146] &quot;var3&quot;                  &quot;weight&quot;                &quot;weight_c&quot;              &quot;weight_data&quot;           &quot;weight_n&quot;             
+[151] &quot;weight_sup_threshold&quot;  &quot;weigth&quot;                &quot;with_seed1&quot;            &quot;with_seed2&quot;           </code></pre>
 <p>As we see, in the second case the <code>to_remove</code> variable has been removed.
 <br>
 What if I want to remove multiple variables? Let’s put multiple variable names inside the <code>rm()</code> function separated by commas:</p>
@@ -506,85 +501,74 @@ What if I want to remove multiple variables? Let’s put multiple variable names
 <span id="cb24-4"><a href="variables.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-5"><a href="variables.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb24-6"><a href="variables.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
-  [5] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                  
-  [9] &quot;ch3&quot;                   &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                  
- [13] &quot;common&quot;                &quot;common_all&quot;            &quot;common_mean&quot;           &quot;common1_2&quot;            
- [17] &quot;condition&quot;             &quot;CXCR4&quot;                 &quot;expr&quot;                  &quot;expr_data&quot;            
- [21] &quot;expr_data_t&quot;           &quot;expr_levels&quot;           &quot;expr_mat_pat&quot;          &quot;expr_values&quot;          
- [25] &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                  &quot;gene_2_keep&quot;          
- [29] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
- [33] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;              
- [37] &quot;gsub_all&quot;              &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;               
- [41] &quot;LCT&quot;                   &quot;LHX9&quot;                  &quot;mean_col&quot;              &quot;mean_res_better&quot;      
- [45] &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mean_row&quot;              &quot;mean_time&quot;            
- [49] &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                
- [53] &quot;mito_genes&quot;            &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;               
- [57] &quot;my_col_names&quot;          &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;           
- [61] &quot;my_max&quot;                &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;         
- [65] &quot;my_sum&quot;                &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;             
- [69] &quot;mynumber&quot;              &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;          
- [73] &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;           &quot;no_seed1&quot;             
- [77] &quot;no_seed2&quot;              &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                 
- [81] &quot;only_1&quot;                &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;          
- [85] &quot;patien2_sub&quot;           &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;        
- [89] &quot;patient_weight&quot;        &quot;patient1&quot;              &quot;patient2&quot;              &quot;patient3&quot;             
- [93] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;             &quot;perc_no_mito&quot;         
- [97] &quot;proteins&quot;              &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                
-[101] &quot;r_numb&quot;                &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;         
-[105] &quot;read_sum_pat_filt&quot;     &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                 
-[109] &quot;response&quot;              &quot;sample&quot;                &quot;sample0&quot;               &quot;sample1&quot;              
-[113] &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;            &quot;sample3&quot;              
-[117] &quot;sample3_fr&quot;            &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;        
-[121] &quot;sd_calc_round&quot;         &quot;sd_time&quot;               &quot;sliced_odd&quot;            &quot;sub_only&quot;             
-[125] &quot;sum_aa&quot;                &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;              
-[129] &quot;time&quot;                  &quot;to_extract&quot;            &quot;to_print&quot;              &quot;to_remove&quot;            
-[133] &quot;to_remove2&quot;            &quot;total_mito&quot;            &quot;total_no_mito&quot;         &quot;treatment&quot;            
-[137] &quot;upregulated_1&quot;         &quot;upregulated_2&quot;         &quot;var_calc&quot;              &quot;var1&quot;                 
-[141] &quot;var2&quot;                  &quot;var3&quot;                  &quot;weight_c&quot;              &quot;weight_n&quot;             
-[145] &quot;weight_sup_threshold&quot;  &quot;with_seed1&quot;            &quot;with_seed2&quot;           </code></pre>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age&quot;                   &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
+  [6] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                   &quot;ch3&quot;                  
+ [11] &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                   &quot;common&quot;                &quot;common_all&quot;           
+ [16] &quot;common_mean&quot;           &quot;common1_2&quot;             &quot;condition&quot;             &quot;ctrl_sex_age&quot;          &quot;CXCR4&quot;                
+ [21] &quot;df1&quot;                   &quot;expr&quot;                  &quot;expr_data&quot;             &quot;expr_data_t&quot;           &quot;expr_levels&quot;          
+ [26] &quot;expr_mat_pat&quot;          &quot;expr_values&quot;           &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                 
+ [31] &quot;gene_2_keep&quot;           &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
+ [36] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+ [41] &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;                &quot;LCT&quot;                   &quot;LHX9&quot;                 
+ [46] &quot;males_data&quot;            &quot;mean_col&quot;              &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;     
+ [51] &quot;mean_row&quot;              &quot;mean_time&quot;             &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                
+ [56] &quot;mice4&quot;                 &quot;mito_genes&quot;            &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;               
+ [61] &quot;my_col_names&quot;          &quot;my_df&quot;                 &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;           
+ [66] &quot;my_max&quot;                &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;          &quot;my_sum&quot;               
+ [71] &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;              &quot;mystring&quot;             
+ [76] &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;          
+ [81] &quot;no_seed1&quot;              &quot;no_seed2&quot;              &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                 
+ [86] &quot;only_1&quot;                &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;           &quot;patien2_sub&quot;          
+ [91] &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;         &quot;patient_weight&quot;        &quot;patient1&quot;             
+ [96] &quot;patient2&quot;              &quot;patient3&quot;              &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;            
+[101] &quot;perc_no_mito&quot;          &quot;proteins&quot;              &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                
+[106] &quot;r_numb&quot;                &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;          &quot;read_sum_pat_filt&quot;    
+[111] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;response&quot;              &quot;sample&quot;               
+[116] &quot;sample0&quot;               &quot;sample1&quot;               &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;           
+[121] &quot;sample3&quot;               &quot;sample3_fr&quot;            &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;        
+[126] &quot;sd_calc_round&quot;         &quot;sd_time&quot;               &quot;sex&quot;                   &quot;sliced_odd&quot;            &quot;sub_only&quot;             
+[131] &quot;sum_aa&quot;                &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;               &quot;time&quot;                 
+[136] &quot;to_extract&quot;            &quot;to_print&quot;              &quot;to_remove&quot;             &quot;to_remove2&quot;            &quot;total_mito&quot;           
+[141] &quot;total_no_mito&quot;         &quot;treatment&quot;             &quot;upregulated_1&quot;         &quot;upregulated_2&quot;         &quot;var_calc&quot;             
+[146] &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                  &quot;weight&quot;                &quot;weight_c&quot;             
+[151] &quot;weight_data&quot;           &quot;weight_n&quot;              &quot;weight_sup_threshold&quot;  &quot;weigth&quot;                &quot;with_seed1&quot;           
+[156] &quot;with_seed2&quot;           </code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="variables.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variables</span></span>
 <span id="cb26-2"><a href="variables.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove, to_remove2)</span>
 <span id="cb26-3"><a href="variables.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-4"><a href="variables.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb26-5"><a href="variables.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
-  [5] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                  
-  [9] &quot;ch3&quot;                   &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                  
- [13] &quot;common&quot;                &quot;common_all&quot;            &quot;common_mean&quot;           &quot;common1_2&quot;            
- [17] &quot;condition&quot;             &quot;CXCR4&quot;                 &quot;expr&quot;                  &quot;expr_data&quot;            
- [21] &quot;expr_data_t&quot;           &quot;expr_levels&quot;           &quot;expr_mat_pat&quot;          &quot;expr_values&quot;          
- [25] &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                  &quot;gene_2_keep&quot;          
- [29] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
- [33] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;              
- [37] &quot;gsub_all&quot;              &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;               
- [41] &quot;LCT&quot;                   &quot;LHX9&quot;                  &quot;mean_col&quot;              &quot;mean_res_better&quot;      
- [45] &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mean_row&quot;              &quot;mean_time&quot;            
- [49] &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                
- [53] &quot;mito_genes&quot;            &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;               
- [57] &quot;my_col_names&quot;          &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;           
- [61] &quot;my_max&quot;                &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;         
- [65] &quot;my_sum&quot;                &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;             
- [69] &quot;mynumber&quot;              &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;          
- [73] &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;           &quot;no_seed1&quot;             
- [77] &quot;no_seed2&quot;              &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                 
- [81] &quot;only_1&quot;                &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;          
- [85] &quot;patien2_sub&quot;           &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;        
- [89] &quot;patient_weight&quot;        &quot;patient1&quot;              &quot;patient2&quot;              &quot;patient3&quot;             
- [93] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;             &quot;perc_no_mito&quot;         
- [97] &quot;proteins&quot;              &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                
-[101] &quot;r_numb&quot;                &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;         
-[105] &quot;read_sum_pat_filt&quot;     &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                 
-[109] &quot;response&quot;              &quot;sample&quot;                &quot;sample0&quot;               &quot;sample1&quot;              
-[113] &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;            &quot;sample3&quot;              
-[117] &quot;sample3_fr&quot;            &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;        
-[121] &quot;sd_calc_round&quot;         &quot;sd_time&quot;               &quot;sliced_odd&quot;            &quot;sub_only&quot;             
-[125] &quot;sum_aa&quot;                &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;              
-[129] &quot;time&quot;                  &quot;to_extract&quot;            &quot;to_print&quot;              &quot;total_mito&quot;           
-[133] &quot;total_no_mito&quot;         &quot;treatment&quot;             &quot;upregulated_1&quot;         &quot;upregulated_2&quot;        
-[137] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 
-[141] &quot;weight_c&quot;              &quot;weight_n&quot;              &quot;weight_sup_threshold&quot;  &quot;with_seed1&quot;           
-[145] &quot;with_seed2&quot;           </code></pre>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age&quot;                   &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
+  [6] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                   &quot;ch3&quot;                  
+ [11] &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                   &quot;common&quot;                &quot;common_all&quot;           
+ [16] &quot;common_mean&quot;           &quot;common1_2&quot;             &quot;condition&quot;             &quot;ctrl_sex_age&quot;          &quot;CXCR4&quot;                
+ [21] &quot;df1&quot;                   &quot;expr&quot;                  &quot;expr_data&quot;             &quot;expr_data_t&quot;           &quot;expr_levels&quot;          
+ [26] &quot;expr_mat_pat&quot;          &quot;expr_values&quot;           &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                 
+ [31] &quot;gene_2_keep&quot;           &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
+ [36] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+ [41] &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;                &quot;LCT&quot;                   &quot;LHX9&quot;                 
+ [46] &quot;males_data&quot;            &quot;mean_col&quot;              &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;     
+ [51] &quot;mean_row&quot;              &quot;mean_time&quot;             &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                
+ [56] &quot;mice4&quot;                 &quot;mito_genes&quot;            &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;               
+ [61] &quot;my_col_names&quot;          &quot;my_df&quot;                 &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;           
+ [66] &quot;my_max&quot;                &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;          &quot;my_sum&quot;               
+ [71] &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;              &quot;mystring&quot;             
+ [76] &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;          
+ [81] &quot;no_seed1&quot;              &quot;no_seed2&quot;              &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                 
+ [86] &quot;only_1&quot;                &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;           &quot;patien2_sub&quot;          
+ [91] &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;         &quot;patient_weight&quot;        &quot;patient1&quot;             
+ [96] &quot;patient2&quot;              &quot;patient3&quot;              &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;            
+[101] &quot;perc_no_mito&quot;          &quot;proteins&quot;              &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                
+[106] &quot;r_numb&quot;                &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;          &quot;read_sum_pat_filt&quot;    
+[111] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;response&quot;              &quot;sample&quot;               
+[116] &quot;sample0&quot;               &quot;sample1&quot;               &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;           
+[121] &quot;sample3&quot;               &quot;sample3_fr&quot;            &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;        
+[126] &quot;sd_calc_round&quot;         &quot;sd_time&quot;               &quot;sex&quot;                   &quot;sliced_odd&quot;            &quot;sub_only&quot;             
+[131] &quot;sum_aa&quot;                &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;               &quot;time&quot;                 
+[136] &quot;to_extract&quot;            &quot;to_print&quot;              &quot;total_mito&quot;            &quot;total_no_mito&quot;         &quot;treatment&quot;            
+[141] &quot;upregulated_1&quot;         &quot;upregulated_2&quot;         &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                 
+[146] &quot;var3&quot;                  &quot;weight&quot;                &quot;weight_c&quot;              &quot;weight_data&quot;           &quot;weight_n&quot;             
+[151] &quot;weight_sup_threshold&quot;  &quot;weigth&quot;                &quot;with_seed1&quot;            &quot;with_seed2&quot;           </code></pre>
 <p>The two variables have been removed.
 <br>
 But looking closely at these codes, we see that some start with <code>#</code> and are not evaluated. What are they? These are the <strong>comments</strong>, i.e. messages that you will write in the scripts (and we will see later how to create them) to help you understand what you are doing. They are actual comments that you can add, and will not be “evaluated” as code as the line starts with <code>#</code>.
@@ -660,85 +644,74 @@ Solution
 <span id="cb38-3"><a href="variables.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-4"><a href="variables.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb38-5"><a href="variables.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
-  [5] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                  
-  [9] &quot;ch3&quot;                   &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                  
- [13] &quot;common&quot;                &quot;common_all&quot;            &quot;common_mean&quot;           &quot;common1_2&quot;            
- [17] &quot;condition&quot;             &quot;CXCR4&quot;                 &quot;expr&quot;                  &quot;expr_data&quot;            
- [21] &quot;expr_data_t&quot;           &quot;expr_levels&quot;           &quot;expr_mat_pat&quot;          &quot;expr_values&quot;          
- [25] &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                  &quot;gene_2_keep&quot;          
- [29] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
- [33] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;              
- [37] &quot;gsub_all&quot;              &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;               
- [41] &quot;LCT&quot;                   &quot;LHX9&quot;                  &quot;mean_col&quot;              &quot;mean_res_better&quot;      
- [45] &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mean_row&quot;              &quot;mean_time&quot;            
- [49] &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                
- [53] &quot;mice5&quot;                 &quot;mice6&quot;                 &quot;mice7&quot;                 &quot;mito_genes&quot;           
- [57] &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;                &quot;my_col_names&quot;         
- [61] &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;            &quot;my_max&quot;               
- [65] &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;          &quot;my_sum&quot;               
- [69] &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;             
- [73] &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                
- [77] &quot;n_responders&quot;          &quot;nationality&quot;           &quot;no_seed1&quot;              &quot;no_seed2&quot;             
- [81] &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                  &quot;only_1&quot;               
- [85] &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;           &quot;patien2_sub&quot;          
- [89] &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;         &quot;patient_weight&quot;       
- [93] &quot;patient1&quot;              &quot;patient2&quot;              &quot;patient3&quot;              &quot;pattern_to_check_1&quot;   
- [97] &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;             &quot;perc_no_mito&quot;          &quot;proteins&quot;             
-[101] &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                 &quot;r_numb&quot;               
-[105] &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;          &quot;read_sum_pat_filt&quot;    
-[109] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;response&quot;             
-[113] &quot;sample&quot;                &quot;sample0&quot;               &quot;sample1&quot;               &quot;sample1_fr&quot;           
-[117] &quot;sample2&quot;               &quot;sample2_fr&quot;            &quot;sample3&quot;               &quot;sample3_fr&quot;           
-[121] &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;        
-[125] &quot;sd_time&quot;               &quot;sliced_odd&quot;            &quot;sub_only&quot;              &quot;sum_aa&quot;               
-[129] &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;               &quot;time&quot;                 
-[133] &quot;to_extract&quot;            &quot;to_print&quot;              &quot;total_mito&quot;            &quot;total_no_mito&quot;        
-[137] &quot;treatment&quot;             &quot;upregulated_1&quot;         &quot;upregulated_2&quot;         &quot;var_calc&quot;             
-[141] &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                  &quot;weight_c&quot;             
-[145] &quot;weight_n&quot;              &quot;weight_sup_threshold&quot;  &quot;with_seed1&quot;            &quot;with_seed2&quot;           </code></pre>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age&quot;                   &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
+  [6] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                   &quot;ch3&quot;                  
+ [11] &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                   &quot;common&quot;                &quot;common_all&quot;           
+ [16] &quot;common_mean&quot;           &quot;common1_2&quot;             &quot;condition&quot;             &quot;ctrl_sex_age&quot;          &quot;CXCR4&quot;                
+ [21] &quot;df1&quot;                   &quot;expr&quot;                  &quot;expr_data&quot;             &quot;expr_data_t&quot;           &quot;expr_levels&quot;          
+ [26] &quot;expr_mat_pat&quot;          &quot;expr_values&quot;           &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                 
+ [31] &quot;gene_2_keep&quot;           &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
+ [36] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+ [41] &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;                &quot;LCT&quot;                   &quot;LHX9&quot;                 
+ [46] &quot;males_data&quot;            &quot;mean_col&quot;              &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;     
+ [51] &quot;mean_row&quot;              &quot;mean_time&quot;             &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                
+ [56] &quot;mice4&quot;                 &quot;mice5&quot;                 &quot;mice6&quot;                 &quot;mice7&quot;                 &quot;mito_genes&quot;           
+ [61] &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;                &quot;my_col_names&quot;          &quot;my_df&quot;                
+ [66] &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;            &quot;my_max&quot;                &quot;my_mean&quot;              
+ [71] &quot;my_min&quot;                &quot;my_row_names&quot;          &quot;my_sum&quot;                &quot;my_vector&quot;             &quot;mychar_d&quot;             
+ [76] &quot;mychar_s&quot;              &quot;mynumber&quot;              &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;          
+ [81] &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;           &quot;no_seed1&quot;              &quot;no_seed2&quot;             
+ [86] &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                  &quot;only_1&quot;                &quot;only_2&quot;               
+ [91] &quot;p_responders&quot;          &quot;patien1_sub&quot;           &quot;patien2_sub&quot;           &quot;patien3_sub&quot;           &quot;patient_age&quot;          
+ [96] &quot;patient_state&quot;         &quot;patient_weight&quot;        &quot;patient1&quot;              &quot;patient2&quot;              &quot;patient3&quot;             
+[101] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;             &quot;perc_no_mito&quot;          &quot;proteins&quot;             
+[106] &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                 &quot;r_numb&quot;                &quot;r_patients&quot;           
+[111] &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;          &quot;read_sum_pat_filt&quot;     &quot;rep1&quot;                  &quot;rep2&quot;                 
+[116] &quot;rep3&quot;                  &quot;response&quot;              &quot;sample&quot;                &quot;sample0&quot;               &quot;sample1&quot;              
+[121] &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;            &quot;sample3&quot;               &quot;sample3_fr&quot;           
+[126] &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;         &quot;sd_calc_round&quot;         &quot;sd_time&quot;              
+[131] &quot;sex&quot;                   &quot;sliced_odd&quot;            &quot;sub_only&quot;              &quot;sum_aa&quot;                &quot;sum_time&quot;             
+[136] &quot;sum_weights&quot;           &quot;t_value&quot;               &quot;time&quot;                  &quot;to_extract&quot;            &quot;to_print&quot;             
+[141] &quot;total_mito&quot;            &quot;total_no_mito&quot;         &quot;treatment&quot;             &quot;upregulated_1&quot;         &quot;upregulated_2&quot;        
+[146] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                  &quot;weight&quot;               
+[151] &quot;weight_c&quot;              &quot;weight_data&quot;           &quot;weight_n&quot;              &quot;weight_sup_threshold&quot;  &quot;weigth&quot;               
+[156] &quot;with_seed1&quot;            &quot;with_seed2&quot;           </code></pre>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="variables.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete 3 of the just-created variables</span></span>
 <span id="cb40-2"><a href="variables.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(mice5, mice6, mice7)</span>
 <span id="cb40-3"><a href="variables.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-4"><a href="variables.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb40-5"><a href="variables.html#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
-  [5] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                  
-  [9] &quot;ch3&quot;                   &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                  
- [13] &quot;common&quot;                &quot;common_all&quot;            &quot;common_mean&quot;           &quot;common1_2&quot;            
- [17] &quot;condition&quot;             &quot;CXCR4&quot;                 &quot;expr&quot;                  &quot;expr_data&quot;            
- [21] &quot;expr_data_t&quot;           &quot;expr_levels&quot;           &quot;expr_mat_pat&quot;          &quot;expr_values&quot;          
- [25] &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                  &quot;gene_2_keep&quot;          
- [29] &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
- [33] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;              
- [37] &quot;gsub_all&quot;              &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;               
- [41] &quot;LCT&quot;                   &quot;LHX9&quot;                  &quot;mean_col&quot;              &quot;mean_res_better&quot;      
- [45] &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;      &quot;mean_row&quot;              &quot;mean_time&quot;            
- [49] &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                 &quot;mice4&quot;                
- [53] &quot;mito_genes&quot;            &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;               
- [57] &quot;my_col_names&quot;          &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;           
- [61] &quot;my_max&quot;                &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;         
- [65] &quot;my_sum&quot;                &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;             
- [69] &quot;mynumber&quot;              &quot;mystring&quot;              &quot;myvar&quot;                 &quot;myvar_power&quot;          
- [73] &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;           &quot;no_seed1&quot;             
- [77] &quot;no_seed2&quot;              &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                 
- [81] &quot;only_1&quot;                &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;          
- [85] &quot;patien2_sub&quot;           &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;        
- [89] &quot;patient_weight&quot;        &quot;patient1&quot;              &quot;patient2&quot;              &quot;patient3&quot;             
- [93] &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;             &quot;perc_no_mito&quot;         
- [97] &quot;proteins&quot;              &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                
-[101] &quot;r_numb&quot;                &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;         
-[105] &quot;read_sum_pat_filt&quot;     &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                 
-[109] &quot;response&quot;              &quot;sample&quot;                &quot;sample0&quot;               &quot;sample1&quot;              
-[113] &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;            &quot;sample3&quot;              
-[117] &quot;sample3_fr&quot;            &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;        
-[121] &quot;sd_calc_round&quot;         &quot;sd_time&quot;               &quot;sliced_odd&quot;            &quot;sub_only&quot;             
-[125] &quot;sum_aa&quot;                &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;              
-[129] &quot;time&quot;                  &quot;to_extract&quot;            &quot;to_print&quot;              &quot;total_mito&quot;           
-[133] &quot;total_no_mito&quot;         &quot;treatment&quot;             &quot;upregulated_1&quot;         &quot;upregulated_2&quot;        
-[137] &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                  &quot;var3&quot;                 
-[141] &quot;weight_c&quot;              &quot;weight_n&quot;              &quot;weight_sup_threshold&quot;  &quot;with_seed1&quot;           
-[145] &quot;with_seed2&quot;           </code></pre>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                &quot;age&quot;                   &quot;age_inf_threshold&quot;     &quot;age_sup_threshold&quot;     &quot;all_string&quot;           
+  [6] &quot;areas&quot;                 &quot;c_patients&quot;            &quot;ch1&quot;                   &quot;ch2&quot;                   &quot;ch3&quot;                  
+ [11] &quot;ch4&quot;                   &quot;ch5&quot;                   &quot;ch6&quot;                   &quot;common&quot;                &quot;common_all&quot;           
+ [16] &quot;common_mean&quot;           &quot;common1_2&quot;             &quot;condition&quot;             &quot;ctrl_sex_age&quot;          &quot;CXCR4&quot;                
+ [21] &quot;df1&quot;                   &quot;expr&quot;                  &quot;expr_data&quot;             &quot;expr_data_t&quot;           &quot;expr_levels&quot;          
+ [26] &quot;expr_mat_pat&quot;          &quot;expr_values&quot;           &quot;f_value&quot;               &quot;features&quot;              &quot;gene&quot;                 
+ [31] &quot;gene_2_keep&quot;           &quot;gene_to_test&quot;          &quot;gene1&quot;                 &quot;gene2&quot;                 &quot;genes&quot;                
+ [36] &quot;grep_1&quot;                &quot;grep_2&quot;                &quot;grepl_1&quot;               &quot;grepl_2&quot;               &quot;gsub_all&quot;             
+ [41] &quot;heights&quot;               &quot;idx&quot;                   &quot;is_odd&quot;                &quot;LCT&quot;                   &quot;LHX9&quot;                 
+ [46] &quot;males_data&quot;            &quot;mean_col&quot;              &quot;mean_res_better&quot;       &quot;mean_res_better_round&quot; &quot;mean_result_calc&quot;     
+ [51] &quot;mean_row&quot;              &quot;mean_time&quot;             &quot;mice1&quot;                 &quot;mice2&quot;                 &quot;mice3&quot;                
+ [56] &quot;mice4&quot;                 &quot;mito_genes&quot;            &quot;ml_to_add&quot;             &quot;mother_diabetes&quot;       &quot;mt_mat&quot;               
+ [61] &quot;my_col_names&quot;          &quot;my_df&quot;                 &quot;my_info&quot;               &quot;my_matrix&quot;             &quot;my_matrix2&quot;           
+ [66] &quot;my_max&quot;                &quot;my_mean&quot;               &quot;my_min&quot;                &quot;my_row_names&quot;          &quot;my_sum&quot;               
+ [71] &quot;my_vector&quot;             &quot;mychar_d&quot;              &quot;mychar_s&quot;              &quot;mynumber&quot;              &quot;mystring&quot;             
+ [76] &quot;myvar&quot;                 &quot;myvar_power&quot;           &quot;n_rep&quot;                 &quot;n_responders&quot;          &quot;nationality&quot;          
+ [81] &quot;no_seed1&quot;              &quot;no_seed2&quot;              &quot;not_center&quot;            &quot;num1&quot;                  &quot;num2&quot;                 
+ [86] &quot;only_1&quot;                &quot;only_2&quot;                &quot;p_responders&quot;          &quot;patien1_sub&quot;           &quot;patien2_sub&quot;          
+ [91] &quot;patien3_sub&quot;           &quot;patient_age&quot;           &quot;patient_state&quot;         &quot;patient_weight&quot;        &quot;patient1&quot;             
+ [96] &quot;patient2&quot;              &quot;patient3&quot;              &quot;pattern_to_check_1&quot;    &quot;pattern_to_check_2&quot;    &quot;perc_mito&quot;            
+[101] &quot;perc_no_mito&quot;          &quot;proteins&quot;              &quot;proteins1&quot;             &quot;proteins2&quot;             &quot;PTPN7&quot;                
+[106] &quot;r_numb&quot;                &quot;r_patients&quot;            &quot;read_sum_gene&quot;         &quot;read_sum_pat&quot;          &quot;read_sum_pat_filt&quot;    
+[111] &quot;rep1&quot;                  &quot;rep2&quot;                  &quot;rep3&quot;                  &quot;response&quot;              &quot;sample&quot;               
+[116] &quot;sample0&quot;               &quot;sample1&quot;               &quot;sample1_fr&quot;            &quot;sample2&quot;               &quot;sample2_fr&quot;           
+[121] &quot;sample3&quot;               &quot;sample3_fr&quot;            &quot;sd_calc&quot;               &quot;sd_calc_ceil&quot;          &quot;sd_calc_floor&quot;        
+[126] &quot;sd_calc_round&quot;         &quot;sd_time&quot;               &quot;sex&quot;                   &quot;sliced_odd&quot;            &quot;sub_only&quot;             
+[131] &quot;sum_aa&quot;                &quot;sum_time&quot;              &quot;sum_weights&quot;           &quot;t_value&quot;               &quot;time&quot;                 
+[136] &quot;to_extract&quot;            &quot;to_print&quot;              &quot;total_mito&quot;            &quot;total_no_mito&quot;         &quot;treatment&quot;            
+[141] &quot;upregulated_1&quot;         &quot;upregulated_2&quot;         &quot;var_calc&quot;              &quot;var1&quot;                  &quot;var2&quot;                 
+[146] &quot;var3&quot;                  &quot;weight&quot;                &quot;weight_c&quot;              &quot;weight_data&quot;           &quot;weight_n&quot;             
+[151] &quot;weight_sup_threshold&quot;  &quot;weigth&quot;                &quot;with_seed1&quot;            &quot;with_seed2&quot;           </code></pre>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="variables.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change the value of one variable</span></span>
 <span id="cb42-2"><a href="variables.html#cb42-2" aria-hidden="true" tabindex="-1"></a>mice4 <span class="ot">&lt;-</span> <span class="fl">7.7</span></span>
 <span id="cb42-3"><a href="variables.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
