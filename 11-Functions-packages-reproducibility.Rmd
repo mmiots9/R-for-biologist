@@ -1,0 +1,84 @@
+# Functions, packages and reproducibility
+I'm sorry, I know last time I told you we would have start exploratory data analysis... but there are some <strong>crucial</strong> concepts that you should know prior to start your analysis: functions, packages and reproducibility.
+
+## Functions {-}
+We have encountered them quite a few times in previous chapters. We know that in R functions can be used by writing the name of the function, followed by parenthesis with some values in it.<br>
+I'm not here to describe how to write new functions etc (if you want to know more about it, this is a useful <a href="https://r4ds.had.co.nz/functions.html" target="_blank">guide</a>), but you have to know that the functions we've seen (e.g. `mean()`, `max()`, `median()`, `length()`) are so-called "built-in", so they are accessible in R since its installation.
+<br>
+However, there are lots and lots of functions created by different "users" around the world that are fundamental for different types of analysis but that are not "pre-built" in R. They are collected in different <em>packages</em>.
+
+## Packages {-}
+So, you have to imagine a package as a box containing different functions that you want to use.
+<br>
+"Right, and how can I use them?" Great question, let's see how to install a package.
+
+### Install a package {-}
+To install a package you have to know in which <em>repository</em> it is stored (imagine a repository as a free App Store/Play Store). Most of the packages are store on CRAN (<a href="https://cran.r-project.org/" target="_blank">website</a>), while the majority of genomic-related packages are store in Bioconductor (<a href="https://www.bioconductor.org/" target="_blank">website</a>).
+<br>
+As we are going to use CRAN packages, here I show you how to install those packages. 
+<br>
+Let's say we want to install `tidyverse` (which is a collection of packages that I love for data analysis), we will use the command `install.packages("<name_of_the_package>")`.
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+```
+
+I strongly suggest you to run this code and follow the instructions that pop up in the console.
+<br>
+The process will take a while and if all worked fine, it should prompt "DONE The downloaded source packages are in...." at the end.
+
+### Load a package {-}
+Installing a package is not sufficient to be able to use its functions, you have to load it in every session you want to use it. So, I now it sounds like a big deal, but it's easier than it seems: at the beginning of your script you have to write `library(<name_of_the_package>)` for each package you want to load.
+<br>
+For example, in our case we will write:
+```{r, warning=FALSE}
+library(tidyverse)
+```
+
+Now that we have loaded the package, we are able to use its functions.<br>
+
+## Reproducibility {-}
+Here we are at the most important part of this chapter: data reproducibility. I mentioned you just few things about functions and packages, I know... but those concepts are important to understand how data reproducibility works.
+<br>
+<p class="plist">You know that reproducibility is a key aspect of every experiment and analysis. When you are analyzing data with R there are few things that are mandatory for reproducibility:</p>
+<ol>
+<li>Write every step and code you run</li>
+<li>Use set.seed for randomization steps</li>
+<li>Use the same version of R and of the packages</li>
+</ol>
+
+As we have already seen the first 2 points, we will now discuss about the third one.
+<br>
+When you are installing a package, you are installing a certain version if it. In fact, during time, packages changes with new functionalities, fixed bugs and so on. For this reason, the results of an analysis done with version 1.0 of a package may be different from the ones using version 5.2... it should not be the case, but some times it happens because the same functions may change a bit.
+<br>
+So, how to control it?
+
+### Control package versions {-}
+To check which version of a package you have installed you can use the command `packageVersion("<name_of_the_package>")`. For example:
+```{r}
+packageVersion("tidyverse")
+```
+
+I have installed version `r packageVersion("tidyverse")` of tidyverse. DON'T worry if your version is not the same as mine (I know it sounds controversial, but here we are explaining things, you should stick with you own version).
+
+### Session info {-}
+Another way is to look at the sessionInfo, which returns all the package loaded in the current session (remember, a session starts when you start R and ends when you exit or restart R).
+```{r}
+sessionInfo()
+```
+
+Here it is reported the version of R, and of all the packages loaded during this session.
+<br>
+You should use this command at the end of all your analyses, especially if you are using Markdown (we will see them soon, very soon) and provide it when you want to share the analysis to someone else (or publish a paper with an analysis performed in R). In fact, in "Material and Methods" section of a paper, you should write down the version of R and of the packages used for analyses.
+
+<strong>IMPORTANT</strong>: for all these reasons, you should NOT upgrade R or any packages you are using for an analysis, even if it asks you for any upgrade during packages installation. There are better ways to control package versions etc, but that is out of the scope of this book (if you are interested, go and learn about conda environments <a href="https://astrobiomike.github.io/R/managing-r-and-rstudio-with-conda" target="_blank">here</a>).
+
+
+So, with these concepts in mind, let's start our first data analysis in R in the next chapter.
+
+
+link versione pacchetto
+
+Importanza riproducibilità
+Versione pacchetti
+Conda environment (per approfondire), altrimenti non aggiornare mai.
