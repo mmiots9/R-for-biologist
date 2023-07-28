@@ -1,4 +1,4 @@
-# Boolean
+# Boolean {#boolean-chapter}
 We finally arrived to the last data type that needs a deeper explanation: the boolean (or logical).
 <br>
 In programming languages, there are a particular type of data (the boolean) representing what we can imagine as true or false, in R they are represented by two values: `TRUE` (or `T`) and `FALSE` (or `F`). We can see an example here:

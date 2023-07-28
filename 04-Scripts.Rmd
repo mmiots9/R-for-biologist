@@ -1,4 +1,4 @@
-# Scripts
+# Scripts {#scripts-chapter}
 Ok, let's take a break before all the theoretical chapters to discuss about scripts. 
 <br>
 I always say this word when talking to you about my job, but what are they? A script is essentially an ordered list of commands, used to not have to write again and again the same commands on the console. It can contain everything you type in the console, like functions, operations and even comments; in this way, you can do an analysis and store it as a "text" file that you can use as reference (so you know what you have done), use for another analysis, edit, share with others...

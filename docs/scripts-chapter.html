@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Numbers | Learn R for biologist, with no fear</title>
+  <title>4 Scripts | Learn R for biologist, with no fear</title>
   <meta name="description" content="For you, who never gives up, for your future" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Numbers | Learn R for biologist, with no fear" />
+  <meta property="og:title" content="4 Scripts | Learn R for biologist, with no fear" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Numbers | Learn R for biologist, with no fear" />
+  <meta name="twitter:title" content="4 Scripts | Learn R for biologist, with no fear" />
   
   <meta name="twitter:description" content="For you, who never gives up, for your future" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="scripts-chapter.html"/>
-<link rel="next" href="character.html"/>
+<link rel="prev" href="variables.html"/>
+<link rel="next" href="numbers.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -299,120 +299,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="numbers" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Numbers</h1>
-<p>I know you know what numbers are, and we’ve already seen that we have two types of numbers in R: integers and doubles; so, let’s move to see them in action.</p>
-<div id="operations" class="section level2 unnumbered">
-<h2>Operations</h2>
-<p>First of all, here is how to do basic mathematical operation in R:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="numbers.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plus, minus, multiply, divide</span></span>
-<span id="cb44-2"><a href="numbers.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">4</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span> <span class="sc">/</span> <span class="dv">2</span></span></code></pre></div>
-<pre class="code-out"><code>[1] 6</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="numbers.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Power</span></span>
-<span id="cb46-2"><a href="numbers.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">**</span> <span class="dv">3</span></span></code></pre></div>
-<pre class="code-out"><code>[1] 64</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="numbers.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Logarithm</span></span>
-<span id="cb48-2"><a href="numbers.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">100</span>) <span class="co"># base e</span></span></code></pre></div>
-<pre class="code-out"><code>[1] 4.60517</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="numbers.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="dv">100</span>) <span class="co"># base 10</span></span></code></pre></div>
-<pre class="code-out"><code>[1] 2</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="numbers.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log2</span>(<span class="dv">100</span>) <span class="co"># base 2</span></span></code></pre></div>
-<pre class="code-out"><code>[1] 6.643856</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="numbers.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">100</span>, <span class="at">base =</span> <span class="dv">3</span>) <span class="co"># choose the base</span></span></code></pre></div>
-<pre class="code-out"><code>[1] 4.191807</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="numbers.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Natural exponential</span></span>
-<span id="cb56-2"><a href="numbers.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">2</span>)</span></code></pre></div>
-<pre class="code-out"><code>[1] 7.389056</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="numbers.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Square root</span></span>
-<span id="cb58-2"><a href="numbers.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">9</span>)</span></code></pre></div>
-<pre class="code-out"><code>[1] 3</code></pre>
-<p>An interesting operator is the modulus (%%) which returns the remainder of a division, for example:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="numbers.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="sc">%%</span> <span class="dv">3</span></span></code></pre></div>
-<pre class="code-out"><code>[1] 1</code></pre>
-<p>This can be useful to evaluate if a number is even or odd by calculating the remainder of the division x / 2 (so using x %% 2): if it is 0, the number x is even, otherwise it is odd.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="numbers.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> <span class="sc">%%</span> <span class="dv">2</span></span></code></pre></div>
-<pre class="code-out"><code>[1] 1</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="numbers.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span> <span class="sc">%%</span> <span class="dv">2</span></span></code></pre></div>
-<pre class="code-out"><code>[1] 0</code></pre>
-</div>
-<div id="rounding" class="section level2 unnumbered">
-<h2>Rounding</h2>
-<p>Another thing that we usually want to do is to round decimal number, especially after log transformation or division. To do so, we have 3 functions:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="numbers.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Round to n decimal places</span></span>
-<span id="cb66-2"><a href="numbers.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre class="code-out"><code>[1] 0.33</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="numbers.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Round to upper integer</span></span>
-<span id="cb68-2"><a href="numbers.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(<span class="fl">10.2</span>)</span></code></pre></div>
-<pre class="code-out"><code>[1] 11</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="numbers.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Round to lower integer</span></span>
-<span id="cb70-2"><a href="numbers.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">floor</span>(<span class="fl">14.9</span>)</span></code></pre></div>
-<pre class="code-out"><code>[1] 14</code></pre>
-<p>Look how ceiling and floor do not take into account the decimal part, even if it is greater or lower than 0.5.</p>
-</div>
-<div id="tranform-to-type-number" class="section level2 unnumbered">
-<h2>Tranform to type number</h2>
-<p>Sometimes you want to transform a string that contains a number to a numeric type in R. I know we haven’t covered strings yet (next chapter will be on them), but let’s do a bit step forward now just to see this super useful function, that we use a lot when dealing with dataframes.
+<div id="scripts-chapter" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Scripts</h1>
+<p>Ok, let’s take a break before all the theoretical chapters to discuss about scripts.
 <br>
-To do so, we’ll use the function called <code>as.numeric()</code></p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="numbers.html#cb72-1" aria-hidden="true" tabindex="-1"></a>mystring <span class="ot">&lt;-</span> <span class="st">&quot;15&quot;</span> <span class="co"># This is a character, can you guess why R interpret it as a character?</span></span>
-<span id="cb72-2"><a href="numbers.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(mystring)</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="numbers.html#cb74-1" aria-hidden="true" tabindex="-1"></a>mynumber <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(mystring)</span>
-<span id="cb74-2"><a href="numbers.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(mynumber)</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;double&quot;</code></pre>
-<p>Wow, you will find this super super super useful.</p>
+I always say this word when talking to you about my job, but what are they? A script is essentially an ordered list of commands, used to not have to write again and again the same commands on the console. It can contain everything you type in the console, like functions, operations and even comments; in this way, you can do an analysis and store it as a “text” file that you can use as reference (so you know what you have done), use for another analysis, edit, share with others…
+<br>
+You will <strong>always</strong> write code in scripts, for all these reasons.
+<br>
+<br>
+Let’s see how to create a script, write some code in it and run part of the script or even a small part of it in RStudio.</p>
+<div style="text-align:center">
+<video height=500px width=auto controls>
+<source src="video/create-script.mov">
+</video>
 </div>
-<div id="exercises-1" class="section level2 unnumbered">
-<h2>Exercises</h2>
-<p>Let’s now put in practice what we have seen in this chapter and in the previous (remember? the script… I want you to write a script with these exercises and save it)</p>
-<div class="exercise">
-<p><span id="exr:mean-calc" class="exercise"><strong>Exercise 5.1  </strong></span>The results of a Real-Time PCR indicate that your triplicates for FOXP1 have these Ct: 22.4, 22.31, 22.24. Calculate the mean value and print it rounded to 2 decimal places.</p>
+<p class="plist">
+In the video we see a series of actions:
+</p>
+<ol>
+<li>
+To create a script, click the button on top left, then select “R Script” (or File -&gt; New File -&gt; R Script)
+</li>
+<li>
+Start writing the commands (even comments)
+</li>
+<li>
+To run a single line click “Run”
+</li>
+<li>
+To run the whole script (R starts from the beginning) click “Source”)
+</li>
+</ol>
+<p><strong>Suggetion</strong>: Comment, comment, comment everything. I know it is time consuming, but you will be so happy and greatful to read comments that help you understand what you’ve done months (or weeks) before.
+<br></p>
+<div id="save" class="section level2 unnumbered">
+<h2>Save</h2>
+<p>To save a script “File -&gt; Save” or the usual shortcut “Ctrl-S” (Windows) or “Cmd-S” (MacOS). Use them for all the exercise from now on!</p>
 </div>
-<details>
-<summary>
-Solution
-</summary>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="numbers.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculator solution</span></span>
-<span id="cb76-2"><a href="numbers.html#cb76-2" aria-hidden="true" tabindex="-1"></a>mean_result_calc <span class="ot">&lt;-</span> (<span class="fl">22.4</span> <span class="sc">+</span> <span class="fl">22.31</span> <span class="sc">+</span> <span class="fl">22.24</span>) <span class="sc">/</span> <span class="dv">3</span></span>
-<span id="cb76-3"><a href="numbers.html#cb76-3" aria-hidden="true" tabindex="-1"></a>mean_result_calc <span class="ot">&lt;-</span> <span class="fu">round</span>(mean_result_calc, <span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb76-4"><a href="numbers.html#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mean_result_calc)</span></code></pre></div>
-<pre class="code-out"><code>[1] 22.32</code></pre>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="numbers.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BETTER solution</span></span>
-<span id="cb78-2"><a href="numbers.html#cb78-2" aria-hidden="true" tabindex="-1"></a>rep1 <span class="ot">&lt;-</span> <span class="fl">22.4</span></span>
-<span id="cb78-3"><a href="numbers.html#cb78-3" aria-hidden="true" tabindex="-1"></a>rep2 <span class="ot">&lt;-</span> <span class="fl">22.31</span></span>
-<span id="cb78-4"><a href="numbers.html#cb78-4" aria-hidden="true" tabindex="-1"></a>rep3 <span class="ot">&lt;-</span> <span class="fl">22.24</span></span>
-<span id="cb78-5"><a href="numbers.html#cb78-5" aria-hidden="true" tabindex="-1"></a>n_rep <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb78-6"><a href="numbers.html#cb78-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-7"><a href="numbers.html#cb78-7" aria-hidden="true" tabindex="-1"></a>mean_res_better <span class="ot">&lt;-</span> (rep1 <span class="sc">+</span> rep2 <span class="sc">+</span> rep3) <span class="sc">/</span> n_rep</span>
-<span id="cb78-8"><a href="numbers.html#cb78-8" aria-hidden="true" tabindex="-1"></a>mean_res_better_round <span class="ot">&lt;-</span> <span class="fu">round</span>(mean_res_better, <span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb78-9"><a href="numbers.html#cb78-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mean_res_better_round)</span></code></pre></div>
-<pre class="code-out"><code>[1] 22.32</code></pre>
-The second solution is better because every number is stored in a variable, that you then use to calculate the mean value.
-</details>
-<div class="exercise">
-<p><span id="exr:sd-calc" class="exercise"><strong>Exercise 5.2  </strong></span>Now calculate the sd of the data of exercise <a href="numbers.html#exr:mean-calc">5.1</a> and print the value rounded to upper integer, to lower integer and to a 4-digit decimal.</p>
-</div>
-<details>
-<summary>
-Solution
-</summary>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="numbers.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use only better solution, first calculate the variance</span></span>
-<span id="cb80-2"><a href="numbers.html#cb80-2" aria-hidden="true" tabindex="-1"></a>var_calc <span class="ot">&lt;-</span> ((rep1 <span class="sc">-</span> mean_res_better)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (rep2 <span class="sc">-</span> mean_res_better)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (rep3 <span class="sc">-</span> mean_res_better)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (n_rep <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb80-3"><a href="numbers.html#cb80-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb80-4"><a href="numbers.html#cb80-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let&#39;s calculate sd</span></span>
-<span id="cb80-5"><a href="numbers.html#cb80-5" aria-hidden="true" tabindex="-1"></a>sd_calc <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_calc)</span>
-<span id="cb80-6"><a href="numbers.html#cb80-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb80-7"><a href="numbers.html#cb80-7" aria-hidden="true" tabindex="-1"></a>sd_calc_ceil <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(sd_calc)</span>
-<span id="cb80-8"><a href="numbers.html#cb80-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sd_calc_ceil)</span></code></pre></div>
-<pre class="code-out"><code>[1] 1</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="numbers.html#cb82-1" aria-hidden="true" tabindex="-1"></a>sd_calc_floor <span class="ot">&lt;-</span> <span class="fu">floor</span>(sd_calc)</span>
-<span id="cb82-2"><a href="numbers.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sd_calc_floor)</span></code></pre></div>
-<pre class="code-out"><code>[1] 0</code></pre>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="numbers.html#cb84-1" aria-hidden="true" tabindex="-1"></a>sd_calc_round <span class="ot">&lt;-</span> <span class="fu">round</span>(sd_calc, <span class="at">digits =</span> <span class="dv">4</span>)</span>
-<span id="cb84-2"><a href="numbers.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sd_calc_round)</span></code></pre></div>
-<pre class="code-out"><code>[1] 0.0802</code></pre>
-</details>
-<p>Ok, now you’re ready to learn about strings, let’s go.</p>
+<div id="source-a-script" class="section level2 unnumbered">
+<h2>Source a script</h2>
+<p>Source a script from the console instead of having to open it and source from RStudio is very useful when you want to save time and create re-usable pipelines or analysis. Sourcing a script means to execute all the line of codes in that script. It can be archieved by doing <code>source("path_to_file")</code>.
+<br>
+<br>
+Now, head to the next chapter in which we will talk about numbers.</p>
 
 </div>
 </div>
@@ -421,8 +351,8 @@ Solution
           </div>
         </div>
       </div>
-<a href="scripts-chapter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="character.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="numbers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
