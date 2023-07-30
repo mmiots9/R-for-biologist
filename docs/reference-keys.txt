@@ -13,6 +13,7 @@ exr:calculate-read-sum
 exr:calculate-read-sum-filtered
 exr:read-spreadheet
 exr:filter-or
+exr:aggr-multi
 installation
 first-step-in-rstudio
 variables
@@ -25,3 +26,4 @@ matrices
 data-frames
 functions-packages-and-reproducibility
 manage-data-with-tidyverse
+aggregate-data-with-tidyverse

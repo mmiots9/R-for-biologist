@@ -1,0 +1,286 @@
+# Aggregate data with tidyverse
+After having seen how to organize and manipulate a dataframe, let's start analyzing them! In particular, in this chapter we will see how to aggregate data based on values of one or more columns.
+
+The first step, as always, is to load the packages and the data:
+```{r, warning=FALSE}
+# 1. Load packages 
+library(tidyverse)
+
+# 2. Load data
+df <- read.csv("data/Supplementary_table_13.csv")
+head(df)
+```
+
+Then, we will change the column types (as in last chapter):
+```{r}
+df <- df %>%
+  mutate("Diagnosis" = factor(Diagnosis, levels = c("Control", "AD")),
+         "sex" = factor(sex),
+         "Area" = factor(Area),
+         "dataset" = factor(dataset))
+
+str(df)
+```
+
+We are now ready to start our very first analyses!
+
+## Table {-}
+The very first function we will explore is `table`. It is used on vectors or dataframe columns and it returns the numerosity of each different value of them; when used for 2 vectors/columns, it returns a contingency matrix.
+<br>
+Let's see:
+```{r}
+table(df$sex)
+```
+This is the simplest situation, it is not used so much (remember, summary does the same); but, it can be useful if combined with `sum` to get the fraction of each value. In fact, dividing the table for its sum, we can get the fraction of each value:
+```{r}
+# 1. Create the table
+tbl_sex <- table(df$sex)
+
+# 2. Calculate the sum of the table
+sum_tbl_sex <- sum(tbl_sex)
+
+# 3. Calculate the fraction
+tbl_sex / sum_tbl_sex
+
+```
+So, ~ 60% of samples comes from females and ~ 40% from males. Yes, we could have just written `table(df$sex)/sum(table(df$sex))`, one line, less stored variables.
+<br>
+We can do the same with two columns, and you will find doing it a lot during your analysis:
+```{r}
+tbl_sex_diagnosis <- table("sex" = df$sex, "Diagnosis" = df$Diagnosis)
+tbl_sex_diagnosis
+```
+We can also specify names associated to the vectors/columns we use, and they will be displayed in the output. This can be usefule when dealing with two variables whose values are 0/1 or TRUE/FALSE in both.
+<br>
+<em>And if I want to see the fraction of females and males that are AD or Control?</em> Right, we can do it. If you try the previous approach, so dividing for the sum of the table, you will get the proportion of each category NOT divided by sex:
+```{r}
+tbl_sex_diagnosis / sum(tbl_sex_diagnosis)
+```
+
+To get what you really want, you have to use one of `colSums` or `rowSums` depending on what you want to sum. Let's see how they work:
+```{r}
+# 1. rowSums
+tbl_sex_diagnosis_rowsum <- rowSums(tbl_sex_diagnosis)
+tbl_sex_diagnosis_rowsum
+
+# 2. colSums
+tbl_sex_diagnosis_colsum <- colSums(tbl_sex_diagnosis)
+tbl_sex_diagnosis_colsum
+```
+They perform the sum of the values in each row or the values in each column. So, we can use these values and divide our initial table to get the proportion of each sex value in each diagnosis and <em>vice versa</em>.
+
+<strong>Remember</strong>: when dividing a table for a vector, it performs the division in this way: each element of the first row are divided for the first element of the vector, each element of the second row for the second element of the vector and so on.
+```{r}
+tbl_sex_diagnosis / tbl_sex_diagnosis_rowsum
+```
+
+We can see that ~38% of females are controls and ~62% of them have AD, while for men the proportion is quite balanced with ~47% of Control samples and ~53% of AD.
+<br>
+We can also check what is the proportion of males and females in each Diagnosis condition. To do so, we have to apply a little trick: in fact, we have to transpose our initial table, otherwise the division would not be applied as we want (on each level of Diagnosis), but as before (on each level of sex). We then transpose the result to obtain a table with the same orientation as the initial one.
+
+```{r}
+t(t(tbl_sex_diagnosis) / tbl_sex_diagnosis_colsum)
+```
+And here it is: ~54% of controls and ~63% of AD are females.
+<br>
+
+## Group by variables and summarize values of another {-}
+The previous function is wonderful also to present data, but you will find yourself dealing with contingency table with more that 2 variables, so here I present you one of the greatest tool for analyzing dataframe: the magical combination of `group_by()` and `summarize()` from <em>tidyverse</em>.
+Let's see an example and then analyze how it works:
+```{r}
+# Suppress summarise info
+options(dplyr.summarise.inform = FALSE)
+
+# creating a new df with summarized counts
+df_grouped <- df %>%
+  group_by(sex, Diagnosis, dataset) %>%
+  summarise(counts = n())
+
+df_grouped
+```
+
+Great! We now have the number of samples for each combination of sex, Diagnosis and dataset. 
+<br>
+<p class="plist">It is important to understand how this code works:</p>
+<ol>
+<li>`options(dplyr.summarise.inform = FALSE)`: it is a option you can insert at the beginning of a markdown/script, after loading packages, that disable some useless messages when using summarize after group_by</li>
+<li>`group_by(sex, Diagnosis, dataset)`: it tells dplyr (a tidyverse package) which groups are defined in this dataframe. In this case, we have 12 groups (2 sex * 2 Diagnosis * 3 dataset)</li>
+<li>`summarise()`: takes as input a dataframe with pre-defined groups and performs action on each of them</li>
+<li>`counts = n()`: creates a new column called counts filled by the result of function `n()`, which calculates the number of elements in each group</li>
+</ol>
+
+Wow, this is cool... but we can do more things with these functions: in fact, we can use other functions inside `summarize()` and pass a column in them; the column is divided into pre-defined group and the function is run on each of them.
+<br>
+For example, let's calculate the mean and sd values of PMI for each combination of sex and Diagnosis:
+```{r}
+df %>%
+  group_by(sex, Diagnosis) %>%
+  summarise(n = n(), mean = mean(PMI), sd = sd(PMI))
+```
+
+<em>Oh, what happened? Why are they all NA?</em> That's because if a vector contains NAs, functions like mean, min, max, sd etc returns NA, unless `na.rm = T` is provided to the functions, which remove NAs from the original vector.
+
+```{r}
+df %>%
+  group_by(sex, Diagnosis) %>%
+  summarise(n = n(), mean = mean(PMI, na.rm = T), sd = sd(PMI, na.rm = T))
+```
+
+Great! We can see that AD samples have a lower PMI value in both males and females. This can already be an indication that some differences are present.
+<br>
+I guarantee you will find yourself doing this a lot in your life.
+<br>
+To conclude this section, let's use these functions to recreate the proportion table we calculate in the previous section:
+```{r}
+df %>%
+  group_by(sex, Diagnosis) %>%
+  summarize(counts = n()) %>%
+  group_by(sex) %>%
+  reframe(Diagnosis = Diagnosis, proportion = counts/sum(counts))
+```
+
+<p class="plist">Just a couple of considerations:</p>
+<ul>
+<li>After the first summarize, we have grouped again but only by sex, to calculate the proportion of each value of Diagnosis in each sex</li>
+<li>We used `reframe` instead of summarize just because summarize would have give a warning, but it acts the same in this scenario</li>
+<li>We insert `Diagnosis = Diagnosis` in reframe because otherwise we would have lost this information. <strong>Remember</strong>: summarize and reframe would return only the columns of the last group_by and the ones calculated in them.</li>
+</ul>
+
+## Expand dataframe column using pivot wider {-}
+Even though the previous code works fine, I know that comparing in a table-like structure is better sometimes. So here is a function that can help us in the interpretation and in the presentation of the results: `pivot_larger`.
+<br>
+It is easier to show than to explain:
+```{r}
+df %>%
+  group_by(sex, Diagnosis) %>%
+  summarize(counts = n()) %>%
+  group_by(sex) %>%
+  reframe(Diagnosis = Diagnosis, proportion = counts/sum(counts)) %>%
+  pivot_wider(id_cols = sex, names_from = Diagnosis, values_from = proportion)
+```
+
+That's exactly the same as before!
+<br>
+<p class="plist">Code explanation:</p>
+<ul>
+<li>`id_cols` is used to define the columns used as "rows"</li>
+<li>`names_from` is used to define the columns that defines column groups</li>
+<li>`values_from` is used to define the columns used to fill the table</li>
+</ul>
+
+Let's see another example, because the previous one could have been written in 3 lines of code as before.
+```{r}
+df_wider <- df %>%
+  group_by(sex, Diagnosis, dataset) %>%
+  summarise(n = n(), mean = mean(PMI, na.rm = T), sd = sd(PMI, na.rm = T)) %>%
+  pivot_wider(id_cols = c(sex, dataset), names_from = Diagnosis, values_from = c(mean, sd), names_vary = "slowest")
+
+df_wider
+```
+Super cool! In this case we used two variables to define rows and two variables to fill values.
+<br>
+
+## Reshape a dataframe with pivot_longer {-}
+Although the previous code returns a cool table, it is suitable only to present data, not for any further analysis. As you may remember from the exercise \@ref(exr:read-spreadheet), this is not how raw data should be organized.
+<br>
+If you find yourself in a situation in which raw data are like that, use `pivot_longer()` to fix it.
+
+```{r}
+df_wider %>%
+  pivot_longer(cols = mean_Control:sd_AD, names_to = c("statistics", "Diagnosis"), names_sep = "_")
+```
+
+<p class="plist">Let's explain the code prior to adjust it a bit:</p>
+<ul>
+<li>`cols` defines which value columns to take and reshape</li>
+<li>`mean_Control:sd_AD` means "from column mean_Control to column sd_AD"</li>
+<li>`names_to` is used to define names for the new columns that stores the column names defined in `cols`. We set "statistics" and "Diagnosis"</li>
+<li>`names_sep` is used when names_to has more that one value, it splits the names based on the given pattern (in our case, as the columns were like statistics_Diagnosis we used "_")</li>
+</ul>
+
+Now, as it is a bit confusing having statistics column, we can combine the two `pivot_` functions in this way:
+```{r}
+df_wider %>%
+  pivot_longer(cols = mean_Control:sd_AD, names_to = c("statistics", "Diagnosis"), names_sep = "_") %>%
+  pivot_wider(id_cols = c(sex, dataset, Diagnosis), names_from = statistics, values_from = value)
+```
+Tadaaaaa!
+
+<br>
+I think this is enough for this chapter, here are some exercise to practice these functions.
+
+## Exercises {-}
+::: {.exercise #aggr-multi}
+This is a multi-question exercise, that resemble a real-life analysis.
+
+<p class="plist">Considering our initial dataframe:</p>
+<ol>
+<li>Are there differences between datasets in RIN value? consider max, min and mean</li>
+<li>Which Area has the highest value of AOD? And, is there difference between sex in these values?</li>
+<li>How many NAs are present in CDR for each combination of Diagnosis and dataset?</li>
+<li>Sort the dataframe based on the average vale of PMI for each area, based also on sex</li>
+</ol>
+
+:::
+
+<details>
+  <summary>Solution</summary>
+
+We will answer one question at a time. 
+<br>
+
+<strong>1.</strong>
+```{r}
+# 1. Calculate mean, min and max values of RIN for each dataset
+df_RIN_dataset <- df %>%
+  group_by(dataset) %>%
+  summarise(min = min(RIN, na.rm = T), mean = mean(RIN, na.rm = T), max = max(RIN, na.rm = T))
+  
+df_RIN_dataset
+```
+
+<em>Yes, it seems that MAYO dataset is the one with better RIN values, while MSBB has the worst samples.</em>
+
+<strong>2.</strong>
+```{r}
+# 1. Calculate max value of AOD for each dataset
+df_AOD_dataset <- df %>%
+  group_by(dataset, sex) %>%
+  summarise(max_AOD = max(AOD, na.rm = T)) %>%
+  pivot_wider(id_cols = dataset, names_from = sex, values_from = max_AOD)
+
+df_AOD_dataset
+```
+
+<em>No, there is not difference between dataset, even considering sex.</em>
+
+<strong>3.</strong>
+```{r}
+# 1. Calculate number of CDR NAs for each Diagnosis/dataset combination
+df_nas_diag_dataset <- df %>%
+  group_by(Diagnosis, dataset) %>%
+  summarise(n_nas = sum(is.na(CDR))) %>%
+  pivot_wider(id_cols = Diagnosis, names_from = dataset, values_from = n_nas)
+
+df_nas_diag_dataset
+```
+<em>It seems that people that have filled MSBB dataset have done a better job in collecting data than the others ahahah</em>
+
+<strong>Remember</strong>: `is.na()` returns a boolean vector, and the sum of a boolean vector is the number of TRUE values in it.
+
+<strong>4.</strong>
+```{r}
+# 1. Sort dataframe based on mean PMI value for each Area/sex
+df_PMI_area_sex <- df %>%
+  group_by(Area, sex) %>%
+  summarise(avg_PMI = mean(PMI, na.rm = T)) %>%
+  arrange(desc(avg_PMI))
+
+df_PMI_area_sex
+
+```
+<em>Males BM44 samples have the higher mean of PMI.</em>
+
+</details>
+
+I'm so proud of you to have reached this chapter. What's next? Plotting! Data should be visualized for a better understand of them.

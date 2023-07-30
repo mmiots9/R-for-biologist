@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-07-28" />
+<meta name="date" content="2023-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -281,6 +281,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="manage-data-with-tidyverse.html#split-two-columns" id="toc-split-two-columns">Split two columns</a></li>
 <li><a href="manage-data-with-tidyverse.html#merge-two-dataframes" id="toc-merge-two-dataframes">Merge two dataframes</a></li>
 <li><a href="manage-data-with-tidyverse.html#exercises-6" id="toc-exercises-6">Exercises</a></li>
+</ul></li>
+<li><a href="aggregate-data-with-tidyverse.html#aggregate-data-with-tidyverse" id="toc-aggregate-data-with-tidyverse"><span class="toc-section-number">13</span> Aggregate data with tidyverse</a>
+<ul>
+<li><a href="aggregate-data-with-tidyverse.html#table" id="toc-table">Table</a></li>
+<li><a href="aggregate-data-with-tidyverse.html#group-by-variables-and-summarize-values-of-another" id="toc-group-by-variables-and-summarize-values-of-another">Group by variables and summarize values of another</a></li>
+<li><a href="aggregate-data-with-tidyverse.html#expand-dataframe-column-using-pivot-wider" id="toc-expand-dataframe-column-using-pivot-wider">Expand dataframe column using pivot wider</a></li>
+<li><a href="aggregate-data-with-tidyverse.html#reshape-a-dataframe-with-pivot_longer" id="toc-reshape-a-dataframe-with-pivot_longer">Reshape a dataframe with pivot_longer</a></li>
+<li><a href="aggregate-data-with-tidyverse.html#exercises-7" id="toc-exercises-7">Exercises</a></li>
 </ul></li>
 </ul>
 
@@ -598,20 +606,20 @@ MIR1302-10   0   0   0   0   0   0   0   0   0   0   0   0</code></pre>
 <br>
 Here comes the function <code>summary()</code>:</p>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="matrices.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(expr_data)</span></code></pre></div>
-<pre class="code-out"><code>      wt1                wt2                wt3                wt4             wt5                wt6                ko1         
- Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0   Min.   :     0.0   Min.   :     0.0   Min.   :    0.0  
- 1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0.0  
- Median :    19.0   Median :    16.0   Median :    16.0   Median :   15   Median :    16.0   Median :    17.0   Median :   13.0  
- Mean   :   411.4   Mean   :   324.4   Mean   :   326.7   Mean   :  274   Mean   :   317.3   Mean   :   316.6   Mean   :  250.1  
- 3rd Qu.:   272.0   3rd Qu.:   214.0   3rd Qu.:   218.0   3rd Qu.:  186   3rd Qu.:   212.0   3rd Qu.:   224.0   3rd Qu.:  179.0  
- Max.   :327719.0   Max.   :536733.0   Max.   :377069.0   Max.   :90474   Max.   :352034.0   Max.   :209954.0   Max.   :61650.0  
-      ko2                ko3                ko4                ko5               ko6          
- Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0.0   Min.   :     0.0  
- 1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0.0   1st Qu.:     0.0  
- Median :    18.0   Median :    19.0   Median :    17.0   Median :   17.0   Median :    19.0  
- Mean   :   378.2   Mean   :   351.4   Mean   :   373.8   Mean   :  319.8   Mean   :   423.4  
- 3rd Qu.:   245.0   3rd Qu.:   246.0   3rd Qu.:   255.0   3rd Qu.:  233.0   3rd Qu.:   288.0  
- Max.   :641616.0   Max.   :497463.0   Max.   :236803.0   Max.   :62660.0   Max.   :338679.0  </code></pre>
+<pre class="code-out"><code>      wt1                wt2                wt3                wt4             wt5                wt6          
+ Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0   Min.   :     0.0   Min.   :     0.0  
+ 1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0   1st Qu.:     0.0   1st Qu.:     0.0  
+ Median :    19.0   Median :    16.0   Median :    16.0   Median :   15   Median :    16.0   Median :    17.0  
+ Mean   :   411.4   Mean   :   324.4   Mean   :   326.7   Mean   :  274   Mean   :   317.3   Mean   :   316.6  
+ 3rd Qu.:   272.0   3rd Qu.:   214.0   3rd Qu.:   218.0   3rd Qu.:  186   3rd Qu.:   212.0   3rd Qu.:   224.0  
+ Max.   :327719.0   Max.   :536733.0   Max.   :377069.0   Max.   :90474   Max.   :352034.0   Max.   :209954.0  
+      ko1               ko2                ko3                ko4                ko5               ko6          
+ Min.   :    0.0   Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0.0   Min.   :     0.0  
+ 1st Qu.:    0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0.0   1st Qu.:     0.0  
+ Median :   13.0   Median :    18.0   Median :    19.0   Median :    17.0   Median :   17.0   Median :    19.0  
+ Mean   :  250.1   Mean   :   378.2   Mean   :   351.4   Mean   :   373.8   Mean   :  319.8   Mean   :   423.4  
+ 3rd Qu.:  179.0   3rd Qu.:   245.0   3rd Qu.:   246.0   3rd Qu.:   255.0   3rd Qu.:  233.0   3rd Qu.:   288.0  
+ Max.   :61650.0   Max.   :641616.0   Max.   :497463.0   Max.   :236803.0   Max.   :62660.0   Max.   :338679.0  </code></pre>
 <p>For each column it returns some descriptive. But, ehi, on the columns we have the samples, we want this statistics for the genes, how can we do it? Here comes <code>t()</code> that transpose the matrix so that rows became columns and <i>vice versa</i>.</p>
 <div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="matrices.html#cb312-1" aria-hidden="true" tabindex="-1"></a>expr_data_t <span class="ot">&lt;-</span> <span class="fu">t</span>(expr_data)</span>
 <span id="cb312-2"><a href="matrices.html#cb312-2" aria-hidden="true" tabindex="-1"></a></span>
