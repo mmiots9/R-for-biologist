@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>13 Aggregate data with tidyverse | Learn R for biologist, with no fear</title>
-  <meta name="description" content="For you, who never gives up, for your future" />
+  <title>13 Aggregate data with tidyverse | Learn R for biologist</title>
+  <meta name="description" content="To you, who never gives up, for your future. You can make it!" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="13 Aggregate data with tidyverse | Learn R for biologist, with no fear" />
+  <meta property="og:title" content="13 Aggregate data with tidyverse | Learn R for biologist" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="For you, who never gives up, for your future" />
+  <meta property="og:description" content="To you, who never gives up, for your future. You can make it!" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="13 Aggregate data with tidyverse | Learn R for biologist, with no fear" />
+  <meta name="twitter:title" content="13 Aggregate data with tidyverse | Learn R for biologist" />
   
-  <meta name="twitter:description" content="For you, who never gives up, for your future" />
+  <meta name="twitter:description" content="To you, who never gives up, for your future. You can make it!" />
   
 
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-07-30" />
+<meta name="date" content="2023-08-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="manage-data-with-tidyverse.html"/>
-
+<link rel="next" href="plot-our-data-with-ggplot2.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -290,6 +290,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="aggregate-data-with-tidyverse.html#reshape-a-dataframe-with-pivot_longer" id="toc-reshape-a-dataframe-with-pivot_longer">Reshape a dataframe with pivot_longer</a></li>
 <li><a href="aggregate-data-with-tidyverse.html#exercises-7" id="toc-exercises-7">Exercises</a></li>
 </ul></li>
+<li><a href="plot-our-data-with-ggplot2.html#plot-our-data-with-ggplot2" id="toc-plot-our-data-with-ggplot2"><span class="toc-section-number">14</span> Plot our data with ggplot2</a>
+<ul>
+<li><a href="plot-our-data-with-ggplot2.html#command-structure" id="toc-command-structure">Command structure</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#type-of-graph-geom_-and-stat_" id="toc-type-of-graph-geom_-and-stat_">Type of graph (geom_ and stat_)</a>
+<ul>
+<li><a href="plot-our-data-with-ggplot2.html#mapping-values-to-graph-elements-aes" id="toc-mapping-values-to-graph-elements-aes">Mapping values to graph elements (aes)</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#change-the-stat-associated-to-the-graph" id="toc-change-the-stat-associated-to-the-graph">Change the “stat” associated to the graph</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#multiple-geometries-in-the-same-plot" id="toc-multiple-geometries-in-the-same-plot">Multiple geometries in the same plot</a></li>
+</ul></li>
+<li><a href="plot-our-data-with-ggplot2.html#change-axis-and-colors-scale_" id="toc-change-axis-and-colors-scale_">Change axis and colors (scale_)</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#add-title-and-change-labels-labs" id="toc-add-title-and-change-labels-labs">Add title and change labels (labs)</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#change-appearence-theme" id="toc-change-appearence-theme">Change appearence (theme)</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#save-plot" id="toc-save-plot">Save plot</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -299,7 +313,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learn R for biologist, with no fear</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learn R for biologist</a>
           </h1>
         </div>
 
@@ -311,12 +325,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">13</span> Aggregate data with tidyverse</h1>
 <p>After having seen how to organize and manipulate a dataframe, let’s start analyzing them! In particular, in this chapter we will see how to aggregate data based on values of one or more columns.</p>
 <p>The first step, as always, is to load the packages and the data:</p>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="aggregate-data-with-tidyverse.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
-<span id="cb404-2"><a href="aggregate-data-with-tidyverse.html#cb404-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb404-3"><a href="aggregate-data-with-tidyverse.html#cb404-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb404-4"><a href="aggregate-data-with-tidyverse.html#cb404-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
-<span id="cb404-5"><a href="aggregate-data-with-tidyverse.html#cb404-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Supplementary_table_13.csv&quot;</span>)</span>
-<span id="cb404-6"><a href="aggregate-data-with-tidyverse.html#cb404-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="aggregate-data-with-tidyverse.html#cb403-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
+<span id="cb403-2"><a href="aggregate-data-with-tidyverse.html#cb403-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb403-3"><a href="aggregate-data-with-tidyverse.html#cb403-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb403-4"><a href="aggregate-data-with-tidyverse.html#cb403-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
+<span id="cb403-5"><a href="aggregate-data-with-tidyverse.html#cb403-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Supplementary_table_13.csv&quot;</span>)</span>
+<span id="cb403-6"><a href="aggregate-data-with-tidyverse.html#cb403-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>  SampleID Diagnosis Braak sex AOD PMI RIN CDR Area dataset
 1 1005_TCX        AD     6   F  90   8 8.6  NA   TL    MAYO
 2 1019_TCX        AD     6   F  86   4 7.8  NA   TL    MAYO
@@ -325,13 +339,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 5 1045_TCX        AD     5   F  90  NA 8.4  NA   TL    MAYO
 6 1046_TCX        AD     6   F  72   2 9.0  NA   TL    MAYO</code></pre>
 <p>Then, we will change the column types (as in last chapter):</p>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="aggregate-data-with-tidyverse.html#cb406-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb406-2"><a href="aggregate-data-with-tidyverse.html#cb406-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;Diagnosis&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Diagnosis, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;AD&quot;</span>)),</span>
-<span id="cb406-3"><a href="aggregate-data-with-tidyverse.html#cb406-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
-<span id="cb406-4"><a href="aggregate-data-with-tidyverse.html#cb406-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Area),</span>
-<span id="cb406-5"><a href="aggregate-data-with-tidyverse.html#cb406-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(dataset))</span>
-<span id="cb406-6"><a href="aggregate-data-with-tidyverse.html#cb406-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb406-7"><a href="aggregate-data-with-tidyverse.html#cb406-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="aggregate-data-with-tidyverse.html#cb405-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb405-2"><a href="aggregate-data-with-tidyverse.html#cb405-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;Diagnosis&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Diagnosis, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;AD&quot;</span>)),</span>
+<span id="cb405-3"><a href="aggregate-data-with-tidyverse.html#cb405-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb405-4"><a href="aggregate-data-with-tidyverse.html#cb405-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Area),</span>
+<span id="cb405-5"><a href="aggregate-data-with-tidyverse.html#cb405-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(dataset))</span>
+<span id="cb405-6"><a href="aggregate-data-with-tidyverse.html#cb405-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb405-7"><a href="aggregate-data-with-tidyverse.html#cb405-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>&#39;data.frame&#39;:   1493 obs. of  10 variables:
  $ SampleID : chr  &quot;1005_TCX&quot; &quot;1019_TCX&quot; &quot;1029_TCX&quot; &quot;1034_TCX&quot; ...
  $ Diagnosis: Factor w/ 2 levels &quot;Control&quot;,&quot;AD&quot;: 2 2 2 2 2 2 2 2 2 2 ...
@@ -349,27 +363,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The very first function we will explore is <code>table</code>. It is used on vectors or dataframe columns and it returns the numerosity of each different value of them; when used for 2 vectors/columns, it returns a contingency matrix.
 <br>
 Let’s see:</p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="aggregate-data-with-tidyverse.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>sex)</span></code></pre></div>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="aggregate-data-with-tidyverse.html#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>sex)</span></code></pre></div>
 <pre class="code-out"><code>
   F   M 
 890 603 </code></pre>
 <p>This is the simplest situation, it is not used so much (remember, summary does the same); but, it can be useful if combined with <code>sum</code> to get the fraction of each value. In fact, dividing the table for its sum, we can get the fraction of each value:</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="aggregate-data-with-tidyverse.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create the table</span></span>
-<span id="cb410-2"><a href="aggregate-data-with-tidyverse.html#cb410-2" aria-hidden="true" tabindex="-1"></a>tbl_sex <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>sex)</span>
-<span id="cb410-3"><a href="aggregate-data-with-tidyverse.html#cb410-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb410-4"><a href="aggregate-data-with-tidyverse.html#cb410-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate the sum of the table</span></span>
-<span id="cb410-5"><a href="aggregate-data-with-tidyverse.html#cb410-5" aria-hidden="true" tabindex="-1"></a>sum_tbl_sex <span class="ot">&lt;-</span> <span class="fu">sum</span>(tbl_sex)</span>
-<span id="cb410-6"><a href="aggregate-data-with-tidyverse.html#cb410-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb410-7"><a href="aggregate-data-with-tidyverse.html#cb410-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calculate the fraction</span></span>
-<span id="cb410-8"><a href="aggregate-data-with-tidyverse.html#cb410-8" aria-hidden="true" tabindex="-1"></a>tbl_sex <span class="sc">/</span> sum_tbl_sex</span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="aggregate-data-with-tidyverse.html#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create the table</span></span>
+<span id="cb409-2"><a href="aggregate-data-with-tidyverse.html#cb409-2" aria-hidden="true" tabindex="-1"></a>tbl_sex <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>sex)</span>
+<span id="cb409-3"><a href="aggregate-data-with-tidyverse.html#cb409-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb409-4"><a href="aggregate-data-with-tidyverse.html#cb409-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate the sum of the table</span></span>
+<span id="cb409-5"><a href="aggregate-data-with-tidyverse.html#cb409-5" aria-hidden="true" tabindex="-1"></a>sum_tbl_sex <span class="ot">&lt;-</span> <span class="fu">sum</span>(tbl_sex)</span>
+<span id="cb409-6"><a href="aggregate-data-with-tidyverse.html#cb409-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb409-7"><a href="aggregate-data-with-tidyverse.html#cb409-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calculate the fraction</span></span>
+<span id="cb409-8"><a href="aggregate-data-with-tidyverse.html#cb409-8" aria-hidden="true" tabindex="-1"></a>tbl_sex <span class="sc">/</span> sum_tbl_sex</span></code></pre></div>
 <pre class="code-out"><code>
         F         M 
 0.5961152 0.4038848 </code></pre>
 <p>So, ~ 60% of samples comes from females and ~ 40% from males. Yes, we could have just written <code>table(df$sex)/sum(table(df$sex))</code>, one line, less stored variables.
 <br>
 We can do the same with two columns, and you will find doing it a lot during your analysis:</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="aggregate-data-with-tidyverse.html#cb412-1" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="st">&quot;sex&quot;</span> <span class="ot">=</span> df<span class="sc">$</span>sex, <span class="st">&quot;Diagnosis&quot;</span> <span class="ot">=</span> df<span class="sc">$</span>Diagnosis)</span>
-<span id="cb412-2"><a href="aggregate-data-with-tidyverse.html#cb412-2" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis</span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="aggregate-data-with-tidyverse.html#cb411-1" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="st">&quot;sex&quot;</span> <span class="ot">=</span> df<span class="sc">$</span>sex, <span class="st">&quot;Diagnosis&quot;</span> <span class="ot">=</span> df<span class="sc">$</span>Diagnosis)</span>
+<span id="cb411-2"><a href="aggregate-data-with-tidyverse.html#cb411-2" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis</span></code></pre></div>
 <pre class="code-out"><code>   Diagnosis
 sex Control  AD
   F     341 549
@@ -377,25 +391,25 @@ sex Control  AD
 <p>We can also specify names associated to the vectors/columns we use, and they will be displayed in the output. This can be usefule when dealing with two variables whose values are 0/1 or TRUE/FALSE in both.
 <br>
 <em>And if I want to see the fraction of females and males that are AD or Control?</em> Right, we can do it. If you try the previous approach, so dividing for the sum of the table, you will get the proportion of each category NOT divided by sex:</p>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="aggregate-data-with-tidyverse.html#cb414-1" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis <span class="sc">/</span> <span class="fu">sum</span>(tbl_sex_diagnosis)</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="aggregate-data-with-tidyverse.html#cb413-1" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis <span class="sc">/</span> <span class="fu">sum</span>(tbl_sex_diagnosis)</span></code></pre></div>
 <pre class="code-out"><code>   Diagnosis
 sex   Control        AD
   F 0.2283992 0.3677160
   M 0.1908908 0.2129940</code></pre>
 <p>To get what you really want, you have to use one of <code>colSums</code> or <code>rowSums</code> depending on what you want to sum. Let’s see how they work:</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="aggregate-data-with-tidyverse.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. rowSums</span></span>
-<span id="cb416-2"><a href="aggregate-data-with-tidyverse.html#cb416-2" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis_rowsum <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(tbl_sex_diagnosis)</span>
-<span id="cb416-3"><a href="aggregate-data-with-tidyverse.html#cb416-3" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis_rowsum</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="aggregate-data-with-tidyverse.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. rowSums</span></span>
+<span id="cb415-2"><a href="aggregate-data-with-tidyverse.html#cb415-2" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis_rowsum <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(tbl_sex_diagnosis)</span>
+<span id="cb415-3"><a href="aggregate-data-with-tidyverse.html#cb415-3" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis_rowsum</span></code></pre></div>
 <pre class="code-out"><code>  F   M 
 890 603 </code></pre>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="aggregate-data-with-tidyverse.html#cb418-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. colSums</span></span>
-<span id="cb418-2"><a href="aggregate-data-with-tidyverse.html#cb418-2" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis_colsum <span class="ot">&lt;-</span> <span class="fu">colSums</span>(tbl_sex_diagnosis)</span>
-<span id="cb418-3"><a href="aggregate-data-with-tidyverse.html#cb418-3" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis_colsum</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="aggregate-data-with-tidyverse.html#cb417-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. colSums</span></span>
+<span id="cb417-2"><a href="aggregate-data-with-tidyverse.html#cb417-2" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis_colsum <span class="ot">&lt;-</span> <span class="fu">colSums</span>(tbl_sex_diagnosis)</span>
+<span id="cb417-3"><a href="aggregate-data-with-tidyverse.html#cb417-3" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis_colsum</span></code></pre></div>
 <pre class="code-out"><code>Control      AD 
     626     867 </code></pre>
 <p>They perform the sum of the values in each row or the values in each column. So, we can use these values and divide our initial table to get the proportion of each sex value in each diagnosis and <em>vice versa</em>.</p>
 <p><strong>Remember</strong>: when dividing a table for a vector, it performs the division in this way: each element of the first row are divided for the first element of the vector, each element of the second row for the second element of the vector and so on.</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="aggregate-data-with-tidyverse.html#cb420-1" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis <span class="sc">/</span> tbl_sex_diagnosis_rowsum</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="aggregate-data-with-tidyverse.html#cb419-1" aria-hidden="true" tabindex="-1"></a>tbl_sex_diagnosis <span class="sc">/</span> tbl_sex_diagnosis_rowsum</span></code></pre></div>
 <pre class="code-out"><code>   Diagnosis
 sex   Control        AD
   F 0.3831461 0.6168539
@@ -403,7 +417,7 @@ sex   Control        AD
 <p>We can see that ~38% of females are controls and ~62% of them have AD, while for men the proportion is quite balanced with ~47% of Control samples and ~53% of AD.
 <br>
 We can also check what is the proportion of males and females in each Diagnosis condition. To do so, we have to apply a little trick: in fact, we have to transpose our initial table, otherwise the division would not be applied as we want (on each level of Diagnosis), but as before (on each level of sex). We then transpose the result to obtain a table with the same orientation as the initial one.</p>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="aggregate-data-with-tidyverse.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">t</span>(tbl_sex_diagnosis) <span class="sc">/</span> tbl_sex_diagnosis_colsum)</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="aggregate-data-with-tidyverse.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">t</span>(tbl_sex_diagnosis) <span class="sc">/</span> tbl_sex_diagnosis_colsum)</span></code></pre></div>
 <pre class="code-out"><code>   Diagnosis
 sex   Control        AD
   F 0.5447284 0.6332180
@@ -415,15 +429,15 @@ sex   Control        AD
 <h2>Group by variables and summarize values of another</h2>
 <p>The previous function is wonderful also to present data, but you will find yourself dealing with contingency table with more that 2 variables, so here I present you one of the greatest tool for analyzing dataframe: the magical combination of <code>group_by()</code> and <code>summarize()</code> from <em>tidyverse</em>.
 Let’s see an example and then analyze how it works:</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="aggregate-data-with-tidyverse.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppress summarise info</span></span>
-<span id="cb424-2"><a href="aggregate-data-with-tidyverse.html#cb424-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">dplyr.summarise.inform =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb424-3"><a href="aggregate-data-with-tidyverse.html#cb424-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb424-4"><a href="aggregate-data-with-tidyverse.html#cb424-4" aria-hidden="true" tabindex="-1"></a><span class="co"># creating a new df with summarized counts</span></span>
-<span id="cb424-5"><a href="aggregate-data-with-tidyverse.html#cb424-5" aria-hidden="true" tabindex="-1"></a>df_grouped <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb424-6"><a href="aggregate-data-with-tidyverse.html#cb424-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, Diagnosis, dataset) <span class="sc">%&gt;%</span></span>
-<span id="cb424-7"><a href="aggregate-data-with-tidyverse.html#cb424-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">counts =</span> <span class="fu">n</span>())</span>
-<span id="cb424-8"><a href="aggregate-data-with-tidyverse.html#cb424-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb424-9"><a href="aggregate-data-with-tidyverse.html#cb424-9" aria-hidden="true" tabindex="-1"></a>df_grouped</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="aggregate-data-with-tidyverse.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppress summarise info</span></span>
+<span id="cb423-2"><a href="aggregate-data-with-tidyverse.html#cb423-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">dplyr.summarise.inform =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb423-3"><a href="aggregate-data-with-tidyverse.html#cb423-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-4"><a href="aggregate-data-with-tidyverse.html#cb423-4" aria-hidden="true" tabindex="-1"></a><span class="co"># creating a new df with summarized counts</span></span>
+<span id="cb423-5"><a href="aggregate-data-with-tidyverse.html#cb423-5" aria-hidden="true" tabindex="-1"></a>df_grouped <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb423-6"><a href="aggregate-data-with-tidyverse.html#cb423-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, Diagnosis, dataset) <span class="sc">%&gt;%</span></span>
+<span id="cb423-7"><a href="aggregate-data-with-tidyverse.html#cb423-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">counts =</span> <span class="fu">n</span>())</span>
+<span id="cb423-8"><a href="aggregate-data-with-tidyverse.html#cb423-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-9"><a href="aggregate-data-with-tidyverse.html#cb423-9" aria-hidden="true" tabindex="-1"></a>df_grouped</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 12 × 4
 # Groups:   sex, Diagnosis [4]
    sex   Diagnosis dataset counts
@@ -462,9 +476,9 @@ It is important to understand how this code works:
 <p>Wow, this is cool… but we can do more things with these functions: in fact, we can use other functions inside <code>summarize()</code> and pass a column in them; the column is divided into pre-defined group and the function is run on each of them.
 <br>
 For example, let’s calculate the mean and sd values of PMI for each combination of sex and Diagnosis:</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="aggregate-data-with-tidyverse.html#cb426-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb426-2"><a href="aggregate-data-with-tidyverse.html#cb426-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, Diagnosis) <span class="sc">%&gt;%</span></span>
-<span id="cb426-3"><a href="aggregate-data-with-tidyverse.html#cb426-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(PMI), <span class="at">sd =</span> <span class="fu">sd</span>(PMI))</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="aggregate-data-with-tidyverse.html#cb425-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb425-2"><a href="aggregate-data-with-tidyverse.html#cb425-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, Diagnosis) <span class="sc">%&gt;%</span></span>
+<span id="cb425-3"><a href="aggregate-data-with-tidyverse.html#cb425-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(PMI), <span class="at">sd =</span> <span class="fu">sd</span>(PMI))</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 4 × 5
 # Groups:   sex [2]
   sex   Diagnosis     n  mean    sd
@@ -474,9 +488,9 @@ For example, let’s calculate the mean and sd values of PMI for each combinatio
 3 M     Control     285    NA    NA
 4 M     AD          318    NA    NA</code></pre>
 <p><em>Oh, what happened? Why are they all NA?</em> That’s because if a vector contains NAs, functions like mean, min, max, sd etc returns NA, unless <code>na.rm = T</code> is provided to the functions, which remove NAs from the original vector.</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="aggregate-data-with-tidyverse.html#cb428-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb428-2"><a href="aggregate-data-with-tidyverse.html#cb428-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, Diagnosis) <span class="sc">%&gt;%</span></span>
-<span id="cb428-3"><a href="aggregate-data-with-tidyverse.html#cb428-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(PMI, <span class="at">na.rm =</span> T), <span class="at">sd =</span> <span class="fu">sd</span>(PMI, <span class="at">na.rm =</span> T))</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="aggregate-data-with-tidyverse.html#cb427-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb427-2"><a href="aggregate-data-with-tidyverse.html#cb427-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, Diagnosis) <span class="sc">%&gt;%</span></span>
+<span id="cb427-3"><a href="aggregate-data-with-tidyverse.html#cb427-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(PMI, <span class="at">na.rm =</span> T), <span class="at">sd =</span> <span class="fu">sd</span>(PMI, <span class="at">na.rm =</span> T))</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 4 × 5
 # Groups:   sex [2]
   sex   Diagnosis     n  mean    sd
@@ -490,11 +504,11 @@ For example, let’s calculate the mean and sd values of PMI for each combinatio
 I guarantee you will find yourself doing this a lot in your life.
 <br>
 To conclude this section, let’s use these functions to recreate the proportion table we calculate in the previous section:</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="aggregate-data-with-tidyverse.html#cb430-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb430-2"><a href="aggregate-data-with-tidyverse.html#cb430-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, Diagnosis) <span class="sc">%&gt;%</span></span>
-<span id="cb430-3"><a href="aggregate-data-with-tidyverse.html#cb430-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">counts =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb430-4"><a href="aggregate-data-with-tidyverse.html#cb430-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
-<span id="cb430-5"><a href="aggregate-data-with-tidyverse.html#cb430-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">Diagnosis =</span> Diagnosis, <span class="at">proportion =</span> counts<span class="sc">/</span><span class="fu">sum</span>(counts))</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="aggregate-data-with-tidyverse.html#cb429-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb429-2"><a href="aggregate-data-with-tidyverse.html#cb429-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, Diagnosis) <span class="sc">%&gt;%</span></span>
+<span id="cb429-3"><a href="aggregate-data-with-tidyverse.html#cb429-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">counts =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb429-4"><a href="aggregate-data-with-tidyverse.html#cb429-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb429-5"><a href="aggregate-data-with-tidyverse.html#cb429-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">Diagnosis =</span> Diagnosis, <span class="at">proportion =</span> counts<span class="sc">/</span><span class="fu">sum</span>(counts))</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 4 × 3
   sex   Diagnosis proportion
   &lt;fct&gt; &lt;fct&gt;          &lt;dbl&gt;
@@ -522,12 +536,12 @@ We insert <code>Diagnosis = Diagnosis</code> in reframe because otherwise we wou
 <p>Even though the previous code works fine, I know that comparing in a table-like structure is better sometimes. So here is a function that can help us in the interpretation and in the presentation of the results: <code>pivot_larger</code>.
 <br>
 It is easier to show than to explain:</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="aggregate-data-with-tidyverse.html#cb432-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb432-2"><a href="aggregate-data-with-tidyverse.html#cb432-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, Diagnosis) <span class="sc">%&gt;%</span></span>
-<span id="cb432-3"><a href="aggregate-data-with-tidyverse.html#cb432-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">counts =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb432-4"><a href="aggregate-data-with-tidyverse.html#cb432-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
-<span id="cb432-5"><a href="aggregate-data-with-tidyverse.html#cb432-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">Diagnosis =</span> Diagnosis, <span class="at">proportion =</span> counts<span class="sc">/</span><span class="fu">sum</span>(counts)) <span class="sc">%&gt;%</span></span>
-<span id="cb432-6"><a href="aggregate-data-with-tidyverse.html#cb432-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> sex, <span class="at">names_from =</span> Diagnosis, <span class="at">values_from =</span> proportion)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="aggregate-data-with-tidyverse.html#cb431-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb431-2"><a href="aggregate-data-with-tidyverse.html#cb431-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, Diagnosis) <span class="sc">%&gt;%</span></span>
+<span id="cb431-3"><a href="aggregate-data-with-tidyverse.html#cb431-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">counts =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb431-4"><a href="aggregate-data-with-tidyverse.html#cb431-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb431-5"><a href="aggregate-data-with-tidyverse.html#cb431-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">Diagnosis =</span> Diagnosis, <span class="at">proportion =</span> counts<span class="sc">/</span><span class="fu">sum</span>(counts)) <span class="sc">%&gt;%</span></span>
+<span id="cb431-6"><a href="aggregate-data-with-tidyverse.html#cb431-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> sex, <span class="at">names_from =</span> Diagnosis, <span class="at">values_from =</span> proportion)</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 2 × 3
   sex   Control    AD
   &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;
@@ -550,12 +564,12 @@ Code explanation:
 </li>
 </ul>
 <p>Let’s see another example, because the previous one could have been written in 3 lines of code as before.</p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="aggregate-data-with-tidyverse.html#cb434-1" aria-hidden="true" tabindex="-1"></a>df_wider <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb434-2"><a href="aggregate-data-with-tidyverse.html#cb434-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, Diagnosis, dataset) <span class="sc">%&gt;%</span></span>
-<span id="cb434-3"><a href="aggregate-data-with-tidyverse.html#cb434-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(PMI, <span class="at">na.rm =</span> T), <span class="at">sd =</span> <span class="fu">sd</span>(PMI, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
-<span id="cb434-4"><a href="aggregate-data-with-tidyverse.html#cb434-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(sex, dataset), <span class="at">names_from =</span> Diagnosis, <span class="at">values_from =</span> <span class="fu">c</span>(mean, sd), <span class="at">names_vary =</span> <span class="st">&quot;slowest&quot;</span>)</span>
-<span id="cb434-5"><a href="aggregate-data-with-tidyverse.html#cb434-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb434-6"><a href="aggregate-data-with-tidyverse.html#cb434-6" aria-hidden="true" tabindex="-1"></a>df_wider</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="aggregate-data-with-tidyverse.html#cb433-1" aria-hidden="true" tabindex="-1"></a>df_wider <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb433-2"><a href="aggregate-data-with-tidyverse.html#cb433-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, Diagnosis, dataset) <span class="sc">%&gt;%</span></span>
+<span id="cb433-3"><a href="aggregate-data-with-tidyverse.html#cb433-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(PMI, <span class="at">na.rm =</span> T), <span class="at">sd =</span> <span class="fu">sd</span>(PMI, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
+<span id="cb433-4"><a href="aggregate-data-with-tidyverse.html#cb433-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(sex, dataset), <span class="at">names_from =</span> Diagnosis, <span class="at">values_from =</span> <span class="fu">c</span>(mean, sd), <span class="at">names_vary =</span> <span class="st">&quot;slowest&quot;</span>)</span>
+<span id="cb433-5"><a href="aggregate-data-with-tidyverse.html#cb433-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-6"><a href="aggregate-data-with-tidyverse.html#cb433-6" aria-hidden="true" tabindex="-1"></a>df_wider</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 6 × 6
 # Groups:   sex [2]
   sex   dataset mean_Control sd_Control mean_AD sd_AD
@@ -574,8 +588,8 @@ Code explanation:
 <p>Although the previous code returns a cool table, it is suitable only to present data, not for any further analysis. As you may remember from the exercise <a href="manage-data-with-tidyverse.html#exr:read-spreadheet">12.1</a>, this is not how raw data should be organized.
 <br>
 If you find yourself in a situation in which raw data are like that, use <code>pivot_longer()</code> to fix it.</p>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="aggregate-data-with-tidyverse.html#cb436-1" aria-hidden="true" tabindex="-1"></a>df_wider <span class="sc">%&gt;%</span></span>
-<span id="cb436-2"><a href="aggregate-data-with-tidyverse.html#cb436-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> mean_Control<span class="sc">:</span>sd_AD, <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;statistics&quot;</span>, <span class="st">&quot;Diagnosis&quot;</span>), <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="aggregate-data-with-tidyverse.html#cb435-1" aria-hidden="true" tabindex="-1"></a>df_wider <span class="sc">%&gt;%</span></span>
+<span id="cb435-2"><a href="aggregate-data-with-tidyverse.html#cb435-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> mean_Control<span class="sc">:</span>sd_AD, <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;statistics&quot;</span>, <span class="st">&quot;Diagnosis&quot;</span>), <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>)</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 24 × 5
 # Groups:   sex [2]
    sex   dataset statistics Diagnosis value
@@ -609,9 +623,9 @@ Let’s explain the code prior to adjust it a bit:
 </li>
 </ul>
 <p>Now, as it is a bit confusing having statistics column, we can combine the two <code>pivot_</code> functions in this way:</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="aggregate-data-with-tidyverse.html#cb438-1" aria-hidden="true" tabindex="-1"></a>df_wider <span class="sc">%&gt;%</span></span>
-<span id="cb438-2"><a href="aggregate-data-with-tidyverse.html#cb438-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> mean_Control<span class="sc">:</span>sd_AD, <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;statistics&quot;</span>, <span class="st">&quot;Diagnosis&quot;</span>), <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb438-3"><a href="aggregate-data-with-tidyverse.html#cb438-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(sex, dataset, Diagnosis), <span class="at">names_from =</span> statistics, <span class="at">values_from =</span> value)</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="aggregate-data-with-tidyverse.html#cb437-1" aria-hidden="true" tabindex="-1"></a>df_wider <span class="sc">%&gt;%</span></span>
+<span id="cb437-2"><a href="aggregate-data-with-tidyverse.html#cb437-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> mean_Control<span class="sc">:</span>sd_AD, <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;statistics&quot;</span>, <span class="st">&quot;Diagnosis&quot;</span>), <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb437-3"><a href="aggregate-data-with-tidyverse.html#cb437-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(sex, dataset, Diagnosis), <span class="at">names_from =</span> statistics, <span class="at">values_from =</span> value)</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 12 × 5
 # Groups:   sex [2]
    sex   dataset Diagnosis  mean    sd
@@ -661,12 +675,12 @@ Solution
 <p>We will answer one question at a time.
 <br></p>
 <p><strong>1.</strong></p>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="aggregate-data-with-tidyverse.html#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Calculate mean, min and max values of RIN for each dataset</span></span>
-<span id="cb440-2"><a href="aggregate-data-with-tidyverse.html#cb440-2" aria-hidden="true" tabindex="-1"></a>df_RIN_dataset <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb440-3"><a href="aggregate-data-with-tidyverse.html#cb440-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dataset) <span class="sc">%&gt;%</span></span>
-<span id="cb440-4"><a href="aggregate-data-with-tidyverse.html#cb440-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min =</span> <span class="fu">min</span>(RIN, <span class="at">na.rm =</span> T), <span class="at">mean =</span> <span class="fu">mean</span>(RIN, <span class="at">na.rm =</span> T), <span class="at">max =</span> <span class="fu">max</span>(RIN, <span class="at">na.rm =</span> T))</span>
-<span id="cb440-5"><a href="aggregate-data-with-tidyverse.html#cb440-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb440-6"><a href="aggregate-data-with-tidyverse.html#cb440-6" aria-hidden="true" tabindex="-1"></a>df_RIN_dataset</span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="aggregate-data-with-tidyverse.html#cb439-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Calculate mean, min and max values of RIN for each dataset</span></span>
+<span id="cb439-2"><a href="aggregate-data-with-tidyverse.html#cb439-2" aria-hidden="true" tabindex="-1"></a>df_RIN_dataset <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb439-3"><a href="aggregate-data-with-tidyverse.html#cb439-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dataset) <span class="sc">%&gt;%</span></span>
+<span id="cb439-4"><a href="aggregate-data-with-tidyverse.html#cb439-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min =</span> <span class="fu">min</span>(RIN, <span class="at">na.rm =</span> T), <span class="at">mean =</span> <span class="fu">mean</span>(RIN, <span class="at">na.rm =</span> T), <span class="at">max =</span> <span class="fu">max</span>(RIN, <span class="at">na.rm =</span> T))</span>
+<span id="cb439-5"><a href="aggregate-data-with-tidyverse.html#cb439-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb439-6"><a href="aggregate-data-with-tidyverse.html#cb439-6" aria-hidden="true" tabindex="-1"></a>df_RIN_dataset</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 3 × 4
   dataset   min  mean   max
   &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -675,13 +689,13 @@ Solution
 3 ROSMAP    5    7.11   9.9</code></pre>
 <p><em>Yes, it seems that MAYO dataset is the one with better RIN values, while MSBB has the worst samples.</em></p>
 <p><strong>2.</strong></p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="aggregate-data-with-tidyverse.html#cb442-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Calculate max value of AOD for each dataset</span></span>
-<span id="cb442-2"><a href="aggregate-data-with-tidyverse.html#cb442-2" aria-hidden="true" tabindex="-1"></a>df_AOD_dataset <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb442-3"><a href="aggregate-data-with-tidyverse.html#cb442-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dataset, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb442-4"><a href="aggregate-data-with-tidyverse.html#cb442-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">max_AOD =</span> <span class="fu">max</span>(AOD, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
-<span id="cb442-5"><a href="aggregate-data-with-tidyverse.html#cb442-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> dataset, <span class="at">names_from =</span> sex, <span class="at">values_from =</span> max_AOD)</span>
-<span id="cb442-6"><a href="aggregate-data-with-tidyverse.html#cb442-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb442-7"><a href="aggregate-data-with-tidyverse.html#cb442-7" aria-hidden="true" tabindex="-1"></a>df_AOD_dataset</span></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="aggregate-data-with-tidyverse.html#cb441-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Calculate max value of AOD for each dataset</span></span>
+<span id="cb441-2"><a href="aggregate-data-with-tidyverse.html#cb441-2" aria-hidden="true" tabindex="-1"></a>df_AOD_dataset <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb441-3"><a href="aggregate-data-with-tidyverse.html#cb441-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dataset, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb441-4"><a href="aggregate-data-with-tidyverse.html#cb441-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">max_AOD =</span> <span class="fu">max</span>(AOD, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
+<span id="cb441-5"><a href="aggregate-data-with-tidyverse.html#cb441-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> dataset, <span class="at">names_from =</span> sex, <span class="at">values_from =</span> max_AOD)</span>
+<span id="cb441-6"><a href="aggregate-data-with-tidyverse.html#cb441-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb441-7"><a href="aggregate-data-with-tidyverse.html#cb441-7" aria-hidden="true" tabindex="-1"></a>df_AOD_dataset</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 3 × 3
 # Groups:   dataset [3]
   dataset     F     M
@@ -691,13 +705,13 @@ Solution
 3 ROSMAP     90    90</code></pre>
 <p><em>No, there is not difference between dataset, even considering sex.</em></p>
 <p><strong>3.</strong></p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="aggregate-data-with-tidyverse.html#cb444-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Calculate number of CDR NAs for each Diagnosis/dataset combination</span></span>
-<span id="cb444-2"><a href="aggregate-data-with-tidyverse.html#cb444-2" aria-hidden="true" tabindex="-1"></a>df_nas_diag_dataset <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb444-3"><a href="aggregate-data-with-tidyverse.html#cb444-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Diagnosis, dataset) <span class="sc">%&gt;%</span></span>
-<span id="cb444-4"><a href="aggregate-data-with-tidyverse.html#cb444-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_nas =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(CDR))) <span class="sc">%&gt;%</span></span>
-<span id="cb444-5"><a href="aggregate-data-with-tidyverse.html#cb444-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> Diagnosis, <span class="at">names_from =</span> dataset, <span class="at">values_from =</span> n_nas)</span>
-<span id="cb444-6"><a href="aggregate-data-with-tidyverse.html#cb444-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb444-7"><a href="aggregate-data-with-tidyverse.html#cb444-7" aria-hidden="true" tabindex="-1"></a>df_nas_diag_dataset</span></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="aggregate-data-with-tidyverse.html#cb443-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Calculate number of CDR NAs for each Diagnosis/dataset combination</span></span>
+<span id="cb443-2"><a href="aggregate-data-with-tidyverse.html#cb443-2" aria-hidden="true" tabindex="-1"></a>df_nas_diag_dataset <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb443-3"><a href="aggregate-data-with-tidyverse.html#cb443-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Diagnosis, dataset) <span class="sc">%&gt;%</span></span>
+<span id="cb443-4"><a href="aggregate-data-with-tidyverse.html#cb443-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_nas =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(CDR))) <span class="sc">%&gt;%</span></span>
+<span id="cb443-5"><a href="aggregate-data-with-tidyverse.html#cb443-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> Diagnosis, <span class="at">names_from =</span> dataset, <span class="at">values_from =</span> n_nas)</span>
+<span id="cb443-6"><a href="aggregate-data-with-tidyverse.html#cb443-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb443-7"><a href="aggregate-data-with-tidyverse.html#cb443-7" aria-hidden="true" tabindex="-1"></a>df_nas_diag_dataset</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 2 × 4
 # Groups:   Diagnosis [2]
   Diagnosis  MAYO  MSBB ROSMAP
@@ -707,13 +721,13 @@ Solution
 <p><em>It seems that people that have filled MSBB dataset have done a better job in collecting data than the others ahahah</em></p>
 <p><strong>Remember</strong>: <code>is.na()</code> returns a boolean vector, and the sum of a boolean vector is the number of TRUE values in it.</p>
 <p><strong>4.</strong></p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="aggregate-data-with-tidyverse.html#cb446-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Sort dataframe based on mean PMI value for each Area/sex</span></span>
-<span id="cb446-2"><a href="aggregate-data-with-tidyverse.html#cb446-2" aria-hidden="true" tabindex="-1"></a>df_PMI_area_sex <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb446-3"><a href="aggregate-data-with-tidyverse.html#cb446-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Area, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb446-4"><a href="aggregate-data-with-tidyverse.html#cb446-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_PMI =</span> <span class="fu">mean</span>(PMI, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
-<span id="cb446-5"><a href="aggregate-data-with-tidyverse.html#cb446-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_PMI))</span>
-<span id="cb446-6"><a href="aggregate-data-with-tidyverse.html#cb446-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb446-7"><a href="aggregate-data-with-tidyverse.html#cb446-7" aria-hidden="true" tabindex="-1"></a>df_PMI_area_sex</span></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="aggregate-data-with-tidyverse.html#cb445-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Sort dataframe based on mean PMI value for each Area/sex</span></span>
+<span id="cb445-2"><a href="aggregate-data-with-tidyverse.html#cb445-2" aria-hidden="true" tabindex="-1"></a>df_PMI_area_sex <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb445-3"><a href="aggregate-data-with-tidyverse.html#cb445-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Area, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb445-4"><a href="aggregate-data-with-tidyverse.html#cb445-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_PMI =</span> <span class="fu">mean</span>(PMI, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
+<span id="cb445-5"><a href="aggregate-data-with-tidyverse.html#cb445-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_PMI))</span>
+<span id="cb445-6"><a href="aggregate-data-with-tidyverse.html#cb445-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb445-7"><a href="aggregate-data-with-tidyverse.html#cb445-7" aria-hidden="true" tabindex="-1"></a>df_PMI_area_sex</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 12 × 3
 # Groups:   Area [6]
    Area  sex   avg_PMI
@@ -741,8 +755,8 @@ Solution
           </div>
         </div>
       </div>
-<a href="manage-data-with-tidyverse.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="manage-data-with-tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="plot-our-data-with-ggplot2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,18 +1,24 @@
 --- 
-title: "Learn R for biologist, with no fear"
+title: "Learn R for biologist"
+subtitle: "It's easier than a western blot"
 author: "Matteo Miotto"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 description: |
- For you, who never gives up, for your future
+ To you, who never gives up, for your future. You can make it!
 link-citations: yes
 ---
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(
   comment = "",
-  class.output = "code-out"
+  class.output = "code-out",
+  out.width = "85%",
+  dev='svg',
+  fig.height = 7, 
+  fig.width = 7, 
+  fig.align='center'
 )
 ```
 

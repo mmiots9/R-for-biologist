@@ -27,3 +27,4 @@ data-frames
 functions-packages-and-reproducibility
 manage-data-with-tidyverse
 aggregate-data-with-tidyverse
+plot-our-data-with-ggplot2
