@@ -1,4 +1,4 @@
-# Manage data with tidyverse
+# Manage data with tidyverse {#tidyverse-manage}
 Let's start with our first data analysis (I know you were waiting for it!): in this chapter, we will use the magic world of <em>tidyverse</em> and rnotebook to explore a dataset.
 <br>
 

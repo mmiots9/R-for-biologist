@@ -25,3 +25,7 @@ pre code {
   background-color: white !important;
   border: 1px solid black !important;
 }
+
+.book .book-body .page-wrapper .page-inner {
+    max-width: 90%;
+}

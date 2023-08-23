@@ -25,6 +25,9 @@ vectors
 matrices
 data-frames
 functions-packages-and-reproducibility
-manage-data-with-tidyverse
+tidyverse-manage
 aggregate-data-with-tidyverse
 plot-our-data-with-ggplot2
+introduction-to-statistics-in-r
+shapiro-wilk-normality-test
+kolmogorov-smirnov-test

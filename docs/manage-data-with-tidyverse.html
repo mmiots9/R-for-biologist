@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-08-19" />
+<meta name="date" content="2023-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,6 +304,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="plot-our-data-with-ggplot2.html#change-appearence-theme" id="toc-change-appearence-theme">Change appearence (theme)</a></li>
 <li><a href="plot-our-data-with-ggplot2.html#save-plot" id="toc-save-plot">Save plot</a></li>
 </ul></li>
+<li><a href="introduction-to-statistics-in-r.html#introduction-to-statistics-in-r" id="toc-introduction-to-statistics-in-r"><span class="toc-section-number">15</span> Introduction to statistics in R</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#evaluate-parametric-assumptions" id="toc-evaluate-parametric-assumptions">Evaluate parametric assumptions</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#normality" id="toc-normality">Normality</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#qq-plot" id="toc-qq-plot"><span class="toc-section-number">15.0.0.1</span> QQ plot</a></li>
+<li><a href="introduction-to-statistics-in-r.html#shapiro-wilk-normality-test" id="toc-shapiro-wilk-normality-test"><span class="toc-section-number">15.0.0.2</span> Shapiro-Wilk normality test</a></li>
+<li><a href="introduction-to-statistics-in-r.html#kolmogorov-smirnov-test" id="toc-kolmogorov-smirnov-test"><span class="toc-section-number">15.0.0.3</span> Kolmogorov-Smirnov test</a></li>
+</ul></li>
+<li><a href="introduction-to-statistics-in-r.html#homogeneity-of-variances-homoschedaticity" id="toc-homogeneity-of-variances-homoschedaticity">Homogeneity of variances (homoschedaticity)</a></li>
+<li><a href="introduction-to-statistics-in-r.html#no-outliers" id="toc-no-outliers">No outliers</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -490,22 +504,22 @@ Having said that, we can now see in the result of <code>str()</code> that now Di
 <h2>Summary</h2>
 <p>Ok, now that we have fixed some columns, let’s evaluate the values of the dataframe, we will use <code>summary()</code>:</p>
 <div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="manage-data-with-tidyverse.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
-<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN       
- Length:1493        Control:626   Min.   :0.000   F:890   Min.   :53.00   Min.   : 1.000   Min.   : 1.00  
- Class :character   AD     :867   1st Qu.:3.000   M:603   1st Qu.:79.00   1st Qu.: 3.917   1st Qu.: 5.60  
- Mode  :character                 Median :4.000           Median :86.00   Median : 5.500   Median : 6.80  
-                                  Mean   :3.909           Mean   :83.59   Mean   : 7.471   Mean   : 6.67  
-                                  3rd Qu.:6.000           3rd Qu.:90.00   3rd Qu.: 9.167   3rd Qu.: 7.80  
-                                  Max.   :6.000           Max.   :90.00   Max.   :38.000   Max.   :10.00  
-                                  NA&#39;s   :97                              NA&#39;s   :45                      
-      CDR           Area       dataset   
- Min.   :0.000   BM10 :233   MAYO  :160  
- 1st Qu.:0.500   BM22 :238   MSBB  :930  
- Median :2.000   BM36 :232   ROSMAP:403  
- Mean   :2.368   BM44 :227               
- 3rd Qu.:4.000   DLPFC:403               
- Max.   :5.000   TL   :160               
- NA&#39;s   :563                             </code></pre>
+<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN             CDR           Area    
+ Length:1493        Control:626   Min.   :0.000   F:890   Min.   :53.00   Min.   : 1.000   Min.   : 1.00   Min.   :0.000   BM10 :233  
+ Class :character   AD     :867   1st Qu.:3.000   M:603   1st Qu.:79.00   1st Qu.: 3.917   1st Qu.: 5.60   1st Qu.:0.500   BM22 :238  
+ Mode  :character                 Median :4.000           Median :86.00   Median : 5.500   Median : 6.80   Median :2.000   BM36 :232  
+                                  Mean   :3.909           Mean   :83.59   Mean   : 7.471   Mean   : 6.67   Mean   :2.368   BM44 :227  
+                                  3rd Qu.:6.000           3rd Qu.:90.00   3rd Qu.: 9.167   3rd Qu.: 7.80   3rd Qu.:4.000   DLPFC:403  
+                                  Max.   :6.000           Max.   :90.00   Max.   :38.000   Max.   :10.00   Max.   :5.000   TL   :160  
+                                  NA&#39;s   :97                              NA&#39;s   :45                       NA&#39;s   :563                
+   dataset   
+ MAYO  :160  
+ MSBB  :930  
+ ROSMAP:403  
+             
+             
+             
+             </code></pre>
 <p class="plist">
 How does summary works? It depends on the type of data of the column:
 <p>
@@ -544,22 +558,22 @@ Instead, I propose an example on how to delete rows that have missing values in 
 <p>Here is you should have answered:</p>
 <div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="manage-data-with-tidyverse.html#cb385-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span><span class="fu">is.na</span>(df<span class="sc">$</span>PMI), ]</span>
 <span id="cb385-2"><a href="manage-data-with-tidyverse.html#cb385-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
-<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN        
- Length:1448        Control:612   Min.   :0.000   F:864   Min.   :58.00   Min.   : 1.000   Min.   : 1.000  
- Class :character   AD     :836   1st Qu.:3.000   M:584   1st Qu.:79.00   1st Qu.: 3.917   1st Qu.: 5.600  
- Mode  :character                 Median :4.000           Median :86.00   Median : 5.500   Median : 6.700  
-                                  Mean   :3.881           Mean   :83.65   Mean   : 7.471   Mean   : 6.623  
-                                  3rd Qu.:6.000           3rd Qu.:90.00   3rd Qu.: 9.167   3rd Qu.: 7.800  
-                                  Max.   :6.000           Max.   :90.00   Max.   :38.000   Max.   :10.000  
-                                  NA&#39;s   :87                                                               
-      CDR           Area       dataset   
- Min.   :0.000   BM10 :233   MAYO  :117  
- 1st Qu.:0.500   BM22 :238   MSBB  :930  
- Median :2.000   BM36 :232   ROSMAP:401  
- Mean   :2.368   BM44 :227               
- 3rd Qu.:4.000   DLPFC:401               
- Max.   :5.000   TL   :117               
- NA&#39;s   :518                             </code></pre>
+<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN              CDR           Area    
+ Length:1448        Control:612   Min.   :0.000   F:864   Min.   :58.00   Min.   : 1.000   Min.   : 1.000   Min.   :0.000   BM10 :233  
+ Class :character   AD     :836   1st Qu.:3.000   M:584   1st Qu.:79.00   1st Qu.: 3.917   1st Qu.: 5.600   1st Qu.:0.500   BM22 :238  
+ Mode  :character                 Median :4.000           Median :86.00   Median : 5.500   Median : 6.700   Median :2.000   BM36 :232  
+                                  Mean   :3.881           Mean   :83.65   Mean   : 7.471   Mean   : 6.623   Mean   :2.368   BM44 :227  
+                                  3rd Qu.:6.000           3rd Qu.:90.00   3rd Qu.: 9.167   3rd Qu.: 7.800   3rd Qu.:4.000   DLPFC:401  
+                                  Max.   :6.000           Max.   :90.00   Max.   :38.000   Max.   :10.000   Max.   :5.000   TL   :117  
+                                  NA&#39;s   :87                                                                NA&#39;s   :518                
+   dataset   
+ MAYO  :117  
+ MSBB  :930  
+ ROSMAP:401  
+             
+             
+             
+             </code></pre>
 <p>Great, we have no more NAs in PMI. If you don’t remember what <code>!</code> stands for, go back and check the <a href="boolean-chapter.html#boolean-chapter">boolean chapter</a>.
 <br></p>
 </div>
@@ -571,44 +585,36 @@ This function takes as input an expression that returns a vector of boolean. Let
 <span id="cb387-2"><a href="manage-data-with-tidyverse.html#cb387-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diagnosis <span class="sc">==</span> <span class="st">&quot;Control&quot;</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> CDR <span class="sc">&gt;</span> <span class="dv">4</span>)</span>
 <span id="cb387-3"><a href="manage-data-with-tidyverse.html#cb387-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb387-4"><a href="manage-data-with-tidyverse.html#cb387-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_male_ctrl_cdr4)</span></code></pre></div>
-<pre class="code-out"><code>   SampleID           Diagnosis     Braak     sex        AOD          PMI             RIN       
- Length:3           Control:3   Min.   : NA   F:0   Min.   :89   Min.   :2.667   Min.   :4.900  
- Class :character   AD     :0   1st Qu.: NA   M:3   1st Qu.:89   1st Qu.:2.667   1st Qu.:5.100  
- Mode  :character               Median : NA         Median :89   Median :2.667   Median :5.300  
-                                Mean   :NaN         Mean   :89   Mean   :2.667   Mean   :5.367  
-                                3rd Qu.: NA         3rd Qu.:89   3rd Qu.:2.667   3rd Qu.:5.600  
-                                Max.   : NA         Max.   :89   Max.   :2.667   Max.   :5.900  
-                                NA&#39;s   :3                                                       
-      CDR       Area     dataset 
- Min.   :5   BM10 :1   MAYO  :0  
- 1st Qu.:5   BM22 :1   MSBB  :3  
- Median :5   BM36 :1   ROSMAP:0  
- Mean   :5   BM44 :0             
- 3rd Qu.:5   DLPFC:0             
- Max.   :5   TL   :0             
-                                 </code></pre>
+<pre class="code-out"><code>   SampleID           Diagnosis     Braak     sex        AOD          PMI             RIN             CDR       Area     dataset 
+ Length:3           Control:3   Min.   : NA   F:0   Min.   :89   Min.   :2.667   Min.   :4.900   Min.   :5   BM10 :1   MAYO  :0  
+ Class :character   AD     :0   1st Qu.: NA   M:3   1st Qu.:89   1st Qu.:2.667   1st Qu.:5.100   1st Qu.:5   BM22 :1   MSBB  :3  
+ Mode  :character               Median : NA         Median :89   Median :2.667   Median :5.300   Median :5   BM36 :1   ROSMAP:0  
+                                Mean   :NaN         Mean   :89   Mean   :2.667   Mean   :5.367   Mean   :5   BM44 :0             
+                                3rd Qu.: NA         3rd Qu.:89   3rd Qu.:2.667   3rd Qu.:5.600   3rd Qu.:5   DLPFC:0             
+                                Max.   : NA         Max.   :89   Max.   :2.667   Max.   :5.900   Max.   :5   TL   :0             
+                                NA&#39;s   :3                                                                                        </code></pre>
 <p>We have just 3 observations that matches our request.<br></p>
 <p>We can also use functions to evaluate thresholds etc. For example, let’s take the female whose RIN is above 3rd quartile (75th quantile):</p>
 <div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="manage-data-with-tidyverse.html#cb389-1" aria-hidden="true" tabindex="-1"></a>df_female_rin3q <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
 <span id="cb389-2"><a href="manage-data-with-tidyverse.html#cb389-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> RIN <span class="sc">&gt;</span> <span class="fu">quantile</span>(df<span class="sc">$</span>RIN, <span class="at">p =</span> <span class="fl">0.75</span>))</span>
 <span id="cb389-3"><a href="manage-data-with-tidyverse.html#cb389-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb389-4"><a href="manage-data-with-tidyverse.html#cb389-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_female_rin3q)</span></code></pre></div>
-<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN        
- Length:199         Control: 87   Min.   :0.000   F:199   Min.   :58.00   Min.   : 1.000   Min.   : 7.900  
- Class :character   AD     :112   1st Qu.:3.000   M:  0   1st Qu.:83.00   1st Qu.: 3.500   1st Qu.: 8.100  
- Mode  :character                 Median :4.000           Median :88.00   Median : 4.750   Median : 8.500  
-                                  Mean   :3.899           Mean   :85.07   Mean   : 5.855   Mean   : 8.708  
-                                  3rd Qu.:5.000           3rd Qu.:90.00   3rd Qu.: 6.500   3rd Qu.: 9.200  
-                                  Max.   :6.000           Max.   :90.00   Max.   :30.000   Max.   :10.000  
-                                  NA&#39;s   :10                                                               
-      CDR           Area      dataset  
- Min.   :0.000   BM10 :13   MAYO  :45  
- 1st Qu.:0.500   BM22 : 9   MSBB  :90  
- Median :2.000   BM36 :14   ROSMAP:64  
- Mean   :1.978   BM44 :54              
- 3rd Qu.:3.000   DLPFC:64              
- Max.   :5.000   TL   :45              
- NA&#39;s   :109                           </code></pre>
+<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN              CDR           Area   
+ Length:199         Control: 87   Min.   :0.000   F:199   Min.   :58.00   Min.   : 1.000   Min.   : 7.900   Min.   :0.000   BM10 :13  
+ Class :character   AD     :112   1st Qu.:3.000   M:  0   1st Qu.:83.00   1st Qu.: 3.500   1st Qu.: 8.100   1st Qu.:0.500   BM22 : 9  
+ Mode  :character                 Median :4.000           Median :88.00   Median : 4.750   Median : 8.500   Median :2.000   BM36 :14  
+                                  Mean   :3.899           Mean   :85.07   Mean   : 5.855   Mean   : 8.708   Mean   :1.978   BM44 :54  
+                                  3rd Qu.:5.000           3rd Qu.:90.00   3rd Qu.: 6.500   3rd Qu.: 9.200   3rd Qu.:3.000   DLPFC:64  
+                                  Max.   :6.000           Max.   :90.00   Max.   :30.000   Max.   :10.000   Max.   :5.000   TL   :45  
+                                  NA&#39;s   :10                                                                NA&#39;s   :109               
+   dataset  
+ MAYO  :45  
+ MSBB  :90  
+ ROSMAP:64  
+            
+            
+            
+            </code></pre>
 <p>There are 199 female samples with a RIN above 3rd quartile. We get it thanks to <code>quantile</code> function, which accept a vector and returns the quartile values; if you want a particular quantile (as in our case), you can give as input <code>p</code>, which is the quantile you want to calculate.</p>
 </div>
 <div id="sort-for-the-value-of-a-column" class="section level2 unnumbered">
@@ -787,22 +793,22 @@ Solution
 <span id="cb401-4"><a href="manage-data-with-tidyverse.html#cb401-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;full_name&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(full_name))</span>
 <span id="cb401-5"><a href="manage-data-with-tidyverse.html#cb401-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb401-6"><a href="manage-data-with-tidyverse.html#cb401-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_filtered)</span></code></pre></div>
-<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN        
- Length:318         Control:152   Min.   :0.000   F:263   Min.   :61.00   Min.   : 1.000   Min.   : 5.000  
- Class :character   AD     :166   1st Qu.:3.000   M: 55   1st Qu.:84.45   1st Qu.: 4.021   1st Qu.: 6.500  
- Mode  :character                 Median :4.000           Median :89.20   Median : 5.375   Median : 7.400  
-                                  Mean   :3.751           Mean   :86.37   Mean   : 7.143   Mean   : 7.271  
-                                  3rd Qu.:5.000           3rd Qu.:90.00   3rd Qu.: 8.167   3rd Qu.: 8.000  
-                                  Max.   :6.000           Max.   :90.00   Max.   :33.000   Max.   :10.000  
-                                  NA&#39;s   :25                                                               
-      CDR      Area_dataset           Area             dataset                            full_name  
- Min.   : NA   Length:318         Length:318         MAYO  : 55   Dorsolateral prefronal cortex:263  
- 1st Qu.: NA   Class :character   Class :character   MSBB  :  0   Temporal lobe                : 55  
- Median : NA   Mode  :character   Mode  :character   ROSMAP:263                                      
- Mean   :NaN                                                                                         
- 3rd Qu.: NA                                                                                         
- Max.   : NA                                                                                         
- NA&#39;s   :318                                                                                         </code></pre>
+<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN              CDR      Area_dataset      
+ Length:318         Control:152   Min.   :0.000   F:263   Min.   :61.00   Min.   : 1.000   Min.   : 5.000   Min.   : NA   Length:318        
+ Class :character   AD     :166   1st Qu.:3.000   M: 55   1st Qu.:84.45   1st Qu.: 4.021   1st Qu.: 6.500   1st Qu.: NA   Class :character  
+ Mode  :character                 Median :4.000           Median :89.20   Median : 5.375   Median : 7.400   Median : NA   Mode  :character  
+                                  Mean   :3.751           Mean   :86.37   Mean   : 7.143   Mean   : 7.271   Mean   :NaN                     
+                                  3rd Qu.:5.000           3rd Qu.:90.00   3rd Qu.: 8.167   3rd Qu.: 8.000   3rd Qu.: NA                     
+                                  Max.   :6.000           Max.   :90.00   Max.   :33.000   Max.   :10.000   Max.   : NA                     
+                                  NA&#39;s   :25                                                                NA&#39;s   :318                     
+     Area             dataset                            full_name  
+ Length:318         MAYO  : 55   Dorsolateral prefronal cortex:263  
+ Class :character   MSBB  :  0   Temporal lobe                : 55  
+ Mode  :character   ROSMAP:263                                      
+                                                                    
+                                                                    
+                                                                    
+                                                                    </code></pre>
 It is important to note that, since we have one condition OR another, and both have multiple conditions in them, we must use parenthesis to separate the conditions to evaluate. In fact, it works as in math: first parenthesis and then from left to right.
 </details>
 <p><br>

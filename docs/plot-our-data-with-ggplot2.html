@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-08-19" />
+<meta name="date" content="2023-08-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="aggregate-data-with-tidyverse.html"/>
-
+<link rel="next" href="introduction-to-statistics-in-r.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -264,23 +264,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="functions-packages-and-reproducibility.html#session-info" id="toc-session-info">Session info</a></li>
 </ul></li>
 </ul></li>
-<li><a href="manage-data-with-tidyverse.html#manage-data-with-tidyverse" id="toc-manage-data-with-tidyverse"><span class="toc-section-number">12</span> Manage data with tidyverse</a>
+<li><a href="tidyverse-manage.html#tidyverse-manage" id="toc-tidyverse-manage"><span class="toc-section-number">12</span> Manage data with tidyverse</a>
 <ul>
-<li><a href="manage-data-with-tidyverse.html#r-notebook" id="toc-r-notebook">R notebook</a></li>
-<li><a href="manage-data-with-tidyverse.html#load-packages-and-data" id="toc-load-packages-and-data">Load packages and data</a></li>
-<li><a href="manage-data-with-tidyverse.html#dataset-structure" id="toc-dataset-structure">Dataset structure</a>
+<li><a href="tidyverse-manage.html#r-notebook" id="toc-r-notebook">R notebook</a></li>
+<li><a href="tidyverse-manage.html#load-packages-and-data" id="toc-load-packages-and-data">Load packages and data</a></li>
+<li><a href="tidyverse-manage.html#dataset-structure" id="toc-dataset-structure">Dataset structure</a>
 <ul>
-<li><a href="manage-data-with-tidyverse.html#change-column-type" id="toc-change-column-type">Change column type</a></li>
-<li><a href="manage-data-with-tidyverse.html#reorder-levels-of-a-factor" id="toc-reorder-levels-of-a-factor">Reorder levels of a factor</a></li>
+<li><a href="tidyverse-manage.html#change-column-type" id="toc-change-column-type">Change column type</a></li>
+<li><a href="tidyverse-manage.html#reorder-levels-of-a-factor" id="toc-reorder-levels-of-a-factor">Reorder levels of a factor</a></li>
 </ul></li>
-<li><a href="manage-data-with-tidyverse.html#summary" id="toc-summary">Summary</a></li>
-<li><a href="manage-data-with-tidyverse.html#dealing-with-missing-values" id="toc-dealing-with-missing-values">Dealing with missing values</a></li>
-<li><a href="manage-data-with-tidyverse.html#filter-a-dataframe" id="toc-filter-a-dataframe">Filter a dataframe</a></li>
-<li><a href="manage-data-with-tidyverse.html#sort-for-the-value-of-a-column" id="toc-sort-for-the-value-of-a-column">Sort for the value of a column</a></li>
-<li><a href="manage-data-with-tidyverse.html#merge-two-columns" id="toc-merge-two-columns">Merge two columns</a></li>
-<li><a href="manage-data-with-tidyverse.html#split-two-columns" id="toc-split-two-columns">Split two columns</a></li>
-<li><a href="manage-data-with-tidyverse.html#merge-two-dataframes" id="toc-merge-two-dataframes">Merge two dataframes</a></li>
-<li><a href="manage-data-with-tidyverse.html#exercises-6" id="toc-exercises-6">Exercises</a></li>
+<li><a href="tidyverse-manage.html#summary" id="toc-summary">Summary</a></li>
+<li><a href="tidyverse-manage.html#dealing-with-missing-values" id="toc-dealing-with-missing-values">Dealing with missing values</a></li>
+<li><a href="tidyverse-manage.html#filter-a-dataframe" id="toc-filter-a-dataframe">Filter a dataframe</a></li>
+<li><a href="tidyverse-manage.html#sort-for-the-value-of-a-column" id="toc-sort-for-the-value-of-a-column">Sort for the value of a column</a></li>
+<li><a href="tidyverse-manage.html#merge-two-columns" id="toc-merge-two-columns">Merge two columns</a></li>
+<li><a href="tidyverse-manage.html#split-two-columns" id="toc-split-two-columns">Split two columns</a></li>
+<li><a href="tidyverse-manage.html#merge-two-dataframes" id="toc-merge-two-dataframes">Merge two dataframes</a></li>
+<li><a href="tidyverse-manage.html#exercises-6" id="toc-exercises-6">Exercises</a></li>
 </ul></li>
 <li><a href="aggregate-data-with-tidyverse.html#aggregate-data-with-tidyverse" id="toc-aggregate-data-with-tidyverse"><span class="toc-section-number">13</span> Aggregate data with tidyverse</a>
 <ul>
@@ -303,6 +303,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="plot-our-data-with-ggplot2.html#add-title-and-change-labels-labs" id="toc-add-title-and-change-labels-labs">Add title and change labels (labs)</a></li>
 <li><a href="plot-our-data-with-ggplot2.html#change-appearence-theme" id="toc-change-appearence-theme">Change appearence (theme)</a></li>
 <li><a href="plot-our-data-with-ggplot2.html#save-plot" id="toc-save-plot">Save plot</a></li>
+</ul></li>
+<li><a href="introduction-to-statistics-in-r.html#introduction-to-statistics-in-r" id="toc-introduction-to-statistics-in-r"><span class="toc-section-number">15</span> Introduction to statistics in R</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#evaluate-parametric-assumptions" id="toc-evaluate-parametric-assumptions">Evaluate parametric assumptions</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#visual-inspection" id="toc-visual-inspection">Visual inspection</a></li>
+<li><a href="introduction-to-statistics-in-r.html#no-outliers" id="toc-no-outliers">No outliers</a></li>
+<li><a href="introduction-to-statistics-in-r.html#normality" id="toc-normality">Normality</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#shapiro-wilk-normality-test" id="toc-shapiro-wilk-normality-test"><span class="toc-section-number">15.0.0.1</span> Shapiro-Wilk normality test</a></li>
+<li><a href="introduction-to-statistics-in-r.html#kolmogorov-smirnov-test" id="toc-kolmogorov-smirnov-test"><span class="toc-section-number">15.0.0.2</span> Kolmogorov-Smirnov test</a></li>
+</ul></li>
+<li><a href="introduction-to-statistics-in-r.html#homogeneity-of-variances-homoschedaticity" id="toc-homogeneity-of-variances-homoschedaticity">Homogeneity of variances (homoschedaticity)</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -597,8 +611,8 @@ Here we are at the end of this introduction of <em>ggplot2</em>. As I told you a
           </div>
         </div>
       </div>
-<a href="aggregate-data-with-tidyverse.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="aggregate-data-with-tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-to-statistics-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

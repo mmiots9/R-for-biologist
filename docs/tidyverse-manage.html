@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>12 Manage data with tidyverse | Learn R for biologist</title>
+  <meta name="description" content="To you, who never gives up, for your future. You can make it!" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="12 Manage data with tidyverse | Learn R for biologist" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="To you, who never gives up, for your future. You can make it!" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="12 Manage data with tidyverse | Learn R for biologist" />
+  
+  <meta name="twitter:description" content="To you, who never gives up, for your future. You can make it!" />
+  
+
+<meta name="author" content="Matteo Miotto" />
+
+
+<meta name="date" content="2023-08-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="functions-packages-and-reproducibility.html"/>
+<link rel="next" href="aggregate-data-with-tidyverse.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for biologist</a></li>
+<li class="divider"></li>
+<li><a href="index.html#about" id="toc-about">About</a></li>
+<li><a href="installation.html#installation" id="toc-installation"><span class="toc-section-number">1</span> Installation</a></li>
+<li><a href="first-step-in-rstudio.html#first-step-in-rstudio" id="toc-first-step-in-rstudio"><span class="toc-section-number">2</span> First step in RStudio</a>
+<ul>
+<li><a href="first-step-in-rstudio.html#console" id="toc-console">Console</a></li>
+</ul></li>
+<li><a href="variables.html#variables" id="toc-variables"><span class="toc-section-number">3</span> Variables</a>
+<ul>
+<li><a href="variables.html#create-a-variable" id="toc-create-a-variable">Create a variable</a></li>
+<li><a href="variables.html#use-a-variable" id="toc-use-a-variable">Use a variable</a></li>
+<li><a href="variables.html#variable-names" id="toc-variable-names">Variable names</a></li>
+<li><a href="variables.html#overwriting-variables" id="toc-overwriting-variables">Overwriting variables</a></li>
+<li><a href="variables.html#list-all-variables" id="toc-list-all-variables">List all variables</a></li>
+<li><a href="variables.html#delete-variables" id="toc-delete-variables">Delete variables</a></li>
+<li><a href="variables.html#type-of-variables" id="toc-type-of-variables">Type of variables</a></li>
+<li><a href="variables.html#exercises" id="toc-exercises">Exercises</a></li>
+</ul></li>
+<li><a href="scripts-chapter.html#scripts-chapter" id="toc-scripts-chapter"><span class="toc-section-number">4</span> Scripts</a>
+<ul>
+<li><a href="scripts-chapter.html#save" id="toc-save">Save</a></li>
+<li><a href="scripts-chapter.html#source-a-script" id="toc-source-a-script">Source a script</a></li>
+</ul></li>
+<li><a href="numbers.html#numbers" id="toc-numbers"><span class="toc-section-number">5</span> Numbers</a>
+<ul>
+<li><a href="numbers.html#operations" id="toc-operations">Operations</a></li>
+<li><a href="numbers.html#rounding" id="toc-rounding">Rounding</a></li>
+<li><a href="numbers.html#tranform-to-type-number" id="toc-tranform-to-type-number">Tranform to type number</a></li>
+<li><a href="numbers.html#exercises-1" id="toc-exercises-1">Exercises</a></li>
+</ul></li>
+<li><a href="character.html#character" id="toc-character"><span class="toc-section-number">6</span> Character</a>
+<ul>
+<li><a href="character.html#concatenate-strings" id="toc-concatenate-strings">Concatenate strings</a></li>
+<li><a href="character.html#substring" id="toc-substring">Substring</a></li>
+<li><a href="character.html#substitution" id="toc-substitution">Substitution</a></li>
+<li><a href="character.html#grep" id="toc-grep">Grep</a></li>
+<li><a href="character.html#transform-to-type-character" id="toc-transform-to-type-character">Transform to type character</a></li>
+<li><a href="character.html#exercises-2" id="toc-exercises-2">Exercises</a></li>
+</ul></li>
+<li><a href="boolean-chapter.html#boolean-chapter" id="toc-boolean-chapter"><span class="toc-section-number">7</span> Boolean</a>
+<ul>
+<li><a href="boolean-chapter.html#boolean-as-results-of-comparison" id="toc-boolean-as-results-of-comparison">Boolean as results of comparison</a></li>
+<li><a href="boolean-chapter.html#logical-operator" id="toc-logical-operator">Logical operator</a>
+<ul>
+<li><a href="boolean-chapter.html#and" id="toc-and">AND</a></li>
+<li><a href="boolean-chapter.html#or" id="toc-or">OR</a></li>
+<li><a href="boolean-chapter.html#not" id="toc-not">NOT</a></li>
+</ul></li>
+<li><a href="boolean-chapter.html#exercises-3" id="toc-exercises-3">Exercises</a></li>
+</ul></li>
+<li><a href="vectors.html#vectors" id="toc-vectors"><span class="toc-section-number">8</span> Vectors</a>
+<ul>
+<li><a href="vectors.html#named-vectors" id="toc-named-vectors">Named vectors</a></li>
+<li><a href="vectors.html#indexing" id="toc-indexing">Indexing</a>
+<ul>
+<li><a href="vectors.html#named-vectors-1" id="toc-named-vectors-1">Named vectors</a></li>
+<li><a href="vectors.html#slicing-vectors" id="toc-slicing-vectors">Slicing</a></li>
+<li><a href="vectors.html#using-logicals" id="toc-using-logicals">Using logicals</a></li>
+</ul></li>
+<li><a href="vectors.html#one-function-can-be-applied-to-all-elements" id="toc-one-function-can-be-applied-to-all-elements">One function can be applied to all elements</a></li>
+<li><a href="vectors.html#functions-specific-of-vectors" id="toc-functions-specific-of-vectors">Functions specific of vectors</a>
+<ul>
+<li><a href="vectors.html#sorting-a-vector" id="toc-sorting-a-vector">Sorting a vector</a></li>
+<li><a href="vectors.html#unique-values" id="toc-unique-values">Unique values</a></li>
+<li><a href="vectors.html#logical-vectors-sum-and-mean" id="toc-logical-vectors-sum-and-mean">Logical vectors sum and mean</a></li>
+</ul></li>
+<li><a href="vectors.html#operations-between-vectors" id="toc-operations-between-vectors">Operations between vectors</a>
+<ul>
+<li><a href="vectors.html#mathematical" id="toc-mathematical">Mathematical</a></li>
+<li><a href="vectors.html#different-and-common-elements" id="toc-different-and-common-elements">Different and common elements</a></li>
+<li><a href="vectors.html#in" id="toc-in">%in%</a></li>
+<li><a href="vectors.html#match" id="toc-match">Match</a></li>
+</ul></li>
+<li><a href="vectors.html#exercises-4" id="toc-exercises-4">Exercises</a></li>
+</ul></li>
+<li><a href="matrices.html#matrices" id="toc-matrices"><span class="toc-section-number">9</span> Matrices</a>
+<ul>
+<li><a href="matrices.html#create-a-matrix" id="toc-create-a-matrix">Create a matrix</a>
+<ul>
+<li><a href="matrices.html#binding" id="toc-binding">Binding</a></li>
+<li><a href="matrices.html#transform-into-a-matrix" id="toc-transform-into-a-matrix">Transform into a matrix</a></li>
+</ul></li>
+<li><a href="matrices.html#rownames-and-colnames" id="toc-rownames-and-colnames">Rownames and colnames</a>
+<ul>
+<li><a href="matrices.html#set-and-edit-row-and-column-names" id="toc-set-and-edit-row-and-column-names">Set and edit row and column names</a></li>
+</ul></li>
+<li><a href="matrices.html#indexing-matrices" id="toc-indexing-matrices">Indexing</a>
+<ul>
+<li><a href="matrices.html#slicing" id="toc-slicing">Slicing</a></li>
+<li><a href="matrices.html#using-names" id="toc-using-names">Using names</a></li>
+<li><a href="matrices.html#using-logicals-1" id="toc-using-logicals-1">Using logicals</a></li>
+</ul></li>
+<li><a href="matrices.html#functions-for-all-matrix" id="toc-functions-for-all-matrix">Functions for all matrix</a>
+<ul>
+<li><a href="matrices.html#head-tail-matrices" id="toc-head-tail-matrices">Head/Tail</a></li>
+<li><a href="matrices.html#dim-nrow-ncol" id="toc-dim-nrow-ncol">Dim, nrow, ncol</a></li>
+<li><a href="matrices.html#summary-and-transpose" id="toc-summary-and-transpose">Summary and transpose</a></li>
+<li><a href="matrices.html#sum-max-min" id="toc-sum-max-min">Sum, Max, Min, …</a></li>
+</ul></li>
+<li><a href="matrices.html#apply-a-function-to-all-rows-or-columns" id="toc-apply-a-function-to-all-rows-or-columns">Apply a function to all rows or columns</a></li>
+<li><a href="matrices.html#exercises-5" id="toc-exercises-5">Exercises</a></li>
+</ul></li>
+<li><a href="data-frames.html#data-frames" id="toc-data-frames"><span class="toc-section-number">10</span> Data frames</a>
+<ul>
+<li><a href="data-frames.html#create-a-data.frame" id="toc-create-a-data.frame">Create a data.frame</a>
+<ul>
+<li><a href="data-frames.html#from-matrix" id="toc-from-matrix">From matrix</a></li>
+<li><a href="data-frames.html#from-vectors" id="toc-from-vectors">From vectors</a></li>
+<li><a href="data-frames.html#from-file" id="toc-from-file">From file</a></li>
+</ul></li>
+<li><a href="data-frames.html#indexing-1" id="toc-indexing-1">Indexing</a></li>
+<li><a href="data-frames.html#create-a-new-column" id="toc-create-a-new-column">Create a new column</a></li>
+<li><a href="data-frames.html#delete-a-column" id="toc-delete-a-column">Delete a column</a></li>
+<li><a href="data-frames.html#export-a-data-frame" id="toc-export-a-data-frame">Export a data frame</a></li>
+</ul></li>
+<li><a href="functions-packages-and-reproducibility.html#functions-packages-and-reproducibility" id="toc-functions-packages-and-reproducibility"><span class="toc-section-number">11</span> Functions, packages and reproducibility</a>
+<ul>
+<li><a href="functions-packages-and-reproducibility.html#functions" id="toc-functions">Functions</a></li>
+<li><a href="functions-packages-and-reproducibility.html#packages" id="toc-packages">Packages</a>
+<ul>
+<li><a href="functions-packages-and-reproducibility.html#install-a-package" id="toc-install-a-package">Install a package</a></li>
+<li><a href="functions-packages-and-reproducibility.html#load-a-package" id="toc-load-a-package">Load a package</a></li>
+</ul></li>
+<li><a href="functions-packages-and-reproducibility.html#reproducibility" id="toc-reproducibility">Reproducibility</a>
+<ul>
+<li><a href="functions-packages-and-reproducibility.html#control-package-versions" id="toc-control-package-versions">Control package versions</a></li>
+<li><a href="functions-packages-and-reproducibility.html#session-info" id="toc-session-info">Session info</a></li>
+</ul></li>
+</ul></li>
+<li><a href="tidyverse-manage.html#tidyverse-manage" id="toc-tidyverse-manage"><span class="toc-section-number">12</span> Manage data with tidyverse</a>
+<ul>
+<li><a href="tidyverse-manage.html#r-notebook" id="toc-r-notebook">R notebook</a></li>
+<li><a href="tidyverse-manage.html#load-packages-and-data" id="toc-load-packages-and-data">Load packages and data</a></li>
+<li><a href="tidyverse-manage.html#dataset-structure" id="toc-dataset-structure">Dataset structure</a>
+<ul>
+<li><a href="tidyverse-manage.html#change-column-type" id="toc-change-column-type">Change column type</a></li>
+<li><a href="tidyverse-manage.html#reorder-levels-of-a-factor" id="toc-reorder-levels-of-a-factor">Reorder levels of a factor</a></li>
+</ul></li>
+<li><a href="tidyverse-manage.html#summary" id="toc-summary">Summary</a></li>
+<li><a href="tidyverse-manage.html#dealing-with-missing-values" id="toc-dealing-with-missing-values">Dealing with missing values</a></li>
+<li><a href="tidyverse-manage.html#filter-a-dataframe" id="toc-filter-a-dataframe">Filter a dataframe</a></li>
+<li><a href="tidyverse-manage.html#sort-for-the-value-of-a-column" id="toc-sort-for-the-value-of-a-column">Sort for the value of a column</a></li>
+<li><a href="tidyverse-manage.html#merge-two-columns" id="toc-merge-two-columns">Merge two columns</a></li>
+<li><a href="tidyverse-manage.html#split-two-columns" id="toc-split-two-columns">Split two columns</a></li>
+<li><a href="tidyverse-manage.html#merge-two-dataframes" id="toc-merge-two-dataframes">Merge two dataframes</a></li>
+<li><a href="tidyverse-manage.html#exercises-6" id="toc-exercises-6">Exercises</a></li>
+</ul></li>
+<li><a href="aggregate-data-with-tidyverse.html#aggregate-data-with-tidyverse" id="toc-aggregate-data-with-tidyverse"><span class="toc-section-number">13</span> Aggregate data with tidyverse</a>
+<ul>
+<li><a href="aggregate-data-with-tidyverse.html#table" id="toc-table">Table</a></li>
+<li><a href="aggregate-data-with-tidyverse.html#group-by-variables-and-summarize-values-of-another" id="toc-group-by-variables-and-summarize-values-of-another">Group by variables and summarize values of another</a></li>
+<li><a href="aggregate-data-with-tidyverse.html#expand-dataframe-column-using-pivot-wider" id="toc-expand-dataframe-column-using-pivot-wider">Expand dataframe column using pivot wider</a></li>
+<li><a href="aggregate-data-with-tidyverse.html#reshape-a-dataframe-with-pivot_longer" id="toc-reshape-a-dataframe-with-pivot_longer">Reshape a dataframe with pivot_longer</a></li>
+<li><a href="aggregate-data-with-tidyverse.html#exercises-7" id="toc-exercises-7">Exercises</a></li>
+</ul></li>
+<li><a href="plot-our-data-with-ggplot2.html#plot-our-data-with-ggplot2" id="toc-plot-our-data-with-ggplot2"><span class="toc-section-number">14</span> Plot our data with ggplot2</a>
+<ul>
+<li><a href="plot-our-data-with-ggplot2.html#command-structure" id="toc-command-structure">Command structure</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#type-of-graph-geom_-and-stat_" id="toc-type-of-graph-geom_-and-stat_">Type of graph (geom_ and stat_)</a>
+<ul>
+<li><a href="plot-our-data-with-ggplot2.html#mapping-values-to-graph-elements-aes" id="toc-mapping-values-to-graph-elements-aes">Mapping values to graph elements (aes)</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#change-the-stat-associated-to-the-graph" id="toc-change-the-stat-associated-to-the-graph">Change the “stat” associated to the graph</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#multiple-geometries-in-the-same-plot" id="toc-multiple-geometries-in-the-same-plot">Multiple geometries in the same plot</a></li>
+</ul></li>
+<li><a href="plot-our-data-with-ggplot2.html#change-axis-and-colors-scale_" id="toc-change-axis-and-colors-scale_">Change axis and colors (scale_)</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#add-title-and-change-labels-labs" id="toc-add-title-and-change-labels-labs">Add title and change labels (labs)</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#change-appearence-theme" id="toc-change-appearence-theme">Change appearence (theme)</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#save-plot" id="toc-save-plot">Save plot</a></li>
+</ul></li>
+<li><a href="introduction-to-statistics-in-r.html#introduction-to-statistics-in-r" id="toc-introduction-to-statistics-in-r"><span class="toc-section-number">15</span> Introduction to statistics in R</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#evaluate-parametric-assumptions" id="toc-evaluate-parametric-assumptions">Evaluate parametric assumptions</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#visual-inspection" id="toc-visual-inspection">Visual inspection</a></li>
+<li><a href="introduction-to-statistics-in-r.html#no-outliers" id="toc-no-outliers">No outliers</a></li>
+<li><a href="introduction-to-statistics-in-r.html#normality" id="toc-normality">Normality</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#shapiro-wilk-normality-test" id="toc-shapiro-wilk-normality-test"><span class="toc-section-number">15.0.0.1</span> Shapiro-Wilk normality test</a></li>
+<li><a href="introduction-to-statistics-in-r.html#kolmogorov-smirnov-test" id="toc-kolmogorov-smirnov-test"><span class="toc-section-number">15.0.0.2</span> Kolmogorov-Smirnov test</a></li>
+</ul></li>
+<li><a href="introduction-to-statistics-in-r.html#homogeneity-of-variances-homoschedaticity" id="toc-homogeneity-of-variances-homoschedaticity">Homogeneity of variances (homoschedaticity)</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learn R for biologist</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tidyverse-manage" class="section level1" number="12">
+<h1><span class="header-section-number">12</span> Manage data with tidyverse</h1>
+<p>Let’s start with our first data analysis (I know you were waiting for it!): in this chapter, we will use the magic world of <em>tidyverse</em> and rnotebook to explore a dataset.
+<br></p>
+<div id="r-notebook" class="section level2 unnumbered">
+<h2>R notebook</h2>
+We have already seen how to store R codes into <a href="scripts-chapter.html#scripts-chapter">scripts</a>. However, there are some disadvantages of using them: you cannot see the output of a code directly under it, you cannot see the graphs directly under the code, you cannot create multiline comments without having to comment each line etc.
+<br>
+Here comes <strong>notebooks</strong>!
+Whithin RStudio, just click “File” &gt; “New File” &gt; “R notebook” to open a new notebook.
+<br>
+As this book is not focused on it, and there is already a wonderful book about it, I invite you to read the first part of <a href="https://bookdown.org/yihui/rmarkdown/notebook.html" target="_blank">it</a> to get used to this wonderful tool.
+<br>
+<p class="plist">
+The key feature you need to understand are:
+</p>
+<ul>
+<li>
+code is executed only in <em>code chunks</em>, and all what you type outside is considered as “comment”
+</li>
+<li>
+after every executed code chunks you can see the output of the chunk itself (super useful for data visualization and dataframe inspection)
+</li>
+<li>
+you can export the notebook as html/pdf and share it with your colleagues (I prefer html for many reasons)
+</li>
+</ul>
+<p><strong>Dont’ worry!</strong> At the end of each chapter you can download the notebook used for the analysis, so you can explore it, see how it works, and run it. Don’t be lazy, first write your own notebook, in which you can add whatever comment you want, and then download mine to compare it.</p>
+</div>
+<div id="load-packages-and-data" class="section level2 unnumbered">
+<h2>Load packages and data</h2>
+<p>At the beginning of every analysis, it is strongly suggested to load any external package you want to use, in our case <em>tidyverse</em>.
+Why using tidyverse? Because it is super useful, easy to learn, intuitive and it is the main package used for data analysis with R. We have seen in the last chapter how to install and load it in our session, so let’s do it:</p>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="tidyverse-manage.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p><br>
+Next, we will load the dataset to analyze. It is taken from <a href="https://www.nature.com/articles/s41514-020-00052-5" target="_blank">this</a> paper, in particular it is Supplementary Table 13 (<a href="data/Supplementary_table_13.csv" download>Download</a>).</p>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="tidyverse-manage.html#cb367-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Supplementary_table_13.csv&quot;</span>)</span>
+<span id="cb367-2"><a href="tidyverse-manage.html#cb367-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>  SampleID Diagnosis Braak sex AOD PMI RIN CDR Area dataset
+1 1005_TCX        AD     6   F  90   8 8.6  NA   TL    MAYO
+2 1019_TCX        AD     6   F  86   4 7.8  NA   TL    MAYO
+3 1029_TCX        AD     6   F  69   4 9.7  NA   TL    MAYO
+4 1034_TCX        AD     6   F  88   5 8.9  NA   TL    MAYO
+5 1045_TCX        AD     5   F  90  NA 8.4  NA   TL    MAYO
+6 1046_TCX        AD     6   F  72   2 9.0  NA   TL    MAYO</code></pre>
+</div>
+<div id="dataset-structure" class="section level2 unnumbered">
+<h2>Dataset structure</h2>
+<p>The very first thing to do is to explore the dataset, in particular the number of rows/columns and the type of columns. We can do it through <code>str()</code>, which returns the dimensions of the dataframe and some info about each column.
+<br>
+Here it is:</p>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="tidyverse-manage.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>&#39;data.frame&#39;:   1493 obs. of  10 variables:
+ $ SampleID : chr  &quot;1005_TCX&quot; &quot;1019_TCX&quot; &quot;1029_TCX&quot; &quot;1034_TCX&quot; ...
+ $ Diagnosis: chr  &quot;AD&quot; &quot;AD&quot; &quot;AD&quot; &quot;AD&quot; ...
+ $ Braak    : num  6 6 6 6 5 6 5.5 6 6 5 ...
+ $ sex      : chr  &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; ...
+ $ AOD      : num  90 86 69 88 90 72 85 82 77 90 ...
+ $ PMI      : num  8 4 4 5 NA 2 NA 15 NA NA ...
+ $ RIN      : num  8.6 7.8 9.7 8.9 8.4 9 8 10 8.6 7.9 ...
+ $ CDR      : num  NA NA NA NA NA NA NA NA NA NA ...
+ $ Area     : chr  &quot;TL&quot; &quot;TL&quot; &quot;TL&quot; &quot;TL&quot; ...
+ $ dataset  : chr  &quot;MAYO&quot; &quot;MAYO&quot; &quot;MAYO&quot; &quot;MAYO&quot; ...</code></pre>
+<p>You usually know what data you have in your dataset, which variables etc. As this is a downloaded table and it is my first time looking at it, I have to admit that we have to discover few things ahahah</p>
+<p class="plist">
+What can we say about this dataframe?
+</p>
+<ul>
+<li>
+It has 1493 observation and 10 variables
+</li>
+<li>
+Variable SampleID should be the unique identifier of the sample (we should check it)
+</li>
+<li>
+Diagnosis, sex, Area and dataset column can be categorical data, so we should convert them to factors
+</li>
+<li>
+We have NAs in some variables. I see your face asking yourself “What the hell are NAs?”. Don’t worry, we’ll explain it in a bit
+</li>
+</ul>
+<p>Let’s now check if SampleID are unique identifiers; to do it, we evaluate whether the number of unique values in that column is equal to the number of total values of that column:</p>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="tidyverse-manage.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(df<span class="sc">$</span>SampleID)) <span class="sc">==</span> <span class="fu">length</span>(df<span class="sc">$</span>SampleID)</span></code></pre></div>
+<pre class="code-out"><code>[1] TRUE</code></pre>
+<p>Yes, they are unique identifiers.</p>
+<div id="change-column-type" class="section level3 unnumbered">
+<h3>Change column type</h3>
+<p>Next, we transform some chr columns to factor, this has 2 main advantages: first of all, factors are treated differently in some functions (expecially plotting) and they occupy less memory in you PC.
+<br>
+“Factors?! Why are you telling me about this data type now?” Yes, this is another data type, but don’t worry, you just have to know the two advantages aforementioned and how to create it (we will see it now).
+<br>
+An you know what?! As I know you’re doing great, let’s introduce our first function of the magic tidyverse world: <code>mutate</code>:</p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="tidyverse-manage.html#cb373-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb373-2"><a href="tidyverse-manage.html#cb373-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;Diagnosis&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Diagnosis),</span>
+<span id="cb373-3"><a href="tidyverse-manage.html#cb373-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb373-4"><a href="tidyverse-manage.html#cb373-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Area),</span>
+<span id="cb373-5"><a href="tidyverse-manage.html#cb373-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(dataset))</span>
+<span id="cb373-6"><a href="tidyverse-manage.html#cb373-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb373-7"><a href="tidyverse-manage.html#cb373-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>&#39;data.frame&#39;:   1493 obs. of  10 variables:
+ $ SampleID : chr  &quot;1005_TCX&quot; &quot;1019_TCX&quot; &quot;1029_TCX&quot; &quot;1034_TCX&quot; ...
+ $ Diagnosis: Factor w/ 2 levels &quot;AD&quot;,&quot;Control&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+ $ Braak    : num  6 6 6 6 5 6 5.5 6 6 5 ...
+ $ sex      : Factor w/ 2 levels &quot;F&quot;,&quot;M&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+ $ AOD      : num  90 86 69 88 90 72 85 82 77 90 ...
+ $ PMI      : num  8 4 4 5 NA 2 NA 15 NA NA ...
+ $ RIN      : num  8.6 7.8 9.7 8.9 8.4 9 8 10 8.6 7.9 ...
+ $ CDR      : num  NA NA NA NA NA NA NA NA NA NA ...
+ $ Area     : Factor w/ 6 levels &quot;BM10&quot;,&quot;BM22&quot;,..: 6 6 6 6 6 6 6 6 6 6 ...
+ $ dataset  : Factor w/ 3 levels &quot;MAYO&quot;,&quot;MSBB&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<p class="plist">
+Great! It worked! Let’s dissect this code:
+</p>
+<ol>
+<li>
+<code>df &lt;-</code>: we reassign the result to the same variable (overwriting it)
+</li>
+<li>
+<code>df %&gt;%</code>: this is a feature of <em>purr</em>, a package inside tidyverse, that takes what is at the left of <code>%&gt;%</code> and pass it as the first input of the function after the symbol. We could have written this code in just one line, but in this way is more readable
+</li>
+<li>
+<code>mutata(</code>: we use the function mutate, with df as first input (implicit thanks to %&gt;%). This function is used to create <strong>new column/s</strong> in the dataframe; if the column already exists (as in our case), it is overwritten
+</li>
+<li>
+<code>"Diagnosis" = factor(Diagnosis)</code>
+</li>
+: I take this as example, as this function has this structure <code>"new_column" = something</code>. In this case, we create (overwrite) column Diagnosis with <code>factor(Diagnosis)</code>. <strong>To note</strong>: in tidyverse functions, the column of the dataframe can be accessed by calling only the name of the column, and not df$name_of_the_column.
+<li>
+<code>factor(Diagnosis)</code>: it takes as input the column Diagnosis and transform it from chr to Factor
+</li>
+</ol>
+<p>And what can we say about the result?
+<br>
+As you can see, the four columns we changed inside <code>mutate</code> has now changed their output: from chr they became Factor w/ n levels and a bunch of numbers instead of the values. I’m sure you have already understood what does it mean, but to be sure: with “levels”, R stores the unique values of that vector (remember, each column of a dataframe is a vector!), and then it uses, for each element, integers to refer to the corresponding levels. This ensure memory optimization (integers takes less memory/space than words).
+<br>
+But, don’t worry, when you ask R to visualize the values of a factor, it returns the value and not the numbers:</p>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="tidyverse-manage.html#cb375-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Diagnosis[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre class="code-out"><code>[1] AD AD AD AD AD
+Levels: AD Control</code></pre>
+</div>
+<div id="reorder-levels-of-a-factor" class="section level3 unnumbered">
+<h3>Reorder levels of a factor</h3>
+<p>There is a cool feature about factors: you can order the levels of it. In fact, by default levels are in alphabetical order. We can see it here, using the function <code>levels()</code>:</p>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="tidyverse-manage.html#cb377-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>Diagnosis)</span></code></pre></div>
+<pre class="code-out"><code>[1] &quot;AD&quot;      &quot;Control&quot;</code></pre>
+<p>Sometimes, it is useful to change the order of them: think about times (20 weeks comes before 3 days alphabetically), or having a control reference as first in plots (when plotting categorical variable, the order of the levels is the order in the plot). <br>
+So, let’s see how we can change the order of the levels using <code>factor</code>:</p>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="tidyverse-manage.html#cb379-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Diagnosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Diagnosis, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;AD&quot;</span>), <span class="at">ordered =</span> T)</span>
+<span id="cb379-2"><a href="tidyverse-manage.html#cb379-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>&#39;data.frame&#39;:   1493 obs. of  10 variables:
+ $ SampleID : chr  &quot;1005_TCX&quot; &quot;1019_TCX&quot; &quot;1029_TCX&quot; &quot;1034_TCX&quot; ...
+ $ Diagnosis: Ord.factor w/ 2 levels &quot;Control&quot;&lt;&quot;AD&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+ $ Braak    : num  6 6 6 6 5 6 5.5 6 6 5 ...
+ $ sex      : Factor w/ 2 levels &quot;F&quot;,&quot;M&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+ $ AOD      : num  90 86 69 88 90 72 85 82 77 90 ...
+ $ PMI      : num  8 4 4 5 NA 2 NA 15 NA NA ...
+ $ RIN      : num  8.6 7.8 9.7 8.9 8.4 9 8 10 8.6 7.9 ...
+ $ CDR      : num  NA NA NA NA NA NA NA NA NA NA ...
+ $ Area     : Factor w/ 6 levels &quot;BM10&quot;,&quot;BM22&quot;,..: 6 6 6 6 6 6 6 6 6 6 ...
+ $ dataset  : Factor w/ 3 levels &quot;MAYO&quot;,&quot;MSBB&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<p><em>“You are not using tidyverse now, why?”</em> Right, I used the standard R syntax to highlight the syntax difference with tidyverse: in fact, here I had to put <code>df$</code> into the function to explicit which column to convert. You can use whatever syntax you want, it does not matter at all; you will see shortly that sometimes tidyverse version is more clear.
+<br>
+Having said that, we can now see in the result of <code>str()</code> that now Diagnosis is an <em>Ord.factor w/ 2 levels “Control”&lt;“AD”</em>.</p>
+</div>
+</div>
+<div id="summary" class="section level2 unnumbered">
+<h2>Summary</h2>
+<p>Ok, now that we have fixed some columns, let’s evaluate the values of the dataframe, we will use <code>summary()</code>:</p>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="tidyverse-manage.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN             CDR           Area    
+ Length:1493        Control:626   Min.   :0.000   F:890   Min.   :53.00   Min.   : 1.000   Min.   : 1.00   Min.   :0.000   BM10 :233  
+ Class :character   AD     :867   1st Qu.:3.000   M:603   1st Qu.:79.00   1st Qu.: 3.917   1st Qu.: 5.60   1st Qu.:0.500   BM22 :238  
+ Mode  :character                 Median :4.000           Median :86.00   Median : 5.500   Median : 6.80   Median :2.000   BM36 :232  
+                                  Mean   :3.909           Mean   :83.59   Mean   : 7.471   Mean   : 6.67   Mean   :2.368   BM44 :227  
+                                  3rd Qu.:6.000           3rd Qu.:90.00   3rd Qu.: 9.167   3rd Qu.: 7.80   3rd Qu.:4.000   DLPFC:403  
+                                  Max.   :6.000           Max.   :90.00   Max.   :38.000   Max.   :10.00   Max.   :5.000   TL   :160  
+                                  NA&#39;s   :97                              NA&#39;s   :45                       NA&#39;s   :563                
+   dataset   
+ MAYO  :160  
+ MSBB  :930  
+ ROSMAP:403  
+             
+             
+             
+             </code></pre>
+<p class="plist">
+How does summary works? It depends on the type of data of the column:
+<p>
+<ul>
+<li>
+<em>Character</em>: it returns the length and the class (See SampleID)
+</li>
+<li>
+<em>Factor</em>: it returns the number of occurrence of each levels (see Diagnosis, sex, Area and dataset). That’s another reason to use factor over character/numeric when possible. You can easily see if there are imbalance in some categories/levels or not.
+</li>
+<li>
+<em>Numeric</em>: it returns some descriptive (See Braak and others). As you should know the data types you have inserted, you know the range of values you are expecting, so this function helps you to immediately evaluate the presence of some outliers.
+</li>
+<li>
+<em>Boolean</em>: it returns the occurrence of TRUE and FALSE (as a factor with 2 levels)
+</li>
+<ul>
+<p>Again, we have these NA’s… and now it’s the time to explain them.</p>
+</div>
+<div id="dealing-with-missing-values" class="section level2 unnumbered">
+<h2>Dealing with missing values</h2>
+<p>OPS, I already spoilered it ahahah. <code>NA</code> is the way R represent <strong>missing values</strong>.
+<br>
+In our example, we can see that we have different missing values in different columns, in particular in CDR where 1/3 of the total observations is missing.
+<br>
+How to deal with missing values is up to you. First of all, if you have collected the data it is a control on whether all your data are present (if not, you can go back and check why it is missing a data and fill it with a value, if you have it).<br>
+Usually, NA’s comes with downloaded data or data from different sources. You can decide if you want to delete all the observation with missing values, fill the missing values with another value (imputation) or accept missing values. There is not a <em>standard</em> on it, it is really up to you.
+<br></p>
+<p>If you want to exclude all rows that have a missing value in any of the column, you should use <code>na.omit</code> function (I won’t show it because I don’t want to apply this filter to our data, but it is important that you know this function).
+<br>
+Instead, I propose an example on how to delete rows that have missing values in column PMI. We will use the function <code>is.na()</code> that evaluates values of a vector and returns a boolean (TRUE/FALSE) vector on whether a value is NA or not:</p>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="tidyverse-manage.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Example of is.na</span></span>
+<span id="cb383-2"><a href="tidyverse-manage.html#cb383-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">12</span>))</span></code></pre></div>
+<pre class="code-out"><code>[1] FALSE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
+<p>You should now tell me how to use it to exclude rows from a dataframe based on whether a value of a column is NA or not.<br></p>
+<p>Here is you should have answered:</p>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="tidyverse-manage.html#cb385-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span><span class="fu">is.na</span>(df<span class="sc">$</span>PMI), ]</span>
+<span id="cb385-2"><a href="tidyverse-manage.html#cb385-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN              CDR           Area    
+ Length:1448        Control:612   Min.   :0.000   F:864   Min.   :58.00   Min.   : 1.000   Min.   : 1.000   Min.   :0.000   BM10 :233  
+ Class :character   AD     :836   1st Qu.:3.000   M:584   1st Qu.:79.00   1st Qu.: 3.917   1st Qu.: 5.600   1st Qu.:0.500   BM22 :238  
+ Mode  :character                 Median :4.000           Median :86.00   Median : 5.500   Median : 6.700   Median :2.000   BM36 :232  
+                                  Mean   :3.881           Mean   :83.65   Mean   : 7.471   Mean   : 6.623   Mean   :2.368   BM44 :227  
+                                  3rd Qu.:6.000           3rd Qu.:90.00   3rd Qu.: 9.167   3rd Qu.: 7.800   3rd Qu.:4.000   DLPFC:401  
+                                  Max.   :6.000           Max.   :90.00   Max.   :38.000   Max.   :10.000   Max.   :5.000   TL   :117  
+                                  NA&#39;s   :87                                                                NA&#39;s   :518                
+   dataset   
+ MAYO  :117  
+ MSBB  :930  
+ ROSMAP:401  
+             
+             
+             
+             </code></pre>
+<p>Great, we have no more NAs in PMI. If you don’t remember what <code>!</code> stands for, go back and check the <a href="boolean-chapter.html#boolean-chapter">boolean chapter</a>.
+<br></p>
+</div>
+<div id="filter-a-dataframe" class="section level2 unnumbered">
+<h2>Filter a dataframe</h2>
+<p>We have just filtered out some rows, and guess what?! Tidyverse has a function to filter values, it is called…… <code>filter</code>. <br>
+This function takes as input an expression that returns a vector of boolean. Let’s try it to retrieve a dataframe of control males with CDR greater than 4:</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="tidyverse-manage.html#cb387-1" aria-hidden="true" tabindex="-1"></a>df_male_ctrl_cdr4 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb387-2"><a href="tidyverse-manage.html#cb387-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diagnosis <span class="sc">==</span> <span class="st">&quot;Control&quot;</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> CDR <span class="sc">&gt;</span> <span class="dv">4</span>)</span>
+<span id="cb387-3"><a href="tidyverse-manage.html#cb387-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb387-4"><a href="tidyverse-manage.html#cb387-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_male_ctrl_cdr4)</span></code></pre></div>
+<pre class="code-out"><code>   SampleID           Diagnosis     Braak     sex        AOD          PMI             RIN             CDR       Area     dataset 
+ Length:3           Control:3   Min.   : NA   F:0   Min.   :89   Min.   :2.667   Min.   :4.900   Min.   :5   BM10 :1   MAYO  :0  
+ Class :character   AD     :0   1st Qu.: NA   M:3   1st Qu.:89   1st Qu.:2.667   1st Qu.:5.100   1st Qu.:5   BM22 :1   MSBB  :3  
+ Mode  :character               Median : NA         Median :89   Median :2.667   Median :5.300   Median :5   BM36 :1   ROSMAP:0  
+                                Mean   :NaN         Mean   :89   Mean   :2.667   Mean   :5.367   Mean   :5   BM44 :0             
+                                3rd Qu.: NA         3rd Qu.:89   3rd Qu.:2.667   3rd Qu.:5.600   3rd Qu.:5   DLPFC:0             
+                                Max.   : NA         Max.   :89   Max.   :2.667   Max.   :5.900   Max.   :5   TL   :0             
+                                NA&#39;s   :3                                                                                        </code></pre>
+<p>We have just 3 observations that matches our request.<br></p>
+<p>We can also use functions to evaluate thresholds etc. For example, let’s take the female whose RIN is above 3rd quartile (75th quantile):</p>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="tidyverse-manage.html#cb389-1" aria-hidden="true" tabindex="-1"></a>df_female_rin3q <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb389-2"><a href="tidyverse-manage.html#cb389-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> RIN <span class="sc">&gt;</span> <span class="fu">quantile</span>(df<span class="sc">$</span>RIN, <span class="at">p =</span> <span class="fl">0.75</span>))</span>
+<span id="cb389-3"><a href="tidyverse-manage.html#cb389-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb389-4"><a href="tidyverse-manage.html#cb389-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_female_rin3q)</span></code></pre></div>
+<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN              CDR           Area   
+ Length:199         Control: 87   Min.   :0.000   F:199   Min.   :58.00   Min.   : 1.000   Min.   : 7.900   Min.   :0.000   BM10 :13  
+ Class :character   AD     :112   1st Qu.:3.000   M:  0   1st Qu.:83.00   1st Qu.: 3.500   1st Qu.: 8.100   1st Qu.:0.500   BM22 : 9  
+ Mode  :character                 Median :4.000           Median :88.00   Median : 4.750   Median : 8.500   Median :2.000   BM36 :14  
+                                  Mean   :3.899           Mean   :85.07   Mean   : 5.855   Mean   : 8.708   Mean   :1.978   BM44 :54  
+                                  3rd Qu.:5.000           3rd Qu.:90.00   3rd Qu.: 6.500   3rd Qu.: 9.200   3rd Qu.:3.000   DLPFC:64  
+                                  Max.   :6.000           Max.   :90.00   Max.   :30.000   Max.   :10.000   Max.   :5.000   TL   :45  
+                                  NA&#39;s   :10                                                                NA&#39;s   :109               
+   dataset  
+ MAYO  :45  
+ MSBB  :90  
+ ROSMAP:64  
+            
+            
+            
+            </code></pre>
+<p>There are 199 female samples with a RIN above 3rd quartile. We get it thanks to <code>quantile</code> function, which accept a vector and returns the quartile values; if you want a particular quantile (as in our case), you can give as input <code>p</code>, which is the quantile you want to calculate.</p>
+</div>
+<div id="sort-for-the-value-of-a-column" class="section level2 unnumbered">
+<h2>Sort for the value of a column</h2>
+<p>You can also sort the entire dataframe based on the values of a column (or more columns if ties are present). We do it through <code>arrange</code> function of tidyverse. <br>
+For example, let’s sort the dataframe based on RIN:</p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="tidyverse-manage.html#cb391-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb391-2"><a href="tidyverse-manage.html#cb391-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(RIN) <span class="sc">%&gt;%</span></span>
+<span id="cb391-3"><a href="tidyverse-manage.html#cb391-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre class="code-out"><code>               SampleID Diagnosis Braak sex AOD       PMI RIN CDR Area dataset
+1          hB_RNA_12624        AD     6   F  90  3.250000 1.0   4 BM10    MSBB
+2          hB_RNA_12768        AD     6   M  82  6.833333 1.5   4 BM10    MSBB
+3          hB_RNA_12695        AD     3   F  90  2.750000 1.8   3 BM10    MSBB
+4           hB_RNA_8405        AD     5   F  85  9.166667 2.0   3 BM44    MSBB
+5          hB_RNA_12615        AD     6   F  84  8.000000 2.1   3 BM10    MSBB
+6          hB_RNA_10902        AD     5   F  73  7.333333 2.2   5 BM36    MSBB
+7           hB_RNA_9005        AD     6   M  69  4.166667 2.2   5 BM44    MSBB
+8          hB_RNA_10782        AD     5   F  90 11.833333 2.3   3 BM36    MSBB
+9  hB_RNA_10782_L43C014        AD     5   F  90 11.833333 2.3   3 BM36    MSBB
+10          hB_RNA_4341        AD     4   F  90  6.000000 2.4   4 BM44    MSBB</code></pre>
+<p class="plist">
+There are few consideration about this code:
+</p>
+<ul>
+<li>
+We have sorted df based on RIN in an <em>ascending</em> order. If you want to sort the values in a descending way, you have to wrap the name of the column into <code>desc</code>, as <code>arrange(desc(RIN))</code>
+</li>
+<li>
+We piped (the symbol <code>%&gt;%</code> is also called <strong>pipe</strong>) the output of <code>arrange</code> to <code>head</code> function, to get only top 10 rows to visualize
+</li>
+<li>
+Row 6 and 7 have the same RIN value, in this case we can add another column to <code>arrange</code> and use it to sort ties, as <code>arrange(RIN, PMI)</code>
+</li>
+</ul>
+</div>
+<div id="merge-two-columns" class="section level2 unnumbered">
+<h2>Merge two columns</h2>
+<p>Sometimes, you want to merge two columns, and guess what?! There is a function for it ahahah
+<br>
+Let’s merge Area and dataset columns using <code>unite()</code>:</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="tidyverse-manage.html#cb393-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb393-2"><a href="tidyverse-manage.html#cb393-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="at">col =</span> <span class="st">&quot;Area_dataset&quot;</span>, Area, dataset, </span>
+<span id="cb393-3"><a href="tidyverse-manage.html#cb393-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="at">remove =</span> T)</span>
+<span id="cb393-4"><a href="tidyverse-manage.html#cb393-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb393-5"><a href="tidyverse-manage.html#cb393-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>  SampleID Diagnosis Braak sex AOD PMI  RIN CDR Area_dataset
+1 1005_TCX        AD     6   F  90   8  8.6  NA      TL_MAYO
+2 1019_TCX        AD     6   F  86   4  7.8  NA      TL_MAYO
+3 1029_TCX        AD     6   F  69   4  9.7  NA      TL_MAYO
+4 1034_TCX        AD     6   F  88   5  8.9  NA      TL_MAYO
+6 1046_TCX        AD     6   F  72   2  9.0  NA      TL_MAYO
+8 1085_TCX        AD     6   F  82  15 10.0  NA      TL_MAYO</code></pre>
+Tadaaa! Instead of two columns we now have just one. <br>
+<p class="plist">
+Looking at the code:
+</p>
+<ul>
+<li>
+<code>col =</code> was used to set the new column name
+</li>
+<li>
+<code>Area, dataset</code> were the two columns to merge. BUT, you can merge more than two columns, simply continue adding column names separated by a comma
+</li>
+<li>
+<code>sep = "_"</code> was used to set the separator between the values of the columns (in our case, the underscore)
+</li>
+<li>
+<code>remove = T</code> was used to tell R to remove the columns that we have merged. If set to FALSE, the original columns are kept in the dataframe and the merged column is added
+</li>
+</ul>
+</div>
+<div id="split-two-columns" class="section level2 unnumbered">
+<h2>Split two columns</h2>
+<p>Obviously, there is also a function to split a column based on a patter: <code>separate</code>. <br>
+We use it to separate the newly created Area_dataset column into the original ones:</p>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="tidyverse-manage.html#cb395-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb395-2"><a href="tidyverse-manage.html#cb395-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> Area_dataset, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;Area&quot;</span>, <span class="st">&quot;dataset&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="at">remove =</span> F) <span class="sc">%&gt;%</span></span>
+<span id="cb395-3"><a href="tidyverse-manage.html#cb395-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Area),</span>
+<span id="cb395-4"><a href="tidyverse-manage.html#cb395-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(dataset))</span>
+<span id="cb395-5"><a href="tidyverse-manage.html#cb395-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb395-6"><a href="tidyverse-manage.html#cb395-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>  SampleID Diagnosis Braak sex AOD PMI  RIN CDR Area_dataset Area dataset
+1 1005_TCX        AD     6   F  90   8  8.6  NA      TL_MAYO   TL    MAYO
+2 1019_TCX        AD     6   F  86   4  7.8  NA      TL_MAYO   TL    MAYO
+3 1029_TCX        AD     6   F  69   4  9.7  NA      TL_MAYO   TL    MAYO
+4 1034_TCX        AD     6   F  88   5  8.9  NA      TL_MAYO   TL    MAYO
+6 1046_TCX        AD     6   F  72   2  9.0  NA      TL_MAYO   TL    MAYO
+8 1085_TCX        AD     6   F  82  15 10.0  NA      TL_MAYO   TL    MAYO</code></pre>
+<p>Here it is! We have regained the original columns as well as the merged one.
+<br>
+As you may have guessed, <code>into =</code> is used to set the names of the columns that are created by this function.</p>
+</div>
+<div id="merge-two-dataframes" class="section level2 unnumbered">
+<h2>Merge two dataframes</h2>
+<p>To conclude this chapter, we will see how to merge two dataframes based on the values of a common column. <br>
+This is useful when, for example, you have the output of a differential gene expression with ensemble gene id and another dataframe which associates the ensemble gene ids with gene names, chromosome position etc etc. In this way, you can bring the information of the second dataframe into the first one.
+<br>
+In our case, I found in the paper the extended names of the Area abbreviations, and I want to add this info to our table. To do so, let’s first create the dataframe of abbreviations and full names:</p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="tidyverse-manage.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create vectors</span></span>
+<span id="cb397-2"><a href="tidyverse-manage.html#cb397-2" aria-hidden="true" tabindex="-1"></a>abbreviations <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;BM10&quot;</span>, <span class="st">&quot;BM22&quot;</span>, <span class="st">&quot;BM36&quot;</span>, <span class="st">&quot;BM44&quot;</span>, <span class="st">&quot;DLPFC&quot;</span>, <span class="st">&quot;TL&quot;</span>)</span>
+<span id="cb397-3"><a href="tidyverse-manage.html#cb397-3" aria-hidden="true" tabindex="-1"></a>full_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Broadmann area 10&quot;</span>, <span class="st">&quot;Broadmann area 22&quot;</span>, <span class="st">&quot;Broadmann area 36&quot;</span>, <span class="st">&quot;Broadmann area 44&quot;</span>,  <span class="st">&quot;Dorsolateral prefronal cortex&quot;</span>, <span class="st">&quot;Temporal lobe&quot;</span>)</span>
+<span id="cb397-4"><a href="tidyverse-manage.html#cb397-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb397-5"><a href="tidyverse-manage.html#cb397-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create dataframe</span></span>
+<span id="cb397-6"><a href="tidyverse-manage.html#cb397-6" aria-hidden="true" tabindex="-1"></a>area_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(abbreviations, full_name)</span>
+<span id="cb397-7"><a href="tidyverse-manage.html#cb397-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb397-8"><a href="tidyverse-manage.html#cb397-8" aria-hidden="true" tabindex="-1"></a>area_df</span></code></pre></div>
+<pre class="code-out"><code>  abbreviations                     full_name
+1          BM10             Broadmann area 10
+2          BM22             Broadmann area 22
+3          BM36             Broadmann area 36
+4          BM44             Broadmann area 44
+5         DLPFC Dorsolateral prefronal cortex
+6            TL                 Temporal lobe</code></pre>
+<p>Next, to insert full_name info into our original dataframe we have to use one of the <code>join</code> functions from <code>dplyr</code> package of the tidyverse universe:</p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="tidyverse-manage.html#cb399-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb399-2"><a href="tidyverse-manage.html#cb399-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="at">y =</span> area_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="st">&quot;abbreviations&quot;</span>))</span>
+<span id="cb399-3"><a href="tidyverse-manage.html#cb399-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb399-4"><a href="tidyverse-manage.html#cb399-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>  SampleID Diagnosis Braak sex AOD PMI  RIN CDR Area_dataset Area dataset     full_name
+1 1005_TCX        AD     6   F  90   8  8.6  NA      TL_MAYO   TL    MAYO Temporal lobe
+2 1019_TCX        AD     6   F  86   4  7.8  NA      TL_MAYO   TL    MAYO Temporal lobe
+3 1029_TCX        AD     6   F  69   4  9.7  NA      TL_MAYO   TL    MAYO Temporal lobe
+4 1034_TCX        AD     6   F  88   5  8.9  NA      TL_MAYO   TL    MAYO Temporal lobe
+5 1046_TCX        AD     6   F  72   2  9.0  NA      TL_MAYO   TL    MAYO Temporal lobe
+6 1085_TCX        AD     6   F  82  15 10.0  NA      TL_MAYO   TL    MAYO Temporal lobe</code></pre>
+<p class="plist">
+Just a couple of comments on the code:
+</p>
+<ul>
+<li>
+<code>y =</code> is used to set the dataframe that has to be joined
+</li>
+<li>
+<code>by =</code> is used to declare which variable of the first dataframe is to match in the second dataframe (in our case Area from the first with abbreviations in the second)
+</li>
+<li>
+There are many <em>join</em> functions:
+<ul>
+<li>
+<code>left_join</code> (the one we used): keep all the rows of the first dataframe, even if there is not the correspondence in the second on, and only the rows of the second one that have a match in the first
+</li>
+<li>
+<code>right_join</code>: keep all the rows of the second dataframe, even if there is not the correspondence in the first one, and only the rows of the first one that have a match in the second
+</li>
+<li>
+<code>inner_join</code>: keep only the rows that have common values between the two dataframe in the column used to merge
+</li>
+<li>
+<code>full_join</code>: keep every rows of both dataframes
+</li>
+</ul>
+</li>
+</ul>
+<p>This concept is easier to explain with this image:
+<img src="images/png/join_functions.png" height=30%></p>
+</div>
+<div id="exercises-6" class="section level2 unnumbered">
+<h2>Exercises</h2>
+<p>Woah… this was tough. Let’s do some exercises to strengthen these concepts.</p>
+<div class="exercise">
+<p><span id="exr:read-spreadheet" class="exercise"><strong>Exercise 12.1  </strong></span>The first exercise is not a practical exercise sorry… I want you to read this very short <a href="https://www.biostat.wisc.edu/~kbroman/publications/dataorg.pdf" target="_blank">paper</a> on how to structure tabular data. I is mainly on Excel (which you know… NEVER use it anymore to do analysis), but the key concepts must be applied to every tabular data you are creating.
+<br>
+Next, take one of your data file from an experiment and try to be consistent with what you have just read.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:filter-or" class="exercise"><strong>Exercise 12.2  </strong></span>Take our dataset and filter for males samples of Temporal lobe and female samples of Dorsolateral prefronal cortex.<br>
+Change full_name to a factor</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="tidyverse-manage.html#cb401-1" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb401-2"><a href="tidyverse-manage.html#cb401-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>((sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> full_name <span class="sc">==</span> <span class="st">&quot;Temporal lobe&quot;</span>) <span class="sc">|</span></span>
+<span id="cb401-3"><a href="tidyverse-manage.html#cb401-3" aria-hidden="true" tabindex="-1"></a>           (sex <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> full_name <span class="sc">==</span> <span class="st">&quot;Dorsolateral prefronal cortex&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb401-4"><a href="tidyverse-manage.html#cb401-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;full_name&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(full_name))</span>
+<span id="cb401-5"><a href="tidyverse-manage.html#cb401-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb401-6"><a href="tidyverse-manage.html#cb401-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_filtered)</span></code></pre></div>
+<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN              CDR      Area_dataset      
+ Length:318         Control:152   Min.   :0.000   F:263   Min.   :61.00   Min.   : 1.000   Min.   : 5.000   Min.   : NA   Length:318        
+ Class :character   AD     :166   1st Qu.:3.000   M: 55   1st Qu.:84.45   1st Qu.: 4.021   1st Qu.: 6.500   1st Qu.: NA   Class :character  
+ Mode  :character                 Median :4.000           Median :89.20   Median : 5.375   Median : 7.400   Median : NA   Mode  :character  
+                                  Mean   :3.751           Mean   :86.37   Mean   : 7.143   Mean   : 7.271   Mean   :NaN                     
+                                  3rd Qu.:5.000           3rd Qu.:90.00   3rd Qu.: 8.167   3rd Qu.: 8.000   3rd Qu.: NA                     
+                                  Max.   :6.000           Max.   :90.00   Max.   :33.000   Max.   :10.000   Max.   : NA                     
+                                  NA&#39;s   :25                                                                NA&#39;s   :318                     
+     Area             dataset                            full_name  
+ Length:318         MAYO  : 55   Dorsolateral prefronal cortex:263  
+ Class :character   MSBB  :  0   Temporal lobe                : 55  
+ Mode  :character   ROSMAP:263                                      
+                                                                    
+                                                                    
+                                                                    
+                                                                    </code></pre>
+It is important to note that, since we have one condition OR another, and both have multiple conditions in them, we must use parenthesis to separate the conditions to evaluate. In fact, it works as in math: first parenthesis and then from left to right.
+</details>
+<p><br>
+This was just an introduction with some cool stuff you can do with tidyverse. In the next chapter we will see more functions that can help us in doing statistics and other useful operations.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="functions-packages-and-reproducibility.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="aggregate-data-with-tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

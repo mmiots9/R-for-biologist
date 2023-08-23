@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>15 Introduction to statistics in R | Learn R for biologist</title>
+  <meta name="description" content="To you, who never gives up, for your future. You can make it!" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="15 Introduction to statistics in R | Learn R for biologist" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="To you, who never gives up, for your future. You can make it!" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="15 Introduction to statistics in R | Learn R for biologist" />
+  
+  <meta name="twitter:description" content="To you, who never gives up, for your future. You can make it!" />
+  
+
+<meta name="author" content="Matteo Miotto" />
+
+
+<meta name="date" content="2023-08-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="plot-our-data-with-ggplot2.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for biologist</a></li>
+<li class="divider"></li>
+<li><a href="index.html#about" id="toc-about">About</a></li>
+<li><a href="installation.html#installation" id="toc-installation"><span class="toc-section-number">1</span> Installation</a></li>
+<li><a href="first-step-in-rstudio.html#first-step-in-rstudio" id="toc-first-step-in-rstudio"><span class="toc-section-number">2</span> First step in RStudio</a>
+<ul>
+<li><a href="first-step-in-rstudio.html#console" id="toc-console">Console</a></li>
+</ul></li>
+<li><a href="variables.html#variables" id="toc-variables"><span class="toc-section-number">3</span> Variables</a>
+<ul>
+<li><a href="variables.html#create-a-variable" id="toc-create-a-variable">Create a variable</a></li>
+<li><a href="variables.html#use-a-variable" id="toc-use-a-variable">Use a variable</a></li>
+<li><a href="variables.html#variable-names" id="toc-variable-names">Variable names</a></li>
+<li><a href="variables.html#overwriting-variables" id="toc-overwriting-variables">Overwriting variables</a></li>
+<li><a href="variables.html#list-all-variables" id="toc-list-all-variables">List all variables</a></li>
+<li><a href="variables.html#delete-variables" id="toc-delete-variables">Delete variables</a></li>
+<li><a href="variables.html#type-of-variables" id="toc-type-of-variables">Type of variables</a></li>
+<li><a href="variables.html#exercises" id="toc-exercises">Exercises</a></li>
+</ul></li>
+<li><a href="scripts-chapter.html#scripts-chapter" id="toc-scripts-chapter"><span class="toc-section-number">4</span> Scripts</a>
+<ul>
+<li><a href="scripts-chapter.html#save" id="toc-save">Save</a></li>
+<li><a href="scripts-chapter.html#source-a-script" id="toc-source-a-script">Source a script</a></li>
+</ul></li>
+<li><a href="numbers.html#numbers" id="toc-numbers"><span class="toc-section-number">5</span> Numbers</a>
+<ul>
+<li><a href="numbers.html#operations" id="toc-operations">Operations</a></li>
+<li><a href="numbers.html#rounding" id="toc-rounding">Rounding</a></li>
+<li><a href="numbers.html#tranform-to-type-number" id="toc-tranform-to-type-number">Tranform to type number</a></li>
+<li><a href="numbers.html#exercises-1" id="toc-exercises-1">Exercises</a></li>
+</ul></li>
+<li><a href="character.html#character" id="toc-character"><span class="toc-section-number">6</span> Character</a>
+<ul>
+<li><a href="character.html#concatenate-strings" id="toc-concatenate-strings">Concatenate strings</a></li>
+<li><a href="character.html#substring" id="toc-substring">Substring</a></li>
+<li><a href="character.html#substitution" id="toc-substitution">Substitution</a></li>
+<li><a href="character.html#grep" id="toc-grep">Grep</a></li>
+<li><a href="character.html#transform-to-type-character" id="toc-transform-to-type-character">Transform to type character</a></li>
+<li><a href="character.html#exercises-2" id="toc-exercises-2">Exercises</a></li>
+</ul></li>
+<li><a href="boolean-chapter.html#boolean-chapter" id="toc-boolean-chapter"><span class="toc-section-number">7</span> Boolean</a>
+<ul>
+<li><a href="boolean-chapter.html#boolean-as-results-of-comparison" id="toc-boolean-as-results-of-comparison">Boolean as results of comparison</a></li>
+<li><a href="boolean-chapter.html#logical-operator" id="toc-logical-operator">Logical operator</a>
+<ul>
+<li><a href="boolean-chapter.html#and" id="toc-and">AND</a></li>
+<li><a href="boolean-chapter.html#or" id="toc-or">OR</a></li>
+<li><a href="boolean-chapter.html#not" id="toc-not">NOT</a></li>
+</ul></li>
+<li><a href="boolean-chapter.html#exercises-3" id="toc-exercises-3">Exercises</a></li>
+</ul></li>
+<li><a href="vectors.html#vectors" id="toc-vectors"><span class="toc-section-number">8</span> Vectors</a>
+<ul>
+<li><a href="vectors.html#named-vectors" id="toc-named-vectors">Named vectors</a></li>
+<li><a href="vectors.html#indexing" id="toc-indexing">Indexing</a>
+<ul>
+<li><a href="vectors.html#named-vectors-1" id="toc-named-vectors-1">Named vectors</a></li>
+<li><a href="vectors.html#slicing-vectors" id="toc-slicing-vectors">Slicing</a></li>
+<li><a href="vectors.html#using-logicals" id="toc-using-logicals">Using logicals</a></li>
+</ul></li>
+<li><a href="vectors.html#one-function-can-be-applied-to-all-elements" id="toc-one-function-can-be-applied-to-all-elements">One function can be applied to all elements</a></li>
+<li><a href="vectors.html#functions-specific-of-vectors" id="toc-functions-specific-of-vectors">Functions specific of vectors</a>
+<ul>
+<li><a href="vectors.html#sorting-a-vector" id="toc-sorting-a-vector">Sorting a vector</a></li>
+<li><a href="vectors.html#unique-values" id="toc-unique-values">Unique values</a></li>
+<li><a href="vectors.html#logical-vectors-sum-and-mean" id="toc-logical-vectors-sum-and-mean">Logical vectors sum and mean</a></li>
+</ul></li>
+<li><a href="vectors.html#operations-between-vectors" id="toc-operations-between-vectors">Operations between vectors</a>
+<ul>
+<li><a href="vectors.html#mathematical" id="toc-mathematical">Mathematical</a></li>
+<li><a href="vectors.html#different-and-common-elements" id="toc-different-and-common-elements">Different and common elements</a></li>
+<li><a href="vectors.html#in" id="toc-in">%in%</a></li>
+<li><a href="vectors.html#match" id="toc-match">Match</a></li>
+</ul></li>
+<li><a href="vectors.html#exercises-4" id="toc-exercises-4">Exercises</a></li>
+</ul></li>
+<li><a href="matrices.html#matrices" id="toc-matrices"><span class="toc-section-number">9</span> Matrices</a>
+<ul>
+<li><a href="matrices.html#create-a-matrix" id="toc-create-a-matrix">Create a matrix</a>
+<ul>
+<li><a href="matrices.html#binding" id="toc-binding">Binding</a></li>
+<li><a href="matrices.html#transform-into-a-matrix" id="toc-transform-into-a-matrix">Transform into a matrix</a></li>
+</ul></li>
+<li><a href="matrices.html#rownames-and-colnames" id="toc-rownames-and-colnames">Rownames and colnames</a>
+<ul>
+<li><a href="matrices.html#set-and-edit-row-and-column-names" id="toc-set-and-edit-row-and-column-names">Set and edit row and column names</a></li>
+</ul></li>
+<li><a href="matrices.html#indexing-matrices" id="toc-indexing-matrices">Indexing</a>
+<ul>
+<li><a href="matrices.html#slicing" id="toc-slicing">Slicing</a></li>
+<li><a href="matrices.html#using-names" id="toc-using-names">Using names</a></li>
+<li><a href="matrices.html#using-logicals-1" id="toc-using-logicals-1">Using logicals</a></li>
+</ul></li>
+<li><a href="matrices.html#functions-for-all-matrix" id="toc-functions-for-all-matrix">Functions for all matrix</a>
+<ul>
+<li><a href="matrices.html#head-tail-matrices" id="toc-head-tail-matrices">Head/Tail</a></li>
+<li><a href="matrices.html#dim-nrow-ncol" id="toc-dim-nrow-ncol">Dim, nrow, ncol</a></li>
+<li><a href="matrices.html#summary-and-transpose" id="toc-summary-and-transpose">Summary and transpose</a></li>
+<li><a href="matrices.html#sum-max-min" id="toc-sum-max-min">Sum, Max, Min, …</a></li>
+</ul></li>
+<li><a href="matrices.html#apply-a-function-to-all-rows-or-columns" id="toc-apply-a-function-to-all-rows-or-columns">Apply a function to all rows or columns</a></li>
+<li><a href="matrices.html#exercises-5" id="toc-exercises-5">Exercises</a></li>
+</ul></li>
+<li><a href="data-frames.html#data-frames" id="toc-data-frames"><span class="toc-section-number">10</span> Data frames</a>
+<ul>
+<li><a href="data-frames.html#create-a-data.frame" id="toc-create-a-data.frame">Create a data.frame</a>
+<ul>
+<li><a href="data-frames.html#from-matrix" id="toc-from-matrix">From matrix</a></li>
+<li><a href="data-frames.html#from-vectors" id="toc-from-vectors">From vectors</a></li>
+<li><a href="data-frames.html#from-file" id="toc-from-file">From file</a></li>
+</ul></li>
+<li><a href="data-frames.html#indexing-1" id="toc-indexing-1">Indexing</a></li>
+<li><a href="data-frames.html#create-a-new-column" id="toc-create-a-new-column">Create a new column</a></li>
+<li><a href="data-frames.html#delete-a-column" id="toc-delete-a-column">Delete a column</a></li>
+<li><a href="data-frames.html#export-a-data-frame" id="toc-export-a-data-frame">Export a data frame</a></li>
+</ul></li>
+<li><a href="functions-packages-and-reproducibility.html#functions-packages-and-reproducibility" id="toc-functions-packages-and-reproducibility"><span class="toc-section-number">11</span> Functions, packages and reproducibility</a>
+<ul>
+<li><a href="functions-packages-and-reproducibility.html#functions" id="toc-functions">Functions</a></li>
+<li><a href="functions-packages-and-reproducibility.html#packages" id="toc-packages">Packages</a>
+<ul>
+<li><a href="functions-packages-and-reproducibility.html#install-a-package" id="toc-install-a-package">Install a package</a></li>
+<li><a href="functions-packages-and-reproducibility.html#load-a-package" id="toc-load-a-package">Load a package</a></li>
+</ul></li>
+<li><a href="functions-packages-and-reproducibility.html#reproducibility" id="toc-reproducibility">Reproducibility</a>
+<ul>
+<li><a href="functions-packages-and-reproducibility.html#control-package-versions" id="toc-control-package-versions">Control package versions</a></li>
+<li><a href="functions-packages-and-reproducibility.html#session-info" id="toc-session-info">Session info</a></li>
+</ul></li>
+</ul></li>
+<li><a href="tidyverse-manage.html#tidyverse-manage" id="toc-tidyverse-manage"><span class="toc-section-number">12</span> Manage data with tidyverse</a>
+<ul>
+<li><a href="tidyverse-manage.html#r-notebook" id="toc-r-notebook">R notebook</a></li>
+<li><a href="tidyverse-manage.html#load-packages-and-data" id="toc-load-packages-and-data">Load packages and data</a></li>
+<li><a href="tidyverse-manage.html#dataset-structure" id="toc-dataset-structure">Dataset structure</a>
+<ul>
+<li><a href="tidyverse-manage.html#change-column-type" id="toc-change-column-type">Change column type</a></li>
+<li><a href="tidyverse-manage.html#reorder-levels-of-a-factor" id="toc-reorder-levels-of-a-factor">Reorder levels of a factor</a></li>
+</ul></li>
+<li><a href="tidyverse-manage.html#summary" id="toc-summary">Summary</a></li>
+<li><a href="tidyverse-manage.html#dealing-with-missing-values" id="toc-dealing-with-missing-values">Dealing with missing values</a></li>
+<li><a href="tidyverse-manage.html#filter-a-dataframe" id="toc-filter-a-dataframe">Filter a dataframe</a></li>
+<li><a href="tidyverse-manage.html#sort-for-the-value-of-a-column" id="toc-sort-for-the-value-of-a-column">Sort for the value of a column</a></li>
+<li><a href="tidyverse-manage.html#merge-two-columns" id="toc-merge-two-columns">Merge two columns</a></li>
+<li><a href="tidyverse-manage.html#split-two-columns" id="toc-split-two-columns">Split two columns</a></li>
+<li><a href="tidyverse-manage.html#merge-two-dataframes" id="toc-merge-two-dataframes">Merge two dataframes</a></li>
+<li><a href="tidyverse-manage.html#exercises-6" id="toc-exercises-6">Exercises</a></li>
+</ul></li>
+<li><a href="aggregate-data-with-tidyverse.html#aggregate-data-with-tidyverse" id="toc-aggregate-data-with-tidyverse"><span class="toc-section-number">13</span> Aggregate data with tidyverse</a>
+<ul>
+<li><a href="aggregate-data-with-tidyverse.html#table" id="toc-table">Table</a></li>
+<li><a href="aggregate-data-with-tidyverse.html#group-by-variables-and-summarize-values-of-another" id="toc-group-by-variables-and-summarize-values-of-another">Group by variables and summarize values of another</a></li>
+<li><a href="aggregate-data-with-tidyverse.html#expand-dataframe-column-using-pivot-wider" id="toc-expand-dataframe-column-using-pivot-wider">Expand dataframe column using pivot wider</a></li>
+<li><a href="aggregate-data-with-tidyverse.html#reshape-a-dataframe-with-pivot_longer" id="toc-reshape-a-dataframe-with-pivot_longer">Reshape a dataframe with pivot_longer</a></li>
+<li><a href="aggregate-data-with-tidyverse.html#exercises-7" id="toc-exercises-7">Exercises</a></li>
+</ul></li>
+<li><a href="plot-our-data-with-ggplot2.html#plot-our-data-with-ggplot2" id="toc-plot-our-data-with-ggplot2"><span class="toc-section-number">14</span> Plot our data with ggplot2</a>
+<ul>
+<li><a href="plot-our-data-with-ggplot2.html#command-structure" id="toc-command-structure">Command structure</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#type-of-graph-geom_-and-stat_" id="toc-type-of-graph-geom_-and-stat_">Type of graph (geom_ and stat_)</a>
+<ul>
+<li><a href="plot-our-data-with-ggplot2.html#mapping-values-to-graph-elements-aes" id="toc-mapping-values-to-graph-elements-aes">Mapping values to graph elements (aes)</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#change-the-stat-associated-to-the-graph" id="toc-change-the-stat-associated-to-the-graph">Change the “stat” associated to the graph</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#multiple-geometries-in-the-same-plot" id="toc-multiple-geometries-in-the-same-plot">Multiple geometries in the same plot</a></li>
+</ul></li>
+<li><a href="plot-our-data-with-ggplot2.html#change-axis-and-colors-scale_" id="toc-change-axis-and-colors-scale_">Change axis and colors (scale_)</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#add-title-and-change-labels-labs" id="toc-add-title-and-change-labels-labs">Add title and change labels (labs)</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#change-appearence-theme" id="toc-change-appearence-theme">Change appearence (theme)</a></li>
+<li><a href="plot-our-data-with-ggplot2.html#save-plot" id="toc-save-plot">Save plot</a></li>
+</ul></li>
+<li><a href="introduction-to-statistics-in-r.html#introduction-to-statistics-in-r" id="toc-introduction-to-statistics-in-r"><span class="toc-section-number">15</span> Introduction to statistics in R</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#evaluate-parametric-assumptions" id="toc-evaluate-parametric-assumptions">Evaluate parametric assumptions</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#visual-inspection" id="toc-visual-inspection">Visual inspection</a></li>
+<li><a href="introduction-to-statistics-in-r.html#no-outliers" id="toc-no-outliers">No outliers</a></li>
+<li><a href="introduction-to-statistics-in-r.html#normality" id="toc-normality">Normality</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#shapiro-wilk-normality-test" id="toc-shapiro-wilk-normality-test"><span class="toc-section-number">15.0.0.1</span> Shapiro-Wilk normality test</a></li>
+<li><a href="introduction-to-statistics-in-r.html#kolmogorov-smirnov-test" id="toc-kolmogorov-smirnov-test"><span class="toc-section-number">15.0.0.2</span> Kolmogorov-Smirnov test</a></li>
+</ul></li>
+<li><a href="introduction-to-statistics-in-r.html#homogeneity-of-variances-homoschedaticity" id="toc-homogeneity-of-variances-homoschedaticity">Homogeneity of variances (homoschedaticity)</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learn R for biologist</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-to-statistics-in-r" class="section level1" number="15">
+<h1><span class="header-section-number">15</span> Introduction to statistics in R</h1>
+<p>What a journey so far! And now, maybe the scariest thing for a researcher: statistics. <br>
+Don’t worry, thanks to R it is easier than ever; in fact, R is the best programming language for statistics, it has lot of built-in functions and other packages for computing the right statistic you want.
+<br>
+Here, I will do a brief introduction to statistical tests, focusing in next chapters on each type. So, first of all the choice of the right test is fundamental: here, you can see a scheme describing how to choose the right test depending on you design (you can download a pdf version <a href=images/pdf/statistical-tests.pdf" download>here</a>).</p>
+<p><img src="images/svg/statistical-tests.svg" height=50% alt="statistical tests schema"></p>
+<p>This scheme is huge, but should be your mantra while doing analysis and, in particular, <strong>when you are designing your experiment</strong>. Why so much emphasis?! Because you should decide the test, the sample size etc <u>prior</u> to perform the experiments: experimental design makes 90% of the work. Remember it!
+<br>
+That said, we can see that the most asked question in the schema is <em>“Parametric data?”</em>, so let’s discuss about it and how to assess wheteher our data are parametric or not.</p>
+<div id="evaluate-parametric-assumptions" class="section level2 unnumbered">
+<h2>Evaluate parametric assumptions</h2>
+<p class="plist">
+Depending on if the data are parametric or not, we will use different tests. Here are the 4 assumptions for data to be parametric:
+</p>
+<ol>
+<li>
+<u>Normality</u>: data in each group must be normally distributed
+</li>
+<li>
+<u>Homoschedasticity</u>: there must be equal variances between groups you are going to compare
+</li>
+<li>
+<u>Independency</u>: data belonging to a group should be independent
+</li>
+<li>
+<u>No outliers</u>: there should not be any outlier in any group.
+</li>
+</ol>
+<p>We will now see how to evaluate all the points except for 3, as there is no way to “measure” it and it depends on your design.
+<br>
+First of all, let’s import packages and data. We will now use a different dataset for these chapters, as the previous one was a sample-descriptive one, while here we want something with results. <br>
+Through &lt;a href”script/Stat-test-dataset_create” download&gt;this script</a> I created a custom dataset, which you can download <a href="data/Stat-test-dataset.csv" download>here</a></p>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="introduction-to-statistics-in-r.html#cb462-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
+<span id="cb462-2"><a href="introduction-to-statistics-in-r.html#cb462-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb462-3"><a href="introduction-to-statistics-in-r.html#cb462-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb462-4"><a href="introduction-to-statistics-in-r.html#cb462-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb462-5"><a href="introduction-to-statistics-in-r.html#cb462-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
+<span id="cb462-6"><a href="introduction-to-statistics-in-r.html#cb462-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Stat-test-dataset.csv&quot;</span>)</span>
+<span id="cb462-7"><a href="introduction-to-statistics-in-r.html#cb462-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb462-8"><a href="introduction-to-statistics-in-r.html#cb462-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Change come column types</span></span>
+<span id="cb462-9"><a href="introduction-to-statistics-in-r.html#cb462-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb462-10"><a href="introduction-to-statistics-in-r.html#cb462-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb462-11"><a href="introduction-to-statistics-in-r.html#cb462-11" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;treatment&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Untreated&quot;</span>, <span class="st">&quot;T1&quot;</span>)),</span>
+<span id="cb462-12"><a href="introduction-to-statistics-in-r.html#cb462-12" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Task1&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task1),</span>
+<span id="cb462-13"><a href="introduction-to-statistics-in-r.html#cb462-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Task2&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task2),</span>
+<span id="cb462-14"><a href="introduction-to-statistics-in-r.html#cb462-14" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb462-15"><a href="introduction-to-statistics-in-r.html#cb462-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb462-16"><a href="introduction-to-statistics-in-r.html#cb462-16" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>&#39;data.frame&#39;:   600 obs. of  7 variables:
+ $ sex      : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 1 2 1 2 1 2 1 2 1 ...
+ $ age      : int  3 3 3 3 3 3 3 3 3 3 ...
+ $ treatment: Factor w/ 2 levels &quot;Untreated&quot;,&quot;T1&quot;: 1 1 2 2 1 1 2 2 1 1 ...
+ $ weight   : num  6.43 3.42 4.97 4.63 7.31 3.27 5.58 3.27 5.9 4.22 ...
+ $ Task1    : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 2 1 1 1 2 2 2 2 1 2 ...
+ $ Task2    : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 2 1 1 2 2 1 1 2 2 2 ...
+ $ Task3    : num  222.4 202.3 36.7 221.8 178.8 ...</code></pre>
+<p class="plist">
+Let’s explain this dataset:
+</p>
+<ul>
+<li>
+sex, age, weight (g) and treatment are self explanatory. These can be data from a disease mouse model treated with a test drug
+</li>
+<li>
+Task1 and Task2: this score indicates whether the mouse successfully (1) did the task or not (0)
+</li>
+<li>
+Task3: this indicates the time spent by the mouse to complete the task, in seconds
+</li>
+</ul>
+<p>You can produce some plots at this point, if you want to explore the dataset. We will now move on to explore the parametric assumptions.</p>
+<p>For this example, we will test if for comparing both weight and Task3 between T1-treated males at age == 30 vs. Untreated we should use parametric or non-parametric tests; we will see in details all the others comparisons when we will Samplely see the statistical tests. So, just for now, we will extrapolate from the df the data of interest:</p>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="introduction-to-statistics-in-r.html#cb464-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb464-2"><a href="introduction-to-statistics-in-r.html#cb464-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span> <span class="sc">&amp;</span> age <span class="sc">==</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb464-3"><a href="introduction-to-statistics-in-r.html#cb464-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, age, treatment, weight, Task3)</span>
+<span id="cb464-4"><a href="introduction-to-statistics-in-r.html#cb464-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb464-5"><a href="introduction-to-statistics-in-r.html#cb464-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(male_30_weight_task3)</span></code></pre></div>
+<pre class="code-out"><code>   sex age treatment weight  Task3
+1 Male  30        T1  19.38 290.04
+2 Male  30 Untreated  19.17 123.19
+3 Male  30        T1  20.31  98.74
+4 Male  30 Untreated  18.76 148.15
+5 Male  30        T1  18.85 312.12
+6 Male  30 Untreated  19.98 183.93</code></pre>
+<p>Alright, here are the data we need. I used a function that we didn’t see in the tidyverse <a href="tidyverse-manage.html#tidyverse-manage">chapter</a>: <code>select</code>. It is used to select only specific columns of the dataset; in this case we use it to extrapolate columns of interest.</p>
+<div id="visual-inspection" class="section level3 unnumbered">
+<h3>Visual inspection</h3>
+<p>Visual inspection is always recommended, as it can give us an idea of how our data are distributed and the eventual presence of outliers. We will see boxplot, density plot and QQ plot (read about it <a href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot" target="_blank">here</a>).
+<br></p>
+<p>Here the code to produce the three plots:</p>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="introduction-to-statistics-in-r.html#cb466-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
+<span id="cb466-2"><a href="introduction-to-statistics-in-r.html#cb466-2" aria-hidden="true" tabindex="-1"></a>male_30_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb466-3"><a href="introduction-to-statistics-in-r.html#cb466-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb466-4"><a href="introduction-to-statistics-in-r.html#cb466-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb466-5"><a href="introduction-to-statistics-in-r.html#cb466-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb466-6"><a href="introduction-to-statistics-in-r.html#cb466-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb466-7"><a href="introduction-to-statistics-in-r.html#cb466-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-8"><a href="introduction-to-statistics-in-r.html#cb466-8" aria-hidden="true" tabindex="-1"></a>male_30_task3_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb466-9"><a href="introduction-to-statistics-in-r.html#cb466-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb466-10"><a href="introduction-to-statistics-in-r.html#cb466-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb466-11"><a href="introduction-to-statistics-in-r.html#cb466-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb466-12"><a href="introduction-to-statistics-in-r.html#cb466-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb466-13"><a href="introduction-to-statistics-in-r.html#cb466-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-14"><a href="introduction-to-statistics-in-r.html#cb466-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create density plots</span></span>
+<span id="cb466-15"><a href="introduction-to-statistics-in-r.html#cb466-15" aria-hidden="true" tabindex="-1"></a>male_30_weight_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb466-16"><a href="introduction-to-statistics-in-r.html#cb466-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb466-17"><a href="introduction-to-statistics-in-r.html#cb466-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb466-18"><a href="introduction-to-statistics-in-r.html#cb466-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb466-19"><a href="introduction-to-statistics-in-r.html#cb466-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb466-20"><a href="introduction-to-statistics-in-r.html#cb466-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-21"><a href="introduction-to-statistics-in-r.html#cb466-21" aria-hidden="true" tabindex="-1"></a>male_30_task3_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb466-22"><a href="introduction-to-statistics-in-r.html#cb466-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb466-23"><a href="introduction-to-statistics-in-r.html#cb466-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb466-24"><a href="introduction-to-statistics-in-r.html#cb466-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb466-25"><a href="introduction-to-statistics-in-r.html#cb466-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb466-26"><a href="introduction-to-statistics-in-r.html#cb466-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-27"><a href="introduction-to-statistics-in-r.html#cb466-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create QQ plots</span></span>
+<span id="cb466-28"><a href="introduction-to-statistics-in-r.html#cb466-28" aria-hidden="true" tabindex="-1"></a>male_30_weight_qq <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> weight, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb466-29"><a href="introduction-to-statistics-in-r.html#cb466-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb466-30"><a href="introduction-to-statistics-in-r.html#cb466-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb466-31"><a href="introduction-to-statistics-in-r.html#cb466-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb466-32"><a href="introduction-to-statistics-in-r.html#cb466-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb466-33"><a href="introduction-to-statistics-in-r.html#cb466-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>()</span>
+<span id="cb466-34"><a href="introduction-to-statistics-in-r.html#cb466-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-35"><a href="introduction-to-statistics-in-r.html#cb466-35" aria-hidden="true" tabindex="-1"></a>male_30_task3_qq <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> Task3, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb466-36"><a href="introduction-to-statistics-in-r.html#cb466-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb466-37"><a href="introduction-to-statistics-in-r.html#cb466-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb466-38"><a href="introduction-to-statistics-in-r.html#cb466-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb466-39"><a href="introduction-to-statistics-in-r.html#cb466-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb466-40"><a href="introduction-to-statistics-in-r.html#cb466-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>()</span>
+<span id="cb466-41"><a href="introduction-to-statistics-in-r.html#cb466-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-42"><a href="introduction-to-statistics-in-r.html#cb466-42" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot, male_30_weight_density, male_30_weight_qq,</span>
+<span id="cb466-43"><a href="introduction-to-statistics-in-r.html#cb466-43" aria-hidden="true" tabindex="-1"></a>          male_30_task3_boxplot, male_30_task3_density, male_30_task3_qq,</span>
+<span id="cb466-44"><a href="introduction-to-statistics-in-r.html#cb466-44" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/parametric_visual_inspection-1.svg" width="85%" style="display: block; margin: auto;" /></p>
+<p>Yet from these graph we can start to say that while for weight we can think of using parametric tests (after having removed possible outliers in T1-treated), for Task3 this is not possible as T1-treated distribution is far away from being normal or having same variances.
+<br>
+Now, we apply some statistical tests to evaluate all the assumptions.</p>
+</div>
+<div id="no-outliers" class="section level3 unnumbered">
+<h3>No outliers</h3>
+<p>As outliers may influence tests for normality and homoschedasticity, we start evaluating possible outliers in our data. To do so, I like to use InterQuartile Range (IQR) method: data that are 1.5 * IQR below 25<upper>th</upper> quantile or 1.5 * IQR over 75<upper>th</upper> quantile are considered as outlier. I usually use a function that takes as input a vector of values and returns one of booleans indicating whether the value is an outlier (TRUE) or not (FALSE), and create a column in the dataframe with this information. <br>
+This is the function:</p>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="introduction-to-statistics-in-r.html#cb467-1" aria-hidden="true" tabindex="-1"></a>is_outlier <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb467-2"><a href="introduction-to-statistics-in-r.html#cb467-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1. Check if x is numeric </span></span>
+<span id="cb467-3"><a href="introduction-to-statistics-in-r.html#cb467-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(x)) {<span class="fu">stop</span>(<span class="st">&quot;x must be a numeric vector&quot;</span>)}</span>
+<span id="cb467-4"><a href="introduction-to-statistics-in-r.html#cb467-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb467-5"><a href="introduction-to-statistics-in-r.html#cb467-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2. Check if at least 3 values in x</span></span>
+<span id="cb467-6"><a href="introduction-to-statistics-in-r.html#cb467-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(x) <span class="sc">&lt;</span> <span class="dv">3</span>) {<span class="fu">stop</span>(<span class="st">&quot;x must have at least 3 values&quot;</span>)}</span>
+<span id="cb467-7"><a href="introduction-to-statistics-in-r.html#cb467-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb467-8"><a href="introduction-to-statistics-in-r.html#cb467-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3. Calculate IQR</span></span>
+<span id="cb467-9"><a href="introduction-to-statistics-in-r.html#cb467-9" aria-hidden="true" tabindex="-1"></a>  q1 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="fl">0.25</span>, <span class="at">na.rm =</span> T)</span>
+<span id="cb467-10"><a href="introduction-to-statistics-in-r.html#cb467-10" aria-hidden="true" tabindex="-1"></a>  q3 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="fl">0.75</span>, <span class="at">na.rm =</span> T)</span>
+<span id="cb467-11"><a href="introduction-to-statistics-in-r.html#cb467-11" aria-hidden="true" tabindex="-1"></a>  iqr <span class="ot">&lt;-</span> q3 <span class="sc">-</span> q1</span>
+<span id="cb467-12"><a href="introduction-to-statistics-in-r.html#cb467-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb467-13"><a href="introduction-to-statistics-in-r.html#cb467-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4. Calculate thresholds</span></span>
+<span id="cb467-14"><a href="introduction-to-statistics-in-r.html#cb467-14" aria-hidden="true" tabindex="-1"></a>  lower_threshold <span class="ot">&lt;-</span> q1 <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
+<span id="cb467-15"><a href="introduction-to-statistics-in-r.html#cb467-15" aria-hidden="true" tabindex="-1"></a>  upper_threshold <span class="ot">&lt;-</span> q3 <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
+<span id="cb467-16"><a href="introduction-to-statistics-in-r.html#cb467-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb467-17"><a href="introduction-to-statistics-in-r.html#cb467-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 5. Create boolean vector</span></span>
+<span id="cb467-18"><a href="introduction-to-statistics-in-r.html#cb467-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> (x <span class="sc">&lt;</span> lower_threshold <span class="sc">|</span> x <span class="sc">&gt;</span> upper_threshold)</span>
+<span id="cb467-19"><a href="introduction-to-statistics-in-r.html#cb467-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+If you want to see the explanation of the function steps, expand following section.
+<details>
+<summary>
+Code explanation
+</summary>
+Here, I created a function called <code>is_outlier</code> that accepts one input (<code>x</code>), which must be a numeric vector of at least 3 values. These conditions are evaluated in the first two steps. It is always a good practice to evaluate the inputs validity at the beginning of the function, and stop the execution whether not all of them are valid; in this way, we can immediately stop the function, not performing possible highly computational tasks that the function should perform after.
+<br>
+Once checked the input, we calculated IQR using <code>quantile</code> function that we already seen. Then, we compute the thresholds and return a boolean vector after having evaluated if values are below lower threshold or above upper one.
+</details>
+<p>Let’s now use this function to find possible outliers in our data:</p>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="introduction-to-statistics-in-r.html#cb468-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3 <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb468-2"><a href="introduction-to-statistics-in-r.html#cb468-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb468-3"><a href="introduction-to-statistics-in-r.html#cb468-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;outlier_weight&quot;</span> <span class="ot">=</span> <span class="fu">is_outlier</span>(weight),</span>
+<span id="cb468-4"><a href="introduction-to-statistics-in-r.html#cb468-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;outlier_Task3&quot;</span> <span class="ot">=</span> <span class="fu">is_outlier</span>(Task3))</span>
+<span id="cb468-5"><a href="introduction-to-statistics-in-r.html#cb468-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb468-6"><a href="introduction-to-statistics-in-r.html#cb468-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(male_30_weight_task3)</span></code></pre></div>
+<pre class="code-out"><code># A tibble: 6 × 7
+# Groups:   sex, age, treatment [2]
+  sex     age treatment weight Task3 outlier_weight outlier_Task3
+  &lt;fct&gt; &lt;int&gt; &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;          &lt;lgl&gt;        
+1 Male     30 T1          19.4 290.  FALSE          FALSE        
+2 Male     30 Untreated   19.2 123.  FALSE          FALSE        
+3 Male     30 T1          20.3  98.7 FALSE          FALSE        
+4 Male     30 Untreated   18.8 148.  FALSE          FALSE        
+5 Male     30 T1          18.8 312.  FALSE          FALSE        
+6 Male     30 Untreated   20.0 184.  FALSE          FALSE        </code></pre>
+<p>Great, we can now see how many outliers we have per group and which are, to then decide what to do with them. We can start looking at how many outliers we have:</p>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="introduction-to-statistics-in-r.html#cb470-1" aria-hidden="true" tabindex="-1"></a>n_out_df <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb470-2"><a href="introduction-to-statistics-in-r.html#cb470-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb470-3"><a href="introduction-to-statistics-in-r.html#cb470-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">&quot;n_out_weight&quot;</span> <span class="ot">=</span> <span class="fu">sum</span>(outlier_weight),</span>
+<span id="cb470-4"><a href="introduction-to-statistics-in-r.html#cb470-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;n_out_Task3&quot;</span> <span class="ot">=</span> <span class="fu">sum</span>(outlier_Task3))</span>
+<span id="cb470-5"><a href="introduction-to-statistics-in-r.html#cb470-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb470-6"><a href="introduction-to-statistics-in-r.html#cb470-6" aria-hidden="true" tabindex="-1"></a>n_out_df</span></code></pre></div>
+<pre class="code-out"><code># A tibble: 2 × 5
+# Groups:   sex, age [1]
+  sex     age treatment n_out_weight n_out_Task3
+  &lt;fct&gt; &lt;int&gt; &lt;fct&gt;            &lt;int&gt;       &lt;int&gt;
+1 Male     30 Untreated            0           0
+2 Male     30 T1                   3           0</code></pre>
+<p>Alright, we have 3 outliers for weight in T1-treated group. Let’s see which are those values:</p>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="introduction-to-statistics-in-r.html#cb472-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb472-2"><a href="introduction-to-statistics-in-r.html#cb472-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(outlier_weight)</span></code></pre></div>
+<pre class="code-out"><code># A tibble: 3 × 7
+# Groups:   sex, age, treatment [1]
+  sex     age treatment weight Task3 outlier_weight outlier_Task3
+  &lt;fct&gt; &lt;int&gt; &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;          &lt;lgl&gt;        
+1 Male     30 T1          17.4  216. TRUE           FALSE        
+2 Male     30 T1          16.8  122. TRUE           FALSE        
+3 Male     30 T1          21.4  119. TRUE           FALSE        </code></pre>
+<p>They are exactly the values we have identified in the boxplot before! Now, we have to decide what to do with these values; there are many options depending on your design, number of samples, and other factors. In this case, for example, we could see if those mice are outliers at other ages (if we have evaluated the same mice over time).
+<br>
+As we have good number of samples for each group, we can decide to exclude these mice at this time point: we can delete those rows or replace values with NA. For now, we use the latter, as we want to keep Task3 values for the remaining part of the examples; usually, you should evaluate one variable at a time, so you can remove values directly.</p>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="introduction-to-statistics-in-r.html#cb474-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3<span class="sc">$</span>weight[male_30_weight_task3<span class="sc">$</span>outlier_weight] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<p>We can now re-evaluate outliers:</p>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="introduction-to-statistics-in-r.html#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
+<span id="cb475-2"><a href="introduction-to-statistics-in-r.html#cb475-2" aria-hidden="true" tabindex="-1"></a>male_30_weight_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb475-3"><a href="introduction-to-statistics-in-r.html#cb475-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb475-4"><a href="introduction-to-statistics-in-r.html#cb475-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-5"><a href="introduction-to-statistics-in-r.html#cb475-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb475-6"><a href="introduction-to-statistics-in-r.html#cb475-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb475-7"><a href="introduction-to-statistics-in-r.html#cb475-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-8"><a href="introduction-to-statistics-in-r.html#cb475-8" aria-hidden="true" tabindex="-1"></a>male_30_task3_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb475-9"><a href="introduction-to-statistics-in-r.html#cb475-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb475-10"><a href="introduction-to-statistics-in-r.html#cb475-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-11"><a href="introduction-to-statistics-in-r.html#cb475-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb475-12"><a href="introduction-to-statistics-in-r.html#cb475-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb475-13"><a href="introduction-to-statistics-in-r.html#cb475-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-14"><a href="introduction-to-statistics-in-r.html#cb475-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create density plots</span></span>
+<span id="cb475-15"><a href="introduction-to-statistics-in-r.html#cb475-15" aria-hidden="true" tabindex="-1"></a>male_30_weight_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb475-16"><a href="introduction-to-statistics-in-r.html#cb475-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb475-17"><a href="introduction-to-statistics-in-r.html#cb475-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-18"><a href="introduction-to-statistics-in-r.html#cb475-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb475-19"><a href="introduction-to-statistics-in-r.html#cb475-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb475-20"><a href="introduction-to-statistics-in-r.html#cb475-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-21"><a href="introduction-to-statistics-in-r.html#cb475-21" aria-hidden="true" tabindex="-1"></a>male_30_task3_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb475-22"><a href="introduction-to-statistics-in-r.html#cb475-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb475-23"><a href="introduction-to-statistics-in-r.html#cb475-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-24"><a href="introduction-to-statistics-in-r.html#cb475-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb475-25"><a href="introduction-to-statistics-in-r.html#cb475-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb475-26"><a href="introduction-to-statistics-in-r.html#cb475-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-27"><a href="introduction-to-statistics-in-r.html#cb475-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create QQ plots</span></span>
+<span id="cb475-28"><a href="introduction-to-statistics-in-r.html#cb475-28" aria-hidden="true" tabindex="-1"></a>male_30_weight_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> weight, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb475-29"><a href="introduction-to-statistics-in-r.html#cb475-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb475-30"><a href="introduction-to-statistics-in-r.html#cb475-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb475-31"><a href="introduction-to-statistics-in-r.html#cb475-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-32"><a href="introduction-to-statistics-in-r.html#cb475-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb475-33"><a href="introduction-to-statistics-in-r.html#cb475-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-34"><a href="introduction-to-statistics-in-r.html#cb475-34" aria-hidden="true" tabindex="-1"></a>male_30_task3_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> Task3, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb475-35"><a href="introduction-to-statistics-in-r.html#cb475-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb475-36"><a href="introduction-to-statistics-in-r.html#cb475-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb475-37"><a href="introduction-to-statistics-in-r.html#cb475-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-38"><a href="introduction-to-statistics-in-r.html#cb475-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb475-39"><a href="introduction-to-statistics-in-r.html#cb475-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-40"><a href="introduction-to-statistics-in-r.html#cb475-40" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot_filt, male_30_weight_density_filt, male_30_weight_qq_filt,</span>
+<span id="cb475-41"><a href="introduction-to-statistics-in-r.html#cb475-41" aria-hidden="true" tabindex="-1"></a>          male_30_task3_boxplot_filt, male_30_task3_density_filt, male_30_task3_qq_filt,</span>
+<span id="cb475-42"><a href="introduction-to-statistics-in-r.html#cb475-42" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/parametric_visual_inspection_filtered-1.svg" width="85%" style="display: block; margin: auto;" /></p>
+<p>We can see that we still have one outlier for weight in T1-treated. This is perfectly normal, as we have changed the quantiles by removing 3 values. Here, it is up to you to decide what to do based on your experience, other data etc. In this case, I will exclude it as weight usually is normally distributed.</p>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="introduction-to-statistics-in-r.html#cb476-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3 <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb476-2"><a href="introduction-to-statistics-in-r.html#cb476-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb476-3"><a href="introduction-to-statistics-in-r.html#cb476-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;outlier_weight&quot;</span> <span class="ot">=</span> <span class="fu">is_outlier</span>(weight))</span>
+<span id="cb476-4"><a href="introduction-to-statistics-in-r.html#cb476-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb476-5"><a href="introduction-to-statistics-in-r.html#cb476-5" aria-hidden="true" tabindex="-1"></a>n_out_df <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb476-6"><a href="introduction-to-statistics-in-r.html#cb476-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb476-7"><a href="introduction-to-statistics-in-r.html#cb476-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">&quot;n_out_weight&quot;</span> <span class="ot">=</span> <span class="fu">sum</span>(outlier_weight, <span class="at">na.rm =</span> T))</span>
+<span id="cb476-8"><a href="introduction-to-statistics-in-r.html#cb476-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb476-9"><a href="introduction-to-statistics-in-r.html#cb476-9" aria-hidden="true" tabindex="-1"></a>n_out_df</span></code></pre></div>
+<pre class="code-out"><code># A tibble: 2 × 4
+# Groups:   sex, age [1]
+  sex     age treatment n_out_weight
+  &lt;fct&gt; &lt;int&gt; &lt;fct&gt;            &lt;int&gt;
+1 Male     30 Untreated            0
+2 Male     30 T1                   1</code></pre>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="introduction-to-statistics-in-r.html#cb478-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3<span class="sc">$</span>weight[male_30_weight_task3<span class="sc">$</span>outlier_weight] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<p>We can now re-evaluate outliers:</p>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="introduction-to-statistics-in-r.html#cb479-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
+<span id="cb479-2"><a href="introduction-to-statistics-in-r.html#cb479-2" aria-hidden="true" tabindex="-1"></a>male_30_weight_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb479-3"><a href="introduction-to-statistics-in-r.html#cb479-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb479-4"><a href="introduction-to-statistics-in-r.html#cb479-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-5"><a href="introduction-to-statistics-in-r.html#cb479-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb479-6"><a href="introduction-to-statistics-in-r.html#cb479-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-7"><a href="introduction-to-statistics-in-r.html#cb479-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb479-8"><a href="introduction-to-statistics-in-r.html#cb479-8" aria-hidden="true" tabindex="-1"></a>male_30_task3_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb479-9"><a href="introduction-to-statistics-in-r.html#cb479-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb479-10"><a href="introduction-to-statistics-in-r.html#cb479-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-11"><a href="introduction-to-statistics-in-r.html#cb479-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb479-12"><a href="introduction-to-statistics-in-r.html#cb479-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-13"><a href="introduction-to-statistics-in-r.html#cb479-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb479-14"><a href="introduction-to-statistics-in-r.html#cb479-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create density plots</span></span>
+<span id="cb479-15"><a href="introduction-to-statistics-in-r.html#cb479-15" aria-hidden="true" tabindex="-1"></a>male_30_weight_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb479-16"><a href="introduction-to-statistics-in-r.html#cb479-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb479-17"><a href="introduction-to-statistics-in-r.html#cb479-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-18"><a href="introduction-to-statistics-in-r.html#cb479-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb479-19"><a href="introduction-to-statistics-in-r.html#cb479-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-20"><a href="introduction-to-statistics-in-r.html#cb479-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb479-21"><a href="introduction-to-statistics-in-r.html#cb479-21" aria-hidden="true" tabindex="-1"></a>male_30_task3_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb479-22"><a href="introduction-to-statistics-in-r.html#cb479-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb479-23"><a href="introduction-to-statistics-in-r.html#cb479-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-24"><a href="introduction-to-statistics-in-r.html#cb479-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb479-25"><a href="introduction-to-statistics-in-r.html#cb479-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-26"><a href="introduction-to-statistics-in-r.html#cb479-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb479-27"><a href="introduction-to-statistics-in-r.html#cb479-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create QQ plots</span></span>
+<span id="cb479-28"><a href="introduction-to-statistics-in-r.html#cb479-28" aria-hidden="true" tabindex="-1"></a>male_30_weight_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> weight, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb479-29"><a href="introduction-to-statistics-in-r.html#cb479-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb479-30"><a href="introduction-to-statistics-in-r.html#cb479-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb479-31"><a href="introduction-to-statistics-in-r.html#cb479-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-32"><a href="introduction-to-statistics-in-r.html#cb479-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb479-33"><a href="introduction-to-statistics-in-r.html#cb479-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb479-34"><a href="introduction-to-statistics-in-r.html#cb479-34" aria-hidden="true" tabindex="-1"></a>male_30_task3_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> Task3, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb479-35"><a href="introduction-to-statistics-in-r.html#cb479-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb479-36"><a href="introduction-to-statistics-in-r.html#cb479-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb479-37"><a href="introduction-to-statistics-in-r.html#cb479-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-38"><a href="introduction-to-statistics-in-r.html#cb479-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() </span>
+<span id="cb479-39"><a href="introduction-to-statistics-in-r.html#cb479-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb479-40"><a href="introduction-to-statistics-in-r.html#cb479-40" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot_filt, male_30_weight_density_filt, male_30_weight_qq_filt,</span>
+<span id="cb479-41"><a href="introduction-to-statistics-in-r.html#cb479-41" aria-hidden="true" tabindex="-1"></a>          male_30_task3_boxplot_filt, male_30_task3_density_filt, male_30_task3_qq_filt,</span>
+<span id="cb479-42"><a href="introduction-to-statistics-in-r.html#cb479-42" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/parametric_visual_inspection_filtered_2-1.svg" width="85%" style="display: block; margin: auto;" /></p>
+<p>Again, let’s for the last time try to exclude the outlier:</p>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="introduction-to-statistics-in-r.html#cb480-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3 <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb480-2"><a href="introduction-to-statistics-in-r.html#cb480-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb480-3"><a href="introduction-to-statistics-in-r.html#cb480-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;outlier_weight&quot;</span> <span class="ot">=</span> <span class="fu">is_outlier</span>(weight))</span>
+<span id="cb480-4"><a href="introduction-to-statistics-in-r.html#cb480-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb480-5"><a href="introduction-to-statistics-in-r.html#cb480-5" aria-hidden="true" tabindex="-1"></a>n_out_df <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb480-6"><a href="introduction-to-statistics-in-r.html#cb480-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb480-7"><a href="introduction-to-statistics-in-r.html#cb480-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">&quot;n_out_weight&quot;</span> <span class="ot">=</span> <span class="fu">sum</span>(outlier_weight, <span class="at">na.rm =</span> T))</span>
+<span id="cb480-8"><a href="introduction-to-statistics-in-r.html#cb480-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb480-9"><a href="introduction-to-statistics-in-r.html#cb480-9" aria-hidden="true" tabindex="-1"></a>n_out_df</span></code></pre></div>
+<pre class="code-out"><code># A tibble: 2 × 4
+# Groups:   sex, age [1]
+  sex     age treatment n_out_weight
+  &lt;fct&gt; &lt;int&gt; &lt;fct&gt;            &lt;int&gt;
+1 Male     30 Untreated            0
+2 Male     30 T1                   1</code></pre>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="introduction-to-statistics-in-r.html#cb482-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3<span class="sc">$</span>weight[male_30_weight_task3<span class="sc">$</span>outlier_weight] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<p>We can now re-evaluate outliers:</p>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="introduction-to-statistics-in-r.html#cb483-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
+<span id="cb483-2"><a href="introduction-to-statistics-in-r.html#cb483-2" aria-hidden="true" tabindex="-1"></a>male_30_weight_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb483-3"><a href="introduction-to-statistics-in-r.html#cb483-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb483-4"><a href="introduction-to-statistics-in-r.html#cb483-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb483-5"><a href="introduction-to-statistics-in-r.html#cb483-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb483-6"><a href="introduction-to-statistics-in-r.html#cb483-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb483-7"><a href="introduction-to-statistics-in-r.html#cb483-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb483-8"><a href="introduction-to-statistics-in-r.html#cb483-8" aria-hidden="true" tabindex="-1"></a>male_30_task3_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb483-9"><a href="introduction-to-statistics-in-r.html#cb483-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb483-10"><a href="introduction-to-statistics-in-r.html#cb483-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb483-11"><a href="introduction-to-statistics-in-r.html#cb483-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb483-12"><a href="introduction-to-statistics-in-r.html#cb483-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb483-13"><a href="introduction-to-statistics-in-r.html#cb483-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb483-14"><a href="introduction-to-statistics-in-r.html#cb483-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create density plots</span></span>
+<span id="cb483-15"><a href="introduction-to-statistics-in-r.html#cb483-15" aria-hidden="true" tabindex="-1"></a>male_30_weight_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb483-16"><a href="introduction-to-statistics-in-r.html#cb483-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb483-17"><a href="introduction-to-statistics-in-r.html#cb483-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb483-18"><a href="introduction-to-statistics-in-r.html#cb483-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb483-19"><a href="introduction-to-statistics-in-r.html#cb483-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb483-20"><a href="introduction-to-statistics-in-r.html#cb483-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb483-21"><a href="introduction-to-statistics-in-r.html#cb483-21" aria-hidden="true" tabindex="-1"></a>male_30_task3_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb483-22"><a href="introduction-to-statistics-in-r.html#cb483-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb483-23"><a href="introduction-to-statistics-in-r.html#cb483-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb483-24"><a href="introduction-to-statistics-in-r.html#cb483-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb483-25"><a href="introduction-to-statistics-in-r.html#cb483-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb483-26"><a href="introduction-to-statistics-in-r.html#cb483-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb483-27"><a href="introduction-to-statistics-in-r.html#cb483-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create QQ plots</span></span>
+<span id="cb483-28"><a href="introduction-to-statistics-in-r.html#cb483-28" aria-hidden="true" tabindex="-1"></a>male_30_weight_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> weight, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb483-29"><a href="introduction-to-statistics-in-r.html#cb483-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb483-30"><a href="introduction-to-statistics-in-r.html#cb483-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb483-31"><a href="introduction-to-statistics-in-r.html#cb483-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb483-32"><a href="introduction-to-statistics-in-r.html#cb483-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb483-33"><a href="introduction-to-statistics-in-r.html#cb483-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb483-34"><a href="introduction-to-statistics-in-r.html#cb483-34" aria-hidden="true" tabindex="-1"></a>male_30_task3_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> Task3, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb483-35"><a href="introduction-to-statistics-in-r.html#cb483-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb483-36"><a href="introduction-to-statistics-in-r.html#cb483-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb483-37"><a href="introduction-to-statistics-in-r.html#cb483-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb483-38"><a href="introduction-to-statistics-in-r.html#cb483-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb483-39"><a href="introduction-to-statistics-in-r.html#cb483-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb483-40"><a href="introduction-to-statistics-in-r.html#cb483-40" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot_filt, male_30_weight_density_filt, male_30_weight_qq_filt,</span>
+<span id="cb483-41"><a href="introduction-to-statistics-in-r.html#cb483-41" aria-hidden="true" tabindex="-1"></a>          male_30_task3_boxplot_filt, male_30_task3_density_filt, male_30_task3_qq_filt,</span>
+<span id="cb483-42"><a href="introduction-to-statistics-in-r.html#cb483-42" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/parametric_visual_inspection_filtered_3-1.svg" width="85%" style="display: block; margin: auto;" /></p>
+<p>Great, we now have not any outlier and we can move on with the other checks.</p>
+</div>
+<div id="normality" class="section level3 unnumbered">
+<h3>Normality</h3>
+<p>We now check if our data are normally distributed. There are two main tests that are used for this: <em>Shapiro-Wilk normality test</em> and <em>Kolmogorov-Smirnov test</em>. The first one is specific for normal distributions, while the second one compares two samples and returns whether they belong to the same distribution, by setting the second sample as a normal distribution, it comes that is like Shapiro-Wlik test.
+<br>
+As all frequentest statistical tests, these two have null and alternative hypothesis and returns p.values: the null hypothesis is that the distribution of the sample is normal (or comes from the same distribution in the case we have two samples). So, a p.value &gt; 0.05 (or another user-defined threshold) means we <strong>cannot refuse the null hypothesis</strong>,so the sample has a normal distribution (or comes from the same distribution as the other sample).
+<br>
+However, they both hae <u>limitatios</u> when dealing with large samples (n &gt;150/200); in those cases, you could look at the plots and decide, together with the fact that Central Limit Theorem often comes into play in these cases; you should test homoschedasticity as well.</p>
+<p>We will now see the structure of the results of these test, and then apply them to our data. Let’s create two samples, one normally distributed and one not.</p>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="introduction-to-statistics-in-r.html#cb484-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">111</span>)</span>
+<span id="cb484-2"><a href="introduction-to-statistics-in-r.html#cb484-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb484-3"><a href="introduction-to-statistics-in-r.html#cb484-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create normally distributed sample</span></span>
+<span id="cb484-4"><a href="introduction-to-statistics-in-r.html#cb484-4" aria-hidden="true" tabindex="-1"></a>quantiles <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.99</span>, <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb484-5"><a href="introduction-to-statistics-in-r.html#cb484-5" aria-hidden="true" tabindex="-1"></a>norm_sample <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(quantiles, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb484-6"><a href="introduction-to-statistics-in-r.html#cb484-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb484-7"><a href="introduction-to-statistics-in-r.html#cb484-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create non-normally distributed sample</span></span>
+<span id="cb484-8"><a href="introduction-to-statistics-in-r.html#cb484-8" aria-hidden="true" tabindex="-1"></a>non_norm_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>) <span class="sc">*</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>Now, we just visualize the data as we would do in a real-life scenario:</p>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="introduction-to-statistics-in-r.html#cb485-1" aria-hidden="true" tabindex="-1"></a>norm_sample_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb485-2"><a href="introduction-to-statistics-in-r.html#cb485-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(norm_sample)) <span class="sc">+</span></span>
+<span id="cb485-3"><a href="introduction-to-statistics-in-r.html#cb485-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Normally distributed data&quot;</span>) <span class="sc">+</span></span>
+<span id="cb485-4"><a href="introduction-to-statistics-in-r.html#cb485-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb485-5"><a href="introduction-to-statistics-in-r.html#cb485-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb485-6"><a href="introduction-to-statistics-in-r.html#cb485-6" aria-hidden="true" tabindex="-1"></a>non_norm_sample_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb485-7"><a href="introduction-to-statistics-in-r.html#cb485-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(non_norm_sample)) <span class="sc">+</span></span>
+<span id="cb485-8"><a href="introduction-to-statistics-in-r.html#cb485-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Non normally distributed data&quot;</span>) <span class="sc">+</span></span>
+<span id="cb485-9"><a href="introduction-to-statistics-in-r.html#cb485-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb485-10"><a href="introduction-to-statistics-in-r.html#cb485-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb485-11"><a href="introduction-to-statistics-in-r.html#cb485-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(norm_sample_density, non_norm_sample_density, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;v&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-282-1.svg" width="85%" style="display: block; margin: auto;" />
+Great! We can clearly see by visual inspection that the first is normmally distributed and the second one not, but we are here to see statistical tests.</p>
+<div id="shapiro-wilk-normality-test" class="section level4" number="15.0.0.1">
+<h4><span class="header-section-number">15.0.0.1</span> Shapiro-Wilk normality test</h4>
+<p>We start with <code>shapiro.test</code>:</p>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="introduction-to-statistics-in-r.html#cb486-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Shapiro-Wilk test</span></span>
+<span id="cb486-2"><a href="introduction-to-statistics-in-r.html#cb486-2" aria-hidden="true" tabindex="-1"></a>norm_sample_shapiro_res <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(<span class="at">x =</span> norm_sample)</span>
+<span id="cb486-3"><a href="introduction-to-statistics-in-r.html#cb486-3" aria-hidden="true" tabindex="-1"></a>non_norm_sample_shapiro_res <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(<span class="at">x =</span> non_norm_sample)</span>
+<span id="cb486-4"><a href="introduction-to-statistics-in-r.html#cb486-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb486-5"><a href="introduction-to-statistics-in-r.html#cb486-5" aria-hidden="true" tabindex="-1"></a>norm_sample_shapiro_res</span></code></pre></div>
+<pre class="code-out"><code>
+    Shapiro-Wilk normality test
+
+data:  norm_sample
+W = 0.9977, p-value = 0.9999</code></pre>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="introduction-to-statistics-in-r.html#cb488-1" aria-hidden="true" tabindex="-1"></a>non_norm_sample_shapiro_res</span></code></pre></div>
+<pre class="code-out"><code>
+    Shapiro-Wilk normality test
+
+data:  non_norm_sample
+W = 0.91693, p-value = 9.714e-06</code></pre>
+<p class="plist">
+Running the function is very simple, the only input you have to give is the numeric vector. What we can see in the results?
+</p>
+<ul>
+<li>
+<em>Data</em>: which data we have evaluated
+</li>
+<li>
+<em>W</em>: a measure of how well the ordered and standardized sample quantiles fit the standard normal quantiles. The statistic will take a value between 0 and 1 with 1 being a perfect match.
+</li>
+<li>
+<em>p.value</em>: p value associated to the test. If greater than the threshold, we <strong>cannot</strong> reject the null hypothesis
+</li>
+</ul>
+<p>So, we can say that the Shapiro-Wilk test confirms that the first sample is normally distributed, while the second one not.</p>
+</div>
+<div id="kolmogorov-smirnov-test" class="section level4" number="15.0.0.2">
+<h4><span class="header-section-number">15.0.0.2</span> Kolmogorov-Smirnov test</h4>
+<p>Let’s now see the Kolgomorov-Smirnov test. The function is <code>ks.test</code>, and it differs a lot from the previous one, so let’s see some examples and then comment them:</p>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="introduction-to-statistics-in-r.html#cb490-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Test normal data</span></span>
+<span id="cb490-2"><a href="introduction-to-statistics-in-r.html#cb490-2" aria-hidden="true" tabindex="-1"></a>norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="st">&quot;pnorm&quot;</span>)</span>
+<span id="cb490-3"><a href="introduction-to-statistics-in-r.html#cb490-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb490-4"><a href="introduction-to-statistics-in-r.html#cb490-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Test non-normal data</span></span>
+<span id="cb490-5"><a href="introduction-to-statistics-in-r.html#cb490-5" aria-hidden="true" tabindex="-1"></a>non_norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> non_norm_sample, <span class="st">&quot;pnorm&quot;</span>)</span>
+<span id="cb490-6"><a href="introduction-to-statistics-in-r.html#cb490-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb490-7"><a href="introduction-to-statistics-in-r.html#cb490-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Test if the two belongs to the same distributions</span></span>
+<span id="cb490-8"><a href="introduction-to-statistics-in-r.html#cb490-8" aria-hidden="true" tabindex="-1"></a>comparison_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="at">y =</span> non_norm_sample)</span>
+<span id="cb490-9"><a href="introduction-to-statistics-in-r.html#cb490-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb490-10"><a href="introduction-to-statistics-in-r.html#cb490-10" aria-hidden="true" tabindex="-1"></a>norm_sample_ks_res</span></code></pre></div>
+<pre class="code-out"><code>
+    One-sample Kolmogorov-Smirnov test
+
+data:  norm_sample
+D = 1, p-value &lt; 2.2e-16
+alternative hypothesis: two-sided</code></pre>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="introduction-to-statistics-in-r.html#cb492-1" aria-hidden="true" tabindex="-1"></a>non_norm_sample_ks_res</span></code></pre></div>
+<pre class="code-out"><code>
+    One-sample Kolmogorov-Smirnov test
+
+data:  non_norm_sample
+D = 0.74044, p-value &lt; 2.2e-16
+alternative hypothesis: two-sided</code></pre>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="introduction-to-statistics-in-r.html#cb494-1" aria-hidden="true" tabindex="-1"></a>comparison_ks_res</span></code></pre></div>
+<pre class="code-out"><code>
+    Two-sample Kolmogorov-Smirnov test
+
+data:  norm_sample and non_norm_sample
+D = 0.63, p-value &lt; 2.2e-16
+alternative hypothesis: two-sided</code></pre>
+<p>“Wait, what has happened? Why they are all not normal?! The first one should have a p-value &gt; 0.05”. You are perfectly right, that is because we didn’t specify anything about the normal distribution, just “pnorm”, and it assumes that you want to compare your data with the standard normal distribution (mean = 0, sd = 1). To fix it, we can provide to the function, the info about mean and sd of the distribution we want (usually, the mean and the sd of our data).
+<br>
+So, we can do this:</p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="introduction-to-statistics-in-r.html#cb496-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Test normal data</span></span>
+<span id="cb496-2"><a href="introduction-to-statistics-in-r.html#cb496-2" aria-hidden="true" tabindex="-1"></a>norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(norm_sample), <span class="at">sd =</span> <span class="fu">sd</span>(norm_sample))</span>
+<span id="cb496-3"><a href="introduction-to-statistics-in-r.html#cb496-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb496-4"><a href="introduction-to-statistics-in-r.html#cb496-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Test non-normal data</span></span>
+<span id="cb496-5"><a href="introduction-to-statistics-in-r.html#cb496-5" aria-hidden="true" tabindex="-1"></a>non_norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> non_norm_sample, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(norm_sample), <span class="at">sd =</span> <span class="fu">sd</span>(norm_sample))</span>
+<span id="cb496-6"><a href="introduction-to-statistics-in-r.html#cb496-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb496-7"><a href="introduction-to-statistics-in-r.html#cb496-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Test if the two belongs to the same distributions</span></span>
+<span id="cb496-8"><a href="introduction-to-statistics-in-r.html#cb496-8" aria-hidden="true" tabindex="-1"></a>comparison_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="at">y =</span> non_norm_sample)</span>
+<span id="cb496-9"><a href="introduction-to-statistics-in-r.html#cb496-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb496-10"><a href="introduction-to-statistics-in-r.html#cb496-10" aria-hidden="true" tabindex="-1"></a>norm_sample_ks_res</span></code></pre></div>
+<pre class="code-out"><code>
+    One-sample Kolmogorov-Smirnov test
+
+data:  norm_sample
+D = 0.010407, p-value = 1
+alternative hypothesis: two-sided</code></pre>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="introduction-to-statistics-in-r.html#cb498-1" aria-hidden="true" tabindex="-1"></a>non_norm_sample_ks_res</span></code></pre></div>
+<pre class="code-out"><code>
+    One-sample Kolmogorov-Smirnov test
+
+data:  non_norm_sample
+D = 0.63413, p-value &lt; 2.2e-16
+alternative hypothesis: two-sided</code></pre>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="introduction-to-statistics-in-r.html#cb500-1" aria-hidden="true" tabindex="-1"></a>comparison_ks_res</span></code></pre></div>
+<pre class="code-out"><code>
+    Two-sample Kolmogorov-Smirnov test
+
+data:  norm_sample and non_norm_sample
+D = 0.63, p-value &lt; 2.2e-16
+alternative hypothesis: two-sided</code></pre>
+<p>🎉 This is exactly what we were expecting!
+<br>
+You can choose whichever test you want. I personally prefer Shapiro-Wilk, but it is up to you. We can now evaluate our example samples with outlier excluded; I will show you now how to perform both test and get only the pvalues to create a new data.frame:</p>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="introduction-to-statistics-in-r.html#cb502-1" aria-hidden="true" tabindex="-1"></a>normality_df <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb502-2"><a href="introduction-to-statistics-in-r.html#cb502-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb502-3"><a href="introduction-to-statistics-in-r.html#cb502-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">&quot;shapiro_p_value&quot;</span> <span class="ot">=</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p.value,</span>
+<span id="cb502-4"><a href="introduction-to-statistics-in-r.html#cb502-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;ks_p_value&quot;</span> <span class="ot">=</span> <span class="fu">ks.test</span>(weight, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(weight, <span class="at">na.rm =</span> T), <span class="at">sd =</span> <span class="fu">sd</span>(weight, <span class="at">na.rm =</span> T))<span class="sc">$</span>p.value,</span>
+<span id="cb502-5"><a href="introduction-to-statistics-in-r.html#cb502-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;shapiro_p_value_Task3&quot;</span> <span class="ot">=</span> <span class="fu">shapiro.test</span>(Task3)<span class="sc">$</span>p.value,</span>
+<span id="cb502-6"><a href="introduction-to-statistics-in-r.html#cb502-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;ks_p_value_Task3&quot;</span> <span class="ot">=</span> <span class="fu">ks.test</span>(Task3, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(Task3), <span class="at">sd =</span> <span class="fu">sd</span>(Task3))<span class="sc">$</span>p.value)</span>
+<span id="cb502-7"><a href="introduction-to-statistics-in-r.html#cb502-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb502-8"><a href="introduction-to-statistics-in-r.html#cb502-8" aria-hidden="true" tabindex="-1"></a>normality_df</span></code></pre></div>
+<pre class="code-out"><code># A tibble: 2 × 7
+# Groups:   sex, age [1]
+  sex     age treatment shapiro_p_value ks_p_value shapiro_p_value_Task3 ks_p_value_Task3
+  &lt;fct&gt; &lt;int&gt; &lt;fct&gt;               &lt;dbl&gt;      &lt;dbl&gt;                 &lt;dbl&gt;            &lt;dbl&gt;
+1 Male     30 Untreated          0.389       0.938                0.0957            0.374
+2 Male     30 T1                 0.0649      0.696                0.0474            0.590</code></pre>
+<p>Results are in contrast… This is a reason why I prefer Shapiro-Wilk test, whose results are more in line with what we can see by visual inspection: both weight distributions are normal, while T1-treated samples have not a normal distribution of Task3 values.
+<br></p>
+</div>
+</div>
+<div id="homogeneity-of-variances-homoschedaticity" class="section level3 unnumbered">
+<h3>Homogeneity of variances (homoschedaticity)</h3>
+<p>Finally, we can evaluate the homogeneity of variances between samples. We will use the <em>Bartlett test</em>, with the function <code>bartlett.test</code>. It needs two main inputs: a value vector and a vector of groups into which divide the values.
+<br>
+Here, a significant p-value means that the <strong>variances are <u>NOT</u> homogeneous</strong>.
+Here is an example with our data:</p>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="introduction-to-statistics-in-r.html#cb504-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Perform test on weight</span></span>
+<span id="cb504-2"><a href="introduction-to-statistics-in-r.html#cb504-2" aria-hidden="true" tabindex="-1"></a>weight_bartlett_result <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(male_30_weight_task3<span class="sc">$</span>weight, male_30_weight_task3<span class="sc">$</span>treatment)</span>
+<span id="cb504-3"><a href="introduction-to-statistics-in-r.html#cb504-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb504-4"><a href="introduction-to-statistics-in-r.html#cb504-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Perform test on Task3</span></span>
+<span id="cb504-5"><a href="introduction-to-statistics-in-r.html#cb504-5" aria-hidden="true" tabindex="-1"></a>Task3_bartlett_result <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(male_30_weight_task3<span class="sc">$</span>Task3, male_30_weight_task3<span class="sc">$</span>treatment)</span>
+<span id="cb504-6"><a href="introduction-to-statistics-in-r.html#cb504-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb504-7"><a href="introduction-to-statistics-in-r.html#cb504-7" aria-hidden="true" tabindex="-1"></a>weight_bartlett_result</span></code></pre></div>
+<pre class="code-out"><code>
+    Bartlett test of homogeneity of variances
+
+data:  male_30_weight_task3$weight and male_30_weight_task3$treatment
+Bartlett&#39;s K-squared = 4.7979, df = 1, p-value = 0.02849</code></pre>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="introduction-to-statistics-in-r.html#cb506-1" aria-hidden="true" tabindex="-1"></a>Task3_bartlett_result</span></code></pre></div>
+<pre class="code-out"><code>
+    Bartlett test of homogeneity of variances
+
+data:  male_30_weight_task3$Task3 and male_30_weight_task3$treatment
+Bartlett&#39;s K-squared = 32.09, df = 1, p-value = 1.472e-08</code></pre>
+<p>From these results, we can say that the variances are not homogeneous.</p>
+<p><br>
+As an extra exercise, let’s add these info to the plots:</p>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="introduction-to-statistics-in-r.html#cb508-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Get labels position</span></span>
+<span id="cb508-2"><a href="introduction-to-statistics-in-r.html#cb508-2" aria-hidden="true" tabindex="-1"></a>weight_max_label <span class="ot">&lt;-</span> <span class="fu">max</span>(male_30_weight_task3<span class="sc">$</span>weight, <span class="at">na.rm =</span> T) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb508-3"><a href="introduction-to-statistics-in-r.html#cb508-3" aria-hidden="true" tabindex="-1"></a>Task3_max_label <span class="ot">&lt;-</span> <span class="fu">max</span>(male_30_weight_task3<span class="sc">$</span>Task3, <span class="at">na.rm =</span> T) <span class="sc">+</span> <span class="dv">50</span></span>
+<span id="cb508-4"><a href="introduction-to-statistics-in-r.html#cb508-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb508-5"><a href="introduction-to-statistics-in-r.html#cb508-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
+<span id="cb508-6"><a href="introduction-to-statistics-in-r.html#cb508-6" aria-hidden="true" tabindex="-1"></a>male_30_weight_boxplot_filt <span class="ot">&lt;-</span> male_30_weight_boxplot_filt <span class="sc">+</span></span>
+<span id="cb508-7"><a href="introduction-to-statistics-in-r.html#cb508-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> normality_df, </span>
+<span id="cb508-8"><a href="introduction-to-statistics-in-r.html#cb508-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, </span>
+<span id="cb508-9"><a href="introduction-to-statistics-in-r.html#cb508-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> weight_max_label, </span>
+<span id="cb508-10"><a href="introduction-to-statistics-in-r.html#cb508-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shapiro_p_value, <span class="dv">3</span>)))</span>
+<span id="cb508-11"><a href="introduction-to-statistics-in-r.html#cb508-11" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">+</span></span>
+<span id="cb508-12"><a href="introduction-to-statistics-in-r.html#cb508-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(weight_bartlett_result<span class="sc">$</span>p.value, <span class="dv">3</span>)))</span>
+<span id="cb508-13"><a href="introduction-to-statistics-in-r.html#cb508-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb508-14"><a href="introduction-to-statistics-in-r.html#cb508-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb508-15"><a href="introduction-to-statistics-in-r.html#cb508-15" aria-hidden="true" tabindex="-1"></a>male_30_task3_boxplot_filt <span class="ot">&lt;-</span> male_30_task3_boxplot_filt <span class="sc">+</span></span>
+<span id="cb508-16"><a href="introduction-to-statistics-in-r.html#cb508-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> normality_df, </span>
+<span id="cb508-17"><a href="introduction-to-statistics-in-r.html#cb508-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, </span>
+<span id="cb508-18"><a href="introduction-to-statistics-in-r.html#cb508-18" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> Task3_max_label, </span>
+<span id="cb508-19"><a href="introduction-to-statistics-in-r.html#cb508-19" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shapiro_p_value_Task3, <span class="dv">3</span>)))</span>
+<span id="cb508-20"><a href="introduction-to-statistics-in-r.html#cb508-20" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">+</span></span>
+<span id="cb508-21"><a href="introduction-to-statistics-in-r.html#cb508-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(weight_bartlett_result<span class="sc">$</span>p.value, <span class="dv">3</span>)))</span>
+<span id="cb508-22"><a href="introduction-to-statistics-in-r.html#cb508-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb508-23"><a href="introduction-to-statistics-in-r.html#cb508-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot_filt, male_30_weight_density_filt, male_30_weight_qq_filt,</span>
+<span id="cb508-24"><a href="introduction-to-statistics-in-r.html#cb508-24" aria-hidden="true" tabindex="-1"></a>          male_30_task3_boxplot_filt, male_30_task3_density_filt, male_30_task3_qq_filt,</span>
+<span id="cb508-25"><a href="introduction-to-statistics-in-r.html#cb508-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/parametric_visual_inspection_filtered_pvalues-1.svg" width="85%" style="display: block; margin: auto;" /></p>
+<p>Alright, in this chapter we have seen just an example on how to evaluate whether to use or not parametric tests in further analyses. Another important take home message of this chapter is: choose the right test for your analysis and planning and experimental design are fundamental steps.
+<br>
+From next chapter on, we will see in details the statistical tests we can perform.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="plot-our-data-with-ggplot2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

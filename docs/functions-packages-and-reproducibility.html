@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-08-19" />
+<meta name="date" content="2023-08-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="data-frames.html"/>
-<link rel="next" href="manage-data-with-tidyverse.html"/>
+<link rel="next" href="tidyverse-manage.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -264,23 +264,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="functions-packages-and-reproducibility.html#session-info" id="toc-session-info">Session info</a></li>
 </ul></li>
 </ul></li>
-<li><a href="manage-data-with-tidyverse.html#manage-data-with-tidyverse" id="toc-manage-data-with-tidyverse"><span class="toc-section-number">12</span> Manage data with tidyverse</a>
+<li><a href="tidyverse-manage.html#tidyverse-manage" id="toc-tidyverse-manage"><span class="toc-section-number">12</span> Manage data with tidyverse</a>
 <ul>
-<li><a href="manage-data-with-tidyverse.html#r-notebook" id="toc-r-notebook">R notebook</a></li>
-<li><a href="manage-data-with-tidyverse.html#load-packages-and-data" id="toc-load-packages-and-data">Load packages and data</a></li>
-<li><a href="manage-data-with-tidyverse.html#dataset-structure" id="toc-dataset-structure">Dataset structure</a>
+<li><a href="tidyverse-manage.html#r-notebook" id="toc-r-notebook">R notebook</a></li>
+<li><a href="tidyverse-manage.html#load-packages-and-data" id="toc-load-packages-and-data">Load packages and data</a></li>
+<li><a href="tidyverse-manage.html#dataset-structure" id="toc-dataset-structure">Dataset structure</a>
 <ul>
-<li><a href="manage-data-with-tidyverse.html#change-column-type" id="toc-change-column-type">Change column type</a></li>
-<li><a href="manage-data-with-tidyverse.html#reorder-levels-of-a-factor" id="toc-reorder-levels-of-a-factor">Reorder levels of a factor</a></li>
+<li><a href="tidyverse-manage.html#change-column-type" id="toc-change-column-type">Change column type</a></li>
+<li><a href="tidyverse-manage.html#reorder-levels-of-a-factor" id="toc-reorder-levels-of-a-factor">Reorder levels of a factor</a></li>
 </ul></li>
-<li><a href="manage-data-with-tidyverse.html#summary" id="toc-summary">Summary</a></li>
-<li><a href="manage-data-with-tidyverse.html#dealing-with-missing-values" id="toc-dealing-with-missing-values">Dealing with missing values</a></li>
-<li><a href="manage-data-with-tidyverse.html#filter-a-dataframe" id="toc-filter-a-dataframe">Filter a dataframe</a></li>
-<li><a href="manage-data-with-tidyverse.html#sort-for-the-value-of-a-column" id="toc-sort-for-the-value-of-a-column">Sort for the value of a column</a></li>
-<li><a href="manage-data-with-tidyverse.html#merge-two-columns" id="toc-merge-two-columns">Merge two columns</a></li>
-<li><a href="manage-data-with-tidyverse.html#split-two-columns" id="toc-split-two-columns">Split two columns</a></li>
-<li><a href="manage-data-with-tidyverse.html#merge-two-dataframes" id="toc-merge-two-dataframes">Merge two dataframes</a></li>
-<li><a href="manage-data-with-tidyverse.html#exercises-6" id="toc-exercises-6">Exercises</a></li>
+<li><a href="tidyverse-manage.html#summary" id="toc-summary">Summary</a></li>
+<li><a href="tidyverse-manage.html#dealing-with-missing-values" id="toc-dealing-with-missing-values">Dealing with missing values</a></li>
+<li><a href="tidyverse-manage.html#filter-a-dataframe" id="toc-filter-a-dataframe">Filter a dataframe</a></li>
+<li><a href="tidyverse-manage.html#sort-for-the-value-of-a-column" id="toc-sort-for-the-value-of-a-column">Sort for the value of a column</a></li>
+<li><a href="tidyverse-manage.html#merge-two-columns" id="toc-merge-two-columns">Merge two columns</a></li>
+<li><a href="tidyverse-manage.html#split-two-columns" id="toc-split-two-columns">Split two columns</a></li>
+<li><a href="tidyverse-manage.html#merge-two-dataframes" id="toc-merge-two-dataframes">Merge two dataframes</a></li>
+<li><a href="tidyverse-manage.html#exercises-6" id="toc-exercises-6">Exercises</a></li>
 </ul></li>
 <li><a href="aggregate-data-with-tidyverse.html#aggregate-data-with-tidyverse" id="toc-aggregate-data-with-tidyverse"><span class="toc-section-number">13</span> Aggregate data with tidyverse</a>
 <ul>
@@ -303,6 +303,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="plot-our-data-with-ggplot2.html#add-title-and-change-labels-labs" id="toc-add-title-and-change-labels-labs">Add title and change labels (labs)</a></li>
 <li><a href="plot-our-data-with-ggplot2.html#change-appearence-theme" id="toc-change-appearence-theme">Change appearence (theme)</a></li>
 <li><a href="plot-our-data-with-ggplot2.html#save-plot" id="toc-save-plot">Save plot</a></li>
+</ul></li>
+<li><a href="introduction-to-statistics-in-r.html#introduction-to-statistics-in-r" id="toc-introduction-to-statistics-in-r"><span class="toc-section-number">15</span> Introduction to statistics in R</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#evaluate-parametric-assumptions" id="toc-evaluate-parametric-assumptions">Evaluate parametric assumptions</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#visual-inspection" id="toc-visual-inspection">Visual inspection</a></li>
+<li><a href="introduction-to-statistics-in-r.html#no-outliers" id="toc-no-outliers">No outliers</a></li>
+<li><a href="introduction-to-statistics-in-r.html#normality" id="toc-normality">Normality</a>
+<ul>
+<li><a href="introduction-to-statistics-in-r.html#shapiro-wilk-normality-test" id="toc-shapiro-wilk-normality-test"><span class="toc-section-number">15.0.0.1</span> Shapiro-Wilk normality test</a></li>
+<li><a href="introduction-to-statistics-in-r.html#kolmogorov-smirnov-test" id="toc-kolmogorov-smirnov-test"><span class="toc-section-number">15.0.0.2</span> Kolmogorov-Smirnov test</a></li>
+</ul></li>
+<li><a href="introduction-to-statistics-in-r.html#homogeneity-of-variances-homoschedaticity" id="toc-homogeneity-of-variances-homoschedaticity">Homogeneity of variances (homoschedaticity)</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -405,41 +419,18 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] ggpubr_0.4.0    lubridate_1.9.2 forcats_1.0.0   stringr_1.5.0   dplyr_1.1.2     purrr_1.0.1    
- [7] readr_2.1.4     tidyr_1.3.0     tibble_3.2.1    ggplot2_3.4.2   tidyverse_2.0.0
+ [1] outliers_0.15   ggpubr_0.4.0    lubridate_1.9.2 forcats_1.0.0   stringr_1.5.0   dplyr_1.1.2     purrr_1.0.1     readr_2.1.4    
+ [9] tidyr_1.3.0     tibble_3.2.1    ggplot2_3.4.2   tidyverse_2.0.0
 
 loaded via a namespace (and not attached):
-  [1] Seurat_4.0.5          Rtsne_0.15            colorspace_2.0-2      deldir_1.0-6         
-  [5] ggsignif_0.6.3        ellipsis_0.3.2        ggridges_0.5.3        spatstat.data_2.1-0  
-  [9] rstudioapi_0.15.0     leiden_0.3.9          listenv_0.8.0         farver_2.1.0         
- [13] ggrepel_0.9.1         fansi_0.5.0           codetools_0.2-18      splines_4.1.0        
- [17] knitr_1.36            polyclip_1.10-0       jsonlite_1.8.4        broom_1.0.5          
- [21] ica_1.0-2             cluster_2.1.2         png_0.1-7             uwot_0.1.10          
- [25] spatstat.sparse_2.0-0 sctransform_0.3.2     shiny_1.7.1           compiler_4.1.0       
- [29] httr_1.4.6            backports_1.3.0       lazyeval_0.2.2        SeuratObject_4.0.3   
- [33] Matrix_1.3-4          fastmap_1.1.0         cli_3.6.1             later_1.3.0          
- [37] htmltools_0.5.2       tools_4.1.0           igraph_1.2.8          gtable_0.3.0         
- [41] glue_1.6.2            reshape2_1.4.4        RANN_2.6.1            Rcpp_1.0.7           
- [45] scattermore_0.7       carData_3.0-4         jquerylib_0.1.4       vctrs_0.6.2          
- [49] nlme_3.1-153          lmtest_0.9-39         xfun_0.28             globals_0.14.0       
- [53] timechange_0.2.0      mime_0.12             miniUI_0.1.1.1        lifecycle_1.0.3      
- [57] irlba_2.3.3           goftest_1.2-3         rstatix_0.7.0         future_1.23.0        
- [61] MASS_7.3-54           zoo_1.8-9             scales_1.2.1          spatstat.core_2.3-1  
- [65] ragg_1.2.5            spatstat.utils_2.2-0  hms_1.1.3             promises_1.2.0.1     
- [69] parallel_4.1.0        RColorBrewer_1.1-2    yaml_2.2.1            gridExtra_2.3        
- [73] reticulate_1.22       pbapply_1.5-0         sass_0.4.0            rpart_4.1-15         
- [77] stringi_1.7.5         highr_0.9             systemfonts_1.0.3     rlang_1.1.1          
- [81] pkgconfig_2.0.3       matrixStats_0.61.0    evaluate_0.14         lattice_0.20-45      
- [85] tensor_1.5            ROCR_1.0-11           htmlwidgets_1.5.4     patchwork_1.1.1      
- [89] labeling_0.4.2        cowplot_1.1.1         tidyselect_1.2.0      parallelly_1.28.1    
- [93] RcppAnnoy_0.0.19      plyr_1.8.6            magrittr_2.0.3        bookdown_0.24        
- [97] R6_2.5.1              generics_0.1.1        DBI_1.1.1             mgcv_1.8-38          
-[101] pillar_1.9.0          withr_2.5.0           fitdistrplus_1.1-6    survival_3.2-13      
-[105] abind_1.4-5           future.apply_1.8.1    crayon_1.4.2          car_3.0-12           
-[109] KernSmooth_2.23-20    utf8_1.2.2            spatstat.geom_2.4-0   plotly_4.10.0        
-[113] tzdb_0.2.0            rmarkdown_2.11        grid_4.1.0            data.table_1.14.2    
-[117] digest_0.6.28         xtable_1.8-4          httpuv_1.6.3          textshaping_0.3.6    
-[121] munsell_0.5.0         viridisLite_0.4.0     bslib_0.3.1          </code></pre>
+ [1] tidyselect_1.2.0   xfun_0.28          bslib_0.3.1        carData_3.0-4      colorspace_2.0-2   vctrs_0.6.2        generics_0.1.1    
+ [8] htmltools_0.5.2    yaml_2.2.1         utf8_1.2.2         rlang_1.1.1        pillar_1.9.0       jquerylib_0.1.4    glue_1.6.2        
+[15] withr_2.5.0        RColorBrewer_1.1-2 lifecycle_1.0.3    munsell_0.5.0      ggsignif_0.6.3     gtable_0.3.0       evaluate_0.14     
+[22] labeling_0.4.2     knitr_1.36         tzdb_0.2.0         fastmap_1.1.0      fansi_0.5.0        highr_0.9          broom_1.0.5       
+[29] scales_1.2.1       backports_1.3.0    jsonlite_1.8.4     abind_1.4-5        farver_2.1.0       hms_1.1.3          digest_0.6.28     
+[36] stringi_1.7.5      bookdown_0.24      rstatix_0.7.0      cowplot_1.1.1      grid_4.1.0         cli_3.6.1          tools_4.1.0       
+[43] magrittr_2.0.3     sass_0.4.0         crayon_1.4.2       car_3.0-12         pkgconfig_2.0.3    timechange_0.2.0   rmarkdown_2.11    
+[50] rstudioapi_0.15.0  R6_2.5.1           compiler_4.1.0    </code></pre>
 <p>Here it is reported the version of R, and of all the packages loaded during this session.
 <br>
 You should use this command at the end of all your analyses, especially if you are using Markdown (we will see them soon, very soon) and provide it when you want to share the analysis to someone else (or publish a paper with an analysis performed in R). In fact, in “Material and Methods” section of a paper, you should write down the version of R and of the packages used for analyses.</p>
@@ -459,7 +450,7 @@ Conda environment (per approfondire), altrimenti non aggiornare mai.</p>
         </div>
       </div>
 <a href="data-frames.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="manage-data-with-tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tidyverse-manage.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
