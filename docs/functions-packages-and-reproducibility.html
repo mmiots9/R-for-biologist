@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-08-23" />
+<meta name="date" content="2023-08-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -318,6 +318,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="introduction-to-statistics-in-r.html#homogeneity-of-variances-homoschedaticity" id="toc-homogeneity-of-variances-homoschedaticity">Homogeneity of variances (homoschedaticity)</a></li>
 </ul></li>
 </ul></li>
+<li><a href="association-between-categorical-variables.html#association-between-categorical-variables" id="toc-association-between-categorical-variables"><span class="toc-section-number">16</span> Association between categorical variables</a>
+<ul>
+<li><a href="association-between-categorical-variables.html#fisher-exact-test" id="toc-fisher-exact-test">Fisher exact test</a>
+<ul>
+<li><a href="association-between-categorical-variables.html#phi-φ-coefficient" id="toc-phi-φ-coefficient">Phi (φ) Coefficient</a></li>
+</ul></li>
+<li><a href="association-between-categorical-variables.html#chi-squared-test-with-yates-correction" id="toc-chi-squared-test-with-yates-correction">Chi-Squared test with Yates correction</a></li>
+<li><a href="association-between-categorical-variables.html#chi-squared-test-without-correction" id="toc-chi-squared-test-without-correction">Chi-Squared test without correction</a>
+<ul>
+<li><a href="association-between-categorical-variables.html#cramers-v" id="toc-cramers-v">Cramer’s V</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -416,21 +428,23 @@ locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+[1] grid      stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] outliers_0.15   ggpubr_0.4.0    lubridate_1.9.2 forcats_1.0.0   stringr_1.5.0   dplyr_1.1.2     purrr_1.0.1     readr_2.1.4    
- [9] tidyr_1.3.0     tibble_3.2.1    ggplot2_3.4.2   tidyverse_2.0.0
+ [1] ggpubr_0.4.0    vcd_1.4-9       ggmosaic_0.3.3  lubridate_1.9.2 forcats_1.0.0   stringr_1.5.0   dplyr_1.1.2     purrr_1.0.1    
+ [9] readr_2.1.4     tidyr_1.3.0     tibble_3.2.1    ggplot2_3.4.2   tidyverse_2.0.0
 
 loaded via a namespace (and not attached):
- [1] tidyselect_1.2.0   xfun_0.28          bslib_0.3.1        carData_3.0-4      colorspace_2.0-2   vctrs_0.6.2        generics_0.1.1    
- [8] htmltools_0.5.2    yaml_2.2.1         utf8_1.2.2         rlang_1.1.1        pillar_1.9.0       jquerylib_0.1.4    glue_1.6.2        
-[15] withr_2.5.0        RColorBrewer_1.1-2 lifecycle_1.0.3    munsell_0.5.0      ggsignif_0.6.3     gtable_0.3.0       evaluate_0.14     
-[22] labeling_0.4.2     knitr_1.36         tzdb_0.2.0         fastmap_1.1.0      fansi_0.5.0        highr_0.9          broom_1.0.5       
-[29] scales_1.2.1       backports_1.3.0    jsonlite_1.8.4     abind_1.4-5        farver_2.1.0       hms_1.1.3          digest_0.6.28     
-[36] stringi_1.7.5      bookdown_0.24      rstatix_0.7.0      cowplot_1.1.1      grid_4.1.0         cli_3.6.1          tools_4.1.0       
-[43] magrittr_2.0.3     sass_0.4.0         crayon_1.4.2       car_3.0-12         pkgconfig_2.0.3    timechange_0.2.0   rmarkdown_2.11    
-[50] rstudioapi_0.15.0  R6_2.5.1           compiler_4.1.0    </code></pre>
+ [1] ggrepel_0.9.1      Rcpp_1.0.7         lattice_0.20-45    zoo_1.8-9          digest_0.6.28      lmtest_0.9-39      utf8_1.2.2        
+ [8] R6_2.5.1           plyr_1.8.6         backports_1.3.0    evaluate_0.14      httr_1.4.6         highr_0.9          pillar_1.9.0      
+[15] rlang_1.1.1        lazyeval_0.2.2     rstudioapi_0.15.0  data.table_1.14.2  car_3.0-12         jquerylib_0.1.4    rmarkdown_2.11    
+[22] labeling_0.4.2     htmlwidgets_1.5.4  munsell_0.5.0      broom_1.0.5        compiler_4.1.0     xfun_0.28          pkgconfig_2.0.3   
+[29] htmltools_0.5.2    tidyselect_1.2.0   bookdown_0.24      fansi_0.5.0        viridisLite_0.4.0  crayon_1.4.2       tzdb_0.2.0        
+[36] withr_2.5.0        MASS_7.3-54        jsonlite_1.8.4     gtable_0.3.0       lifecycle_1.0.3    magrittr_2.0.3     scales_1.2.1      
+[43] carData_3.0-4      cli_3.6.1          stringi_1.7.5      farver_2.1.0       ggsignif_0.6.3     bslib_0.3.1        generics_0.1.1    
+[50] vctrs_0.6.2        cowplot_1.1.1      RColorBrewer_1.1-2 tools_4.1.0        glue_1.6.2         productplots_0.1.1 hms_1.1.3         
+[57] abind_1.4-5        fastmap_1.1.0      yaml_2.2.1         timechange_0.2.0   colorspace_2.0-2   rstatix_0.7.0      plotly_4.10.0     
+[64] knitr_1.36         sass_0.4.0        </code></pre>
 <p>Here it is reported the version of R, and of all the packages loaded during this session.
 <br>
 You should use this command at the end of all your analyses, especially if you are using Markdown (we will see them soon, very soon) and provide it when you want to share the analysis to someone else (or publish a paper with an analysis performed in R). In fact, in “Material and Methods” section of a paper, you should write down the version of R and of the packages used for analyses.</p>

@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-08-23" />
+<meta name="date" content="2023-08-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="plot-our-data-with-ggplot2.html"/>
-
+<link rel="next" href="association-between-categorical-variables.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -316,6 +316,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="introduction-to-statistics-in-r.html#kolmogorov-smirnov-test" id="toc-kolmogorov-smirnov-test"><span class="toc-section-number">15.0.0.2</span> Kolmogorov-Smirnov test</a></li>
 </ul></li>
 <li><a href="introduction-to-statistics-in-r.html#homogeneity-of-variances-homoschedaticity" id="toc-homogeneity-of-variances-homoschedaticity">Homogeneity of variances (homoschedaticity)</a></li>
+</ul></li>
+</ul></li>
+<li><a href="association-between-categorical-variables.html#association-between-categorical-variables" id="toc-association-between-categorical-variables"><span class="toc-section-number">16</span> Association between categorical variables</a>
+<ul>
+<li><a href="association-between-categorical-variables.html#fisher-exact-test" id="toc-fisher-exact-test">Fisher exact test</a>
+<ul>
+<li><a href="association-between-categorical-variables.html#phi-φ-coefficient" id="toc-phi-φ-coefficient">Phi (φ) Coefficient</a></li>
+</ul></li>
+<li><a href="association-between-categorical-variables.html#chi-squared-test-with-yates-correction" id="toc-chi-squared-test-with-yates-correction">Chi-Squared test with Yates correction</a></li>
+<li><a href="association-between-categorical-variables.html#chi-squared-test-without-correction" id="toc-chi-squared-test-without-correction">Chi-Squared test without correction</a>
+<ul>
+<li><a href="association-between-categorical-variables.html#cramers-v" id="toc-cramers-v">Cramer’s V</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -747,7 +759,7 @@ However, they both hae <u>limitatios</u> when dealing with large samples (n &gt;
 <span id="cb485-9"><a href="introduction-to-statistics-in-r.html#cb485-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
 <span id="cb485-10"><a href="introduction-to-statistics-in-r.html#cb485-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb485-11"><a href="introduction-to-statistics-in-r.html#cb485-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(norm_sample_density, non_norm_sample_density, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;v&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-282-1.svg" width="85%" style="display: block; margin: auto;" />
+<p><img src="_main_files/figure-html/unnamed-chunk-157-1.svg" width="85%" style="display: block; margin: auto;" />
 Great! We can clearly see by visual inspection that the first is normmally distributed and the second one not, but we are here to see statistical tests.</p>
 <div id="shapiro-wilk-normality-test" class="section level4" number="15.0.0.1">
 <h4><span class="header-section-number">15.0.0.1</span> Shapiro-Wilk normality test</h4>
@@ -936,8 +948,8 @@ From next chapter on, we will see in details the statistical tests we can perfor
           </div>
         </div>
       </div>
-<a href="plot-our-data-with-ggplot2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="plot-our-data-with-ggplot2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="association-between-categorical-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

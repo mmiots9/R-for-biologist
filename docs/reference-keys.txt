@@ -31,3 +31,4 @@ plot-our-data-with-ggplot2
 introduction-to-statistics-in-r
 shapiro-wilk-normality-test
 kolmogorov-smirnov-test
+association-between-categorical-variables
