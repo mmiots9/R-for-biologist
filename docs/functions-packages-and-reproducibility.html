@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-08-24" />
+<meta name="date" content="2023-09-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -380,6 +380,16 @@ The process will take a while and if all worked fine, it should prompt “DONE T
 <br>
 For example, in our case we will write:</p>
 <div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="functions-packages-and-reproducibility.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>── Attaching core tidyverse packages ──────────────────────────────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <p>Now that we have loaded the package, we are able to use its functions.<br></p>
 </div>
 </div>
@@ -409,14 +419,14 @@ So, how to control it?</p>
 <div id="control-package-versions" class="section level3 unnumbered">
 <h3>Control package versions</h3>
 <p>To check which version of a package you have installed you can use the command <code>packageVersion("&lt;name_of_the_package&gt;")</code>. For example:</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="functions-packages-and-reproducibility.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="functions-packages-and-reproducibility.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
 <pre class="code-out"><code>[1] &#39;2.0.0&#39;</code></pre>
 <p>I have installed version 2.0.0 of tidyverse. DON’T worry if your version is not the same as mine (I know it sounds controversial, but here we are explaining things, you should stick with you own version).</p>
 </div>
 <div id="session-info" class="section level3 unnumbered">
 <h3>Session info</h3>
 <p>Another way is to look at the sessionInfo, which returns all the package loaded in the current session (remember, a session starts when you start R and ends when you exit or restart R).</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="functions-packages-and-reproducibility.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="functions-packages-and-reproducibility.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre class="code-out"><code>R version 4.1.0 (2021-05-18)
 Platform: x86_64-apple-darwin17.0 (64-bit)
 Running under: macOS 12.6.6
@@ -428,23 +438,21 @@ locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 
 attached base packages:
-[1] grid      stats     graphics  grDevices utils     datasets  methods   base     
+[1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] ggpubr_0.4.0    vcd_1.4-9       ggmosaic_0.3.3  lubridate_1.9.2 forcats_1.0.0   stringr_1.5.0   dplyr_1.1.2     purrr_1.0.1    
- [9] readr_2.1.4     tidyr_1.3.0     tibble_3.2.1    ggplot2_3.4.2   tidyverse_2.0.0
+ [1] lubridate_1.9.2 forcats_1.0.0   stringr_1.5.0   dplyr_1.1.2     purrr_1.0.1     readr_2.1.4    
+ [7] tidyr_1.3.0     tibble_3.2.1    ggplot2_3.4.2   tidyverse_2.0.0
 
 loaded via a namespace (and not attached):
- [1] ggrepel_0.9.1      Rcpp_1.0.7         lattice_0.20-45    zoo_1.8-9          digest_0.6.28      lmtest_0.9-39      utf8_1.2.2        
- [8] R6_2.5.1           plyr_1.8.6         backports_1.3.0    evaluate_0.14      httr_1.4.6         highr_0.9          pillar_1.9.0      
-[15] rlang_1.1.1        lazyeval_0.2.2     rstudioapi_0.15.0  data.table_1.14.2  car_3.0-12         jquerylib_0.1.4    rmarkdown_2.11    
-[22] labeling_0.4.2     htmlwidgets_1.5.4  munsell_0.5.0      broom_1.0.5        compiler_4.1.0     xfun_0.28          pkgconfig_2.0.3   
-[29] htmltools_0.5.2    tidyselect_1.2.0   bookdown_0.24      fansi_0.5.0        viridisLite_0.4.0  crayon_1.4.2       tzdb_0.2.0        
-[36] withr_2.5.0        MASS_7.3-54        jsonlite_1.8.4     gtable_0.3.0       lifecycle_1.0.3    magrittr_2.0.3     scales_1.2.1      
-[43] carData_3.0-4      cli_3.6.1          stringi_1.7.5      farver_2.1.0       ggsignif_0.6.3     bslib_0.3.1        generics_0.1.1    
-[50] vctrs_0.6.2        cowplot_1.1.1      RColorBrewer_1.1-2 tools_4.1.0        glue_1.6.2         productplots_0.1.1 hms_1.1.3         
-[57] abind_1.4-5        fastmap_1.1.0      yaml_2.2.1         timechange_0.2.0   colorspace_2.0-2   rstatix_0.7.0      plotly_4.10.0     
-[64] knitr_1.36         sass_0.4.0        </code></pre>
+ [1] bslib_0.3.1       compiler_4.1.0    pillar_1.9.0      jquerylib_0.1.4   tools_4.1.0      
+ [6] digest_0.6.28     timechange_0.2.0  jsonlite_1.8.4    evaluate_0.14     lifecycle_1.0.3  
+[11] gtable_0.3.0      pkgconfig_2.0.3   rlang_1.1.1       cli_3.6.1         rstudioapi_0.15.0
+[16] yaml_2.2.1        xfun_0.28         fastmap_1.1.0     withr_2.5.0       knitr_1.36       
+[21] hms_1.1.3         generics_0.1.1    vctrs_0.6.2       sass_0.4.0        tidyselect_1.2.0 
+[26] grid_4.1.0        glue_1.6.2        R6_2.5.1          fansi_0.5.0       rmarkdown_2.11   
+[31] bookdown_0.24     tzdb_0.2.0        magrittr_2.0.3    scales_1.2.1      htmltools_0.5.2  
+[36] colorspace_2.0-2  utf8_1.2.2        stringi_1.7.5     munsell_0.5.0    </code></pre>
 <p>Here it is reported the version of R, and of all the packages loaded during this session.
 <br>
 You should use this command at the end of all your analyses, especially if you are using Markdown (we will see them soon, very soon) and provide it when you want to share the analysis to someone else (or publish a paper with an analysis performed in R). In fact, in “Material and Methods” section of a paper, you should write down the version of R and of the packages used for analyses.</p>

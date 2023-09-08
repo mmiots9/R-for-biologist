@@ -381,7 +381,7 @@ non_norm_sample <- runif(n = 100, min = 1, max = 20) * runif(n = 100, min = 0, m
 ```
 
 Now, we just visualize the data as we would do in a real-life scenario:
-```{r}
+```{r normal_vs_non_normal_distribution}
 norm_sample_density <- ggplot() +
   geom_density(aes(norm_sample)) +
   labs(x = "", title = "Normally distributed data") +
