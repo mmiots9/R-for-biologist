@@ -28,7 +28,6 @@ functions-packages-and-reproducibility
 tidyverse-manage
 aggregate-data-with-tidyverse
 plot-our-data-with-ggplot2
-introduction-to-statistics-in-r
-shapiro-wilk-normality-test
-kolmogorov-smirnov-test
+intro-stat-chapter
 association-between-categorical-variables
+comparing-two-groups

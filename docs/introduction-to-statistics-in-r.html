@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-09-08" />
+<meta name="date" content="2023-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -312,8 +312,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="introduction-to-statistics-in-r.html#no-outliers" id="toc-no-outliers">No outliers</a></li>
 <li><a href="introduction-to-statistics-in-r.html#normality" id="toc-normality">Normality</a>
 <ul>
-<li><a href="introduction-to-statistics-in-r.html#shapiro-wilk-normality-test" id="toc-shapiro-wilk-normality-test"><span class="toc-section-number">15.0.0.1</span> Shapiro-Wilk normality test</a></li>
-<li><a href="introduction-to-statistics-in-r.html#kolmogorov-smirnov-test" id="toc-kolmogorov-smirnov-test"><span class="toc-section-number">15.0.0.2</span> Kolmogorov-Smirnov test</a></li>
+<li><a href="introduction-to-statistics-in-r.html#shapiro-wilk-normality-test" id="toc-shapiro-wilk-normality-test">Shapiro-Wilk normality test</a></li>
+<li><a href="introduction-to-statistics-in-r.html#kolmogorov-smirnov-test" id="toc-kolmogorov-smirnov-test">Kolmogorov-Smirnov test</a></li>
 </ul></li>
 <li><a href="introduction-to-statistics-in-r.html#homogeneity-of-variances-homoschedaticity" id="toc-homogeneity-of-variances-homoschedaticity">Homogeneity of variances (homoschedaticity)</a></li>
 </ul></li>
@@ -330,6 +330,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="association-between-categorical-variables.html#cramers-v" id="toc-cramers-v">Cramer’s V</a></li>
 </ul></li>
 </ul></li>
+<li><a href="comparing-two-groups.html#comparing-two-groups" id="toc-comparing-two-groups"><span class="toc-section-number">17</span> Comparing two groups</a></li>
 </ul>
 
       </nav>
@@ -761,8 +762,8 @@ However, they both hae <u>limitatios</u> when dealing with large samples (n &gt;
 <span id="cb486-11"><a href="introduction-to-statistics-in-r.html#cb486-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(norm_sample_density, non_norm_sample_density, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;v&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/normal_vs_non_normal_distribution-1.svg" width="85%" style="display: block; margin: auto;" />
 Great! We can clearly see by visual inspection that the first is normmally distributed and the second one not, but we are here to see statistical tests.</p>
-<div id="shapiro-wilk-normality-test" class="section level4" number="15.0.0.1">
-<h4><span class="header-section-number">15.0.0.1</span> Shapiro-Wilk normality test</h4>
+<div id="shapiro-wilk-normality-test" class="section level4 unnumbered">
+<h4>Shapiro-Wilk normality test</h4>
 <p>We start with <code>shapiro.test</code>:</p>
 <div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="introduction-to-statistics-in-r.html#cb487-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Shapiro-Wilk test</span></span>
 <span id="cb487-2"><a href="introduction-to-statistics-in-r.html#cb487-2" aria-hidden="true" tabindex="-1"></a>norm_sample_shapiro_res <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(<span class="at">x =</span> norm_sample)</span>
@@ -796,8 +797,8 @@ Running the function is very simple, the only input you have to give is the nume
 </ul>
 <p>So, we can say that the Shapiro-Wilk test confirms that the first sample is normally distributed, while the second one not.</p>
 </div>
-<div id="kolmogorov-smirnov-test" class="section level4" number="15.0.0.2">
-<h4><span class="header-section-number">15.0.0.2</span> Kolmogorov-Smirnov test</h4>
+<div id="kolmogorov-smirnov-test" class="section level4 unnumbered">
+<h4>Kolmogorov-Smirnov test</h4>
 <p>Let’s now see the Kolgomorov-Smirnov test. The function is <code>ks.test</code>, and it differs a lot from the previous one, so let’s see some examples and then comment them:</p>
 <div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="introduction-to-statistics-in-r.html#cb491-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Test normal data</span></span>
 <span id="cb491-2"><a href="introduction-to-statistics-in-r.html#cb491-2" aria-hidden="true" tabindex="-1"></a>norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="st">&quot;pnorm&quot;</span>)</span>

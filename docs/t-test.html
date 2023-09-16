@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Variables | Learn R for biologist</title>
+  <title>T-test | Learn R for biologist</title>
   <meta name="description" content="To you, who never gives up, for your future. You can make it!" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Variables | Learn R for biologist" />
+  <meta property="og:title" content="T-test | Learn R for biologist" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Variables | Learn R for biologist" />
+  <meta name="twitter:title" content="T-test | Learn R for biologist" />
   
   <meta name="twitter:description" content="To you, who never gives up, for your future. You can make it!" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="first-step-in-rstudio.html"/>
-<link rel="next" href="scripts-chapter.html"/>
+<link rel="prev" href="comparing-two-groups.html"/>
+
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -330,12 +330,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="association-between-categorical-variables.html#cramers-v" id="toc-cramers-v">Cramer’s V</a></li>
 </ul></li>
 </ul></li>
-<li><a href="comparing-two-groups.html#comparing-two-groups" id="toc-comparing-two-groups"><span class="toc-section-number">17</span> Comparing two groups</a>
+<li><a href="comparing-two-groups.html#comparing-two-groups" id="toc-comparing-two-groups"><span class="toc-section-number">17</span> Comparing two groups</a></li>
+<li><a href="t-test.html#t-test" id="toc-t-test">T-test</a>
 <ul>
-<li><a href="comparing-two-groups.html#t-test" id="toc-t-test">T-test</a></li>
-<li><a href="comparing-two-groups.html#welchs-test" id="toc-welchs-test">Welch’s test</a></li>
-<li><a href="comparing-two-groups.html#mann-whitney-and-wilcoxon" id="toc-mann-whitney-and-wilcoxon">Mann-Whitney and Wilcoxon</a></li>
-<li><a href="comparing-two-groups.html#add-values-to-graph" id="toc-add-values-to-graph">Add values to graph</a></li>
+<li><a href="t-test.html#welchs-test" id="toc-welchs-test">Welch’s test</a></li>
+<li><a href="t-test.html#mann-whitney-and-wilcoxon" id="toc-mann-whitney-and-wilcoxon">Mann-Whitney and Wilcoxon</a></li>
+<li><a href="t-test.html#add-values-to-graph" id="toc-add-values-to-graph">Add values to graph</a></li>
+<li><a href="t-test.html#exercises-8" id="toc-exercises-8"><span class="toc-section-number">17.1</span> Exercises</a></li>
 </ul></li>
 </ul>
 
@@ -354,248 +355,163 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="variables" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Variables</h1>
-<p>As mentioned, we often need some number (eg a concentration), some table (eg table of differentially expressed genes), information (eg the name of a protein) etc. to be saved in R to be able to use them later in the analysis. This is where <em>variables</em> come into play, and now we’ll see how to create them, how to reuse them, and what kinds of variables exist.</p>
-<div id="create-a-variable" class="section level2 unnumbered">
-<h2>Create a variable</h2>
-<p>To create a variable we write <code>name_of_the_variable &lt;- what_to_save</code> (you can either use <code>=</code> instead of <code>&lt;-</code>, even if the former is usually used for declaring arguments in a function, but we’ll see it later).
-<br>
-Now, write this to the console, click Return/send on the keyborard, and see what happens:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="variables.html#cb3-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
-<p><img src="images/png/rstudio-environment.png" height=30%></p>
-On the console nothing happens, but something appeared in the window called Environment (if yours is different, it may be that there is the “List” view setting instead of “Grid” in the blue box, you can change it to your liking).
-<br>
+<div id="t-test" class="section level1 unnumbered">
+<h1>T-test</h1>
+T-test is one of the most famous test and the one that most of people try to apply every time, even if it’s not possible (sigh, but after this course, I know you won’t be one of them).
 <p class="plist">
-Here in details the info given for each variable:
-<p>
-<ul>
-<li>
-<strong>Name</strong>: name of the variable
-</li>
-<li>
-<strong>Type</strong>: type of the variable (don’t worry, we’ll see in a minute what this means)
-</li>
-<li>
-<strong>Length:</strong>: the length of the variable (how many items it contains)
-</li>
-<li>
-<strong>Size</strong>: how much memory that variable occupies
-</li>
-<li>
-<strong>Value</strong>: the value of our variable
-</li>
-</ul>
-<p>If we want to create multiple variables with the same value we can do this:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="variables.html#cb4-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> var2 <span class="ot">&lt;-</span> var3 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb4-2"><a href="variables.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var1)</span></code></pre></div>
-<pre class="code-out"><code>[1] 20</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="variables.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var2)</span></code></pre></div>
-<pre class="code-out"><code>[1] 20</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="variables.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var3)</span></code></pre></div>
-<pre class="code-out"><code>[1] 20</code></pre>
-</div>
-<div id="use-a-variable" class="section level2 unnumbered">
-<h2>Use a variable</h2>
-<p>Ok, but once stored, how to we use a variable? Easy, we just need to type it in the console (or start writing the first letters of its name and press Tab to show RStudio suggestions). If, for example, we want to calculate the power of our variable we should write:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="variables.html#cb10-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="sc">**</span> <span class="dv">2</span></span></code></pre></div>
-<pre class="code-out"><code>[1] 25</code></pre>
-<p>And here is the result (to elevate to the power we can either use <code>**</code> or <code>^</code>).
-<br>
-And what if we want to store this result? As before:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="variables.html#cb12-1" aria-hidden="true" tabindex="-1"></a>myvar_power <span class="ot">&lt;-</span> myvar <span class="sc">**</span> <span class="dv">2</span></span>
-<span id="cb12-2"><a href="variables.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar_power)</span></code></pre></div>
-<pre class="code-out"><code>[1] 25</code></pre>
-<p>Here we use <code>print()</code> function, but in R we can also just write the name of the variable to see it.</p>
-</div>
-<div id="variable-names" class="section level2 unnumbered">
-<h2>Variable names</h2>
-As in everything, even in naming variables there are rules and guidelines. Don’t be scared, they are simple and will make your life easier, let’s see them together.
-<br>
-<p class="plist">
-Rules:
-<p>
-<ul>
-<li>
-Variable name <strong>CANNOT</strong> start with a character other than a letter
-</li>
-<li>
-Variable name can contain both letters and numbers (case sensitive, uppercase and lowercase matter)
-</li>
-<li>
-Variable name may contain as special characters <strong>only</strong> the dot <code>.</code> or the underscore <code>_</code>
-</li>
-</ul>
-<p class="plist">
-Guidelines:
-<p>
-<ul>
-<li>
-Since the name of the variable must be useful, its name must suggest something: for example, the variable <code>myvar</code> was previously defined, whose meaning is equal to 0 (so avoid these names), while <code>myvar_power</code> is more indicative, as it tells us that it is raised to a power
-</li>
-<li>
-Variables are normally written in lowercase letters, except for those you want to remain constant in your analysis, which in other languages are written in uppercase (this does not make them immutable, but suggests this feature within the script)
-</li>
-<li>
-Use underscores rather than periods as special characters in variable names if you can
-</li>
-<li>
-If the variable name contains more than one word, you can separate them with an underscore (as in the example) or use the camel case (myvarPower) or the Pascal case (MyvarPower)
-</li>
-<li>
-Be consistent within the script: if you decide to use the Pascal case, always use the Pascal case in that script
-</li>
-</ul>
-</div>
-<div id="overwriting-variables" class="section level2 unnumbered">
-<h2>Overwriting variables</h2>
-<p>Attention! Variables can be overwritten (<strong>unrecoverable</strong> action).
-<br>
-To override a variable, simply assign that variable a new value:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="variables.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
-<pre class="code-out"><code>[1] 5</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="variables.html#cb16-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="ot">&lt;-</span> <span class="dv">9</span></span>
-<span id="cb16-2"><a href="variables.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="variables.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
-<pre class="code-out"><code>[1] 9</code></pre>
-<p>Now <code>myvar</code> is equal to 9, and there is no way back…
-<br>
-This feature is useful for saving space and not cluttering up too much with variables that are okay to change often, but it can be risky. So be careful when naming variables.</p>
-</div>
-<div id="list-all-variables" class="section level2 unnumbered">
-<h2>List all variables</h2>
-<p>A useful way to avoid overwriting an important variable is to list the variables. We know that in RStudio they are all present in the <i>Environment</i> window, but what if we weren’t in RStudio but elsewhere (for example in the terminal)?
-<br>
-The answer is simple, let’s use the <code>ls()</code> function</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="variables.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
-<p>Here are our variables.
-<br>
-Note how I called this command with the name <em>function</em>: we will cover this concept later, for now you just need to know that they exist and that they can be identified immediately by the fact that after the name there is a pair of round brackets.
-<br></p>
-</div>
-<div id="delete-variables" class="section level2 unnumbered">
-<h2>Delete variables</h2>
-<p>To delete a variable, use the <code>rm()</code> function and insert the variable to be deleted:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="variables.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a variable</span></span>
-<span id="cb20-2"><a href="variables.html#cb20-2" aria-hidden="true" tabindex="-1"></a>to_remove <span class="ot">&lt;-</span> <span class="dv">1213</span></span>
-<span id="cb20-3"><a href="variables.html#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="variables.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
-<span id="cb20-5"><a href="variables.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;to_remove&quot;   &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="variables.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variable</span></span>
-<span id="cb22-2"><a href="variables.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove)</span>
-<span id="cb22-3"><a href="variables.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="variables.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
-<span id="cb22-5"><a href="variables.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
-<p>As we see, in the second case the <code>to_remove</code> variable has been removed.
-<br>
-What if I want to remove multiple variables? Let’s put multiple variable names inside the <code>rm()</code> function separated by commas:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="variables.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create various variables</span></span>
-<span id="cb24-2"><a href="variables.html#cb24-2" aria-hidden="true" tabindex="-1"></a>to_remove <span class="ot">&lt;-</span> <span class="dv">1213</span></span>
-<span id="cb24-3"><a href="variables.html#cb24-3" aria-hidden="true" tabindex="-1"></a>to_remove2 <span class="ot">&lt;-</span> <span class="dv">685</span></span>
-<span id="cb24-4"><a href="variables.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="variables.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
-<span id="cb24-6"><a href="variables.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;to_remove&quot;   &quot;to_remove2&quot;  &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="variables.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variables</span></span>
-<span id="cb26-2"><a href="variables.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove, to_remove2)</span>
-<span id="cb26-3"><a href="variables.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="variables.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
-<span id="cb26-5"><a href="variables.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
-<p>The two variables have been removed.
-<br>
-But looking closely at these codes, we see that some start with <code>#</code> and are not evaluated. What are they? These are the <strong>comments</strong>, i.e. messages that you will write in the scripts (and we will see later how to create them) to help you understand what you are doing. They are actual comments that you can add, and will not be “evaluated” as code as the line starts with <code>#</code>.
-<br></p>
-</div>
-<div id="type-of-variables" class="section level2 unnumbered">
-<h2>Type of variables</h2>
-So far so linear, right? Great, it will continue to be as easy 🙃.
-<br>
-<p class="plist">
-Let’s see what are the basic types of variables that exist in R:
+You can use the t-test to compare:
 </p>
 <ul>
 <li>
-<strong>Numeric</strong>: numbers, can be <em>integer</em> (whole numbers) or <i>double</i> (decimal numbers)
+The mean of a sample and the expected mean of the population
 </li>
 <li>
-<strong>Character</strong>: characters, therefore strings of letters (words, sentences, etc.)
+The difference of the mean values of two dependent populations (paired t-test)
 </li>
 <li>
-<strong>Boolean</strong>: <code>TRUE</code> or <code>FALSE</code>, are a special type of variable that R interprets in its own way, but super super super useful
-</li>
-<li>
-<strong>Factor</strong>: similar to character, but with peculiar features (and memory saving), often used for categorical variables such as male/female, heterozygous/wild-type
+The difference of the mean values of two independent populations (unpaired t-test)
 </li>
 </ul>
-<p>We will see each type of variable in detail in next chapters. To find out what type a variable is we use the <code>typeof()</code> function:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="variables.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(myvar)</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;double&quot;</code></pre>
-<p>We see that myvar is a double (although it is an integer value), this is because R basically interprets every number as a double, so as to increase its precision and the possibility of operations between various numbers without having type problems.</p>
+<p>In our case, we want to evaluate whether the untreated females at P30 weight more than the ones at P15. As the samples are independent, we will use the unpaired t-test, but don’t worry, I will explain you all the possible scenarios and how to write the proper code.<br>
+The function to use is <code>t.test()</code>, and there are plenty of cool arguments that we can use to apply the right test in the right conditions. Let’s look how we apply it in our case, and then explain each bit of code:</p>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="t-test.html#cb559-1" aria-hidden="true" tabindex="-1"></a>t_test_res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="at">formula =</span> female_t1_weight_df<span class="sc">$</span>weight <span class="sc">~</span> female_t1_weight_df<span class="sc">$</span>age,</span>
+<span id="cb559-2"><a href="t-test.html#cb559-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span>,</span>
+<span id="cb559-3"><a href="t-test.html#cb559-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">mu =</span> <span class="dv">0</span>,</span>
+<span id="cb559-4"><a href="t-test.html#cb559-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">paired =</span> F,</span>
+<span id="cb559-5"><a href="t-test.html#cb559-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">var.equal =</span> T)</span></code></pre></div>
+<p class="plist">
+Wow, lots of things to explain:
+</p>
+<ul>
+<li>
+<em>formula</em>: you can provide a formula like <code>continuous ~ categorical</code>. The categorical varibale should have maximum 2 levels, and the comparison is made as 1st level vs. 2nd level (in our case, P15 over P30). This is not the only way you can give data to this function, you can also just provide two continuous vectors separated by a comma, without calling formula.
+</li>
+<li>
+<em>alternative</em>: it indicates which is the alternative hypothesis (“two.sided” default, “less” or “more”). As we wanted to know if P30 females weight more that P15, and that the comparison was made P15 over P30, we used “less”.
+</li>
+<li>
+<em>mu</em>: is the value of the difference we want to test (if two samples) or the mean (if one sample). We choose 0 in this case, but we could have written <code>-5</code> if we wanted to know if P30 females weight 5g more than P15 ones. Pay attention to the sign!
+</li>
+<li>
+<em>paired</em>: TRUE (paired t-test) or FALSE (unpaired t-test, default). Remember that in paired t-test, the two samples must be of the same size
+</li>
+<li>
+<em>var.equal</em>: TRUE (student t-test) or FALSE (Welch’s t-test, default). We wanted to use the student t-test as we tested that the variances of the two groups are the same.
+</li>
+</ul>
+<p>And now, let’s see the results. Remember to store the results in a variable, so we can get all the values that we needed for further analysis/plots.</p>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="t-test.html#cb560-1" aria-hidden="true" tabindex="-1"></a>t_test_res</span></code></pre></div>
+<pre class="code-out"><code>
+    Two Sample t-test
+
+data:  female_t1_weight_df$weight by female_t1_weight_df$age
+t = -47.074, df = 73, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means between group 15 and group 30 is less than 0
+95 percent confidence interval:
+      -Inf -7.279732
+sample estimates:
+mean in group 15 mean in group 30 
+        9.310811        16.857632 </code></pre>
+<p>We have a lot of information. I think that there is not much to say, as it is kind of self-explanatory, with type of test, p-value, confidence interval, alternative hypothesis and mean values.<br>
+We can confirm that this is significant (as expected, otherwise females are not growing and that’s a problem).</p>
+<div id="welchs-test" class="section level2 unnumbered">
+<h2>Welch’s test</h2>
+<p>To address the second question, we have to use Welch’s t-test, as the two samples have normal distributions, but different variances. We have just seen how to perform Welch’s t-test just by setting <code>var.equal = FALSE</code> in <code>t.test()</code> function. <br>
+So, we talks are over, here is the answer to our question:</p>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="t-test.html#cb562-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Perform the test</span></span>
+<span id="cb562-2"><a href="t-test.html#cb562-2" aria-hidden="true" tabindex="-1"></a>welch_res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="at">formula =</span> t1_3_weight_df<span class="sc">$</span>weight <span class="sc">~</span> t1_3_weight_df<span class="sc">$</span>sex,</span>
+<span id="cb562-3"><a href="t-test.html#cb562-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb562-4"><a href="t-test.html#cb562-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">mu =</span> <span class="dv">0</span>,</span>
+<span id="cb562-5"><a href="t-test.html#cb562-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">paired =</span> F,</span>
+<span id="cb562-6"><a href="t-test.html#cb562-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">var.equal =</span> F)</span>
+<span id="cb562-7"><a href="t-test.html#cb562-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb562-8"><a href="t-test.html#cb562-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Show the results</span></span>
+<span id="cb562-9"><a href="t-test.html#cb562-9" aria-hidden="true" tabindex="-1"></a>welch_res</span></code></pre></div>
+<pre class="code-out"><code>
+    Welch Two Sample t-test
+
+data:  t1_3_weight_df$weight by t1_3_weight_df$sex
+t = -7.9115, df = 61.568, p-value = 5.889e-11
+alternative hypothesis: true difference in means between group Female and group Male is not equal to 0
+95 percent confidence interval:
+ -2.313433 -1.380081
+sample estimates:
+mean in group Female   mean in group Male 
+            3.556757             5.403514 </code></pre>
+<p>And yes! There is difference between males and females at P3, with males that weight significantly more than females.</p>
 </div>
-<div id="exercises" class="section level2 unnumbered">
-<h2>Exercises</h2>
-<p>Ok, this chapter was long enough, let’s do some exercises to fix well these concepts.</p>
-<div class="exercise">
-<p><span id="exr:create-variables" class="exercise"><strong>Exercise 3.1  </strong></span>Create 3 variables indicating the weights of 3 mice.</p>
+<div id="mann-whitney-and-wilcoxon" class="section level2 unnumbered">
+<h2>Mann-Whitney and Wilcoxon</h2>
+<p>We will now address the last question through Mann-Whitney test, which is the non-parametric analogous of the unpaired t-test (we will not cover the Wilcoxon, which is the non-parametric analogous of the paired t-test, but you will see now hot to perform it as well).<br>
+The function we will use is <code>wilcox.test()</code>. Yeah, I know it sounds weird, but that’s it. It takes the same arguments as the parametric counterpart, so we won’t see them again. To notice, if we set <code>paired = T</code>, we will perform the Wilcoxon test, otherwise we will perform Mann-Whitney.</p>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="t-test.html#cb564-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Perform the test</span></span>
+<span id="cb564-2"><a href="t-test.html#cb564-2" aria-hidden="true" tabindex="-1"></a>mann_res <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(<span class="at">formula =</span> male_3_task3_df<span class="sc">$</span>Task3 <span class="sc">~</span> male_3_task3_df<span class="sc">$</span>treatment,</span>
+<span id="cb564-3"><a href="t-test.html#cb564-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb564-4"><a href="t-test.html#cb564-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">mu =</span> <span class="dv">0</span>,</span>
+<span id="cb564-5"><a href="t-test.html#cb564-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">paired =</span> F)</span>
+<span id="cb564-6"><a href="t-test.html#cb564-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb564-7"><a href="t-test.html#cb564-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Show the results</span></span>
+<span id="cb564-8"><a href="t-test.html#cb564-8" aria-hidden="true" tabindex="-1"></a>mann_res</span></code></pre></div>
+<pre class="code-out"><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  male_3_task3_df$Task3 by male_3_task3_df$treatment
+W = 189, p-value = 5.277e-08
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<p>The output is slightly different, but we still have p-value and alternative hypothesis.<br>
+<strong>Remember</strong>: with non-parametric tests, you are not comparing the mean directly. That’s why here are not indicated.</p>
 </div>
-<details>
-<summary>
-Solution
-</summary>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="variables.html#cb30-1" aria-hidden="true" tabindex="-1"></a>mice1 <span class="ot">&lt;-</span> <span class="fl">5.8</span></span>
-<span id="cb30-2"><a href="variables.html#cb30-2" aria-hidden="true" tabindex="-1"></a>mice2 <span class="ot">&lt;-</span> <span class="fl">4.8</span></span>
-<span id="cb30-3"><a href="variables.html#cb30-3" aria-hidden="true" tabindex="-1"></a>mice3 <span class="ot">&lt;-</span> <span class="fl">7.5</span></span>
-<span id="cb30-4"><a href="variables.html#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-5"><a href="variables.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice1)</span></code></pre></div>
-<pre class="code-out"><code>[1] 5.8</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="variables.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice2)</span></code></pre></div>
-<pre class="code-out"><code>[1] 4.8</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="variables.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice3)</span></code></pre></div>
-<pre class="code-out"><code>[1] 7.5</code></pre>
-</details>
-<div class="exercise">
-<p><span id="exr:sum-weights" class="exercise"><strong>Exercise 3.2  </strong></span>Create the variable <code>sum_weights</code> as the sum of the weights of those 3 mice.</p>
+<div id="add-values-to-graph" class="section level2 unnumbered">
+<h2>Add values to graph</h2>
+<p>We can now add the results of the statistical tests to the previous plot; but first, we will use <em>gginnards</em> package to removes the shapiro test values on the plot, because we want to put statistics there, moving shapiro results in the plot description.<br>
+I will now write the whole code, you have already seen much of this stuff; the only difference is that I will use <code>delete_layers()</code> to remove Shapiro results:</p>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="t-test.html#cb566-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Remove shapiro results </span></span>
+<span id="cb566-2"><a href="t-test.html#cb566-2" aria-hidden="true" tabindex="-1"></a>female_t1_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">delete_layers</span>(female_t1_weight_boxplot, <span class="st">&quot;GeomText&quot;</span>)</span>
+<span id="cb566-3"><a href="t-test.html#cb566-3" aria-hidden="true" tabindex="-1"></a>t1_3_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">delete_layers</span>(t1_3_weight_boxplot, <span class="st">&quot;GeomText&quot;</span>)</span>
+<span id="cb566-4"><a href="t-test.html#cb566-4" aria-hidden="true" tabindex="-1"></a>male_3_task3_boxplot <span class="ot">&lt;-</span> <span class="fu">delete_layers</span>(male_3_task3_boxplot, <span class="st">&quot;GeomText&quot;</span>)</span>
+<span id="cb566-5"><a href="t-test.html#cb566-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-6"><a href="t-test.html#cb566-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create a function to map *, **, *** and ns to statistics</span></span>
+<span id="cb566-7"><a href="t-test.html#cb566-7" aria-hidden="true" tabindex="-1"></a>pvalue_to_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb566-8"><a href="t-test.html#cb566-8" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">case_when</span>(</span>
+<span id="cb566-9"><a href="t-test.html#cb566-9" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">&quot;***&quot;</span>,</span>
+<span id="cb566-10"><a href="t-test.html#cb566-10" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">~</span> <span class="st">&quot;**&quot;</span>,</span>
+<span id="cb566-11"><a href="t-test.html#cb566-11" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">&quot;*&quot;</span>,</span>
+<span id="cb566-12"><a href="t-test.html#cb566-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="st">&quot;ns&quot;</span></span>
+<span id="cb566-13"><a href="t-test.html#cb566-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb566-14"><a href="t-test.html#cb566-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb566-15"><a href="t-test.html#cb566-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb566-16"><a href="t-test.html#cb566-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-17"><a href="t-test.html#cb566-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Add pvalues of statistics and remove Bartlett results</span></span>
+<span id="cb566-18"><a href="t-test.html#cb566-18" aria-hidden="true" tabindex="-1"></a>female_t1_weight_boxplot <span class="ot">&lt;-</span> female_t1_weight_boxplot <span class="sc">+</span></span>
+<span id="cb566-19"><a href="t-test.html#cb566-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> female_t1_weight_max, <span class="at">xend =</span> <span class="dv">2</span>, <span class="at">yend =</span> female_t1_weight_max)) <span class="sc">+</span></span>
+<span id="cb566-20"><a href="t-test.html#cb566-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> female_t1_weight_max <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">label =</span> <span class="fu">pvalue_to_plot</span>(t_test_res<span class="sc">$</span>p.value))) <span class="sc">+</span></span>
+<span id="cb566-21"><a href="t-test.html#cb566-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb566-22"><a href="t-test.html#cb566-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-23"><a href="t-test.html#cb566-23" aria-hidden="true" tabindex="-1"></a>t1_3_weight_boxplot <span class="ot">&lt;-</span> t1_3_weight_boxplot <span class="sc">+</span></span>
+<span id="cb566-24"><a href="t-test.html#cb566-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> t1_3_weight_max, <span class="at">xend =</span> <span class="dv">2</span>, <span class="at">yend =</span> t1_3_weight_max)) <span class="sc">+</span></span>
+<span id="cb566-25"><a href="t-test.html#cb566-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> t1_3_weight_max <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">label =</span> <span class="fu">pvalue_to_plot</span>(welch_res<span class="sc">$</span>p.value))) <span class="sc">+</span></span>
+<span id="cb566-26"><a href="t-test.html#cb566-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb566-27"><a href="t-test.html#cb566-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-28"><a href="t-test.html#cb566-28" aria-hidden="true" tabindex="-1"></a>male_3_task3_boxplot <span class="ot">&lt;-</span> male_3_task3_boxplot <span class="sc">+</span></span>
+<span id="cb566-29"><a href="t-test.html#cb566-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> male_3_task3_max, <span class="at">xend =</span> <span class="dv">2</span>, <span class="at">yend =</span> male_3_task3_max)) <span class="sc">+</span></span>
+<span id="cb566-30"><a href="t-test.html#cb566-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> male_3_task3_max <span class="sc">+</span> <span class="dv">5</span>, <span class="at">label =</span> <span class="fu">pvalue_to_plot</span>(mann_res<span class="sc">$</span>p.value))) <span class="sc">+</span></span>
+<span id="cb566-31"><a href="t-test.html#cb566-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb566-32"><a href="t-test.html#cb566-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-33"><a href="t-test.html#cb566-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Create one unique plot to annotate</span></span>
+<span id="cb566-34"><a href="t-test.html#cb566-34" aria-hidden="true" tabindex="-1"></a>all_plots <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(female_t1_weight_boxplot, t1_3_weight_boxplot, male_3_task3_boxplot, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>)</span>
+<span id="cb566-35"><a href="t-test.html#cb566-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-36"><a href="t-test.html#cb566-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Create the plot description</span></span>
+<span id="cb566-37"><a href="t-test.html#cb566-37" aria-hidden="true" tabindex="-1"></a>description <span class="ot">&lt;-</span> <span class="fu">glue</span>(<span class="st">&quot;A. Weight difference between T1-treated females at P15 vs. P30 (n = {sum(female_t1_weight_df$age == 15)} and {sum(female_t1_weight_df$age == 30)} respectively, Shapiro-Wilk p-value = {round(female_t1_weight_shapiro$shap[female_t1_weight_shapiro$age == 15], 3)} and {round(female_t1_weight_shapiro$shap[female_t1_weight_shapiro$age == 30], 3)} respectively, Bartlett&#39;s test p-value = {round(female_t1_weight_bartlett, 3)}, t-test p-value = {t_test_res$p.value}). B. Weight difference between T1-treated males and females at P3 (n = {sum(t1_3_weight_df$sex == &#39;Male&#39;)} and {sum(t1_3_weight_df$sex == &#39;Female&#39;)} respectively, Shapiro-Wilk p-value = {round(t1_3_weight_shapiro$shap[t1_3_weight_shapiro$sex == &#39;Male&#39;], 3)} and {round(t1_3_weight_shapiro$shap[t1_3_weight_shapiro$sex == &#39;Male&#39;], 3)} respectively, Bartlett&#39;s test p-value = {round(t1_3_weight_bartlett, 3)}, Welch&#39;s t-test p-value = {welch_res$p.value}). C. Task3 time difference between T1-treated and untreated males at P3 (n = {sum(male_3_task3_df$treatment == &#39;T1&#39;)} and {sum(male_3_task3_df$treatment == &#39;Untreated&#39;)} respectively, Shapiro-Wilk p-value = {round(male_3_task3_shapiro$shap[male_3_task3_shapiro$treatment == &#39;T1&#39;], 3)} and {round(male_3_task3_shapiro$shap[male_3_task3_shapiro$treatment == &#39;Untreated&#39;], 3)} respectively, MAnn-Whitney p-value = {mann_res$p.value}).&quot;</span>)</span>
+<span id="cb566-38"><a href="t-test.html#cb566-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-39"><a href="t-test.html#cb566-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Annotate plots</span></span>
+<span id="cb566-40"><a href="t-test.html#cb566-40" aria-hidden="true" tabindex="-1"></a>all_plots <span class="ot">&lt;-</span> <span class="fu">annotate_figure</span>(all_plots, <span class="at">bottom =</span> <span class="fu">str_wrap</span>(description, <span class="dv">200</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="t-test.html#cb567-1" aria-hidden="true" tabindex="-1"></a>all_plots</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-186-1.svg" width="85%" style="display: block; margin: auto;" /></p>
+<p>We can still improve our figure, but I think it sends a clear message.</p>
 </div>
-<details>
-<summary>
-Solution
-</summary>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="variables.html#cb36-1" aria-hidden="true" tabindex="-1"></a>sum_weights <span class="ot">&lt;-</span> mice1 <span class="sc">+</span> mice2 <span class="sc">+</span> mice3</span>
-<span id="cb36-2"><a href="variables.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum_weights)</span></code></pre></div>
-<pre class="code-out"><code>[1] 18.1</code></pre>
-</details>
-<div class="exercise">
-<p><span id="exr:remove-variables" class="exercise"><strong>Exercise 3.3  </strong></span>Create 4 other variables for other 4 mice that weight 20 g. Then you realize you did a mistake and you choose to delete 3 of them and change the fourth to 7.7.</p>
-</div>
-<details>
-<summary>
-Solution
-</summary>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="variables.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create 4 variables</span></span>
-<span id="cb38-2"><a href="variables.html#cb38-2" aria-hidden="true" tabindex="-1"></a>mice4 <span class="ot">&lt;-</span> mice5 <span class="ot">&lt;-</span> mice6 <span class="ot">&lt;-</span> mice7 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb38-3"><a href="variables.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="variables.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
-<span id="cb38-5"><a href="variables.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;mice5&quot;       &quot;mice6&quot;       &quot;mice7&quot;      
- [8] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="variables.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete 3 of the just-created variables</span></span>
-<span id="cb40-2"><a href="variables.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(mice5, mice6, mice7)</span>
-<span id="cb40-3"><a href="variables.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-4"><a href="variables.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
-<span id="cb40-5"><a href="variables.html#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot;
- [8] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="variables.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change the value of one variable</span></span>
-<span id="cb42-2"><a href="variables.html#cb42-2" aria-hidden="true" tabindex="-1"></a>mice4 <span class="ot">&lt;-</span> <span class="fl">7.7</span></span>
-<span id="cb42-3"><a href="variables.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="variables.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice4)</span></code></pre></div>
-<pre class="code-out"><code>[1] 7.7</code></pre>
-</details>
-<p>Alright, if you have done all the exercises (and I’m sure you have), we can move on to the next chapter in which we briefly talk about scripts and saving the environment.</p>
+<div id="exercises-8" class="section level2" number="17.1">
+<h2><span class="header-section-number">17.1</span> Exercises</h2>
+<p>write some t test: difference less than 2.4, paired</p>
 
 </div>
 </div>
@@ -604,8 +520,8 @@ Solution
           </div>
         </div>
       </div>
-<a href="first-step-in-rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="scripts-chapter.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="comparing-two-groups.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

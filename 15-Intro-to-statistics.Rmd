@@ -1,4 +1,4 @@
-# Introduction to statistics in R
+# Introduction to statistics in R {#intro-stat-chapter}
 What a journey so far! And now, maybe the scariest thing for a researcher: statistics. <br>
 Don't worry, thanks to R it is easier than ever; in fact, R is the best programming language for statistics, it has lot of built-in functions and other packages for computing the right statistic you want.
 <br>
@@ -396,7 +396,7 @@ ggarrange(norm_sample_density, non_norm_sample_density, ncol = 1, nrow = 2, labe
 ```
 Great! We can clearly see by visual inspection that the first is normmally distributed and the second one not, but we are here to see statistical tests.
 
-#### Shapiro-Wilk normality test
+#### Shapiro-Wilk normality test {-}
 We start with `shapiro.test`:
 
 ```{r}
@@ -416,7 +416,7 @@ non_norm_sample_shapiro_res
 
 So, we can say that the Shapiro-Wilk test confirms that the first sample is normally distributed, while the second one not.
 
-#### Kolmogorov-Smirnov test
+#### Kolmogorov-Smirnov test {-}
 Let's now see the Kolgomorov-Smirnov test. The function is `ks.test`, and it differs a lot from the previous one, so let's see some examples and then comment them:
 ```{r}
 # 1. Test normal data
