@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>18 Comparing more groups | Learn R for biologist</title>
+  <meta name="description" content="To you, who never gives up, for your future. You can make it!" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="18 Comparing more groups | Learn R for biologist" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="To you, who never gives up, for your future. You can make it!" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="18 Comparing more groups | Learn R for biologist" />
+  
+  <meta name="twitter:description" content="To you, who never gives up, for your future. You can make it!" />
+  
+
+<meta name="author" content="Matteo Miotto" />
+
+
+<meta name="date" content="2023-10-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="comparing-two-groups.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for biologist</a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>1</b> Installation</a></li>
+<li class="chapter" data-level="2" data-path="first-step-in-rstudio.html"><a href="first-step-in-rstudio.html"><i class="fa fa-check"></i><b>2</b> First step in RStudio</a>
+<ul>
+<li class="chapter" data-level="" data-path="first-step-in-rstudio.html"><a href="first-step-in-rstudio.html#console"><i class="fa fa-check"></i>Console</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i><b>3</b> Variables</a>
+<ul>
+<li class="chapter" data-level="" data-path="variables.html"><a href="variables.html#create-a-variable"><i class="fa fa-check"></i>Create a variable</a></li>
+<li class="chapter" data-level="" data-path="variables.html"><a href="variables.html#use-a-variable"><i class="fa fa-check"></i>Use a variable</a></li>
+<li class="chapter" data-level="" data-path="variables.html"><a href="variables.html#variable-names"><i class="fa fa-check"></i>Variable names</a></li>
+<li class="chapter" data-level="" data-path="variables.html"><a href="variables.html#overwriting-variables"><i class="fa fa-check"></i>Overwriting variables</a></li>
+<li class="chapter" data-level="" data-path="variables.html"><a href="variables.html#list-all-variables"><i class="fa fa-check"></i>List all variables</a></li>
+<li class="chapter" data-level="" data-path="variables.html"><a href="variables.html#delete-variables"><i class="fa fa-check"></i>Delete variables</a></li>
+<li class="chapter" data-level="" data-path="variables.html"><a href="variables.html#type-of-variables"><i class="fa fa-check"></i>Type of variables</a></li>
+<li class="chapter" data-level="" data-path="variables.html"><a href="variables.html#exercises"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="scripts-chapter.html"><a href="scripts-chapter.html"><i class="fa fa-check"></i><b>4</b> Scripts</a>
+<ul>
+<li class="chapter" data-level="" data-path="scripts-chapter.html"><a href="scripts-chapter.html#save"><i class="fa fa-check"></i>Save</a></li>
+<li class="chapter" data-level="" data-path="scripts-chapter.html"><a href="scripts-chapter.html#source-a-script"><i class="fa fa-check"></i>Source a script</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="numbers.html"><a href="numbers.html"><i class="fa fa-check"></i><b>5</b> Numbers</a>
+<ul>
+<li class="chapter" data-level="" data-path="numbers.html"><a href="numbers.html#operations"><i class="fa fa-check"></i>Operations</a></li>
+<li class="chapter" data-level="" data-path="numbers.html"><a href="numbers.html#rounding"><i class="fa fa-check"></i>Rounding</a></li>
+<li class="chapter" data-level="" data-path="numbers.html"><a href="numbers.html#tranform-to-type-number"><i class="fa fa-check"></i>Tranform to type number</a></li>
+<li class="chapter" data-level="" data-path="numbers.html"><a href="numbers.html#exercises-1"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="character.html"><a href="character.html"><i class="fa fa-check"></i><b>6</b> Character</a>
+<ul>
+<li class="chapter" data-level="" data-path="character.html"><a href="character.html#concatenate-strings"><i class="fa fa-check"></i>Concatenate strings</a></li>
+<li class="chapter" data-level="" data-path="character.html"><a href="character.html#substring"><i class="fa fa-check"></i>Substring</a></li>
+<li class="chapter" data-level="" data-path="character.html"><a href="character.html#substitution"><i class="fa fa-check"></i>Substitution</a></li>
+<li class="chapter" data-level="" data-path="character.html"><a href="character.html#grep"><i class="fa fa-check"></i>Grep</a></li>
+<li class="chapter" data-level="" data-path="character.html"><a href="character.html#transform-to-type-character"><i class="fa fa-check"></i>Transform to type character</a></li>
+<li class="chapter" data-level="" data-path="character.html"><a href="character.html#exercises-2"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="boolean-chapter.html"><a href="boolean-chapter.html"><i class="fa fa-check"></i><b>7</b> Boolean</a>
+<ul>
+<li class="chapter" data-level="" data-path="boolean-chapter.html"><a href="boolean-chapter.html#boolean-as-results-of-comparison"><i class="fa fa-check"></i>Boolean as results of comparison</a></li>
+<li class="chapter" data-level="" data-path="boolean-chapter.html"><a href="boolean-chapter.html#logical-operator"><i class="fa fa-check"></i>Logical operator</a>
+<ul>
+<li class="chapter" data-level="" data-path="boolean-chapter.html"><a href="boolean-chapter.html#and"><i class="fa fa-check"></i>AND</a></li>
+<li class="chapter" data-level="" data-path="boolean-chapter.html"><a href="boolean-chapter.html#or"><i class="fa fa-check"></i>OR</a></li>
+<li class="chapter" data-level="" data-path="boolean-chapter.html"><a href="boolean-chapter.html#not"><i class="fa fa-check"></i>NOT</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="boolean-chapter.html"><a href="boolean-chapter.html#exercises-3"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>8</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#named-vectors"><i class="fa fa-check"></i>Named vectors</a></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#indexing"><i class="fa fa-check"></i>Indexing</a>
+<ul>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#named-vectors-1"><i class="fa fa-check"></i>Named vectors</a></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#slicing-vectors"><i class="fa fa-check"></i>Slicing</a></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#using-logicals"><i class="fa fa-check"></i>Using logicals</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#one-function-can-be-applied-to-all-elements"><i class="fa fa-check"></i>One function can be applied to all elements</a></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#functions-specific-of-vectors"><i class="fa fa-check"></i>Functions specific of vectors</a>
+<ul>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#sorting-a-vector"><i class="fa fa-check"></i>Sorting a vector</a></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#unique-values"><i class="fa fa-check"></i>Unique values</a></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#logical-vectors-sum-and-mean"><i class="fa fa-check"></i>Logical vectors sum and mean</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#operations-between-vectors"><i class="fa fa-check"></i>Operations between vectors</a>
+<ul>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#mathematical"><i class="fa fa-check"></i>Mathematical</a></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#different-and-common-elements"><i class="fa fa-check"></i>Different and common elements</a></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#in"><i class="fa fa-check"></i>%in%</a></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#match"><i class="fa fa-check"></i>Match</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#exercises-4"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="matrices.html"><a href="matrices.html"><i class="fa fa-check"></i><b>9</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#create-a-matrix"><i class="fa fa-check"></i>Create a matrix</a>
+<ul>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#binding"><i class="fa fa-check"></i>Binding</a></li>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#transform-into-a-matrix"><i class="fa fa-check"></i>Transform into a matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#rownames-and-colnames"><i class="fa fa-check"></i>Rownames and colnames</a>
+<ul>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#set-and-edit-row-and-column-names"><i class="fa fa-check"></i>Set and edit row and column names</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#indexing-matrices"><i class="fa fa-check"></i>Indexing</a>
+<ul>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#slicing"><i class="fa fa-check"></i>Slicing</a></li>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#using-names"><i class="fa fa-check"></i>Using names</a></li>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#using-logicals-1"><i class="fa fa-check"></i>Using logicals</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#functions-for-all-matrix"><i class="fa fa-check"></i>Functions for all matrix</a>
+<ul>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#head-tail-matrices"><i class="fa fa-check"></i>Head/Tail</a></li>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#dim-nrow-ncol"><i class="fa fa-check"></i>Dim, nrow, ncol</a></li>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#summary-and-transpose"><i class="fa fa-check"></i>Summary and transpose</a></li>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#sum-max-min"><i class="fa fa-check"></i>Sum, Max, Min, …</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#apply-a-function-to-all-rows-or-columns"><i class="fa fa-check"></i>Apply a function to all rows or columns</a></li>
+<li class="chapter" data-level="" data-path="matrices.html"><a href="matrices.html#exercises-5"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>10</b> Data frames</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-frames.html"><a href="data-frames.html#create-a-data.frame"><i class="fa fa-check"></i>Create a data.frame</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-frames.html"><a href="data-frames.html#from-matrix"><i class="fa fa-check"></i>From matrix</a></li>
+<li class="chapter" data-level="" data-path="data-frames.html"><a href="data-frames.html#from-vectors"><i class="fa fa-check"></i>From vectors</a></li>
+<li class="chapter" data-level="" data-path="data-frames.html"><a href="data-frames.html#from-file"><i class="fa fa-check"></i>From file</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-frames.html"><a href="data-frames.html#indexing-1"><i class="fa fa-check"></i>Indexing</a></li>
+<li class="chapter" data-level="" data-path="data-frames.html"><a href="data-frames.html#create-a-new-column"><i class="fa fa-check"></i>Create a new column</a></li>
+<li class="chapter" data-level="" data-path="data-frames.html"><a href="data-frames.html#delete-a-column"><i class="fa fa-check"></i>Delete a column</a></li>
+<li class="chapter" data-level="" data-path="data-frames.html"><a href="data-frames.html#export-a-data-frame"><i class="fa fa-check"></i>Export a data frame</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="functions-packages-and-reproducibility.html"><a href="functions-packages-and-reproducibility.html"><i class="fa fa-check"></i><b>11</b> Functions, packages and reproducibility</a>
+<ul>
+<li class="chapter" data-level="" data-path="functions-packages-and-reproducibility.html"><a href="functions-packages-and-reproducibility.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="functions-packages-and-reproducibility.html"><a href="functions-packages-and-reproducibility.html#packages"><i class="fa fa-check"></i>Packages</a>
+<ul>
+<li class="chapter" data-level="" data-path="functions-packages-and-reproducibility.html"><a href="functions-packages-and-reproducibility.html#install-a-package"><i class="fa fa-check"></i>Install a package</a></li>
+<li class="chapter" data-level="" data-path="functions-packages-and-reproducibility.html"><a href="functions-packages-and-reproducibility.html#load-a-package"><i class="fa fa-check"></i>Load a package</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="functions-packages-and-reproducibility.html"><a href="functions-packages-and-reproducibility.html#reproducibility"><i class="fa fa-check"></i>Reproducibility</a>
+<ul>
+<li class="chapter" data-level="" data-path="functions-packages-and-reproducibility.html"><a href="functions-packages-and-reproducibility.html#control-package-versions"><i class="fa fa-check"></i>Control package versions</a></li>
+<li class="chapter" data-level="" data-path="functions-packages-and-reproducibility.html"><a href="functions-packages-and-reproducibility.html#session-info"><i class="fa fa-check"></i>Session info</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html"><i class="fa fa-check"></i><b>12</b> Manage data with tidyverse</a>
+<ul>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#r-notebook"><i class="fa fa-check"></i>R notebook</a></li>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#load-packages-and-data"><i class="fa fa-check"></i>Load packages and data</a></li>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#dataset-structure"><i class="fa fa-check"></i>Dataset structure</a>
+<ul>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#change-column-type"><i class="fa fa-check"></i>Change column type</a></li>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#reorder-levels-of-a-factor"><i class="fa fa-check"></i>Reorder levels of a factor</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#dealing-with-missing-values"><i class="fa fa-check"></i>Dealing with missing values</a></li>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#filter-a-dataframe"><i class="fa fa-check"></i>Filter a dataframe</a></li>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#sort-for-the-value-of-a-column"><i class="fa fa-check"></i>Sort for the value of a column</a></li>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#merge-two-columns"><i class="fa fa-check"></i>Merge two columns</a></li>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#split-two-columns"><i class="fa fa-check"></i>Split two columns</a></li>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#merge-two-dataframes"><i class="fa fa-check"></i>Merge two dataframes</a></li>
+<li class="chapter" data-level="" data-path="tidyverse-manage.html"><a href="tidyverse-manage.html#exercises-6"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="aggregate-data-with-tidyverse.html"><a href="aggregate-data-with-tidyverse.html"><i class="fa fa-check"></i><b>13</b> Aggregate data with tidyverse</a>
+<ul>
+<li class="chapter" data-level="" data-path="aggregate-data-with-tidyverse.html"><a href="aggregate-data-with-tidyverse.html#table"><i class="fa fa-check"></i>Table</a></li>
+<li class="chapter" data-level="" data-path="aggregate-data-with-tidyverse.html"><a href="aggregate-data-with-tidyverse.html#group-by-variables-and-summarize-values-of-another"><i class="fa fa-check"></i>Group by variables and summarize values of another</a></li>
+<li class="chapter" data-level="" data-path="aggregate-data-with-tidyverse.html"><a href="aggregate-data-with-tidyverse.html#expand-dataframe-column-using-pivot-wider"><i class="fa fa-check"></i>Expand dataframe column using pivot wider</a></li>
+<li class="chapter" data-level="" data-path="aggregate-data-with-tidyverse.html"><a href="aggregate-data-with-tidyverse.html#reshape-a-dataframe-with-pivot_longer"><i class="fa fa-check"></i>Reshape a dataframe with pivot_longer</a></li>
+<li class="chapter" data-level="" data-path="aggregate-data-with-tidyverse.html"><a href="aggregate-data-with-tidyverse.html#exercises-7"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="plot-our-data-with-ggplot2.html"><a href="plot-our-data-with-ggplot2.html"><i class="fa fa-check"></i><b>14</b> Plot our data with ggplot2</a>
+<ul>
+<li class="chapter" data-level="" data-path="plot-our-data-with-ggplot2.html"><a href="plot-our-data-with-ggplot2.html#command-structure"><i class="fa fa-check"></i>Command structure</a></li>
+<li class="chapter" data-level="" data-path="plot-our-data-with-ggplot2.html"><a href="plot-our-data-with-ggplot2.html#type-of-graph-geom_-and-stat_"><i class="fa fa-check"></i>Type of graph (geom_ and stat_)</a>
+<ul>
+<li class="chapter" data-level="" data-path="plot-our-data-with-ggplot2.html"><a href="plot-our-data-with-ggplot2.html#mapping-values-to-graph-elements-aes"><i class="fa fa-check"></i>Mapping values to graph elements (aes)</a></li>
+<li class="chapter" data-level="" data-path="plot-our-data-with-ggplot2.html"><a href="plot-our-data-with-ggplot2.html#change-the-stat-associated-to-the-graph"><i class="fa fa-check"></i>Change the “stat” associated to the graph</a></li>
+<li class="chapter" data-level="" data-path="plot-our-data-with-ggplot2.html"><a href="plot-our-data-with-ggplot2.html#multiple-geometries-in-the-same-plot"><i class="fa fa-check"></i>Multiple geometries in the same plot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="plot-our-data-with-ggplot2.html"><a href="plot-our-data-with-ggplot2.html#change-axis-and-colors-scale_"><i class="fa fa-check"></i>Change axis and colors (scale_)</a></li>
+<li class="chapter" data-level="" data-path="plot-our-data-with-ggplot2.html"><a href="plot-our-data-with-ggplot2.html#add-title-and-change-labels-labs"><i class="fa fa-check"></i>Add title and change labels (labs)</a></li>
+<li class="chapter" data-level="" data-path="plot-our-data-with-ggplot2.html"><a href="plot-our-data-with-ggplot2.html#change-appearence-theme"><i class="fa fa-check"></i>Change appearence (theme)</a></li>
+<li class="chapter" data-level="" data-path="plot-our-data-with-ggplot2.html"><a href="plot-our-data-with-ggplot2.html#save-plot"><i class="fa fa-check"></i>Save plot</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="intro-stat-chapter.html"><a href="intro-stat-chapter.html"><i class="fa fa-check"></i><b>15</b> Introduction to statistics in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="intro-stat-chapter.html"><a href="intro-stat-chapter.html#evaluate-parametric-assumptions"><i class="fa fa-check"></i>Evaluate parametric assumptions</a>
+<ul>
+<li class="chapter" data-level="" data-path="intro-stat-chapter.html"><a href="intro-stat-chapter.html#visual-inspection"><i class="fa fa-check"></i>Visual inspection</a></li>
+<li class="chapter" data-level="" data-path="intro-stat-chapter.html"><a href="intro-stat-chapter.html#no-outliers"><i class="fa fa-check"></i>No outliers</a></li>
+<li class="chapter" data-level="" data-path="intro-stat-chapter.html"><a href="intro-stat-chapter.html#normality"><i class="fa fa-check"></i>Normality</a>
+<ul>
+<li class="chapter" data-level="" data-path="intro-stat-chapter.html"><a href="intro-stat-chapter.html#shapiro-wilk-normality-test"><i class="fa fa-check"></i>Shapiro-Wilk normality test</a></li>
+<li class="chapter" data-level="" data-path="intro-stat-chapter.html"><a href="intro-stat-chapter.html#kolmogorov-smirnov-test"><i class="fa fa-check"></i>Kolmogorov-Smirnov test</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intro-stat-chapter.html"><a href="intro-stat-chapter.html#homogeneity-of-variances-homoschedaticity"><i class="fa fa-check"></i>Homogeneity of variances (homoschedaticity)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="association-between-categorical-variables.html"><a href="association-between-categorical-variables.html"><i class="fa fa-check"></i><b>16</b> Association between categorical variables</a>
+<ul>
+<li class="chapter" data-level="" data-path="association-between-categorical-variables.html"><a href="association-between-categorical-variables.html#fisher-exact-test"><i class="fa fa-check"></i>Fisher exact test</a>
+<ul>
+<li class="chapter" data-level="" data-path="association-between-categorical-variables.html"><a href="association-between-categorical-variables.html#phi-φ-coefficient"><i class="fa fa-check"></i>Phi (φ) Coefficient</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="association-between-categorical-variables.html"><a href="association-between-categorical-variables.html#chi-squared-test-with-yates-correction"><i class="fa fa-check"></i>Chi-Squared test with Yates correction</a></li>
+<li class="chapter" data-level="" data-path="association-between-categorical-variables.html"><a href="association-between-categorical-variables.html#chi-squared-test-without-correction"><i class="fa fa-check"></i>Chi-Squared test without correction</a>
+<ul>
+<li class="chapter" data-level="" data-path="association-between-categorical-variables.html"><a href="association-between-categorical-variables.html#cramers-v"><i class="fa fa-check"></i>Cramer’s V</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="comparing-two-groups.html"><a href="comparing-two-groups.html"><i class="fa fa-check"></i><b>17</b> Comparing two groups</a>
+<ul>
+<li class="chapter" data-level="" data-path="comparing-two-groups.html"><a href="comparing-two-groups.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
+<li class="chapter" data-level="" data-path="comparing-two-groups.html"><a href="comparing-two-groups.html#welchs-test"><i class="fa fa-check"></i>Welch’s test</a></li>
+<li class="chapter" data-level="" data-path="comparing-two-groups.html"><a href="comparing-two-groups.html#mann-whitney-and-wilcoxon"><i class="fa fa-check"></i>Mann-Whitney and Wilcoxon</a></li>
+<li class="chapter" data-level="" data-path="comparing-two-groups.html"><a href="comparing-two-groups.html#add-values-to-graph"><i class="fa fa-check"></i>Add values to graph</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="comparing-more-groups.html"><a href="comparing-more-groups.html"><i class="fa fa-check"></i><b>18</b> Comparing more groups</a>
+<ul>
+<li class="chapter" data-level="" data-path="comparing-more-groups.html"><a href="comparing-more-groups.html#anova"><i class="fa fa-check"></i>ANOVA</a>
+<ul>
+<li class="chapter" data-level="" data-path="comparing-more-groups.html"><a href="comparing-more-groups.html#post-hoc-test"><i class="fa fa-check"></i>Post-hoc test</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="comparing-more-groups.html"><a href="comparing-more-groups.html#kruskal-wallis"><i class="fa fa-check"></i>Kruskal Wallis</a>
+<ul>
+<li class="chapter" data-level="" data-path="comparing-more-groups.html"><a href="comparing-more-groups.html#post-hoc-test-1"><i class="fa fa-check"></i>Post-hoc test</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learn R for biologist</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="comparing-more-groups" class="section level1 hasAnchor" number="18">
+<h1><span class="header-section-number">18</span> Comparing more groups<a href="comparing-more-groups.html#comparing-more-groups" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Last time, we have compared two groups to get if there were differences in their distributions. In this chapter, we will see how to compares more groups.
+<br>
+As mentioned before, if we want to compare groups with a parametric test, we will use the ANOVA, otherwise we will use the Kruskal Wallis test; then, if the test results significant, we will apply post-hoc test to compare the different groups (Tukey’s or Pairwise t-test after ANOVA, or Dunn’s test after Kruskal Wallis test).</p>
+<p>Let’s start by loading our data and decide what we want to compare.</p>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="comparing-more-groups.html#cb568-1" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
+<span id="cb568-2"><a href="comparing-more-groups.html#cb568-2" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb568-3"><a href="comparing-more-groups.html#cb568-3" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
+<span id="cb568-4"><a href="comparing-more-groups.html#cb568-4" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggpubr))</span>
+<span id="cb568-5"><a href="comparing-more-groups.html#cb568-5" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(gginnards))</span>
+<span id="cb568-6"><a href="comparing-more-groups.html#cb568-6" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(glue))</span>
+<span id="cb568-7"><a href="comparing-more-groups.html#cb568-7" tabindex="-1"></a><span class="fu">options</span>(<span class="at">dplyr.summarise.inform =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb568-8"><a href="comparing-more-groups.html#cb568-8" tabindex="-1"></a></span>
+<span id="cb568-9"><a href="comparing-more-groups.html#cb568-9" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
+<span id="cb568-10"><a href="comparing-more-groups.html#cb568-10" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Stat-test-dataset.csv&quot;</span>)</span>
+<span id="cb568-11"><a href="comparing-more-groups.html#cb568-11" tabindex="-1"></a></span>
+<span id="cb568-12"><a href="comparing-more-groups.html#cb568-12" tabindex="-1"></a><span class="co"># 3. Change come column types</span></span>
+<span id="cb568-13"><a href="comparing-more-groups.html#cb568-13" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb568-14"><a href="comparing-more-groups.html#cb568-14" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb568-15"><a href="comparing-more-groups.html#cb568-15" tabindex="-1"></a>         <span class="st">&quot;treatment&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T1&quot;</span>, <span class="st">&quot;Untreated&quot;</span>)),</span>
+<span id="cb568-16"><a href="comparing-more-groups.html#cb568-16" tabindex="-1"></a>         <span class="st">&quot;Task1&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task1, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb568-17"><a href="comparing-more-groups.html#cb568-17" tabindex="-1"></a>         <span class="st">&quot;Task2&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task2, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb568-18"><a href="comparing-more-groups.html#cb568-18" tabindex="-1"></a>         )</span>
+<span id="cb568-19"><a href="comparing-more-groups.html#cb568-19" tabindex="-1"></a></span>
+<span id="cb568-20"><a href="comparing-more-groups.html#cb568-20" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>&#39;data.frame&#39;:   600 obs. of  7 variables:
+ $ sex      : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 1 2 1 2 1 2 1 2 1 ...
+ $ age      : int  3 3 3 3 3 3 3 3 3 3 ...
+ $ treatment: Factor w/ 2 levels &quot;T1&quot;,&quot;Untreated&quot;: 2 2 1 1 2 2 1 1 2 2 ...
+ $ weight   : num  6.43 3.42 4.97 4.63 7.31 3.27 5.58 3.27 5.9 4.22 ...
+ $ Task1    : Factor w/ 2 levels &quot;1&quot;,&quot;0&quot;: 1 2 2 2 1 1 1 1 2 1 ...
+ $ Task2    : Factor w/ 2 levels &quot;1&quot;,&quot;0&quot;: 1 2 2 1 1 2 2 1 1 1 ...
+ $ Task3    : num  222.4 202.3 36.7 221.8 178.8 ...</code></pre>
+<p class="plist">
+Now that we have our data loaded, there are the question we want to address:
+</p>
+<ol>
+<li>
+Do untreated males weight more than untreated females mice at all time points?
+</li>
+<li>
+Do T1-treated females Task3 completing time changes over time?
+</li>
+</ol>
+<p>Let’s now decide which test to use for each question. We can start by looking at the boxplots and then check parametric assumptions (it’s important to do so!).<br> But first, we have to subset our dataframe:</p>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="comparing-more-groups.html#cb570-1" tabindex="-1"></a><span class="co"># 1. Filter data</span></span>
+<span id="cb570-2"><a href="comparing-more-groups.html#cb570-2" tabindex="-1"></a>untreated_weight_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb570-3"><a href="comparing-more-groups.html#cb570-3" tabindex="-1"></a>  <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">&quot;Untreated&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb570-4"><a href="comparing-more-groups.html#cb570-4" tabindex="-1"></a>  <span class="fu">select</span>(sex, age, treatment, weight) <span class="sc">%&gt;%</span></span>
+<span id="cb570-5"><a href="comparing-more-groups.html#cb570-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">factor</span>(age))</span>
+<span id="cb570-6"><a href="comparing-more-groups.html#cb570-6" tabindex="-1"></a></span>
+<span id="cb570-7"><a href="comparing-more-groups.html#cb570-7" tabindex="-1"></a>females_t1_task3_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb570-8"><a href="comparing-more-groups.html#cb570-8" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span> <span class="sc">&amp;</span> treatment <span class="sc">==</span> <span class="st">&quot;T1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb570-9"><a href="comparing-more-groups.html#cb570-9" tabindex="-1"></a>  <span class="fu">select</span>(age, treatment, Task3) <span class="sc">%&gt;%</span></span>
+<span id="cb570-10"><a href="comparing-more-groups.html#cb570-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">factor</span>(age))</span></code></pre></div>
+<p>Then, we will look at the boxplot:</p>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="comparing-more-groups.html#cb571-1" tabindex="-1"></a>untreated_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(untreated_weight_df) <span class="sc">+</span></span>
+<span id="cb571-2"><a href="comparing-more-groups.html#cb571-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> weight, <span class="at">fill =</span> sex, <span class="at">group =</span> sex)) <span class="sc">+</span></span>
+<span id="cb571-3"><a href="comparing-more-groups.html#cb571-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Untreated mice weights&quot;</span>) <span class="sc">+</span></span>
+<span id="cb571-4"><a href="comparing-more-groups.html#cb571-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> age, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb571-5"><a href="comparing-more-groups.html#cb571-5" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb571-6"><a href="comparing-more-groups.html#cb571-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb571-7"><a href="comparing-more-groups.html#cb571-7" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb571-8"><a href="comparing-more-groups.html#cb571-8" tabindex="-1"></a></span>
+<span id="cb571-9"><a href="comparing-more-groups.html#cb571-9" tabindex="-1"></a>females_t1_task3_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(females_t1_task3_df) <span class="sc">+</span></span>
+<span id="cb571-10"><a href="comparing-more-groups.html#cb571-10" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> Task3, <span class="at">fill =</span> age, <span class="at">group =</span> age)) <span class="sc">+</span></span>
+<span id="cb571-11"><a href="comparing-more-groups.html#cb571-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Task3 (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;T1-treated females Task3 completition time&quot;</span>) <span class="sc">+</span></span>
+<span id="cb571-12"><a href="comparing-more-groups.html#cb571-12" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;PuBu&quot;</span>) <span class="sc">+</span></span>
+<span id="cb571-13"><a href="comparing-more-groups.html#cb571-13" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb571-14"><a href="comparing-more-groups.html#cb571-14" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb571-15"><a href="comparing-more-groups.html#cb571-15" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb571-16"><a href="comparing-more-groups.html#cb571-16" tabindex="-1"></a></span>
+<span id="cb571-17"><a href="comparing-more-groups.html#cb571-17" tabindex="-1"></a><span class="fu">ggarrange</span>(untreated_weight_boxplot, females_t1_task3_boxplot, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/more_groups_boxplots-1.svg" width="85%" style="display: block; margin: auto;" /></p>
+<p>Great, we can see some differences. And yes, there are some outliers in <b>B.</b>, but we do not want to remove them now, as it is out of the scope of this chapter, but you could try.<br>
+We now check the normality and homoschedasticity for each group, and then insert those info in the plot:</p>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="comparing-more-groups.html#cb572-1" tabindex="-1"></a><span class="co"># 1. Shapiro test</span></span>
+<span id="cb572-2"><a href="comparing-more-groups.html#cb572-2" tabindex="-1"></a>untreated_weight_shapiro <span class="ot">&lt;-</span> untreated_weight_df <span class="sc">%&gt;%</span></span>
+<span id="cb572-3"><a href="comparing-more-groups.html#cb572-3" tabindex="-1"></a>  <span class="fu">group_by</span>(age, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb572-4"><a href="comparing-more-groups.html#cb572-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">shap =</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p.value)</span>
+<span id="cb572-5"><a href="comparing-more-groups.html#cb572-5" tabindex="-1"></a></span>
+<span id="cb572-6"><a href="comparing-more-groups.html#cb572-6" tabindex="-1"></a>females_t1_task3_shapiro <span class="ot">&lt;-</span> females_t1_task3_df <span class="sc">%&gt;%</span></span>
+<span id="cb572-7"><a href="comparing-more-groups.html#cb572-7" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
+<span id="cb572-8"><a href="comparing-more-groups.html#cb572-8" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">shap =</span> <span class="fu">shapiro.test</span>(Task3)<span class="sc">$</span>p.value)</span>
+<span id="cb572-9"><a href="comparing-more-groups.html#cb572-9" tabindex="-1"></a></span>
+<span id="cb572-10"><a href="comparing-more-groups.html#cb572-10" tabindex="-1"></a><span class="co"># 2. Bartlett test</span></span>
+<span id="cb572-11"><a href="comparing-more-groups.html#cb572-11" tabindex="-1"></a>untreated_weight_bartlett <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(untreated_weight_df<span class="sc">$</span>weight, untreated_weight_df<span class="sc">$</span>age, untreated_weight_df<span class="sc">$</span>sex)<span class="sc">$</span>p.value</span>
+<span id="cb572-12"><a href="comparing-more-groups.html#cb572-12" tabindex="-1"></a>females_t1_task3_bartlett <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(females_t1_task3_df<span class="sc">$</span>Task3, females_t1_task3_df<span class="sc">$</span>age)<span class="sc">$</span>p.value</span>
+<span id="cb572-13"><a href="comparing-more-groups.html#cb572-13" tabindex="-1"></a></span>
+<span id="cb572-14"><a href="comparing-more-groups.html#cb572-14" tabindex="-1"></a></span>
+<span id="cb572-15"><a href="comparing-more-groups.html#cb572-15" tabindex="-1"></a><span class="co"># 3. Get labels position</span></span>
+<span id="cb572-16"><a href="comparing-more-groups.html#cb572-16" tabindex="-1"></a>untreated_weight_shapiro_pos <span class="ot">&lt;-</span> untreated_weight_df <span class="sc">%&gt;%</span></span>
+<span id="cb572-17"><a href="comparing-more-groups.html#cb572-17" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
+<span id="cb572-18"><a href="comparing-more-groups.html#cb572-18" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">max =</span> <span class="fu">max</span>(weight) <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb572-19"><a href="comparing-more-groups.html#cb572-19" tabindex="-1"></a></span>
+<span id="cb572-20"><a href="comparing-more-groups.html#cb572-20" tabindex="-1"></a>females_t1_task3_shapiro_pos <span class="ot">&lt;-</span> females_t1_task3_df <span class="sc">%&gt;%</span></span>
+<span id="cb572-21"><a href="comparing-more-groups.html#cb572-21" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
+<span id="cb572-22"><a href="comparing-more-groups.html#cb572-22" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">max =</span> <span class="fu">max</span>(Task3) <span class="sc">+</span> <span class="dv">10</span>)</span>
+<span id="cb572-23"><a href="comparing-more-groups.html#cb572-23" tabindex="-1"></a></span>
+<span id="cb572-24"><a href="comparing-more-groups.html#cb572-24" tabindex="-1"></a>untreated_weight_shapiro <span class="ot">&lt;-</span> untreated_weight_shapiro <span class="sc">%&gt;%</span></span>
+<span id="cb572-25"><a href="comparing-more-groups.html#cb572-25" tabindex="-1"></a>  <span class="fu">left_join</span>(untreated_weight_shapiro_pos, <span class="at">by =</span> <span class="st">&quot;age&quot;</span>)</span>
+<span id="cb572-26"><a href="comparing-more-groups.html#cb572-26" tabindex="-1"></a></span>
+<span id="cb572-27"><a href="comparing-more-groups.html#cb572-27" tabindex="-1"></a>females_t1_task3_shapiro <span class="ot">&lt;-</span> females_t1_task3_shapiro <span class="sc">%&gt;%</span></span>
+<span id="cb572-28"><a href="comparing-more-groups.html#cb572-28" tabindex="-1"></a>  <span class="fu">left_join</span>(females_t1_task3_shapiro_pos, <span class="at">by =</span> <span class="st">&quot;age&quot;</span>)</span>
+<span id="cb572-29"><a href="comparing-more-groups.html#cb572-29" tabindex="-1"></a></span>
+<span id="cb572-30"><a href="comparing-more-groups.html#cb572-30" tabindex="-1"></a><span class="co"># 4. Update boxplots</span></span>
+<span id="cb572-31"><a href="comparing-more-groups.html#cb572-31" tabindex="-1"></a>untreated_weight_boxplot <span class="ot">&lt;-</span> untreated_weight_boxplot <span class="sc">+</span></span>
+<span id="cb572-32"><a href="comparing-more-groups.html#cb572-32" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> untreated_weight_shapiro, </span>
+<span id="cb572-33"><a href="comparing-more-groups.html#cb572-33" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, </span>
+<span id="cb572-34"><a href="comparing-more-groups.html#cb572-34" tabindex="-1"></a>                           <span class="at">y =</span> max, </span>
+<span id="cb572-35"><a href="comparing-more-groups.html#cb572-35" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shap, <span class="dv">3</span>)))</span>
+<span id="cb572-36"><a href="comparing-more-groups.html#cb572-36" tabindex="-1"></a>            ) <span class="sc">+</span></span>
+<span id="cb572-37"><a href="comparing-more-groups.html#cb572-37" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(untreated_weight_bartlett, <span class="dv">3</span>)))</span>
+<span id="cb572-38"><a href="comparing-more-groups.html#cb572-38" tabindex="-1"></a></span>
+<span id="cb572-39"><a href="comparing-more-groups.html#cb572-39" tabindex="-1"></a>females_t1_task3_boxplot <span class="ot">&lt;-</span> females_t1_task3_boxplot <span class="sc">+</span></span>
+<span id="cb572-40"><a href="comparing-more-groups.html#cb572-40" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> females_t1_task3_shapiro, </span>
+<span id="cb572-41"><a href="comparing-more-groups.html#cb572-41" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age, </span>
+<span id="cb572-42"><a href="comparing-more-groups.html#cb572-42" tabindex="-1"></a>                           <span class="at">y =</span> max, </span>
+<span id="cb572-43"><a href="comparing-more-groups.html#cb572-43" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shap, <span class="dv">3</span>)))</span>
+<span id="cb572-44"><a href="comparing-more-groups.html#cb572-44" tabindex="-1"></a>            ) <span class="sc">+</span></span>
+<span id="cb572-45"><a href="comparing-more-groups.html#cb572-45" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(females_task3_bartlett, <span class="dv">3</span>)))</span>
+<span id="cb572-46"><a href="comparing-more-groups.html#cb572-46" tabindex="-1"></a></span>
+<span id="cb572-47"><a href="comparing-more-groups.html#cb572-47" tabindex="-1"></a><span class="fu">ggarrange</span>(untreated_weight_boxplot, females_t1_task3_boxplot, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/more_groups_boxplots2-1.svg" width="85%" style="display: block; margin: auto;" /></p>
+<p>Alright! We can use ANOVA to answer the first question, while we have to use Kruskal Wallis test for the second one.</p>
+<div id="anova" class="section level2 unnumbered hasAnchor">
+<h2>ANOVA<a href="comparing-more-groups.html#anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+So, to get if <em>untreated males weight more than untreated females mice at all time points</em>, we should perform a two-way ANOVA test, as we are interested in both sex and age, and in their interaction (to see if the effect of sex changes based on age). <br>
+<p class="plist">
+To perform this test, we will use the <code>aov()</code> function, which takes as inputs <code>formula</code> and <code>data</code>. An important note about the formula is how it is written (it will be the same also when we will see other tests):
+</p>
+<ul>
+<li>
+One-way ANOVA: <code>dependent variable ~ independent variable</code>
+</li>
+<li>
+Two-way ANOVA: here situation changes based on what you are interested on. If only on main effects of the two variables <code>dependent variable ~ independent variable 1 + independent variable 2</code>, if interestend only in the interaction <code>dependent variable ~ independent variable 1:independent variable 2</code>, if in both main effects and interaction <code>dependent variable ~ independent variable 1*independent variable 2</code>
+</li>
+</ul>
+<p>Let’s do it:</p>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="comparing-more-groups.html#cb573-1" tabindex="-1"></a>aov_res <span class="ot">&lt;-</span> <span class="fu">aov</span>(<span class="at">formula =</span> weight <span class="sc">~</span> sex<span class="sc">*</span>age, <span class="at">data =</span> untreated_weight_df)</span>
+<span id="cb573-2"><a href="comparing-more-groups.html#cb573-2" tabindex="-1"></a><span class="fu">summary</span>(aov_res)</span></code></pre></div>
+<pre class="code-out"><code>             Df Sum Sq Mean Sq  F value Pr(&gt;F)    
+sex           1    293   293.4  367.986 &lt;2e-16 ***
+age           3   7874  2624.5 3291.977 &lt;2e-16 ***
+sex:age       3      2     0.8    1.004  0.391    
+Residuals   292    233     0.8                    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>To better see the results, it is useful to store them in a variable and call <code>summary()</code> out of them. In this way we have all the summary statistics for this test: degree of freedom for each variable (Df), sum of the square root of the variance (Sum Sq), mean square root (Mean Sq), F statistics value and the p-value (Pr(&gt;F)).
+<br>
+From this, we can say that both sex and age main effects are significant, and that the effect of the sex does NOT change at different time point, so we are expecting differences at all age. Let’s test it with post-hoc tests.</p>
+<div id="post-hoc-test" class="section level3 unnumbered hasAnchor">
+<h3>Post-hoc test<a href="comparing-more-groups.html#post-hoc-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As ANOVA test is significant for the variable we are interested in (sex), we will perform post-hoc tests. I said tests here just to show you how to perform them, but you can either perform Tukey’s test or pairwise t-test.
+<br>
+We can start by Tukey’s test. It needs the object of the results of the ANOVA and, optionally, which term/s we are interested in (sex:age) for us.</p>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="comparing-more-groups.html#cb575-1" tabindex="-1"></a>tukey_res <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(aov_res, <span class="at">which =</span> <span class="st">&quot;sex:age&quot;</span>)</span>
+<span id="cb575-2"><a href="comparing-more-groups.html#cb575-2" tabindex="-1"></a>tukey_res</span></code></pre></div>
+<pre class="code-out"><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = weight ~ sex * age, data = untreated_weight_df)
+
+$`sex:age`
+                           diff        lwr        upr p adj
+Male:3-Female:3      2.03526316  1.4098676  2.6606588     0
+Female:7-Female:3    2.01284495  1.3832379  2.6424520     0
+Male:7-Female:3      3.90879090  3.2791838  4.5383980     0
+Female:15-Female:3   5.91421053  5.2888149  6.5396061     0
+Male:15-Female:3     7.66368421  7.0382886  8.2890798     0
+Female:30-Female:3  13.32798009 12.6983730 13.9575871     0
+Male:30-Female:3    15.56311522 14.9335082 16.1927223     0
+Female:7-Male:3     -0.02241821 -0.6520253  0.6071889     1
+Male:7-Male:3        1.87352774  1.2439207  2.5031348     0
+Female:15-Male:3     3.87894737  3.2535518  4.5043430     0
+Male:15-Male:3       5.62842105  5.0030255  6.2538166     0
+Female:30-Male:3    11.29271693 10.6631099 11.9223240     0
+Male:30-Male:3      13.52785206 12.8982450 14.1574591     0
+Male:7-Female:7      1.89594595  1.2621554  2.5297365     0
+Female:15-Female:7   3.90136558  3.2717585  4.5309726     0
+Male:15-Female:7     5.65083926  5.0212322  6.2804463     0
+Female:30-Female:7  11.31513514 10.6813446 11.9489257     0
+Male:30-Female:7    13.55027027 12.9164797 14.1840608     0
+Female:15-Male:7     2.00541963  1.3758126  2.6350267     0
+Male:15-Male:7       3.75489331  3.1252863  4.3845004     0
+Female:30-Male:7     9.41918919  8.7853986 10.0529797     0
+Male:30-Male:7      11.65432432 11.0205338 12.2881149     0
+Male:15-Female:15    1.74947368  1.1240781  2.3748693     0
+Female:30-Female:15  7.41376956  6.7841625  8.0433766     0
+Male:30-Female:15    9.64890469  9.0192976 10.2785118     0
+Female:30-Male:15    5.66429587  5.0346888  6.2939029     0
+Male:30-Male:15      7.89943101  7.2698239  8.5290381     0
+Male:30-Female:30    2.23513514  1.6013446  2.8689257     0</code></pre>
+<p>At all time points, female weight less than males.
+<br>
+However, I don’t find this results so clear. In fact, I personally prefer to perform pairwise t test:</p>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="comparing-more-groups.html#cb577-1" tabindex="-1"></a><span class="co"># 1. Create an interaction factor of sex and age</span></span>
+<span id="cb577-2"><a href="comparing-more-groups.html#cb577-2" tabindex="-1"></a>interaction_factor <span class="ot">&lt;-</span> <span class="fu">interaction</span>(untreated_weight_df<span class="sc">$</span>sex, untreated_weight_df<span class="sc">$</span>age)</span>
+<span id="cb577-3"><a href="comparing-more-groups.html#cb577-3" tabindex="-1"></a></span>
+<span id="cb577-4"><a href="comparing-more-groups.html#cb577-4" tabindex="-1"></a><span class="co"># 2. Perform pairwise t-tests</span></span>
+<span id="cb577-5"><a href="comparing-more-groups.html#cb577-5" tabindex="-1"></a>pairwise_res <span class="ot">&lt;-</span> <span class="fu">pairwise.t.test</span>(untreated_weight_df<span class="sc">$</span>weight, interaction_factor, <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span>
+<span id="cb577-6"><a href="comparing-more-groups.html#cb577-6" tabindex="-1"></a></span>
+<span id="cb577-7"><a href="comparing-more-groups.html#cb577-7" tabindex="-1"></a>pairwise_res</span></code></pre></div>
+<pre class="code-out"><code>
+    Pairwise comparisons using t tests with pooled SD 
+
+data:  untreated_weight_df$weight and interaction_factor 
+
+          Female.3 Male.3  Female.7 Male.7  Female.15 Male.15 Female.30
+Male.3    &lt; 2e-16  -       -        -       -         -       -        
+Female.7  &lt; 2e-16  1       -        -       -         -       -        
+Male.7    &lt; 2e-16  4.5e-16 3.2e-16  -       -         -       -        
+Female.15 &lt; 2e-16  &lt; 2e-16 &lt; 2e-16  &lt; 2e-16 -         -       -        
+Male.15   &lt; 2e-16  &lt; 2e-16 &lt; 2e-16  &lt; 2e-16 2.1e-14   -       -        
+Female.30 &lt; 2e-16  &lt; 2e-16 &lt; 2e-16  &lt; 2e-16 &lt; 2e-16   &lt; 2e-16 -        
+Male.30   &lt; 2e-16  &lt; 2e-16 &lt; 2e-16  &lt; 2e-16 &lt; 2e-16   &lt; 2e-16 &lt; 2e-16  
+
+P value adjustment method: bonferroni </code></pre>
+<p>Tadaaa! I find this table way clearer.
+<br>
+Let’s now create a beautiful figure. In this case, as it is a timeline, I like to create some lineplots with mean and sd.</p>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="comparing-more-groups.html#cb579-1" tabindex="-1"></a><span class="co"># 1. Create a function to map *, **, *** and ns to statistics</span></span>
+<span id="cb579-2"><a href="comparing-more-groups.html#cb579-2" tabindex="-1"></a>pvalue_to_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb579-3"><a href="comparing-more-groups.html#cb579-3" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">case_when</span>(</span>
+<span id="cb579-4"><a href="comparing-more-groups.html#cb579-4" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">&quot;***&quot;</span>,</span>
+<span id="cb579-5"><a href="comparing-more-groups.html#cb579-5" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">~</span> <span class="st">&quot;**&quot;</span>,</span>
+<span id="cb579-6"><a href="comparing-more-groups.html#cb579-6" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">&quot;*&quot;</span>,</span>
+<span id="cb579-7"><a href="comparing-more-groups.html#cb579-7" tabindex="-1"></a>    <span class="at">.default =</span> <span class="st">&quot;ns&quot;</span></span>
+<span id="cb579-8"><a href="comparing-more-groups.html#cb579-8" tabindex="-1"></a>  )</span>
+<span id="cb579-9"><a href="comparing-more-groups.html#cb579-9" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb579-10"><a href="comparing-more-groups.html#cb579-10" tabindex="-1"></a>}</span>
+<span id="cb579-11"><a href="comparing-more-groups.html#cb579-11" tabindex="-1"></a></span>
+<span id="cb579-12"><a href="comparing-more-groups.html#cb579-12" tabindex="-1"></a><span class="co"># 2. Create df of statistics</span></span>
+<span id="cb579-13"><a href="comparing-more-groups.html#cb579-13" tabindex="-1"></a>untreated_weight_stats_pos <span class="ot">&lt;-</span> untreated_weight_shapiro_pos <span class="sc">%&gt;%</span></span>
+<span id="cb579-14"><a href="comparing-more-groups.html#cb579-14" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;stats&quot;</span> <span class="ot">=</span> <span class="fu">pvalue_to_plot</span>(<span class="fu">c</span>(pairwise_res<span class="sc">$</span>p.value[<span class="st">&quot;Male.3&quot;</span>, <span class="st">&quot;Female.3&quot;</span>],</span>
+<span id="cb579-15"><a href="comparing-more-groups.html#cb579-15" tabindex="-1"></a>                                    pairwise_res<span class="sc">$</span>p.value[<span class="st">&quot;Male.7&quot;</span>, <span class="st">&quot;Female.7&quot;</span>],</span>
+<span id="cb579-16"><a href="comparing-more-groups.html#cb579-16" tabindex="-1"></a>                                    pairwise_res<span class="sc">$</span>p.value[<span class="st">&quot;Male.15&quot;</span>, <span class="st">&quot;Female.15&quot;</span>],</span>
+<span id="cb579-17"><a href="comparing-more-groups.html#cb579-17" tabindex="-1"></a>                                    pairwise_res<span class="sc">$</span>p.value[<span class="st">&quot;Male.30&quot;</span>, <span class="st">&quot;Female.30&quot;</span>])))</span>
+<span id="cb579-18"><a href="comparing-more-groups.html#cb579-18" tabindex="-1"></a></span>
+<span id="cb579-19"><a href="comparing-more-groups.html#cb579-19" tabindex="-1"></a><span class="co"># 3. Create the plot</span></span>
+<span id="cb579-20"><a href="comparing-more-groups.html#cb579-20" tabindex="-1"></a>untreated_weight_lineplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(untreated_weight_df) <span class="sc">+</span></span>
+<span id="cb579-21"><a href="comparing-more-groups.html#cb579-21" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> weight, <span class="at">col =</span> sex, <span class="at">group =</span> sex), <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>) <span class="sc">+</span></span>
+<span id="cb579-22"><a href="comparing-more-groups.html#cb579-22" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> weight, <span class="at">col =</span> sex, <span class="at">group =</span> sex), <span class="at">fun.data =</span> <span class="st">&quot;mean_sd&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb579-23"><a href="comparing-more-groups.html#cb579-23" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> weight, <span class="at">col =</span> sex, <span class="at">group =</span> sex), <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb579-24"><a href="comparing-more-groups.html#cb579-24" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> untreated_weight_stats_pos, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> max, <span class="at">label =</span> stats)) <span class="sc">+</span></span>
+<span id="cb579-25"><a href="comparing-more-groups.html#cb579-25" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Untreated mice weights&quot;</span>) <span class="sc">+</span></span>
+<span id="cb579-26"><a href="comparing-more-groups.html#cb579-26" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb579-27"><a href="comparing-more-groups.html#cb579-27" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="comparing-more-groups.html#cb580-1" tabindex="-1"></a>untreated_weight_lineplot</span></code></pre></div>
+<p><img src="_main_files/figure-html/more_groups_weight_lineplot-1.svg" width="85%" style="display: block; margin: auto;" /></p>
+<p>I find it very clear, and almost ready to be published!</p>
+</div>
+</div>
+<div id="kruskal-wallis" class="section level2 unnumbered hasAnchor">
+<h2>Kruskal Wallis<a href="comparing-more-groups.html#kruskal-wallis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It’s now time to check whether <em>T1-treated females Task3 completing time changes over time</em>.
+<br>
+We’ll use <code>kruskal.test()</code> function, which needs as inputs the dependent variable and the independent one (<strong>remember</strong>: kruskal wallis is the corresponding of the one-way ANOVA, there is not a non parametric test resembling the two-way ANOVA).</p>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="comparing-more-groups.html#cb581-1" tabindex="-1"></a>kruskal_res <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(<span class="at">x =</span> females_t1_task3_df<span class="sc">$</span>Task3, <span class="at">g =</span> females_t1_task3_df<span class="sc">$</span>age)</span>
+<span id="cb581-2"><a href="comparing-more-groups.html#cb581-2" tabindex="-1"></a>kruskal_res</span></code></pre></div>
+<pre class="code-out"><code>
+    Kruskal-Wallis rank sum test
+
+data:  females_t1_task3_df$Task3 and females_t1_task3_df$age
+Kruskal-Wallis chi-squared = 28.733, df = 3, p-value = 2.549e-06</code></pre>
+<p>We can say that T1-treated females Task3 time changes in time. How? let’s check it through post-hoc test.</p>
+<div id="post-hoc-test-1" class="section level3 unnumbered hasAnchor">
+<h3>Post-hoc test<a href="comparing-more-groups.html#post-hoc-test-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The non-parametric post-hoc test is the Dunn’s test. We need to install the <code>dunn.test</code> library (I won’t show how to do so, as you should know…).
+<br>
+The function is <code>dunn.test</code> and requires different inputs: <code>x</code> and <code>g</code> as kruskal.test, <code>method</code> which indicates the p-value correction method. By default, it prints out the output, even when assigning it to a variable; for this reason, we will encapsulate all into <code>capture.output</code> function which will capture the output and put into a file (usually, we will instead use <code>nullfile()</code> to not put it anywhere).</p>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="comparing-more-groups.html#cb583-1" tabindex="-1"></a><span class="fu">library</span>(dunn.test)</span>
+<span id="cb583-2"><a href="comparing-more-groups.html#cb583-2" tabindex="-1"></a></span>
+<span id="cb583-3"><a href="comparing-more-groups.html#cb583-3" tabindex="-1"></a><span class="fu">capture.output</span>(dunn_res <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(</span>
+<span id="cb583-4"><a href="comparing-more-groups.html#cb583-4" tabindex="-1"></a>    <span class="fu">dunn.test</span>(<span class="at">x =</span> females_t1_task3_df<span class="sc">$</span>Task3, <span class="at">g =</span> females_t1_task3_df<span class="sc">$</span>age, <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span>
+<span id="cb583-5"><a href="comparing-more-groups.html#cb583-5" tabindex="-1"></a>  ), <span class="at">file =</span> <span class="fu">nullfile</span>())</span>
+<span id="cb583-6"><a href="comparing-more-groups.html#cb583-6" tabindex="-1"></a></span>
+<span id="cb583-7"><a href="comparing-more-groups.html#cb583-7" tabindex="-1"></a>dunn_res</span></code></pre></div>
+<pre class="code-out"><code>      chi2         Z            P   P.adjusted comparisons
+1 28.73258 -3.267054 5.433646e-04 3.260188e-03      15 - 3
+2 28.73258 -5.265649 6.984754e-08 4.190852e-07     15 - 30
+3 28.73258 -1.976887 2.402723e-02 1.441634e-01      3 - 30
+4 28.73258 -3.445552 2.849468e-04 1.709681e-03      15 - 7
+5 28.73258 -0.156790 4.377052e-01 1.000000e+00       3 - 7
+6 28.73258  1.832353 3.344941e-02 2.006964e-01      30 - 7</code></pre>
+<p>So here we are. It seems that it is only at age of 15 that the T1-treated females change their Task3 completition time.
+Let’s now put these info into our plot, to make a great figure. I know that there are some packages to perform it, but I want to show how to do it manually.</p>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="comparing-more-groups.html#cb585-1" tabindex="-1"></a><span class="co"># 1. Create a df for the statistics</span></span>
+<span id="cb585-2"><a href="comparing-more-groups.html#cb585-2" tabindex="-1"></a>dunn_stat_df <span class="ot">&lt;-</span> dunn_res <span class="sc">%&gt;%</span></span>
+<span id="cb585-3"><a href="comparing-more-groups.html#cb585-3" tabindex="-1"></a>  <span class="fu">filter</span>(P.adjusted <span class="sc">&lt;=</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb585-4"><a href="comparing-more-groups.html#cb585-4" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> comparisons, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;xend&quot;</span>), <span class="at">sep =</span> <span class="st">&quot; - &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb585-5"><a href="comparing-more-groups.html#cb585-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stats =</span> <span class="fu">pvalue_to_plot</span>(P.adjusted),</span>
+<span id="cb585-6"><a href="comparing-more-groups.html#cb585-6" tabindex="-1"></a>         <span class="at">y_segment =</span> <span class="fu">c</span>(<span class="fu">max</span>(females_t1_task3_df<span class="sc">$</span>Task3) <span class="sc">+</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">35</span>)),</span>
+<span id="cb585-7"><a href="comparing-more-groups.html#cb585-7" tabindex="-1"></a>         <span class="at">y_stats =</span> y_segment <span class="sc">+</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb585-8"><a href="comparing-more-groups.html#cb585-8" tabindex="-1"></a>  <span class="fu">select</span>(x, xend, stats, y_segment, y_stats) <span class="sc">%&gt;%</span></span>
+<span id="cb585-9"><a href="comparing-more-groups.html#cb585-9" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb585-10"><a href="comparing-more-groups.html#cb585-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">x_stats =</span> <span class="fu">mean</span>(<span class="fu">match</span>(<span class="fu">c</span>(x, xend), <span class="fu">levels</span>(females_t1_task3_df<span class="sc">$</span>age)))</span>
+<span id="cb585-11"><a href="comparing-more-groups.html#cb585-11" tabindex="-1"></a>         )</span>
+<span id="cb585-12"><a href="comparing-more-groups.html#cb585-12" tabindex="-1"></a></span>
+<span id="cb585-13"><a href="comparing-more-groups.html#cb585-13" tabindex="-1"></a><span class="co"># 2. Remove Shapiro results from plot</span></span>
+<span id="cb585-14"><a href="comparing-more-groups.html#cb585-14" tabindex="-1"></a>females_t1_task3_boxplot <span class="ot">&lt;-</span> <span class="fu">delete_layers</span>(females_t1_task3_boxplot, <span class="st">&quot;GeomText&quot;</span>)</span>
+<span id="cb585-15"><a href="comparing-more-groups.html#cb585-15" tabindex="-1"></a></span>
+<span id="cb585-16"><a href="comparing-more-groups.html#cb585-16" tabindex="-1"></a><span class="co"># 3. Add stats</span></span>
+<span id="cb585-17"><a href="comparing-more-groups.html#cb585-17" tabindex="-1"></a>females_t1_task3_boxplot <span class="ot">&lt;-</span> females_t1_task3_boxplot <span class="sc">+</span></span>
+<span id="cb585-18"><a href="comparing-more-groups.html#cb585-18" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> dunn_stat_df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">xend =</span> xend, <span class="at">y =</span> y_segment, <span class="at">yend =</span> y_segment), <span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb585-19"><a href="comparing-more-groups.html#cb585-19" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> dunn_stat_df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x_stats, <span class="at">y =</span> y_stats, <span class="at">label =</span> stats), <span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb585-20"><a href="comparing-more-groups.html#cb585-20" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="comparing-more-groups.html#cb586-1" tabindex="-1"></a>females_t1_task3_boxplot</span></code></pre></div>
+<p><img src="_main_files/figure-html/more_groups_task3_boxplot-1.svg" width="85%" style="display: block; margin: auto;" /></p>
+<p>Another great figure to add to our paper! And that’s all for this chapter; in the next one we will see correlation.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="comparing-two-groups.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,261 @@
+# Comparing more groups
+Last time, we have compared two groups to get if there were differences in their distributions. In this chapter, we will see how to compares more groups.
+<br>
+As mentioned before, if we want to compare groups with a parametric test, we will use the ANOVA, otherwise we will use the Kruskal Wallis test; then, if the test results significant, we will apply post-hoc test to compare the different groups (Tukey's or Pairwise t-test after ANOVA, or Dunn's test after Kruskal Wallis test).
+
+Let's start by loading our data and decide what we want to compare.
+
+```{r, warning=FALSE}
+# 1. Load packages 
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(ggpubr))
+suppressPackageStartupMessages(library(gginnards))
+suppressPackageStartupMessages(library(glue))
+options(dplyr.summarise.inform = FALSE)
+
+# 2. Load data
+df <- read.csv("data/Stat-test-dataset.csv")
+
+# 3. Change come column types
+df <- df %>%
+  mutate("sex" = factor(sex),
+         "treatment" = factor(treatment, levels = c("T1", "Untreated")),
+         "Task1" = factor(Task1, levels = c(1, 0)),
+         "Task2" = factor(Task2, levels = c(1, 0)),
+         )
+
+str(df)
+```
+
+<p class="plist">Now that we have our data loaded, there are the question we want to address:</p>
+<ol>
+<li>Do untreated males weight more than untreated females mice at all time points?</li>
+<li>Do T1-treated females Task3 completing time changes over time?</li>
+</ol>
+
+Let's now decide which test to use for each question. We can start by looking at the boxplots and then check parametric assumptions (it's important to do so!).<br> But first, we have to subset our dataframe:
+```{r}
+# 1. Filter data
+untreated_weight_df <- df %>%
+  filter(treatment == "Untreated") %>%
+  select(sex, age, treatment, weight) %>%
+  mutate(age = factor(age))
+
+females_t1_task3_df <- df %>%
+  filter(sex == "Female" & treatment == "T1") %>%
+  select(age, treatment, Task3) %>%
+  mutate(age = factor(age))
+```
+
+Then, we will look at the boxplot:
+```{r more_groups_boxplots, fig.width=10, fig.height=7}
+untreated_weight_boxplot <- ggplot(untreated_weight_df) +
+  geom_boxplot(aes(x = sex, y = weight, fill = sex, group = sex)) +
+  labs(x = "", y = "Weight (g)", title = "Untreated mice weights") +
+  facet_wrap(~ age, ncol = 4, scales = "free_y") +
+  theme_classic() +
+  theme(legend.position = "none",
+    plot.title = element_text(face = "bold", size = 16))
+
+females_t1_task3_boxplot <- ggplot(females_t1_task3_df) +
+  geom_boxplot(aes(x = age, y = Task3, fill = age, group = age)) +
+  labs(x = "Age", y = "Task3 (s)", title = "T1-treated females Task3 completition time") +
+  scale_fill_brewer(palette = "PuBu") +
+  theme_classic() +
+  theme(legend.position = "none",
+    plot.title = element_text(face = "bold", size = 16))
+
+ggarrange(untreated_weight_boxplot, females_t1_task3_boxplot, ncol = 1, nrow = 2, labels = "AUTO")
+```
+
+Great, we can see some differences. And yes, there are some outliers in <b>B.</b>, but we do not want to remove them now, as it is out of the scope of this chapter, but you could try.<br>
+We now check the normality and homoschedasticity for each group, and then insert those info in the plot:
+```{r more_groups_boxplots2, fig.width=12, fig.height=12}
+# 1. Shapiro test
+untreated_weight_shapiro <- untreated_weight_df %>%
+  group_by(age, sex) %>%
+  summarise(shap = shapiro.test(weight)$p.value)
+
+females_t1_task3_shapiro <- females_t1_task3_df %>%
+  group_by(age) %>%
+  summarise(shap = shapiro.test(Task3)$p.value)
+
+# 2. Bartlett test
+untreated_weight_bartlett <- bartlett.test(untreated_weight_df$weight, untreated_weight_df$age, untreated_weight_df$sex)$p.value
+females_t1_task3_bartlett <- bartlett.test(females_t1_task3_df$Task3, females_t1_task3_df$age)$p.value
+
+
+# 3. Get labels position
+untreated_weight_shapiro_pos <- untreated_weight_df %>%
+  group_by(age) %>%
+  summarise(max = max(weight) + 1)
+
+females_t1_task3_shapiro_pos <- females_t1_task3_df %>%
+  group_by(age) %>%
+  summarise(max = max(Task3) + 10)
+
+untreated_weight_shapiro <- untreated_weight_shapiro %>%
+  left_join(untreated_weight_shapiro_pos, by = "age")
+
+females_t1_task3_shapiro <- females_t1_task3_shapiro %>%
+  left_join(females_t1_task3_shapiro_pos, by = "age")
+
+# 4. Update boxplots
+untreated_weight_boxplot <- untreated_weight_boxplot +
+  geom_text(data = untreated_weight_shapiro, 
+            mapping = aes(x = sex, 
+                           y = max, 
+                           label = paste("Shapiro-Wilk\n", round(shap, 3)))
+            ) +
+  labs(subtitle = paste("Bartlett test p-value:", round(untreated_weight_bartlett, 3)))
+
+females_t1_task3_boxplot <- females_t1_task3_boxplot +
+  geom_text(data = females_t1_task3_shapiro, 
+            mapping = aes(x = age, 
+                           y = max, 
+                           label = paste("Shapiro-Wilk\n", round(shap, 3)))
+            ) +
+  labs(subtitle = paste("Bartlett test p-value:", round(females_task3_bartlett, 3)))
+
+ggarrange(untreated_weight_boxplot, females_t1_task3_boxplot, ncol = 1, nrow = 2, labels = "AUTO")
+```
+
+Alright! We can use ANOVA to answer the first question, while we have to use Kruskal Wallis test for the second one.
+
+## ANOVA {-}
+So, to get if <em>untreated males weight more than untreated females mice at all time points</em>, we should perform a two-way ANOVA test, as we are interested in both sex and age, and in their interaction (to see if the effect of sex changes based on age). <br>
+<p class="plist">To perform this test, we will use the `aov()` function, which takes as inputs `formula` and `data`. An important note about the formula is how it is written (it will be the same also when we will see other tests):</p>
+<ul>
+<li>One-way ANOVA: `dependent variable ~ independent variable`</li>
+<li>Two-way ANOVA: here situation changes based on what you are interested on. If only on main effects of the two variables `dependent variable ~ independent variable 1 + independent variable 2`, if interestend only in the interaction `dependent variable ~ independent variable 1:independent variable 2`, if in both main effects and interaction `dependent variable ~ independent variable 1*independent variable 2`</li>
+</ul>
+
+Let's do it:
+```{r}
+aov_res <- aov(formula = weight ~ sex*age, data = untreated_weight_df)
+summary(aov_res)
+```
+
+To better see the results, it is useful to store them in a variable and call `summary()` out of them. In this way we have all the summary statistics for this test: degree of freedom for each variable (Df), sum of the square root of the variance (Sum Sq), mean square root (Mean Sq), F statistics value and the p-value (Pr(>F)). 
+<br>
+From this, we can say that both sex and age main effects are significant, and that the effect of the sex does NOT change at different time point, so we are expecting differences at all age. Let's test it with post-hoc tests.
+
+### Post-hoc test {-}
+As ANOVA test is significant for the variable we are interested in (sex), we will perform post-hoc tests. I said tests here just to show you how to perform them, but you can either perform Tukey's test or pairwise t-test.
+<br>
+We can start by Tukey's test. It needs the object of the results of the ANOVA and, optionally, which term/s we are interested in (sex:age) for us.
+```{r, fig.height=10}
+tukey_res <- TukeyHSD(aov_res, which = "sex:age")
+tukey_res
+```
+
+At all time points, female weight less than males. 
+<br>
+However, I don't find this results so clear. In fact, I personally prefer to perform pairwise t test:
+```{r}
+# 1. Create an interaction factor of sex and age
+interaction_factor <- interaction(untreated_weight_df$sex, untreated_weight_df$age)
+
+# 2. Perform pairwise t-tests
+pairwise_res <- pairwise.t.test(untreated_weight_df$weight, interaction_factor, p.adjust.method = "bonferroni")
+
+pairwise_res
+```
+Tadaaa! I find this table way clearer. 
+<br>
+Let's now create a beautiful figure. In this case, as it is a timeline, I like to create some lineplots with mean and sd.
+```{r}
+# 1. Create a function to map *, **, *** and ns to statistics
+pvalue_to_plot <- function(x) {
+  res <- case_when(
+    x <= 0.001 ~ "***",
+    x <= 0.01 ~ "**",
+    x <= 0.05 ~ "*",
+    .default = "ns"
+  )
+  return(res)
+}
+
+# 2. Create df of statistics
+untreated_weight_stats_pos <- untreated_weight_shapiro_pos %>%
+  mutate("stats" = pvalue_to_plot(c(pairwise_res$p.value["Male.3", "Female.3"],
+                                    pairwise_res$p.value["Male.7", "Female.7"],
+                                    pairwise_res$p.value["Male.15", "Female.15"],
+                                    pairwise_res$p.value["Male.30", "Female.30"])))
+
+# 3. Create the plot
+untreated_weight_lineplot <- ggplot(untreated_weight_df) +
+  stat_summary(aes(x = age, y = weight, col = sex, group = sex), fun = "mean", geom = "line") +
+  stat_summary(aes(x = age, y = weight, col = sex, group = sex), fun.data = "mean_sd", geom = "errorbar", width = 0.1) +
+  stat_summary(aes(x = age, y = weight, col = sex, group = sex), fun = "mean", geom = "point", size = 2) +
+  geom_text(data = untreated_weight_stats_pos, mapping = aes(x = age, y = max, label = stats)) +
+  labs(x = "", y = "Weight (g)", title = "Untreated mice weights") +
+  theme_classic() +
+  theme(plot.title = element_text(face = "bold", size = 16))
+```
+
+```{r more_groups_weight_lineplot, fig.width=7, fig.height=5}
+untreated_weight_lineplot
+```
+
+I find it very clear, and almost ready to be published!
+
+## Kruskal Wallis {-}
+It's now time to check whether <em>T1-treated females Task3 completing time changes over time</em>. 
+<br>
+We'll use `kruskal.test()` function, which needs as inputs the dependent variable and the independent one (<strong>remember</strong>: kruskal wallis is the corresponding of the one-way ANOVA, there is not a non parametric test resembling the two-way ANOVA).
+
+```{r}
+kruskal_res <- kruskal.test(x = females_t1_task3_df$Task3, g = females_t1_task3_df$age)
+kruskal_res
+```
+
+We can say that T1-treated females Task3 time changes in time. How? let's check it through post-hoc test.
+
+
+### Post-hoc test {-}
+The non-parametric post-hoc test is the Dunn's test. We need to install the `dunn.test` library (I won't show how to do so, as you should know...).
+<br>
+The function is `dunn.test` and requires different inputs: `x` and `g` as kruskal.test, `method` which indicates the p-value correction method. By default, it prints out the output, even when assigning it to a variable; for this reason, we will encapsulate all into `capture.output` function which will capture the output and put into a file (usually, we will instead use `nullfile()` to not put it anywhere).
+```{r}
+library(dunn.test)
+
+capture.output(dunn_res <- as.data.frame(
+    dunn.test(x = females_t1_task3_df$Task3, g = females_t1_task3_df$age, method = "bonferroni")
+  ), file = nullfile())
+
+dunn_res
+```
+
+So here we are. It seems that it is only at age of 15 that the T1-treated females change their Task3 completition time. 
+Let's now put these info into our plot, to make a great figure. I know that there are some packages to perform it, but I want to show how to do it manually.
+
+```{r}
+# 1. Create a df for the statistics
+dunn_stat_df <- dunn_res %>%
+  filter(P.adjusted <= 0.05) %>%
+  separate(col = comparisons, into = c("x", "xend"), sep = " - ") %>%
+  mutate(stats = pvalue_to_plot(P.adjusted),
+         y_segment = c(max(females_t1_task3_df$Task3) + c(5, 20, 35)),
+         y_stats = y_segment + 5) %>%
+  select(x, xend, stats, y_segment, y_stats) %>%
+  rowwise() %>%
+  mutate(x_stats = mean(match(c(x, xend), levels(females_t1_task3_df$age)))
+         )
+
+# 2. Remove Shapiro results from plot
+females_t1_task3_boxplot <- delete_layers(females_t1_task3_boxplot, "GeomText")
+
+# 3. Add stats
+females_t1_task3_boxplot <- females_t1_task3_boxplot +
+  geom_segment(data = dunn_stat_df, mapping = aes(x = x, xend = xend, y = y_segment, yend = y_segment), col = "black") +
+  geom_text(data = dunn_stat_df, mapping = aes(x = x_stats, y = y_stats, label = stats), col = "black") +
+  labs(subtitle = "")
+```
+
+```{r more_groups_task3_boxplot, fig.width=7, fig.height=5}
+females_t1_task3_boxplot
+```
+
+Another great figure to add to our paper! And that's all for this chapter; in the next one we will see correlation.
