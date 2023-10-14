@@ -116,7 +116,7 @@ females_t1_task3_boxplot <- females_t1_task3_boxplot +
                            y = max, 
                            label = paste("Shapiro-Wilk\n", round(shap, 3)))
             ) +
-  labs(subtitle = paste("Bartlett test p-value:", round(females_task3_bartlett, 3)))
+  labs(subtitle = paste("Bartlett test p-value:", round(females_t1_task3_bartlett, 3)))
 
 ggarrange(untreated_weight_boxplot, females_t1_task3_boxplot, ncol = 1, nrow = 2, labels = "AUTO")
 ```
