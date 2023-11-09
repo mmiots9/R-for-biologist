@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/01-Intro/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/02-RStudio/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/03-Variables/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/04-Scripts/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/05-Numbers/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/06-Character/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/07-Booleans/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/08-Vectors/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/09-Matrices/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/10-Data-frames/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/11-Functions-packages-reproducibility/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/12-Manage-data-tidyverse/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/13-Aggregate-data-with-tidyverse/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/14-Plot-data-with-ggplot2/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/15-Intro-to-statistics/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/16-Categorical-variables-association/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/17-Comparing_two_groups/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/18-Comparing_more_groups/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url xml_ns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <loc>https://mmiots9.github.io/R-for-biologist/index/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+</urlset>
