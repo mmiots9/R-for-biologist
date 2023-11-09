@@ -1,4 +1,6 @@
 bookdown::gitbook:
+  includes:
+    in_header: google_manager.html
   css: style.css
   toc_depth: 4
   config:

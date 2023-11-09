@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-10-14" />
+<meta name="date" content="2023-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,15 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YDEBEF61BH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YDEBEF61BH');
+</script>
 
 
 <style type="text/css">
@@ -493,8 +502,7 @@ Note how I called this command with the name <em>function</em>: we will cover th
 <span id="cb20-3"><a href="variables.html#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-4"><a href="variables.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb20-5"><a href="variables.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;to_remove&quot;   &quot;var1&quot;        &quot;var2&quot;       
-[6] &quot;var3&quot;       </code></pre>
+<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;to_remove&quot;   &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="variables.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variable</span></span>
 <span id="cb22-2"><a href="variables.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove)</span>
 <span id="cb22-3"><a href="variables.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -510,8 +518,7 @@ What if I want to remove multiple variables? Let’s put multiple variable names
 <span id="cb24-4"><a href="variables.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-5"><a href="variables.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb24-6"><a href="variables.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;to_remove&quot;   &quot;to_remove2&quot;  &quot;var1&quot;       
-[6] &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;to_remove&quot;   &quot;to_remove2&quot;  &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="variables.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variables</span></span>
 <span id="cb26-2"><a href="variables.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove, to_remove2)</span>
 <span id="cb26-3"><a href="variables.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -593,16 +600,15 @@ Solution
 <span id="cb38-3"><a href="variables.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-4"><a href="variables.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb38-5"><a href="variables.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;mice5&quot;      
- [6] &quot;mice6&quot;       &quot;mice7&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot;
-[11] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<pre class="code-out"><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;mice5&quot;       &quot;mice6&quot;       &quot;mice7&quot;      
+ [8] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="variables.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete 3 of the just-created variables</span></span>
 <span id="cb40-2"><a href="variables.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(mice5, mice6, mice7)</span>
 <span id="cb40-3"><a href="variables.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-4"><a href="variables.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
 <span id="cb40-5"><a href="variables.html#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;myvar&quot;      
- [6] &quot;myvar_power&quot; &quot;sum_weights&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<pre class="code-out"><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot;
+ [8] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="variables.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change the value of one variable</span></span>
 <span id="cb42-2"><a href="variables.html#cb42-2" aria-hidden="true" tabindex="-1"></a>mice4 <span class="ot">&lt;-</span> <span class="fl">7.7</span></span>
 <span id="cb42-3"><a href="variables.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
