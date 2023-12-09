@@ -1,0 +1,4 @@
+# Farewell
+Well, this has been an incredible journey into R programming language. I hope I have introduced you well to this powerful tool, and that you have appreciated the potentialities of it for your work.
+In the next future, I will upload more examples of data analysis, plots, functions, codes etc.
+Stay tuned, and good luck with your analysis! You can reach me whenever you want at <a href="mailto:miotsdata@gmail.com">miotsdata@gmail.com</a>, or on <a href="https://it.linkedin.com/in/matteo-miotto" target="_blank">linkedin</a>.

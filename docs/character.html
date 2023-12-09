@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Character | Learn R for biologist</title>
-  <meta name="description" content="To you, who never gives up, for your future. You can make it!" />
+  <meta name="description" content="This course is for biologists who want to optimize their analysis, making them faster and reproducible." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Character | Learn R for biologist" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="To you, who never gives up, for your future. You can make it!" />
+  <meta property="og:description" content="This course is for biologists who want to optimize their analysis, making them faster and reproducible." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="6 Character | Learn R for biologist" />
   
-  <meta name="twitter:description" content="To you, who never gives up, for your future. You can make it!" />
+  <meta name="twitter:description" content="This course is for biologists who want to optimize their analysis, making them faster and reproducible." />
   
 
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-11-09" />
+<meta name="date" content="2023-12-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="numbers.html"/>
 <link rel="next" href="boolean-chapter.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +51,13 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<meta property="og:description" content="To you, who never gives up, for your future. You can make it!">
+<meta name="keywords" content="R, biology, data analysis">
+<meta name="author" content="Matteo Miotto">
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YDEBEF61BH"></script>
 <script>
@@ -66,7 +71,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -357,6 +362,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="comparing-more-groups.html#post-hoc-test-1" id="toc-post-hoc-test-1">Post-hoc test</a></li>
 </ul></li>
 </ul></li>
+<li><a href="correlation.html#correlation" id="toc-correlation"><span class="toc-section-number">19</span> Correlation</a>
+<ul>
+<li><a href="correlation.html#pearsons-test" id="toc-pearsons-test">Pearson’s test</a></li>
+</ul></li>
+<li><a href="farewell.html#farewell" id="toc-farewell"><span class="toc-section-number">20</span> Farewell</a></li>
 </ul>
 
       </nav>
@@ -374,130 +384,130 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="character" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Character</h1>
+<div id="character" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> Character<a href="character.html#character" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>When you analyze a dataset, you don’t have only numbers: you’ll have gene names, protein names, mouse strains and other variables that R calls <em>character</em> (I will alsways call them strings, but remember that for R they are character).
 <br>
 A character can be a single letter, a word or even a whole text. To create a character variable you have to include it in <code>""</code> (double quotes) or in <code>''</code>(single quotes):</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="character.html#cb86-1" aria-hidden="true" tabindex="-1"></a>mychar_d <span class="ot">&lt;-</span> <span class="st">&quot;SEC24C&quot;</span> </span>
-<span id="cb86-2"><a href="character.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(mychar_d)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="character.html#cb86-1" tabindex="-1"></a>mychar_d <span class="ot">&lt;-</span> <span class="st">&quot;SEC24C&quot;</span> </span>
+<span id="cb86-2"><a href="character.html#cb86-2" tabindex="-1"></a><span class="fu">typeof</span>(mychar_d)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="character.html#cb88-1" aria-hidden="true" tabindex="-1"></a>mychar_s <span class="ot">&lt;-</span> <span class="st">&#39;SEC24C&#39;</span> </span>
-<span id="cb88-2"><a href="character.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(mychar_s)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="character.html#cb88-1" tabindex="-1"></a>mychar_s <span class="ot">&lt;-</span> <span class="st">&#39;SEC24C&#39;</span> </span>
+<span id="cb88-2"><a href="character.html#cb88-2" tabindex="-1"></a><span class="fu">typeof</span>(mychar_s)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;character&quot;</code></pre>
 <p>Even numbers can be considered as character if included by ““:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="character.html#cb90-1" aria-hidden="true" tabindex="-1"></a>weight_n <span class="ot">&lt;-</span> <span class="dv">12</span></span>
-<span id="cb90-2"><a href="character.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(weight_n)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="character.html#cb90-1" tabindex="-1"></a>weight_n <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb90-2"><a href="character.html#cb90-2" tabindex="-1"></a><span class="fu">typeof</span>(weight_n)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;double&quot;</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="character.html#cb92-1" aria-hidden="true" tabindex="-1"></a>weight_c <span class="ot">&lt;-</span> <span class="st">&quot;12&quot;</span></span>
-<span id="cb92-2"><a href="character.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(weight_c)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="character.html#cb92-1" tabindex="-1"></a>weight_c <span class="ot">&lt;-</span> <span class="st">&quot;12&quot;</span></span>
+<span id="cb92-2"><a href="character.html#cb92-2" tabindex="-1"></a><span class="fu">typeof</span>(weight_c)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;character&quot;</code></pre>
 <p>See? Just adding the double/single quotes it changes everything.
 <br>
 <strong>IMPORTANT</strong>: R interprets <u>everything</u> that is between a pair of single/double quotes as character, so if you forget to close a quote, nothing will work. Moreover, you can’t use a single quote to close a character opened with a double quote and <em>vice versa</em>.</p>
-<div id="concatenate-strings" class="section level2 unnumbered">
-<h2>Concatenate strings</h2>
+<div id="concatenate-strings" class="section level2 unnumbered hasAnchor">
+<h2>Concatenate strings<a href="character.html#concatenate-strings" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Sometimes you want to concatenate different string into one single string, and we can to it with two similar functions: <code>paste()</code> and <code>paste0()</code>. The unique difference among them is that in the former you can decide what character to use to separate what you are concatenating (default is a white space), while the latter do not insert any character.
 <br>
 For example, let’s say you have a variable <code>condition</code> and a variable <code>treatment</code>, and you want to concatenate them to create the variable <code>sample</code>; you will do:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="character.html#cb94-1" aria-hidden="true" tabindex="-1"></a>condition <span class="ot">&lt;-</span> <span class="st">&quot;control&quot;</span></span>
-<span id="cb94-2"><a href="character.html#cb94-2" aria-hidden="true" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="st">&quot;vector&quot;</span></span>
-<span id="cb94-3"><a href="character.html#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-4"><a href="character.html#cb94-4" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">paste</span>(condition, </span>
-<span id="cb94-5"><a href="character.html#cb94-5" aria-hidden="true" tabindex="-1"></a>                treatment, </span>
-<span id="cb94-6"><a href="character.html#cb94-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">sep =</span> <span class="st">&quot;.&quot;</span>) <span class="co"># default is &quot; &quot;</span></span>
-<span id="cb94-7"><a href="character.html#cb94-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-8"><a href="character.html#cb94-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sample)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="character.html#cb94-1" tabindex="-1"></a>condition <span class="ot">&lt;-</span> <span class="st">&quot;control&quot;</span></span>
+<span id="cb94-2"><a href="character.html#cb94-2" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="st">&quot;vector&quot;</span></span>
+<span id="cb94-3"><a href="character.html#cb94-3" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="character.html#cb94-4" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">paste</span>(condition, </span>
+<span id="cb94-5"><a href="character.html#cb94-5" tabindex="-1"></a>                treatment, </span>
+<span id="cb94-6"><a href="character.html#cb94-6" tabindex="-1"></a>                <span class="at">sep =</span> <span class="st">&quot;.&quot;</span>) <span class="co"># default is &quot; &quot;</span></span>
+<span id="cb94-7"><a href="character.html#cb94-7" tabindex="-1"></a></span>
+<span id="cb94-8"><a href="character.html#cb94-8" tabindex="-1"></a><span class="fu">print</span>(sample)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;control.vector&quot;</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="character.html#cb96-1" aria-hidden="true" tabindex="-1"></a>sample0 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(condition, </span>
-<span id="cb96-2"><a href="character.html#cb96-2" aria-hidden="true" tabindex="-1"></a>                  treatment)</span>
-<span id="cb96-3"><a href="character.html#cb96-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-4"><a href="character.html#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sample0)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="character.html#cb96-1" tabindex="-1"></a>sample0 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(condition, </span>
+<span id="cb96-2"><a href="character.html#cb96-2" tabindex="-1"></a>                  treatment)</span>
+<span id="cb96-3"><a href="character.html#cb96-3" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="character.html#cb96-4" tabindex="-1"></a><span class="fu">print</span>(sample0)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;controlvector&quot;</code></pre>
 <p>You concatenate as many character as you want, just put them all inside that function.</p>
 </div>
-<div id="substring" class="section level2 unnumbered">
-<h2>Substring</h2>
+<div id="substring" class="section level2 unnumbered hasAnchor">
+<h2>Substring<a href="character.html#substring" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>I have to tell you about substring, but I never used this function in my life. It is used to slice the character and take only a part of it. The function is called <code>substr()</code>, let’s see how it works:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="character.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(mychar_s, <span class="at">start =</span> <span class="dv">2</span>, <span class="at">stop =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="character.html#cb98-1" tabindex="-1"></a><span class="fu">substr</span>(mychar_s, <span class="at">start =</span> <span class="dv">2</span>, <span class="at">stop =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;EC2&quot;</code></pre>
 <p>It needs a start and a stop value, they are both included in the result (in this case, character at position 2, 3 and 4 are sliced).
 <br>
 <strong>Remember</strong>: in R everything starts at 1, so the first element is at position 1. In other languages it starts from 0, but in R it starts from 1.
 <br>
 Extra funtcion never used but that can be important if we use substr and we don’t know how long is a character is <code>nchar()</code></p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="character.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(mychar_s)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="character.html#cb100-1" tabindex="-1"></a><span class="fu">nchar</span>(mychar_s)</span></code></pre></div>
 <pre class="code-out"><code>[1] 6</code></pre>
 <p>Let’s say we want to take from position 3 until the end, but we don’t know how long is a character, we can do it with:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="character.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(mychar_s, <span class="at">start =</span> <span class="dv">3</span>, <span class="at">stop =</span> <span class="fu">nchar</span>(mychar_s))</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="character.html#cb102-1" tabindex="-1"></a><span class="fu">substr</span>(mychar_s, <span class="at">start =</span> <span class="dv">3</span>, <span class="at">stop =</span> <span class="fu">nchar</span>(mychar_s))</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;C24C&quot;</code></pre>
 <p>What happened here is that the result of the function <code>nchar(mychar_s)</code> is used as the value to indicate the stop. We will usually use these method in R, especially when we don’t want to use memory to store a value that is used only once (as in this case).</p>
 </div>
-<div id="substitution" class="section level2 unnumbered">
-<h2>Substitution</h2>
+<div id="substitution" class="section level2 unnumbered hasAnchor">
+<h2>Substitution<a href="character.html#substitution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Alright, let’s move to something way more useful for our analysis: the function <code>sub()</code>, and its big brother <code>gsub()</code>. They are used to substitute part of a character with another, the only difference is that the former changes only the <u>first</u> occurrence, while the latter every occurrence.
 <br>
 Let’s say we have the sample variable written as <code>"control_vector_3"</code> and we want to get rid of the underscores, we will do:</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="character.html#cb104-1" aria-hidden="true" tabindex="-1"></a>sample2 <span class="ot">&lt;-</span> <span class="st">&quot;control_variable_2&quot;</span></span>
-<span id="cb104-2"><a href="character.html#cb104-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-3"><a href="character.html#cb104-3" aria-hidden="true" tabindex="-1"></a>sub_only <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">&quot;_&quot;</span>, <span class="co"># the part of the string to search to substitute</span></span>
-<span id="cb104-4"><a href="character.html#cb104-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">replacement =</span> <span class="st">&quot; &quot;</span>, <span class="co"># what to use to replace it</span></span>
-<span id="cb104-5"><a href="character.html#cb104-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">x =</span> sample2) <span class="co"># variable in which to search</span></span>
-<span id="cb104-6"><a href="character.html#cb104-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-7"><a href="character.html#cb104-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sub_only)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="character.html#cb104-1" tabindex="-1"></a>sample2 <span class="ot">&lt;-</span> <span class="st">&quot;control_variable_2&quot;</span></span>
+<span id="cb104-2"><a href="character.html#cb104-2" tabindex="-1"></a></span>
+<span id="cb104-3"><a href="character.html#cb104-3" tabindex="-1"></a>sub_only <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">&quot;_&quot;</span>, <span class="co"># the part of the string to search to substitute</span></span>
+<span id="cb104-4"><a href="character.html#cb104-4" tabindex="-1"></a>                <span class="at">replacement =</span> <span class="st">&quot; &quot;</span>, <span class="co"># what to use to replace it</span></span>
+<span id="cb104-5"><a href="character.html#cb104-5" tabindex="-1"></a>                <span class="at">x =</span> sample2) <span class="co"># variable in which to search</span></span>
+<span id="cb104-6"><a href="character.html#cb104-6" tabindex="-1"></a></span>
+<span id="cb104-7"><a href="character.html#cb104-7" tabindex="-1"></a><span class="fu">print</span>(sub_only)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;control variable_2&quot;</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="character.html#cb106-1" aria-hidden="true" tabindex="-1"></a>gsub_all <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">&quot;_&quot;</span>, <span class="co"># the part of the string to search to substitute</span></span>
-<span id="cb106-2"><a href="character.html#cb106-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">replacement =</span> <span class="st">&quot; &quot;</span>, <span class="co"># what to use to replace it</span></span>
-<span id="cb106-3"><a href="character.html#cb106-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">x =</span> sample2) <span class="co"># variable in which to search</span></span>
-<span id="cb106-4"><a href="character.html#cb106-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-5"><a href="character.html#cb106-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gsub_all)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="character.html#cb106-1" tabindex="-1"></a>gsub_all <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">&quot;_&quot;</span>, <span class="co"># the part of the string to search to substitute</span></span>
+<span id="cb106-2"><a href="character.html#cb106-2" tabindex="-1"></a>                <span class="at">replacement =</span> <span class="st">&quot; &quot;</span>, <span class="co"># what to use to replace it</span></span>
+<span id="cb106-3"><a href="character.html#cb106-3" tabindex="-1"></a>                <span class="at">x =</span> sample2) <span class="co"># variable in which to search</span></span>
+<span id="cb106-4"><a href="character.html#cb106-4" tabindex="-1"></a></span>
+<span id="cb106-5"><a href="character.html#cb106-5" tabindex="-1"></a><span class="fu">print</span>(gsub_all)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;control variable 2&quot;</code></pre>
 <p>This is the basic way of using these functions, but they can be very useful in complex analysis, but we will see them later on.</p>
 </div>
-<div id="grep" class="section level2 unnumbered">
-<h2>Grep</h2>
+<div id="grep" class="section level2 unnumbered hasAnchor">
+<h2>Grep<a href="character.html#grep" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Further parents of substitution, are <code>grep()</code> and its brother <code>grepl()</code>: they are used to check if a particular pattern is present in a character variable. The first one returns the index (we’ll see this concept in few chapters) or the value of the variable that match the pattern, the second one returns a boolean value (TRUE or FALSE) indicatung the presence of the pattern in the variable.
 <br>
 Let’s see few example right away:</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="character.html#cb108-1" aria-hidden="true" tabindex="-1"></a>gene_to_test <span class="ot">&lt;-</span> <span class="st">&quot;GAPDH&quot;</span></span>
-<span id="cb108-2"><a href="character.html#cb108-2" aria-hidden="true" tabindex="-1"></a>pattern_to_check_1 <span class="ot">&lt;-</span> <span class="st">&quot;GA&quot;</span></span>
-<span id="cb108-3"><a href="character.html#cb108-3" aria-hidden="true" tabindex="-1"></a>pattern_to_check_2 <span class="ot">&lt;-</span> <span class="st">&quot;PH&quot;</span></span>
-<span id="cb108-4"><a href="character.html#cb108-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-5"><a href="character.html#cb108-5" aria-hidden="true" tabindex="-1"></a>grep_1 <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="at">pattern =</span> pattern_to_check_1, </span>
-<span id="cb108-6"><a href="character.html#cb108-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">x =</span> gene_to_test,</span>
-<span id="cb108-7"><a href="character.html#cb108-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">value =</span> T) <span class="co"># default is FALSE (returns index)</span></span>
-<span id="cb108-8"><a href="character.html#cb108-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(grep_1)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="character.html#cb108-1" tabindex="-1"></a>gene_to_test <span class="ot">&lt;-</span> <span class="st">&quot;GAPDH&quot;</span></span>
+<span id="cb108-2"><a href="character.html#cb108-2" tabindex="-1"></a>pattern_to_check_1 <span class="ot">&lt;-</span> <span class="st">&quot;GA&quot;</span></span>
+<span id="cb108-3"><a href="character.html#cb108-3" tabindex="-1"></a>pattern_to_check_2 <span class="ot">&lt;-</span> <span class="st">&quot;PH&quot;</span></span>
+<span id="cb108-4"><a href="character.html#cb108-4" tabindex="-1"></a></span>
+<span id="cb108-5"><a href="character.html#cb108-5" tabindex="-1"></a>grep_1 <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="at">pattern =</span> pattern_to_check_1, </span>
+<span id="cb108-6"><a href="character.html#cb108-6" tabindex="-1"></a>               <span class="at">x =</span> gene_to_test,</span>
+<span id="cb108-7"><a href="character.html#cb108-7" tabindex="-1"></a>               <span class="at">value =</span> T) <span class="co"># default is FALSE (returns index)</span></span>
+<span id="cb108-8"><a href="character.html#cb108-8" tabindex="-1"></a><span class="fu">print</span>(grep_1)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;GAPDH&quot;</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="character.html#cb110-1" aria-hidden="true" tabindex="-1"></a>grep_2 <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="at">pattern =</span> pattern_to_check_2, </span>
-<span id="cb110-2"><a href="character.html#cb110-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">x =</span> gene_to_test,</span>
-<span id="cb110-3"><a href="character.html#cb110-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">value =</span> T) <span class="co"># default is FALSE (returns index)</span></span>
-<span id="cb110-4"><a href="character.html#cb110-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(grep_2)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="character.html#cb110-1" tabindex="-1"></a>grep_2 <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="at">pattern =</span> pattern_to_check_2, </span>
+<span id="cb110-2"><a href="character.html#cb110-2" tabindex="-1"></a>               <span class="at">x =</span> gene_to_test,</span>
+<span id="cb110-3"><a href="character.html#cb110-3" tabindex="-1"></a>               <span class="at">value =</span> T) <span class="co"># default is FALSE (returns index)</span></span>
+<span id="cb110-4"><a href="character.html#cb110-4" tabindex="-1"></a><span class="fu">print</span>(grep_2)</span></code></pre></div>
 <pre class="code-out"><code>character(0)</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="character.html#cb112-1" aria-hidden="true" tabindex="-1"></a>grepl_1 <span class="ot">&lt;-</span> <span class="fu">grepl</span>(<span class="at">pattern =</span> pattern_to_check_1, </span>
-<span id="cb112-2"><a href="character.html#cb112-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">x =</span> gene_to_test)</span>
-<span id="cb112-3"><a href="character.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(grepl_1)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="character.html#cb112-1" tabindex="-1"></a>grepl_1 <span class="ot">&lt;-</span> <span class="fu">grepl</span>(<span class="at">pattern =</span> pattern_to_check_1, </span>
+<span id="cb112-2"><a href="character.html#cb112-2" tabindex="-1"></a>               <span class="at">x =</span> gene_to_test)</span>
+<span id="cb112-3"><a href="character.html#cb112-3" tabindex="-1"></a><span class="fu">print</span>(grepl_1)</span></code></pre></div>
 <pre class="code-out"><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="character.html#cb114-1" aria-hidden="true" tabindex="-1"></a>grepl_2 <span class="ot">&lt;-</span> <span class="fu">grepl</span>(<span class="at">pattern =</span> pattern_to_check_2, </span>
-<span id="cb114-2"><a href="character.html#cb114-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">x =</span> gene_to_test)</span>
-<span id="cb114-3"><a href="character.html#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(grepl_2)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="character.html#cb114-1" tabindex="-1"></a>grepl_2 <span class="ot">&lt;-</span> <span class="fu">grepl</span>(<span class="at">pattern =</span> pattern_to_check_2, </span>
+<span id="cb114-2"><a href="character.html#cb114-2" tabindex="-1"></a>               <span class="at">x =</span> gene_to_test)</span>
+<span id="cb114-3"><a href="character.html#cb114-3" tabindex="-1"></a><span class="fu">print</span>(grepl_2)</span></code></pre></div>
 <pre class="code-out"><code>[1] FALSE</code></pre>
 <p>We can see that the <code>grep_2</code> gives <code>character(0)</code> as result, meaning that it is an empty character variable.
 <br>
 You are going to use grep a lot during the analysis, even if you find it not so interesting now, trust me 😉.</p>
 </div>
-<div id="transform-to-type-character" class="section level2 unnumbered">
-<h2>Transform to type character</h2>
+<div id="transform-to-type-character" class="section level2 unnumbered hasAnchor">
+<h2>Transform to type character<a href="character.html#transform-to-type-character" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As for numbers, we can also convert a variable into a string: we use the function <code>as.character()</code>. You will use this function when a column of a dataframe is read as numeric while you want it to be read as character instead.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="character.html#cb116-1" aria-hidden="true" tabindex="-1"></a>ml_to_add <span class="ot">&lt;-</span> <span class="dv">35</span></span>
-<span id="cb116-2"><a href="character.html#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(ml_to_add)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="character.html#cb116-1" tabindex="-1"></a>ml_to_add <span class="ot">&lt;-</span> <span class="dv">35</span></span>
+<span id="cb116-2"><a href="character.html#cb116-2" tabindex="-1"></a><span class="fu">typeof</span>(ml_to_add)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;double&quot;</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="character.html#cb118-1" aria-hidden="true" tabindex="-1"></a>ml_to_add <span class="ot">&lt;-</span> <span class="fu">as.character</span>(ml_to_add)</span>
-<span id="cb118-2"><a href="character.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(ml_to_add)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="character.html#cb118-1" tabindex="-1"></a>ml_to_add <span class="ot">&lt;-</span> <span class="fu">as.character</span>(ml_to_add)</span>
+<span id="cb118-2"><a href="character.html#cb118-2" tabindex="-1"></a><span class="fu">typeof</span>(ml_to_add)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;character&quot;</code></pre>
 <p>This is an important lesson: in R variables can be overwritten with other types of data (this can’t be done in other languages such as Java, C++, ecc.). This can be both handy and risky at the same time: handy because we can save memory by overwriting useless variables, risky because we can overwrite a variable without checking if the type is maintained (maybe it is important).</p>
 </div>
-<div id="exercises-2" class="section level2 unnumbered">
-<h2>Exercises</h2>
+<div id="exercises-2" class="section level2 unnumbered hasAnchor">
+<h2>Exercises<a href="character.html#exercises-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="exercise">
 <p><span id="exr:sd-calc" class="exercise"><strong>Exercise 5.2  </strong></span>In a list of genes to test, you found a gene called “NRG_1” and one called “SST R”. In the report you have to present you want to print out “Involved genes are NRG1 and SSTR2”. How to do it?</p>
 </div>
@@ -505,16 +515,16 @@ You are going to use grep a lot during the analysis, even if you find it not so 
 <summary>
 Solution
 </summary>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="character.html#cb120-1" aria-hidden="true" tabindex="-1"></a>gene1 <span class="ot">&lt;-</span> <span class="st">&quot;NRG_1&quot;</span></span>
-<span id="cb120-2"><a href="character.html#cb120-2" aria-hidden="true" tabindex="-1"></a>gene2 <span class="ot">&lt;-</span> <span class="st">&quot;SST R&quot;</span></span>
-<span id="cb120-3"><a href="character.html#cb120-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-4"><a href="character.html#cb120-4" aria-hidden="true" tabindex="-1"></a><span class="co"># correct gene names</span></span>
-<span id="cb120-5"><a href="character.html#cb120-5" aria-hidden="true" tabindex="-1"></a>gene1 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">&quot;_&quot;</span>, <span class="at">replacement =</span> <span class="st">&quot;&quot;</span>, gene1)</span>
-<span id="cb120-6"><a href="character.html#cb120-6" aria-hidden="true" tabindex="-1"></a>gene2 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">&quot; R&quot;</span>, <span class="at">replacement =</span> <span class="st">&quot; R2&quot;</span>, gene1)</span>
-<span id="cb120-7"><a href="character.html#cb120-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-8"><a href="character.html#cb120-8" aria-hidden="true" tabindex="-1"></a><span class="co"># concatenate all the string</span></span>
-<span id="cb120-9"><a href="character.html#cb120-9" aria-hidden="true" tabindex="-1"></a>all_string <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Involved genes are&quot;</span>, gene1, <span class="st">&quot;and&quot;</span>, gene2)</span>
-<span id="cb120-10"><a href="character.html#cb120-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(all_string)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="character.html#cb120-1" tabindex="-1"></a>gene1 <span class="ot">&lt;-</span> <span class="st">&quot;NRG_1&quot;</span></span>
+<span id="cb120-2"><a href="character.html#cb120-2" tabindex="-1"></a>gene2 <span class="ot">&lt;-</span> <span class="st">&quot;SST R&quot;</span></span>
+<span id="cb120-3"><a href="character.html#cb120-3" tabindex="-1"></a></span>
+<span id="cb120-4"><a href="character.html#cb120-4" tabindex="-1"></a><span class="co"># correct gene names</span></span>
+<span id="cb120-5"><a href="character.html#cb120-5" tabindex="-1"></a>gene1 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">&quot;_&quot;</span>, <span class="at">replacement =</span> <span class="st">&quot;&quot;</span>, gene1)</span>
+<span id="cb120-6"><a href="character.html#cb120-6" tabindex="-1"></a>gene2 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">&quot; R&quot;</span>, <span class="at">replacement =</span> <span class="st">&quot; R2&quot;</span>, gene1)</span>
+<span id="cb120-7"><a href="character.html#cb120-7" tabindex="-1"></a></span>
+<span id="cb120-8"><a href="character.html#cb120-8" tabindex="-1"></a><span class="co"># concatenate all the string</span></span>
+<span id="cb120-9"><a href="character.html#cb120-9" tabindex="-1"></a>all_string <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Involved genes are&quot;</span>, gene1, <span class="st">&quot;and&quot;</span>, gene2)</span>
+<span id="cb120-10"><a href="character.html#cb120-10" tabindex="-1"></a><span class="fu">print</span>(all_string)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;Involved genes are NRG1 and NRG1&quot;</code></pre>
 </details>
 <div class="exercise">
@@ -524,12 +534,12 @@ Solution
 <summary>
 Solution
 </summary>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="character.html#cb122-1" aria-hidden="true" tabindex="-1"></a>gene <span class="ot">&lt;-</span> <span class="st">&quot;HCN1&quot;</span></span>
-<span id="cb122-2"><a href="character.html#cb122-2" aria-hidden="true" tabindex="-1"></a>aa_num <span class="ot">&lt;-</span> <span class="dv">890</span></span>
-<span id="cb122-3"><a href="character.html#cb122-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-4"><a href="character.html#cb122-4" aria-hidden="true" tabindex="-1"></a><span class="co"># one string solution</span></span>
-<span id="cb122-5"><a href="character.html#cb122-5" aria-hidden="true" tabindex="-1"></a>to_print <span class="ot">&lt;-</span> <span class="fu">paste</span>(gene, <span class="st">&quot;protein is&quot;</span>, <span class="fu">as.character</span>(aa_num), <span class="st">&quot;aa long&quot;</span>)</span>
-<span id="cb122-6"><a href="character.html#cb122-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(to_print)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="character.html#cb122-1" tabindex="-1"></a>gene <span class="ot">&lt;-</span> <span class="st">&quot;HCN1&quot;</span></span>
+<span id="cb122-2"><a href="character.html#cb122-2" tabindex="-1"></a>aa_num <span class="ot">&lt;-</span> <span class="dv">890</span></span>
+<span id="cb122-3"><a href="character.html#cb122-3" tabindex="-1"></a></span>
+<span id="cb122-4"><a href="character.html#cb122-4" tabindex="-1"></a><span class="co"># one string solution</span></span>
+<span id="cb122-5"><a href="character.html#cb122-5" tabindex="-1"></a>to_print <span class="ot">&lt;-</span> <span class="fu">paste</span>(gene, <span class="st">&quot;protein is&quot;</span>, <span class="fu">as.character</span>(aa_num), <span class="st">&quot;aa long&quot;</span>)</span>
+<span id="cb122-6"><a href="character.html#cb122-6" tabindex="-1"></a><span class="fu">print</span>(to_print)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;HCN1 protein is 890 aa long&quot;</code></pre>
 </details>
 <p>Don’t worry if you had done it in another way or if it didn’t work. We are here to learn, and these exercises are done to challenge you on things you have seen in different pieces.

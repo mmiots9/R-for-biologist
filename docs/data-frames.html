@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10 Data frames | Learn R for biologist</title>
-  <meta name="description" content="To you, who never gives up, for your future. You can make it!" />
+  <meta name="description" content="This course is for biologists who want to optimize their analysis, making them faster and reproducible." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10 Data frames | Learn R for biologist" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="To you, who never gives up, for your future. You can make it!" />
+  <meta property="og:description" content="This course is for biologists who want to optimize their analysis, making them faster and reproducible." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="10 Data frames | Learn R for biologist" />
   
-  <meta name="twitter:description" content="To you, who never gives up, for your future. You can make it!" />
+  <meta name="twitter:description" content="This course is for biologists who want to optimize their analysis, making them faster and reproducible." />
   
 
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-11-09" />
+<meta name="date" content="2023-12-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="matrices.html"/>
 <link rel="next" href="functions-packages-and-reproducibility.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +51,13 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<meta property="og:description" content="To you, who never gives up, for your future. You can make it!">
+<meta name="keywords" content="R, biology, data analysis">
+<meta name="author" content="Matteo Miotto">
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YDEBEF61BH"></script>
 <script>
@@ -66,7 +71,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -357,6 +362,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="comparing-more-groups.html#post-hoc-test-1" id="toc-post-hoc-test-1">Post-hoc test</a></li>
 </ul></li>
 </ul></li>
+<li><a href="correlation.html#correlation" id="toc-correlation"><span class="toc-section-number">19</span> Correlation</a>
+<ul>
+<li><a href="correlation.html#pearsons-test" id="toc-pearsons-test">Pearson’s test</a></li>
+</ul></li>
+<li><a href="farewell.html#farewell" id="toc-farewell"><span class="toc-section-number">20</span> Farewell</a></li>
 </ul>
 
       </nav>
@@ -374,50 +384,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-frames" class="section level1" number="10">
-<h1><span class="header-section-number">10</span> Data frames</h1>
+<div id="data-frames" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">10</span> Data frames<a href="data-frames.html#data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Matrices can only be filled with the exact same type of data in all columns. This is useful when dealing with expression data that have to be manipulated for statistics, but usually we do not have only numbers in a table. For example, we could have all the meta data associated with different samples: age, treatment, sex, number of replicates, number of cells, etc. These are all different types of data, so we need a different “structure” that can store them for us. In R, this structure is called <strong>data.frame</strong>.</p>
-<div id="create-a-data.frame" class="section level2 unnumbered">
-<h2>Create a data.frame</h2>
+<div id="create-a-data.frame" class="section level2 unnumbered hasAnchor">
+<h2>Create a data.frame<a href="data-frames.html#create-a-data.frame" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>There are many ways to create a data.frame in R. We will explore them all, as you will use them in different situations.</p>
-<div id="from-matrix" class="section level3 unnumbered">
-<h3>From matrix</h3>
+<div id="from-matrix" class="section level3 unnumbered hasAnchor">
+<h3>From matrix<a href="data-frames.html#from-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s start from the least commonly utilized one (I know, you want to ask me “So why are you annoying me with this stuff?!”). We can transform a matrix into a data.frame using the function <code>as.data.frame()</code>. Usually, you do so when you want to add a new column to the matrix with a data type that is different from the one of the matrix (e.g. add a character column to a numeric matrix).
 <br>
 Let’s see a quick example:</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="data-frames.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create a matrix</span></span>
-<span id="cb343-2"><a href="data-frames.html#cb343-2" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
-<span id="cb343-3"><a href="data-frames.html#cb343-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb343-4"><a href="data-frames.html#cb343-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check the class of my_matrix variable</span></span>
-<span id="cb343-5"><a href="data-frames.html#cb343-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Variable my_matrix is of class:&quot;</span>, <span class="fu">paste</span>(<span class="fu">class</span>(my_matrix), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="data-frames.html#cb343-1" tabindex="-1"></a><span class="co"># 1. Create a matrix</span></span>
+<span id="cb343-2"><a href="data-frames.html#cb343-2" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb343-3"><a href="data-frames.html#cb343-3" tabindex="-1"></a></span>
+<span id="cb343-4"><a href="data-frames.html#cb343-4" tabindex="-1"></a><span class="co"># 2. Check the class of my_matrix variable</span></span>
+<span id="cb343-5"><a href="data-frames.html#cb343-5" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Variable my_matrix is of class:&quot;</span>, <span class="fu">paste</span>(<span class="fu">class</span>(my_matrix), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)))</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;Variable my_matrix is of class: matrix, array&quot;</code></pre>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="data-frames.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Transform the matrix into a data.frame</span></span>
-<span id="cb345-2"><a href="data-frames.html#cb345-2" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(my_matrix)</span>
-<span id="cb345-3"><a href="data-frames.html#cb345-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb345-4"><a href="data-frames.html#cb345-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Check the class of my_df variable</span></span>
-<span id="cb345-5"><a href="data-frames.html#cb345-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Variable my_df is of class:&quot;</span>, <span class="fu">paste</span>(<span class="fu">class</span>(my_df), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="data-frames.html#cb345-1" tabindex="-1"></a><span class="co"># 3. Transform the matrix into a data.frame</span></span>
+<span id="cb345-2"><a href="data-frames.html#cb345-2" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(my_matrix)</span>
+<span id="cb345-3"><a href="data-frames.html#cb345-3" tabindex="-1"></a></span>
+<span id="cb345-4"><a href="data-frames.html#cb345-4" tabindex="-1"></a><span class="co"># 4. Check the class of my_df variable</span></span>
+<span id="cb345-5"><a href="data-frames.html#cb345-5" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Variable my_df is of class:&quot;</span>, <span class="fu">paste</span>(<span class="fu">class</span>(my_df), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)))</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;Variable my_df is of class: data.frame&quot;</code></pre>
 <p>And now? How do we add a new column? Eheh, keep calm, we will answer this question in a moment…</p>
 </div>
-<div id="from-vectors" class="section level3 unnumbered">
-<h3>From vectors</h3>
+<div id="from-vectors" class="section level3 unnumbered hasAnchor">
+<h3>From vectors<a href="data-frames.html#from-vectors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We have to first look at another method to create a data.frame, that is starting from different vectors (as for a matrix). The syntax is this: <code>data.frame("&lt;name_of_the_column&gt;" = &lt;vector&gt;, "&lt;name_of_the_column2" = &lt;vector2&gt;, ...)</code>. This is useful when you have different information in different vectors and you want to merge them all, for example:</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="data-frames.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Set the seed for sample function</span></span>
-<span id="cb347-2"><a href="data-frames.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">362</span>)</span>
-<span id="cb347-3"><a href="data-frames.html#cb347-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb347-4"><a href="data-frames.html#cb347-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create vectors</span></span>
-<span id="cb347-5"><a href="data-frames.html#cb347-5" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">33</span>, <span class="dv">29</span>, <span class="dv">32</span>, <span class="dv">41</span>, <span class="dv">45</span>, <span class="dv">67</span>, <span class="dv">44</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">21</span>, <span class="dv">37</span>, <span class="dv">36</span>, <span class="dv">39</span>, <span class="dv">45</span>, <span class="dv">19</span>, <span class="dv">20</span>, <span class="dv">28</span>, <span class="dv">30</span>, <span class="dv">48</span>, <span class="dv">50</span>, <span class="dv">66</span>, <span class="dv">26</span>, <span class="dv">55</span>, <span class="dv">56</span>)</span>
-<span id="cb347-6"><a href="data-frames.html#cb347-6" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>), <span class="at">size =</span> <span class="fu">length</span>(age), <span class="at">replace =</span> T)</span>
-<span id="cb347-7"><a href="data-frames.html#cb347-7" aria-hidden="true" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;CTRL&quot;</span>, <span class="st">&quot;Inh1&quot;</span>, <span class="st">&quot;Inh2&quot;</span>), <span class="at">each =</span> <span class="fu">length</span>(age)<span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb347-8"><a href="data-frames.html#cb347-8" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">length</span>(age)<span class="sc">/</span><span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">85</span>, <span class="at">sd =</span> <span class="dv">20</span>), </span>
-<span id="cb347-9"><a href="data-frames.html#cb347-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">length</span>(age)<span class="sc">/</span><span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">75</span>, <span class="at">sd =</span> <span class="dv">5</span>), </span>
-<span id="cb347-10"><a href="data-frames.html#cb347-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">length</span>(age)<span class="sc">/</span><span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">65</span>, <span class="at">sd =</span> <span class="dv">12</span>)), <span class="dv">1</span>)</span>
-<span id="cb347-11"><a href="data-frames.html#cb347-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb347-12"><a href="data-frames.html#cb347-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create the data.frame</span></span>
-<span id="cb347-13"><a href="data-frames.html#cb347-13" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;age&quot;</span> <span class="ot">=</span> age, <span class="st">&quot;sex&quot;</span> <span class="ot">=</span> sex, <span class="at">treatment =</span> treatment, <span class="at">weight =</span> weight)</span>
-<span id="cb347-14"><a href="data-frames.html#cb347-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb347-15"><a href="data-frames.html#cb347-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Visualize first rows</span></span>
-<span id="cb347-16"><a href="data-frames.html#cb347-16" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_df)</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="data-frames.html#cb347-1" tabindex="-1"></a><span class="co"># 1. Set the seed for sample function</span></span>
+<span id="cb347-2"><a href="data-frames.html#cb347-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">362</span>)</span>
+<span id="cb347-3"><a href="data-frames.html#cb347-3" tabindex="-1"></a></span>
+<span id="cb347-4"><a href="data-frames.html#cb347-4" tabindex="-1"></a><span class="co"># 2. Create vectors</span></span>
+<span id="cb347-5"><a href="data-frames.html#cb347-5" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">33</span>, <span class="dv">29</span>, <span class="dv">32</span>, <span class="dv">41</span>, <span class="dv">45</span>, <span class="dv">67</span>, <span class="dv">44</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">21</span>, <span class="dv">37</span>, <span class="dv">36</span>, <span class="dv">39</span>, <span class="dv">45</span>, <span class="dv">19</span>, <span class="dv">20</span>, <span class="dv">28</span>, <span class="dv">30</span>, <span class="dv">48</span>, <span class="dv">50</span>, <span class="dv">66</span>, <span class="dv">26</span>, <span class="dv">55</span>, <span class="dv">56</span>)</span>
+<span id="cb347-6"><a href="data-frames.html#cb347-6" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>), <span class="at">size =</span> <span class="fu">length</span>(age), <span class="at">replace =</span> T)</span>
+<span id="cb347-7"><a href="data-frames.html#cb347-7" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;CTRL&quot;</span>, <span class="st">&quot;Inh1&quot;</span>, <span class="st">&quot;Inh2&quot;</span>), <span class="at">each =</span> <span class="fu">length</span>(age)<span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb347-8"><a href="data-frames.html#cb347-8" tabindex="-1"></a>weight <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">length</span>(age)<span class="sc">/</span><span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">85</span>, <span class="at">sd =</span> <span class="dv">20</span>), </span>
+<span id="cb347-9"><a href="data-frames.html#cb347-9" tabindex="-1"></a>            <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">length</span>(age)<span class="sc">/</span><span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">75</span>, <span class="at">sd =</span> <span class="dv">5</span>), </span>
+<span id="cb347-10"><a href="data-frames.html#cb347-10" tabindex="-1"></a>            <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">length</span>(age)<span class="sc">/</span><span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">65</span>, <span class="at">sd =</span> <span class="dv">12</span>)), <span class="dv">1</span>)</span>
+<span id="cb347-11"><a href="data-frames.html#cb347-11" tabindex="-1"></a></span>
+<span id="cb347-12"><a href="data-frames.html#cb347-12" tabindex="-1"></a><span class="co"># 3. Create the data.frame</span></span>
+<span id="cb347-13"><a href="data-frames.html#cb347-13" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;age&quot;</span> <span class="ot">=</span> age, <span class="st">&quot;sex&quot;</span> <span class="ot">=</span> sex, <span class="at">treatment =</span> treatment, <span class="at">weight =</span> weight)</span>
+<span id="cb347-14"><a href="data-frames.html#cb347-14" tabindex="-1"></a></span>
+<span id="cb347-15"><a href="data-frames.html#cb347-15" tabindex="-1"></a><span class="co"># 4. Visualize first rows</span></span>
+<span id="cb347-16"><a href="data-frames.html#cb347-16" tabindex="-1"></a><span class="fu">head</span>(my_df)</span></code></pre></div>
 <pre class="code-out"><code>  age sex treatment weight
 1  33   F      CTRL  108.9
 2  29   M      CTRL   98.1
@@ -426,14 +436,14 @@ Let’s see a quick example:</p>
 5  45   M      CTRL   69.0
 6  67   F      CTRL   93.4</code></pre>
 </div>
-<div id="from-file" class="section level3 unnumbered">
-<h3>From file</h3>
+<div id="from-file" class="section level3 unnumbered hasAnchor">
+<h3>From file<a href="data-frames.html#from-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You will usually load a table from a file (csv, txt, tsv, etc) that you have written or that someone has given you. We have already seen how to read a csv file in the previous <a href="matrices.html#head-tail-matrices">chapter</a>, so let’s do the same to load our weight data (<a href="data/Weights.csv" download>Download</a>).</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="data-frames.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load data</span></span>
-<span id="cb349-2"><a href="data-frames.html#cb349-2" aria-hidden="true" tabindex="-1"></a>weight_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Weights.csv&quot;</span>, <span class="at">header =</span> T)</span>
-<span id="cb349-3"><a href="data-frames.html#cb349-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb349-4"><a href="data-frames.html#cb349-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Visualize first rows</span></span>
-<span id="cb349-5"><a href="data-frames.html#cb349-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(weight_data)</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="data-frames.html#cb349-1" tabindex="-1"></a><span class="co"># 1. Load data</span></span>
+<span id="cb349-2"><a href="data-frames.html#cb349-2" tabindex="-1"></a>weight_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Weights.csv&quot;</span>, <span class="at">header =</span> T)</span>
+<span id="cb349-3"><a href="data-frames.html#cb349-3" tabindex="-1"></a></span>
+<span id="cb349-4"><a href="data-frames.html#cb349-4" tabindex="-1"></a><span class="co"># 2. Visualize first rows</span></span>
+<span id="cb349-5"><a href="data-frames.html#cb349-5" tabindex="-1"></a><span class="fu">head</span>(weight_data)</span></code></pre></div>
 <pre class="code-out"><code>  age sex treatment weight
 1  33   F      CTRL  108.9
 2  29   M      CTRL   98.1
@@ -444,12 +454,12 @@ Let’s see a quick example:</p>
 <p>By default, the table is loaded as a data.frame.</p>
 </div>
 </div>
-<div id="indexing-1" class="section level2 unnumbered">
-<h2>Indexing</h2>
+<div id="indexing-1" class="section level2 unnumbered hasAnchor">
+<h2>Indexing<a href="data-frames.html#indexing-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Indexing a data.frame is exactly the same as indexing a matrix. For this reason, I will only do some examples here, and invite you to look at the <a href="matrices.html#indexing-matrices">indexing</a> section in matrices chapter for a deeper explanation.</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="data-frames.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Extract males data</span></span>
-<span id="cb351-2"><a href="data-frames.html#cb351-2" aria-hidden="true" tabindex="-1"></a>males_data <span class="ot">&lt;-</span> weight_data[weight_data<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span>,]</span>
-<span id="cb351-3"><a href="data-frames.html#cb351-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(males_data)</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="data-frames.html#cb351-1" tabindex="-1"></a><span class="co"># 1. Extract males data</span></span>
+<span id="cb351-2"><a href="data-frames.html#cb351-2" tabindex="-1"></a>males_data <span class="ot">&lt;-</span> weight_data[weight_data<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span>,]</span>
+<span id="cb351-3"><a href="data-frames.html#cb351-3" tabindex="-1"></a><span class="fu">head</span>(males_data)</span></code></pre></div>
 <pre class="code-out"><code>  age sex treatment weight
 2  29   M      CTRL   98.1
 4  41   M      CTRL   92.9
@@ -457,9 +467,9 @@ Let’s see a quick example:</p>
 7  44   M      CTRL   90.2
 8  18   M      CTRL   65.6
 9  22   M      Inh1   68.0</code></pre>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="data-frames.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Extract controls sex and age</span></span>
-<span id="cb353-2"><a href="data-frames.html#cb353-2" aria-hidden="true" tabindex="-1"></a>ctrl_sex_age <span class="ot">&lt;-</span> weight_data[weight_data<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;CTRL&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>)]</span>
-<span id="cb353-3"><a href="data-frames.html#cb353-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ctrl_sex_age)</span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="data-frames.html#cb353-1" tabindex="-1"></a><span class="co"># 2. Extract controls sex and age</span></span>
+<span id="cb353-2"><a href="data-frames.html#cb353-2" tabindex="-1"></a>ctrl_sex_age <span class="ot">&lt;-</span> weight_data[weight_data<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;CTRL&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>)]</span>
+<span id="cb353-3"><a href="data-frames.html#cb353-3" tabindex="-1"></a><span class="fu">head</span>(ctrl_sex_age)</span></code></pre></div>
 <pre class="code-out"><code>  sex age
 1   F  33
 2   M  29
@@ -468,21 +478,21 @@ Let’s see a quick example:</p>
 5   M  45
 6   F  67</code></pre>
 </div>
-<div id="create-a-new-column" class="section level2 unnumbered">
-<h2>Create a new column</h2>
+<div id="create-a-new-column" class="section level2 unnumbered hasAnchor">
+<h2>Create a new column<a href="data-frames.html#create-a-new-column" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>I’m proud of you and your patience! Here we are to answer previous questions about how to add a new column to a data.frame. There are different ways to add a column to an existing database.
 <br>
 We can use the “$” operator in this way: <code>dataframe\$new_column &lt;- vector</code>. In this way we are telling R to insert <code>vector</code> as <code>new_column</code> in the data.frame. Similarly, we can use <code>dataframe["&lt;new_column&gt;"] &lt;- vector</code> to do the same.
 <br>
 Here an example:</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="data-frames.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Add state column with value Italy for all rows</span></span>
-<span id="cb355-2"><a href="data-frames.html#cb355-2" aria-hidden="true" tabindex="-1"></a>weight_data<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="st">&quot;Italy&quot;</span></span>
-<span id="cb355-3"><a href="data-frames.html#cb355-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb355-4"><a href="data-frames.html#cb355-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Add city column with value Milan for all rows</span></span>
-<span id="cb355-5"><a href="data-frames.html#cb355-5" aria-hidden="true" tabindex="-1"></a>weight_data[<span class="st">&quot;city&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Milan&quot;</span></span>
-<span id="cb355-6"><a href="data-frames.html#cb355-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb355-7"><a href="data-frames.html#cb355-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Visualize first rows</span></span>
-<span id="cb355-8"><a href="data-frames.html#cb355-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(weight_data)</span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="data-frames.html#cb355-1" tabindex="-1"></a><span class="co"># 1. Add state column with value Italy for all rows</span></span>
+<span id="cb355-2"><a href="data-frames.html#cb355-2" tabindex="-1"></a>weight_data<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="st">&quot;Italy&quot;</span></span>
+<span id="cb355-3"><a href="data-frames.html#cb355-3" tabindex="-1"></a></span>
+<span id="cb355-4"><a href="data-frames.html#cb355-4" tabindex="-1"></a><span class="co"># 2. Add city column with value Milan for all rows</span></span>
+<span id="cb355-5"><a href="data-frames.html#cb355-5" tabindex="-1"></a>weight_data[<span class="st">&quot;city&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Milan&quot;</span></span>
+<span id="cb355-6"><a href="data-frames.html#cb355-6" tabindex="-1"></a></span>
+<span id="cb355-7"><a href="data-frames.html#cb355-7" tabindex="-1"></a><span class="co"># 3. Visualize first rows</span></span>
+<span id="cb355-8"><a href="data-frames.html#cb355-8" tabindex="-1"></a><span class="fu">head</span>(weight_data)</span></code></pre></div>
 <pre class="code-out"><code>  age sex treatment weight state  city
 1  33   F      CTRL  108.9 Italy Milan
 2  29   M      CTRL   98.1 Italy Milan
@@ -491,16 +501,16 @@ Here an example:</p>
 5  45   M      CTRL   69.0 Italy Milan
 6  67   F      CTRL   93.4 Italy Milan</code></pre>
 </div>
-<div id="delete-a-column" class="section level2 unnumbered">
-<h2>Delete a column</h2>
+<div id="delete-a-column" class="section level2 unnumbered hasAnchor">
+<h2>Delete a column<a href="data-frames.html#delete-a-column" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To delete a column from a data.frame, you should assign it the value NULL <code>dataframe$column &lt;- NULL</code>. If you want to delete multiple columns, you could use this form <code>dataframe[, c("column1", "column2", ...)] &lt;- NULL</code>.
 <br>
 Let’s now delete state and city columns from our dataframe:</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="data-frames.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Delete rows</span></span>
-<span id="cb357-2"><a href="data-frames.html#cb357-2" aria-hidden="true" tabindex="-1"></a>weight_data[, <span class="fu">c</span>(<span class="st">&quot;state&quot;</span>, <span class="st">&quot;city&quot;</span>)] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb357-3"><a href="data-frames.html#cb357-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb357-4"><a href="data-frames.html#cb357-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Visualize first rows</span></span>
-<span id="cb357-5"><a href="data-frames.html#cb357-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(weight_data)</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="data-frames.html#cb357-1" tabindex="-1"></a><span class="co"># 1. Delete rows</span></span>
+<span id="cb357-2"><a href="data-frames.html#cb357-2" tabindex="-1"></a>weight_data[, <span class="fu">c</span>(<span class="st">&quot;state&quot;</span>, <span class="st">&quot;city&quot;</span>)] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb357-3"><a href="data-frames.html#cb357-3" tabindex="-1"></a></span>
+<span id="cb357-4"><a href="data-frames.html#cb357-4" tabindex="-1"></a><span class="co"># 2. Visualize first rows</span></span>
+<span id="cb357-5"><a href="data-frames.html#cb357-5" tabindex="-1"></a><span class="fu">head</span>(weight_data)</span></code></pre></div>
 <pre class="code-out"><code>  age sex treatment weight
 1  33   F      CTRL  108.9
 2  29   M      CTRL   98.1
@@ -509,10 +519,10 @@ Let’s now delete state and city columns from our dataframe:</p>
 5  45   M      CTRL   69.0
 6  67   F      CTRL   93.4</code></pre>
 </div>
-<div id="export-a-data-frame" class="section level2 unnumbered">
-<h2>Export a data frame</h2>
+<div id="export-a-data-frame" class="section level2 unnumbered hasAnchor">
+<h2>Export a data frame<a href="data-frames.html#export-a-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Lastly, let’s imagine you have performed some operations on a data.frame (filtering, add columns, calculations etc) and you want to save it as a file, what you have to do is this:</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="data-frames.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> weight_data, <span class="at">file =</span> <span class="st">&quot;output/weight_modified.csv&quot;</span>, <span class="at">quote =</span> F, <span class="at">row.names =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="data-frames.html#cb359-1" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> weight_data, <span class="at">file =</span> <span class="st">&quot;output/weight_modified.csv&quot;</span>, <span class="at">quote =</span> F, <span class="at">row.names =</span> F)</span></code></pre></div>
 <p class="plist">
 Let’s dissect this code:
 </p>

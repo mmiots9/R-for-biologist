@@ -1,0 +1,66 @@
+# Correlation
+Here we are to one of the most controversial statistical test: the correlation. Why controversial? "Pull off the band-aid" and let's answer this question at first: usually correlation is used by some scientist as a synonym of <em>causation</em>, but it is not like this! To express this concept, we have to understand what correlation is.
+Correlation is the measure of the relation of changes of data between two variables; it can answer these questions: "If A changes, does B do the same?", "If A increases, does B increase? Or decrease?" So, many people then say "An increase in A leads to an increase of B", but it is totally <strong>wrong</strong> if we do not know and demonstrates that B is caused by A.
+
+<strong>Remember:</strong> correlation is not causation.
+In fact, A and B could be two variables that in reality depends on another variable C, but that are not one causative to the other. To make an example, let's think about the expression of two genes that are downstream the same transcription factor: they both increase when the level of that transcription factor decrease. We cannot say that an increment of one of the two genes causes an increment of the levels of the second one!
+
+I know this may sound obvious, but you will see (and read) lots of people trying to explain causation through correlation... but the test to use are others, with different ground knowledge of the phenomena.
+
+<em>So why using correlation?</em>
+When you don't know the true causative relation between two variables and you want to see if there is any kind of relationship between the variances of them. Moreover, it is very useful when you want to perform dimensionality reduction or you want to create a model, as you want to get the correlated variables to exclude one of them, as two variables that are one the linear transformed of the other are can be reduced to just one, to optimize the model (as the second one does not add any information).
+
+Correlation is expressed by a correlation index, which is a value ranging from -1 to 1. A positive correlation means that when one increases, the other does too; instead, a negative correlation means that when one increases, the other one decreases. A correlation score of 0 is usually found when it does not matter if a variable increases or decreases, the other one remains almost the same.
+
+<p class="plist">There are 3 types of test we can use, based on the type of data we have:</p>:
+<ul>
+<li><em>Pearson</em>: variables should be continuous, with normal distribution and a linear relation</li>
+<li><em>Spearman</em>: (at least) one of the two variables is ordinal</li>
+<li><em>Kendall</em>: both variables are ordinal</li>
+</ul>
+
+We'll see in detail the Pearson test, as in our example we have two continuous variables, then we will briefly see the other two tests.
+
+Let's load the data:
+```{r, warning=FALSE}
+# 1. Load packages 
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(ggpubr))
+suppressPackageStartupMessages(library(gginnards))
+suppressPackageStartupMessages(library(glue))
+
+# 2. Load data
+df <- read.csv("data/Stat-test-dataset.csv")
+
+# 3. Change come column types
+df <- df %>%
+  mutate("sex" = factor(sex),
+         "treatment" = factor(treatment, levels = c("T1", "Untreated")),
+         "Task1" = factor(Task1, levels = c(1, 0)),
+         "Task2" = factor(Task2, levels = c(1, 0)),
+         )
+
+str(df)
+```
+
+## Pearson's test{-}
+We want to know if weight and Task3 are correlated in both males and females. 
+The first thing to do is, as always, plot the variables to have a look at them:
+```{r pearson, fig.width=7}
+ggplot(df) +
+  geom_point(aes(x = weight, y = Task3, color = sex)) +
+  labs(y = "Task3 (s)", x = "Weight (g)", color = "Sex") +
+  theme_classic()
+```
+
+Just visually, we can say that there is no positive or negative correlation between them. To claim it, let's apply the Pearson's test: the function to use is `cor.test()`, specifying `method = "pearson"`; the order of the variables is not important.
+
+```{r}
+pearson_res <- cor.test(df$weight, df$Task3, method = "pearson")
+pearson_res
+```
+
+You should now be able to understand these results, even if it is the first time looking at them: p-value is > 0.05, so there is no significance. Moreover, correlation score is very close to 0 (0.05), meaning that even if weight increases, Task3 times remains pretty the same (this is what was obvious from the graph).
+
+To apply the other two types of test, just specify "kendall" or "spearman" in the method argument.

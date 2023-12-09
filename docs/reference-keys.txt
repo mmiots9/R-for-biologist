@@ -32,3 +32,5 @@ intro-stat-chapter
 association-between-categorical-variables
 comparing-two-groups
 comparing-more-groups
+correlation
+farewell

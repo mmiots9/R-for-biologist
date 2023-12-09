@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Variables | Learn R for biologist</title>
-  <meta name="description" content="To you, who never gives up, for your future. You can make it!" />
+  <meta name="description" content="This course is for biologists who want to optimize their analysis, making them faster and reproducible." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Variables | Learn R for biologist" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="To you, who never gives up, for your future. You can make it!" />
+  <meta property="og:description" content="This course is for biologists who want to optimize their analysis, making them faster and reproducible." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="3 Variables | Learn R for biologist" />
   
-  <meta name="twitter:description" content="To you, who never gives up, for your future. You can make it!" />
+  <meta name="twitter:description" content="This course is for biologists who want to optimize their analysis, making them faster and reproducible." />
   
 
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-11-09" />
+<meta name="date" content="2023-12-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="first-step-in-rstudio.html"/>
 <link rel="next" href="scripts-chapter.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +51,13 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<meta property="og:description" content="To you, who never gives up, for your future. You can make it!">
+<meta name="keywords" content="R, biology, data analysis">
+<meta name="author" content="Matteo Miotto">
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YDEBEF61BH"></script>
 <script>
@@ -66,7 +71,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -357,6 +362,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="comparing-more-groups.html#post-hoc-test-1" id="toc-post-hoc-test-1">Post-hoc test</a></li>
 </ul></li>
 </ul></li>
+<li><a href="correlation.html#correlation" id="toc-correlation"><span class="toc-section-number">19</span> Correlation</a>
+<ul>
+<li><a href="correlation.html#pearsons-test" id="toc-pearsons-test">Pearson’s test</a></li>
+</ul></li>
+<li><a href="farewell.html#farewell" id="toc-farewell"><span class="toc-section-number">20</span> Farewell</a></li>
 </ul>
 
       </nav>
@@ -374,15 +384,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="variables" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Variables</h1>
+<div id="variables" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Variables<a href="variables.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>As mentioned, we often need some number (eg a concentration), some table (eg table of differentially expressed genes), information (eg the name of a protein) etc. to be saved in R to be able to use them later in the analysis. This is where <em>variables</em> come into play, and now we’ll see how to create them, how to reuse them, and what kinds of variables exist.</p>
-<div id="create-a-variable" class="section level2 unnumbered">
-<h2>Create a variable</h2>
+<div id="create-a-variable" class="section level2 unnumbered hasAnchor">
+<h2>Create a variable<a href="variables.html#create-a-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To create a variable we write <code>name_of_the_variable &lt;- what_to_save</code> (you can either use <code>=</code> instead of <code>&lt;-</code>, even if the former is usually used for declaring arguments in a function, but we’ll see it later).
 <br>
 Now, write this to the console, click Return/send on the keyborard, and see what happens:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="variables.html#cb3-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="variables.html#cb3-1" tabindex="-1"></a>myvar <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
 <p><img src="images/png/rstudio-environment.png" height=30%></p>
 On the console nothing happens, but something appeared in the window called Environment (if yours is different, it may be that there is the “List” view setting instead of “Grid” in the blue box, you can change it to your liking).
 <br>
@@ -407,29 +417,29 @@ Here in details the info given for each variable:
 </li>
 </ul>
 <p>If we want to create multiple variables with the same value we can do this:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="variables.html#cb4-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> var2 <span class="ot">&lt;-</span> var3 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb4-2"><a href="variables.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var1)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="variables.html#cb4-1" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> var2 <span class="ot">&lt;-</span> var3 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb4-2"><a href="variables.html#cb4-2" tabindex="-1"></a><span class="fu">print</span>(var1)</span></code></pre></div>
 <pre class="code-out"><code>[1] 20</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="variables.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var2)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="variables.html#cb6-1" tabindex="-1"></a><span class="fu">print</span>(var2)</span></code></pre></div>
 <pre class="code-out"><code>[1] 20</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="variables.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var3)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="variables.html#cb8-1" tabindex="-1"></a><span class="fu">print</span>(var3)</span></code></pre></div>
 <pre class="code-out"><code>[1] 20</code></pre>
 </div>
-<div id="use-a-variable" class="section level2 unnumbered">
-<h2>Use a variable</h2>
+<div id="use-a-variable" class="section level2 unnumbered hasAnchor">
+<h2>Use a variable<a href="variables.html#use-a-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Ok, but once stored, how to we use a variable? Easy, we just need to type it in the console (or start writing the first letters of its name and press Tab to show RStudio suggestions). If, for example, we want to calculate the power of our variable we should write:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="variables.html#cb10-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="sc">**</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="variables.html#cb10-1" tabindex="-1"></a>myvar <span class="sc">**</span> <span class="dv">2</span></span></code></pre></div>
 <pre class="code-out"><code>[1] 25</code></pre>
 <p>And here is the result (to elevate to the power we can either use <code>**</code> or <code>^</code>).
 <br>
 And what if we want to store this result? As before:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="variables.html#cb12-1" aria-hidden="true" tabindex="-1"></a>myvar_power <span class="ot">&lt;-</span> myvar <span class="sc">**</span> <span class="dv">2</span></span>
-<span id="cb12-2"><a href="variables.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar_power)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="variables.html#cb12-1" tabindex="-1"></a>myvar_power <span class="ot">&lt;-</span> myvar <span class="sc">**</span> <span class="dv">2</span></span>
+<span id="cb12-2"><a href="variables.html#cb12-2" tabindex="-1"></a><span class="fu">print</span>(myvar_power)</span></code></pre></div>
 <pre class="code-out"><code>[1] 25</code></pre>
 <p>Here we use <code>print()</code> function, but in R we can also just write the name of the variable to see it.</p>
 </div>
-<div id="variable-names" class="section level2 unnumbered">
-<h2>Variable names</h2>
+<div id="variable-names" class="section level2 unnumbered hasAnchor">
+<h2>Variable names<a href="variables.html#variable-names" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 As in everything, even in naming variables there are rules and guidelines. Don’t be scared, they are simple and will make your life easier, let’s see them together.
 <br>
 <p class="plist">
@@ -467,71 +477,357 @@ Be consistent within the script: if you decide to use the Pascal case, always us
 </li>
 </ul>
 </div>
-<div id="overwriting-variables" class="section level2 unnumbered">
-<h2>Overwriting variables</h2>
+<div id="overwriting-variables" class="section level2 unnumbered hasAnchor">
+<h2>Overwriting variables<a href="variables.html#overwriting-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Attention! Variables can be overwritten (<strong>unrecoverable</strong> action).
 <br>
 To override a variable, simply assign that variable a new value:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="variables.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="variables.html#cb14-1" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
 <pre class="code-out"><code>[1] 5</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="variables.html#cb16-1" aria-hidden="true" tabindex="-1"></a>myvar <span class="ot">&lt;-</span> <span class="dv">9</span></span>
-<span id="cb16-2"><a href="variables.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="variables.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="variables.html#cb16-1" tabindex="-1"></a>myvar <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb16-2"><a href="variables.html#cb16-2" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="variables.html#cb16-3" tabindex="-1"></a><span class="fu">print</span>(myvar)</span></code></pre></div>
 <pre class="code-out"><code>[1] 9</code></pre>
 <p>Now <code>myvar</code> is equal to 9, and there is no way back…
 <br>
 This feature is useful for saving space and not cluttering up too much with variables that are okay to change often, but it can be risky. So be careful when naming variables.</p>
 </div>
-<div id="list-all-variables" class="section level2 unnumbered">
-<h2>List all variables</h2>
+<div id="list-all-variables" class="section level2 unnumbered hasAnchor">
+<h2>List all variables<a href="variables.html#list-all-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A useful way to avoid overwriting an important variable is to list the variables. We know that in RStudio they are all present in the <i>Environment</i> window, but what if we weren’t in RStudio but elsewhere (for example in the terminal)?
 <br>
 The answer is simple, let’s use the <code>ls()</code> function</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="variables.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="variables.html#cb18-1" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                         &quot;abbreviations&quot;                  &quot;age&quot;                            &quot;age_inf_threshold&quot;              &quot;age_sup_threshold&quot;             
+  [6] &quot;all_plots&quot;                      &quot;all_string&quot;                     &quot;aod_pmi&quot;                        &quot;aod_pmi_all&quot;                    &quot;aod_pmi_arr&quot;                   
+ [11] &quot;aod_pmi_sex_rin_aes&quot;            &quot;aod_thresh&quot;                     &quot;aov_res&quot;                        &quot;area_color_vector&quot;              &quot;area_df&quot;                       
+ [16] &quot;areas&quot;                          &quot;c_patients&quot;                     &quot;caption&quot;                        &quot;ch1&quot;                            &quot;ch2&quot;                           
+ [21] &quot;ch3&quot;                            &quot;ch4&quot;                            &quot;ch5&quot;                            &quot;ch6&quot;                            &quot;color_df&quot;                      
+ [26] &quot;common&quot;                         &quot;common_all&quot;                     &quot;common_mean&quot;                    &quot;common1_2&quot;                      &quot;comparison_ks_res&quot;             
+ [31] &quot;condition&quot;                      &quot;ctrl_sex_age&quot;                   &quot;CXCR4&quot;                          &quot;description&quot;                    &quot;df&quot;                            
+ [36] &quot;df_AOD_dataset&quot;                 &quot;df_female_rin3q&quot;                &quot;df_filtered&quot;                    &quot;df_grouped&quot;                     &quot;df_male_ctrl_cdr4&quot;             
+ [41] &quot;df_nas_diag_dataset&quot;            &quot;df_PMI_area_sex&quot;                &quot;df_RIN_dataset&quot;                 &quot;df_wider&quot;                       &quot;dunn_res&quot;                      
+ [46] &quot;dunn_stat_df&quot;                   &quot;expr&quot;                           &quot;expr_data&quot;                      &quot;expr_data_t&quot;                    &quot;expr_levels&quot;                   
+ [51] &quot;expr_mat_pat&quot;                   &quot;expr_values&quot;                    &quot;f_value&quot;                        &quot;features&quot;                       &quot;female_15_task1yes_chisq_res&quot;  
+ [56] &quot;female_15_task1yes_df&quot;          &quot;female_15_task1yes_expected&quot;    &quot;female_15_task1yes_max_cat&quot;     &quot;female_15_task1yes_mosaic&quot;      &quot;female_15_task1yes_or&quot;         
+ [61] &quot;female_15_task1yes_phi&quot;         &quot;female_15_task1yes_sample_size&quot; &quot;female_15_task1yes_table&quot;       &quot;female_t1_weight_bartlett&quot;      &quot;female_t1_weight_boxplot&quot;      
+ [66] &quot;female_t1_weight_df&quot;            &quot;female_t1_weight_max&quot;           &quot;female_t1_weight_shapiro&quot;       &quot;females_t1_task3_bartlett&quot;      &quot;females_t1_task3_boxplot&quot;      
+ [71] &quot;females_t1_task3_df&quot;            &quot;females_t1_task3_shapiro&quot;       &quot;females_t1_task3_shapiro_pos&quot;   &quot;full_name&quot;                      &quot;gene&quot;                          
+ [76] &quot;gene_2_keep&quot;                    &quot;gene_to_test&quot;                   &quot;gene1&quot;                          &quot;gene2&quot;                          &quot;genes&quot;                         
+ [81] &quot;grep_1&quot;                         &quot;grep_2&quot;                         &quot;grepl_1&quot;                        &quot;grepl_2&quot;                        &quot;gsub_all&quot;                      
+ [86] &quot;heights&quot;                        &quot;idx&quot;                            &quot;interaction_factor&quot;             &quot;is_odd&quot;                         &quot;is_outlier&quot;                    
+ [91] &quot;kruskal_res&quot;                    &quot;LCT&quot;                            &quot;LHX9&quot;                           &quot;male_3_task2yes_df&quot;             &quot;male_3_task2yes_expected&quot;      
+ [96] &quot;male_3_task2yes_fisher_phi&quot;     &quot;male_3_task2yes_fisher_res&quot;     &quot;male_3_task2yes_max_cat&quot;        &quot;male_3_task2yes_mosaic&quot;         &quot;male_3_task2yes_sample_size&quot;   
+[101] &quot;male_3_task2yes_table&quot;          &quot;male_3_task3_bartlett&quot;          &quot;male_3_task3_boxplot&quot;           &quot;male_3_task3_df&quot;                &quot;male_3_task3_max&quot;              
+[106] &quot;male_3_task3_shapiro&quot;           &quot;male_30_task3_boxplot&quot;          &quot;male_30_task3_boxplot_filt&quot;     &quot;male_30_task3_density&quot;          &quot;male_30_task3_density_filt&quot;    
+[111] &quot;male_30_task3_qq&quot;               &quot;male_30_task3_qq_filt&quot;          &quot;male_30_weight_boxplot&quot;         &quot;male_30_weight_boxplot_filt&quot;    &quot;male_30_weight_density&quot;        
+[116] &quot;male_30_weight_density_filt&quot;    &quot;male_30_weight_qq&quot;              &quot;male_30_weight_qq_filt&quot;         &quot;male_30_weight_task3&quot;           &quot;males_data&quot;                    
+[121] &quot;males_females_barplot&quot;          &quot;mann_res&quot;                       &quot;mean_col&quot;                       &quot;mean_res_better&quot;                &quot;mean_res_better_round&quot;         
+[126] &quot;mean_result_calc&quot;               &quot;mean_row&quot;                       &quot;mean_time&quot;                      &quot;mice1&quot;                          &quot;mice2&quot;                         
+[131] &quot;mice3&quot;                          &quot;mice4&quot;                          &quot;mito_genes&quot;                     &quot;ml_to_add&quot;                      &quot;mother_diabetes&quot;               
+[136] &quot;mt_mat&quot;                         &quot;my_col_names&quot;                   &quot;my_df&quot;                          &quot;my_info&quot;                        &quot;my_matrix&quot;                     
+[141] &quot;my_matrix2&quot;                     &quot;my_max&quot;                         &quot;my_mean&quot;                        &quot;my_min&quot;                         &quot;my_row_names&quot;                  
+[146] &quot;my_sum&quot;                         &quot;my_vector&quot;                      &quot;mychar_d&quot;                       &quot;mychar_s&quot;                       &quot;mynumber&quot;                      
+[151] &quot;mystring&quot;                       &quot;myvar&quot;                          &quot;myvar_power&quot;                    &quot;n_15&quot;                           &quot;n_3&quot;                           
+[156] &quot;n_30&quot;                           &quot;n_7&quot;                            &quot;n_out_df&quot;                       &quot;n_rep&quot;                          &quot;n_responders&quot;                  
+[161] &quot;n_t1&quot;                           &quot;n_untreated&quot;                    &quot;nationality&quot;                    &quot;no_seed1&quot;                       &quot;no_seed2&quot;                      
+[166] &quot;non_norm_sample&quot;                &quot;non_norm_sample_density&quot;        &quot;non_norm_sample_ks_res&quot;         &quot;non_norm_sample_shapiro_res&quot;    &quot;norm_sample&quot;                   
+[171] &quot;norm_sample_density&quot;            &quot;norm_sample_ks_res&quot;             &quot;norm_sample_shapiro_res&quot;        &quot;normality_df&quot;                   &quot;not_center&quot;                    
+[176] &quot;num1&quot;                           &quot;num2&quot;                           &quot;only_1&quot;                         &quot;only_2&quot;                         &quot;p_responders&quot;                  
+[181] &quot;pairwise_res&quot;                   &quot;patien1_sub&quot;                    &quot;patien2_sub&quot;                    &quot;patien3_sub&quot;                    &quot;patient_age&quot;                   
+[186] &quot;patient_state&quot;                  &quot;patient_weight&quot;                 &quot;patient1&quot;                       &quot;patient2&quot;                       &quot;patient3&quot;                      
+[191] &quot;pattern_to_check_1&quot;             &quot;pattern_to_check_2&quot;             &quot;pearson_res&quot;                    &quot;perc_mito&quot;                      &quot;perc_no_mito&quot;                  
+[196] &quot;pmi_thresh&quot;                     &quot;proteins&quot;                       &quot;proteins1&quot;                      &quot;proteins2&quot;                      &quot;PTPN7&quot;                         
+[201] &quot;pvalue&quot;                         &quot;pvalue_to_plot&quot;                 &quot;quantiles&quot;                      &quot;r_numb&quot;                         &quot;r_patients&quot;                    
+[206] &quot;read_sum_gene&quot;                  &quot;read_sum_pat&quot;                   &quot;read_sum_pat_filt&quot;              &quot;rep1&quot;                           &quot;rep2&quot;                          
+[211] &quot;rep3&quot;                           &quot;response&quot;                       &quot;rin_area_boxplot&quot;               &quot;rin_area_boxplot_edit&quot;          &quot;rin_area_boxplot_manual&quot;       
+[216] &quot;rin_area_boxplots_arr&quot;          &quot;sample&quot;                         &quot;sample0&quot;                        &quot;sample1&quot;                        &quot;sample1_fr&quot;                    
+[221] &quot;sample2&quot;                        &quot;sample2_fr&quot;                     &quot;sample3&quot;                        &quot;sample3_fr&quot;                     &quot;sd_calc&quot;                       
+[226] &quot;sd_calc_ceil&quot;                   &quot;sd_calc_floor&quot;                  &quot;sd_calc_round&quot;                  &quot;sd_time&quot;                        &quot;sex&quot;                           
+[231] &quot;sex_bar_arr&quot;                    &quot;sex_barplot&quot;                    &quot;sex_df&quot;                         &quot;sliced_odd&quot;                     &quot;sub_only&quot;                      
+[236] &quot;sum_aa&quot;                         &quot;sum_tbl_sex&quot;                    &quot;sum_time&quot;                       &quot;sum_weights&quot;                    &quot;t_test_res&quot;                    
+[241] &quot;t_value&quot;                        &quot;t1_3_weight_bartlett&quot;           &quot;t1_3_weight_boxplot&quot;            &quot;t1_3_weight_df&quot;                 &quot;t1_3_weight_max&quot;               
+[246] &quot;t1_3_weight_shapiro&quot;            &quot;Task3_bartlett_result&quot;          &quot;Task3_max_label&quot;                &quot;tbl_sex&quot;                        &quot;tbl_sex_diagnosis&quot;             
+[251] &quot;tbl_sex_diagnosis_colsum&quot;       &quot;tbl_sex_diagnosis_rowsum&quot;       &quot;time&quot;                           &quot;to_extract&quot;                     &quot;to_print&quot;                      
+[256] &quot;total_mito&quot;                     &quot;total_no_mito&quot;                  &quot;treatment&quot;                      &quot;tukey_res&quot;                      &quot;untreated_chisq_res&quot;           
+[261] &quot;untreated_cramer&quot;               &quot;untreated_df&quot;                   &quot;untreated_max_cat&quot;              &quot;untreated_mosaic&quot;               &quot;untreated_sample_size&quot;         
+[266] &quot;untreated_table&quot;                &quot;untreated_weight_bartlett&quot;      &quot;untreated_weight_boxplot&quot;       &quot;untreated_weight_df&quot;            &quot;untreated_weight_lineplot&quot;     
+[271] &quot;untreated_weight_shapiro&quot;       &quot;untreated_weight_shapiro_pos&quot;   &quot;untreated_weight_stats_pos&quot;     &quot;upregulated_1&quot;                  &quot;upregulated_2&quot;                 
+[276] &quot;var_calc&quot;                       &quot;var1&quot;                           &quot;var2&quot;                           &quot;var3&quot;                           &quot;weight&quot;                        
+[281] &quot;weight_bartlett_result&quot;         &quot;weight_c&quot;                       &quot;weight_data&quot;                    &quot;weight_max_label&quot;               &quot;weight_n&quot;                      
+[286] &quot;weight_sup_threshold&quot;           &quot;welch_res&quot;                      &quot;with_seed1&quot;                     &quot;with_seed2&quot;                    </code></pre>
 <p>Here are our variables.
 <br>
 Note how I called this command with the name <em>function</em>: we will cover this concept later, for now you just need to know that they exist and that they can be identified immediately by the fact that after the name there is a pair of round brackets.
 <br></p>
 </div>
-<div id="delete-variables" class="section level2 unnumbered">
-<h2>Delete variables</h2>
+<div id="delete-variables" class="section level2 unnumbered hasAnchor">
+<h2>Delete variables<a href="variables.html#delete-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To delete a variable, use the <code>rm()</code> function and insert the variable to be deleted:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="variables.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a variable</span></span>
-<span id="cb20-2"><a href="variables.html#cb20-2" aria-hidden="true" tabindex="-1"></a>to_remove <span class="ot">&lt;-</span> <span class="dv">1213</span></span>
-<span id="cb20-3"><a href="variables.html#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="variables.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
-<span id="cb20-5"><a href="variables.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;to_remove&quot;   &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="variables.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variable</span></span>
-<span id="cb22-2"><a href="variables.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove)</span>
-<span id="cb22-3"><a href="variables.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="variables.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
-<span id="cb22-5"><a href="variables.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="variables.html#cb20-1" tabindex="-1"></a><span class="co"># create a variable</span></span>
+<span id="cb20-2"><a href="variables.html#cb20-2" tabindex="-1"></a>to_remove <span class="ot">&lt;-</span> <span class="dv">1213</span></span>
+<span id="cb20-3"><a href="variables.html#cb20-3" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="variables.html#cb20-4" tabindex="-1"></a><span class="co"># list all variables</span></span>
+<span id="cb20-5"><a href="variables.html#cb20-5" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                         &quot;abbreviations&quot;                  &quot;age&quot;                            &quot;age_inf_threshold&quot;              &quot;age_sup_threshold&quot;             
+  [6] &quot;all_plots&quot;                      &quot;all_string&quot;                     &quot;aod_pmi&quot;                        &quot;aod_pmi_all&quot;                    &quot;aod_pmi_arr&quot;                   
+ [11] &quot;aod_pmi_sex_rin_aes&quot;            &quot;aod_thresh&quot;                     &quot;aov_res&quot;                        &quot;area_color_vector&quot;              &quot;area_df&quot;                       
+ [16] &quot;areas&quot;                          &quot;c_patients&quot;                     &quot;caption&quot;                        &quot;ch1&quot;                            &quot;ch2&quot;                           
+ [21] &quot;ch3&quot;                            &quot;ch4&quot;                            &quot;ch5&quot;                            &quot;ch6&quot;                            &quot;color_df&quot;                      
+ [26] &quot;common&quot;                         &quot;common_all&quot;                     &quot;common_mean&quot;                    &quot;common1_2&quot;                      &quot;comparison_ks_res&quot;             
+ [31] &quot;condition&quot;                      &quot;ctrl_sex_age&quot;                   &quot;CXCR4&quot;                          &quot;description&quot;                    &quot;df&quot;                            
+ [36] &quot;df_AOD_dataset&quot;                 &quot;df_female_rin3q&quot;                &quot;df_filtered&quot;                    &quot;df_grouped&quot;                     &quot;df_male_ctrl_cdr4&quot;             
+ [41] &quot;df_nas_diag_dataset&quot;            &quot;df_PMI_area_sex&quot;                &quot;df_RIN_dataset&quot;                 &quot;df_wider&quot;                       &quot;dunn_res&quot;                      
+ [46] &quot;dunn_stat_df&quot;                   &quot;expr&quot;                           &quot;expr_data&quot;                      &quot;expr_data_t&quot;                    &quot;expr_levels&quot;                   
+ [51] &quot;expr_mat_pat&quot;                   &quot;expr_values&quot;                    &quot;f_value&quot;                        &quot;features&quot;                       &quot;female_15_task1yes_chisq_res&quot;  
+ [56] &quot;female_15_task1yes_df&quot;          &quot;female_15_task1yes_expected&quot;    &quot;female_15_task1yes_max_cat&quot;     &quot;female_15_task1yes_mosaic&quot;      &quot;female_15_task1yes_or&quot;         
+ [61] &quot;female_15_task1yes_phi&quot;         &quot;female_15_task1yes_sample_size&quot; &quot;female_15_task1yes_table&quot;       &quot;female_t1_weight_bartlett&quot;      &quot;female_t1_weight_boxplot&quot;      
+ [66] &quot;female_t1_weight_df&quot;            &quot;female_t1_weight_max&quot;           &quot;female_t1_weight_shapiro&quot;       &quot;females_t1_task3_bartlett&quot;      &quot;females_t1_task3_boxplot&quot;      
+ [71] &quot;females_t1_task3_df&quot;            &quot;females_t1_task3_shapiro&quot;       &quot;females_t1_task3_shapiro_pos&quot;   &quot;full_name&quot;                      &quot;gene&quot;                          
+ [76] &quot;gene_2_keep&quot;                    &quot;gene_to_test&quot;                   &quot;gene1&quot;                          &quot;gene2&quot;                          &quot;genes&quot;                         
+ [81] &quot;grep_1&quot;                         &quot;grep_2&quot;                         &quot;grepl_1&quot;                        &quot;grepl_2&quot;                        &quot;gsub_all&quot;                      
+ [86] &quot;heights&quot;                        &quot;idx&quot;                            &quot;interaction_factor&quot;             &quot;is_odd&quot;                         &quot;is_outlier&quot;                    
+ [91] &quot;kruskal_res&quot;                    &quot;LCT&quot;                            &quot;LHX9&quot;                           &quot;male_3_task2yes_df&quot;             &quot;male_3_task2yes_expected&quot;      
+ [96] &quot;male_3_task2yes_fisher_phi&quot;     &quot;male_3_task2yes_fisher_res&quot;     &quot;male_3_task2yes_max_cat&quot;        &quot;male_3_task2yes_mosaic&quot;         &quot;male_3_task2yes_sample_size&quot;   
+[101] &quot;male_3_task2yes_table&quot;          &quot;male_3_task3_bartlett&quot;          &quot;male_3_task3_boxplot&quot;           &quot;male_3_task3_df&quot;                &quot;male_3_task3_max&quot;              
+[106] &quot;male_3_task3_shapiro&quot;           &quot;male_30_task3_boxplot&quot;          &quot;male_30_task3_boxplot_filt&quot;     &quot;male_30_task3_density&quot;          &quot;male_30_task3_density_filt&quot;    
+[111] &quot;male_30_task3_qq&quot;               &quot;male_30_task3_qq_filt&quot;          &quot;male_30_weight_boxplot&quot;         &quot;male_30_weight_boxplot_filt&quot;    &quot;male_30_weight_density&quot;        
+[116] &quot;male_30_weight_density_filt&quot;    &quot;male_30_weight_qq&quot;              &quot;male_30_weight_qq_filt&quot;         &quot;male_30_weight_task3&quot;           &quot;males_data&quot;                    
+[121] &quot;males_females_barplot&quot;          &quot;mann_res&quot;                       &quot;mean_col&quot;                       &quot;mean_res_better&quot;                &quot;mean_res_better_round&quot;         
+[126] &quot;mean_result_calc&quot;               &quot;mean_row&quot;                       &quot;mean_time&quot;                      &quot;mice1&quot;                          &quot;mice2&quot;                         
+[131] &quot;mice3&quot;                          &quot;mice4&quot;                          &quot;mito_genes&quot;                     &quot;ml_to_add&quot;                      &quot;mother_diabetes&quot;               
+[136] &quot;mt_mat&quot;                         &quot;my_col_names&quot;                   &quot;my_df&quot;                          &quot;my_info&quot;                        &quot;my_matrix&quot;                     
+[141] &quot;my_matrix2&quot;                     &quot;my_max&quot;                         &quot;my_mean&quot;                        &quot;my_min&quot;                         &quot;my_row_names&quot;                  
+[146] &quot;my_sum&quot;                         &quot;my_vector&quot;                      &quot;mychar_d&quot;                       &quot;mychar_s&quot;                       &quot;mynumber&quot;                      
+[151] &quot;mystring&quot;                       &quot;myvar&quot;                          &quot;myvar_power&quot;                    &quot;n_15&quot;                           &quot;n_3&quot;                           
+[156] &quot;n_30&quot;                           &quot;n_7&quot;                            &quot;n_out_df&quot;                       &quot;n_rep&quot;                          &quot;n_responders&quot;                  
+[161] &quot;n_t1&quot;                           &quot;n_untreated&quot;                    &quot;nationality&quot;                    &quot;no_seed1&quot;                       &quot;no_seed2&quot;                      
+[166] &quot;non_norm_sample&quot;                &quot;non_norm_sample_density&quot;        &quot;non_norm_sample_ks_res&quot;         &quot;non_norm_sample_shapiro_res&quot;    &quot;norm_sample&quot;                   
+[171] &quot;norm_sample_density&quot;            &quot;norm_sample_ks_res&quot;             &quot;norm_sample_shapiro_res&quot;        &quot;normality_df&quot;                   &quot;not_center&quot;                    
+[176] &quot;num1&quot;                           &quot;num2&quot;                           &quot;only_1&quot;                         &quot;only_2&quot;                         &quot;p_responders&quot;                  
+[181] &quot;pairwise_res&quot;                   &quot;patien1_sub&quot;                    &quot;patien2_sub&quot;                    &quot;patien3_sub&quot;                    &quot;patient_age&quot;                   
+[186] &quot;patient_state&quot;                  &quot;patient_weight&quot;                 &quot;patient1&quot;                       &quot;patient2&quot;                       &quot;patient3&quot;                      
+[191] &quot;pattern_to_check_1&quot;             &quot;pattern_to_check_2&quot;             &quot;pearson_res&quot;                    &quot;perc_mito&quot;                      &quot;perc_no_mito&quot;                  
+[196] &quot;pmi_thresh&quot;                     &quot;proteins&quot;                       &quot;proteins1&quot;                      &quot;proteins2&quot;                      &quot;PTPN7&quot;                         
+[201] &quot;pvalue&quot;                         &quot;pvalue_to_plot&quot;                 &quot;quantiles&quot;                      &quot;r_numb&quot;                         &quot;r_patients&quot;                    
+[206] &quot;read_sum_gene&quot;                  &quot;read_sum_pat&quot;                   &quot;read_sum_pat_filt&quot;              &quot;rep1&quot;                           &quot;rep2&quot;                          
+[211] &quot;rep3&quot;                           &quot;response&quot;                       &quot;rin_area_boxplot&quot;               &quot;rin_area_boxplot_edit&quot;          &quot;rin_area_boxplot_manual&quot;       
+[216] &quot;rin_area_boxplots_arr&quot;          &quot;sample&quot;                         &quot;sample0&quot;                        &quot;sample1&quot;                        &quot;sample1_fr&quot;                    
+[221] &quot;sample2&quot;                        &quot;sample2_fr&quot;                     &quot;sample3&quot;                        &quot;sample3_fr&quot;                     &quot;sd_calc&quot;                       
+[226] &quot;sd_calc_ceil&quot;                   &quot;sd_calc_floor&quot;                  &quot;sd_calc_round&quot;                  &quot;sd_time&quot;                        &quot;sex&quot;                           
+[231] &quot;sex_bar_arr&quot;                    &quot;sex_barplot&quot;                    &quot;sex_df&quot;                         &quot;sliced_odd&quot;                     &quot;sub_only&quot;                      
+[236] &quot;sum_aa&quot;                         &quot;sum_tbl_sex&quot;                    &quot;sum_time&quot;                       &quot;sum_weights&quot;                    &quot;t_test_res&quot;                    
+[241] &quot;t_value&quot;                        &quot;t1_3_weight_bartlett&quot;           &quot;t1_3_weight_boxplot&quot;            &quot;t1_3_weight_df&quot;                 &quot;t1_3_weight_max&quot;               
+[246] &quot;t1_3_weight_shapiro&quot;            &quot;Task3_bartlett_result&quot;          &quot;Task3_max_label&quot;                &quot;tbl_sex&quot;                        &quot;tbl_sex_diagnosis&quot;             
+[251] &quot;tbl_sex_diagnosis_colsum&quot;       &quot;tbl_sex_diagnosis_rowsum&quot;       &quot;time&quot;                           &quot;to_extract&quot;                     &quot;to_print&quot;                      
+[256] &quot;to_remove&quot;                      &quot;total_mito&quot;                     &quot;total_no_mito&quot;                  &quot;treatment&quot;                      &quot;tukey_res&quot;                     
+[261] &quot;untreated_chisq_res&quot;            &quot;untreated_cramer&quot;               &quot;untreated_df&quot;                   &quot;untreated_max_cat&quot;              &quot;untreated_mosaic&quot;              
+[266] &quot;untreated_sample_size&quot;          &quot;untreated_table&quot;                &quot;untreated_weight_bartlett&quot;      &quot;untreated_weight_boxplot&quot;       &quot;untreated_weight_df&quot;           
+[271] &quot;untreated_weight_lineplot&quot;      &quot;untreated_weight_shapiro&quot;       &quot;untreated_weight_shapiro_pos&quot;   &quot;untreated_weight_stats_pos&quot;     &quot;upregulated_1&quot;                 
+[276] &quot;upregulated_2&quot;                  &quot;var_calc&quot;                       &quot;var1&quot;                           &quot;var2&quot;                           &quot;var3&quot;                          
+[281] &quot;weight&quot;                         &quot;weight_bartlett_result&quot;         &quot;weight_c&quot;                       &quot;weight_data&quot;                    &quot;weight_max_label&quot;              
+[286] &quot;weight_n&quot;                       &quot;weight_sup_threshold&quot;           &quot;welch_res&quot;                      &quot;with_seed1&quot;                     &quot;with_seed2&quot;                    </code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="variables.html#cb22-1" tabindex="-1"></a><span class="co"># delete just-created variable</span></span>
+<span id="cb22-2"><a href="variables.html#cb22-2" tabindex="-1"></a><span class="fu">rm</span>(to_remove)</span>
+<span id="cb22-3"><a href="variables.html#cb22-3" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="variables.html#cb22-4" tabindex="-1"></a><span class="co"># list all variables</span></span>
+<span id="cb22-5"><a href="variables.html#cb22-5" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                         &quot;abbreviations&quot;                  &quot;age&quot;                            &quot;age_inf_threshold&quot;              &quot;age_sup_threshold&quot;             
+  [6] &quot;all_plots&quot;                      &quot;all_string&quot;                     &quot;aod_pmi&quot;                        &quot;aod_pmi_all&quot;                    &quot;aod_pmi_arr&quot;                   
+ [11] &quot;aod_pmi_sex_rin_aes&quot;            &quot;aod_thresh&quot;                     &quot;aov_res&quot;                        &quot;area_color_vector&quot;              &quot;area_df&quot;                       
+ [16] &quot;areas&quot;                          &quot;c_patients&quot;                     &quot;caption&quot;                        &quot;ch1&quot;                            &quot;ch2&quot;                           
+ [21] &quot;ch3&quot;                            &quot;ch4&quot;                            &quot;ch5&quot;                            &quot;ch6&quot;                            &quot;color_df&quot;                      
+ [26] &quot;common&quot;                         &quot;common_all&quot;                     &quot;common_mean&quot;                    &quot;common1_2&quot;                      &quot;comparison_ks_res&quot;             
+ [31] &quot;condition&quot;                      &quot;ctrl_sex_age&quot;                   &quot;CXCR4&quot;                          &quot;description&quot;                    &quot;df&quot;                            
+ [36] &quot;df_AOD_dataset&quot;                 &quot;df_female_rin3q&quot;                &quot;df_filtered&quot;                    &quot;df_grouped&quot;                     &quot;df_male_ctrl_cdr4&quot;             
+ [41] &quot;df_nas_diag_dataset&quot;            &quot;df_PMI_area_sex&quot;                &quot;df_RIN_dataset&quot;                 &quot;df_wider&quot;                       &quot;dunn_res&quot;                      
+ [46] &quot;dunn_stat_df&quot;                   &quot;expr&quot;                           &quot;expr_data&quot;                      &quot;expr_data_t&quot;                    &quot;expr_levels&quot;                   
+ [51] &quot;expr_mat_pat&quot;                   &quot;expr_values&quot;                    &quot;f_value&quot;                        &quot;features&quot;                       &quot;female_15_task1yes_chisq_res&quot;  
+ [56] &quot;female_15_task1yes_df&quot;          &quot;female_15_task1yes_expected&quot;    &quot;female_15_task1yes_max_cat&quot;     &quot;female_15_task1yes_mosaic&quot;      &quot;female_15_task1yes_or&quot;         
+ [61] &quot;female_15_task1yes_phi&quot;         &quot;female_15_task1yes_sample_size&quot; &quot;female_15_task1yes_table&quot;       &quot;female_t1_weight_bartlett&quot;      &quot;female_t1_weight_boxplot&quot;      
+ [66] &quot;female_t1_weight_df&quot;            &quot;female_t1_weight_max&quot;           &quot;female_t1_weight_shapiro&quot;       &quot;females_t1_task3_bartlett&quot;      &quot;females_t1_task3_boxplot&quot;      
+ [71] &quot;females_t1_task3_df&quot;            &quot;females_t1_task3_shapiro&quot;       &quot;females_t1_task3_shapiro_pos&quot;   &quot;full_name&quot;                      &quot;gene&quot;                          
+ [76] &quot;gene_2_keep&quot;                    &quot;gene_to_test&quot;                   &quot;gene1&quot;                          &quot;gene2&quot;                          &quot;genes&quot;                         
+ [81] &quot;grep_1&quot;                         &quot;grep_2&quot;                         &quot;grepl_1&quot;                        &quot;grepl_2&quot;                        &quot;gsub_all&quot;                      
+ [86] &quot;heights&quot;                        &quot;idx&quot;                            &quot;interaction_factor&quot;             &quot;is_odd&quot;                         &quot;is_outlier&quot;                    
+ [91] &quot;kruskal_res&quot;                    &quot;LCT&quot;                            &quot;LHX9&quot;                           &quot;male_3_task2yes_df&quot;             &quot;male_3_task2yes_expected&quot;      
+ [96] &quot;male_3_task2yes_fisher_phi&quot;     &quot;male_3_task2yes_fisher_res&quot;     &quot;male_3_task2yes_max_cat&quot;        &quot;male_3_task2yes_mosaic&quot;         &quot;male_3_task2yes_sample_size&quot;   
+[101] &quot;male_3_task2yes_table&quot;          &quot;male_3_task3_bartlett&quot;          &quot;male_3_task3_boxplot&quot;           &quot;male_3_task3_df&quot;                &quot;male_3_task3_max&quot;              
+[106] &quot;male_3_task3_shapiro&quot;           &quot;male_30_task3_boxplot&quot;          &quot;male_30_task3_boxplot_filt&quot;     &quot;male_30_task3_density&quot;          &quot;male_30_task3_density_filt&quot;    
+[111] &quot;male_30_task3_qq&quot;               &quot;male_30_task3_qq_filt&quot;          &quot;male_30_weight_boxplot&quot;         &quot;male_30_weight_boxplot_filt&quot;    &quot;male_30_weight_density&quot;        
+[116] &quot;male_30_weight_density_filt&quot;    &quot;male_30_weight_qq&quot;              &quot;male_30_weight_qq_filt&quot;         &quot;male_30_weight_task3&quot;           &quot;males_data&quot;                    
+[121] &quot;males_females_barplot&quot;          &quot;mann_res&quot;                       &quot;mean_col&quot;                       &quot;mean_res_better&quot;                &quot;mean_res_better_round&quot;         
+[126] &quot;mean_result_calc&quot;               &quot;mean_row&quot;                       &quot;mean_time&quot;                      &quot;mice1&quot;                          &quot;mice2&quot;                         
+[131] &quot;mice3&quot;                          &quot;mice4&quot;                          &quot;mito_genes&quot;                     &quot;ml_to_add&quot;                      &quot;mother_diabetes&quot;               
+[136] &quot;mt_mat&quot;                         &quot;my_col_names&quot;                   &quot;my_df&quot;                          &quot;my_info&quot;                        &quot;my_matrix&quot;                     
+[141] &quot;my_matrix2&quot;                     &quot;my_max&quot;                         &quot;my_mean&quot;                        &quot;my_min&quot;                         &quot;my_row_names&quot;                  
+[146] &quot;my_sum&quot;                         &quot;my_vector&quot;                      &quot;mychar_d&quot;                       &quot;mychar_s&quot;                       &quot;mynumber&quot;                      
+[151] &quot;mystring&quot;                       &quot;myvar&quot;                          &quot;myvar_power&quot;                    &quot;n_15&quot;                           &quot;n_3&quot;                           
+[156] &quot;n_30&quot;                           &quot;n_7&quot;                            &quot;n_out_df&quot;                       &quot;n_rep&quot;                          &quot;n_responders&quot;                  
+[161] &quot;n_t1&quot;                           &quot;n_untreated&quot;                    &quot;nationality&quot;                    &quot;no_seed1&quot;                       &quot;no_seed2&quot;                      
+[166] &quot;non_norm_sample&quot;                &quot;non_norm_sample_density&quot;        &quot;non_norm_sample_ks_res&quot;         &quot;non_norm_sample_shapiro_res&quot;    &quot;norm_sample&quot;                   
+[171] &quot;norm_sample_density&quot;            &quot;norm_sample_ks_res&quot;             &quot;norm_sample_shapiro_res&quot;        &quot;normality_df&quot;                   &quot;not_center&quot;                    
+[176] &quot;num1&quot;                           &quot;num2&quot;                           &quot;only_1&quot;                         &quot;only_2&quot;                         &quot;p_responders&quot;                  
+[181] &quot;pairwise_res&quot;                   &quot;patien1_sub&quot;                    &quot;patien2_sub&quot;                    &quot;patien3_sub&quot;                    &quot;patient_age&quot;                   
+[186] &quot;patient_state&quot;                  &quot;patient_weight&quot;                 &quot;patient1&quot;                       &quot;patient2&quot;                       &quot;patient3&quot;                      
+[191] &quot;pattern_to_check_1&quot;             &quot;pattern_to_check_2&quot;             &quot;pearson_res&quot;                    &quot;perc_mito&quot;                      &quot;perc_no_mito&quot;                  
+[196] &quot;pmi_thresh&quot;                     &quot;proteins&quot;                       &quot;proteins1&quot;                      &quot;proteins2&quot;                      &quot;PTPN7&quot;                         
+[201] &quot;pvalue&quot;                         &quot;pvalue_to_plot&quot;                 &quot;quantiles&quot;                      &quot;r_numb&quot;                         &quot;r_patients&quot;                    
+[206] &quot;read_sum_gene&quot;                  &quot;read_sum_pat&quot;                   &quot;read_sum_pat_filt&quot;              &quot;rep1&quot;                           &quot;rep2&quot;                          
+[211] &quot;rep3&quot;                           &quot;response&quot;                       &quot;rin_area_boxplot&quot;               &quot;rin_area_boxplot_edit&quot;          &quot;rin_area_boxplot_manual&quot;       
+[216] &quot;rin_area_boxplots_arr&quot;          &quot;sample&quot;                         &quot;sample0&quot;                        &quot;sample1&quot;                        &quot;sample1_fr&quot;                    
+[221] &quot;sample2&quot;                        &quot;sample2_fr&quot;                     &quot;sample3&quot;                        &quot;sample3_fr&quot;                     &quot;sd_calc&quot;                       
+[226] &quot;sd_calc_ceil&quot;                   &quot;sd_calc_floor&quot;                  &quot;sd_calc_round&quot;                  &quot;sd_time&quot;                        &quot;sex&quot;                           
+[231] &quot;sex_bar_arr&quot;                    &quot;sex_barplot&quot;                    &quot;sex_df&quot;                         &quot;sliced_odd&quot;                     &quot;sub_only&quot;                      
+[236] &quot;sum_aa&quot;                         &quot;sum_tbl_sex&quot;                    &quot;sum_time&quot;                       &quot;sum_weights&quot;                    &quot;t_test_res&quot;                    
+[241] &quot;t_value&quot;                        &quot;t1_3_weight_bartlett&quot;           &quot;t1_3_weight_boxplot&quot;            &quot;t1_3_weight_df&quot;                 &quot;t1_3_weight_max&quot;               
+[246] &quot;t1_3_weight_shapiro&quot;            &quot;Task3_bartlett_result&quot;          &quot;Task3_max_label&quot;                &quot;tbl_sex&quot;                        &quot;tbl_sex_diagnosis&quot;             
+[251] &quot;tbl_sex_diagnosis_colsum&quot;       &quot;tbl_sex_diagnosis_rowsum&quot;       &quot;time&quot;                           &quot;to_extract&quot;                     &quot;to_print&quot;                      
+[256] &quot;total_mito&quot;                     &quot;total_no_mito&quot;                  &quot;treatment&quot;                      &quot;tukey_res&quot;                      &quot;untreated_chisq_res&quot;           
+[261] &quot;untreated_cramer&quot;               &quot;untreated_df&quot;                   &quot;untreated_max_cat&quot;              &quot;untreated_mosaic&quot;               &quot;untreated_sample_size&quot;         
+[266] &quot;untreated_table&quot;                &quot;untreated_weight_bartlett&quot;      &quot;untreated_weight_boxplot&quot;       &quot;untreated_weight_df&quot;            &quot;untreated_weight_lineplot&quot;     
+[271] &quot;untreated_weight_shapiro&quot;       &quot;untreated_weight_shapiro_pos&quot;   &quot;untreated_weight_stats_pos&quot;     &quot;upregulated_1&quot;                  &quot;upregulated_2&quot;                 
+[276] &quot;var_calc&quot;                       &quot;var1&quot;                           &quot;var2&quot;                           &quot;var3&quot;                           &quot;weight&quot;                        
+[281] &quot;weight_bartlett_result&quot;         &quot;weight_c&quot;                       &quot;weight_data&quot;                    &quot;weight_max_label&quot;               &quot;weight_n&quot;                      
+[286] &quot;weight_sup_threshold&quot;           &quot;welch_res&quot;                      &quot;with_seed1&quot;                     &quot;with_seed2&quot;                    </code></pre>
 <p>As we see, in the second case the <code>to_remove</code> variable has been removed.
 <br>
 What if I want to remove multiple variables? Let’s put multiple variable names inside the <code>rm()</code> function separated by commas:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="variables.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create various variables</span></span>
-<span id="cb24-2"><a href="variables.html#cb24-2" aria-hidden="true" tabindex="-1"></a>to_remove <span class="ot">&lt;-</span> <span class="dv">1213</span></span>
-<span id="cb24-3"><a href="variables.html#cb24-3" aria-hidden="true" tabindex="-1"></a>to_remove2 <span class="ot">&lt;-</span> <span class="dv">685</span></span>
-<span id="cb24-4"><a href="variables.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="variables.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
-<span id="cb24-6"><a href="variables.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;to_remove&quot;   &quot;to_remove2&quot;  &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="variables.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete just-created variables</span></span>
-<span id="cb26-2"><a href="variables.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(to_remove, to_remove2)</span>
-<span id="cb26-3"><a href="variables.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="variables.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
-<span id="cb26-5"><a href="variables.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="variables.html#cb24-1" tabindex="-1"></a><span class="co"># create various variables</span></span>
+<span id="cb24-2"><a href="variables.html#cb24-2" tabindex="-1"></a>to_remove <span class="ot">&lt;-</span> <span class="dv">1213</span></span>
+<span id="cb24-3"><a href="variables.html#cb24-3" tabindex="-1"></a>to_remove2 <span class="ot">&lt;-</span> <span class="dv">685</span></span>
+<span id="cb24-4"><a href="variables.html#cb24-4" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="variables.html#cb24-5" tabindex="-1"></a><span class="co"># list all variables</span></span>
+<span id="cb24-6"><a href="variables.html#cb24-6" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                         &quot;abbreviations&quot;                  &quot;age&quot;                            &quot;age_inf_threshold&quot;              &quot;age_sup_threshold&quot;             
+  [6] &quot;all_plots&quot;                      &quot;all_string&quot;                     &quot;aod_pmi&quot;                        &quot;aod_pmi_all&quot;                    &quot;aod_pmi_arr&quot;                   
+ [11] &quot;aod_pmi_sex_rin_aes&quot;            &quot;aod_thresh&quot;                     &quot;aov_res&quot;                        &quot;area_color_vector&quot;              &quot;area_df&quot;                       
+ [16] &quot;areas&quot;                          &quot;c_patients&quot;                     &quot;caption&quot;                        &quot;ch1&quot;                            &quot;ch2&quot;                           
+ [21] &quot;ch3&quot;                            &quot;ch4&quot;                            &quot;ch5&quot;                            &quot;ch6&quot;                            &quot;color_df&quot;                      
+ [26] &quot;common&quot;                         &quot;common_all&quot;                     &quot;common_mean&quot;                    &quot;common1_2&quot;                      &quot;comparison_ks_res&quot;             
+ [31] &quot;condition&quot;                      &quot;ctrl_sex_age&quot;                   &quot;CXCR4&quot;                          &quot;description&quot;                    &quot;df&quot;                            
+ [36] &quot;df_AOD_dataset&quot;                 &quot;df_female_rin3q&quot;                &quot;df_filtered&quot;                    &quot;df_grouped&quot;                     &quot;df_male_ctrl_cdr4&quot;             
+ [41] &quot;df_nas_diag_dataset&quot;            &quot;df_PMI_area_sex&quot;                &quot;df_RIN_dataset&quot;                 &quot;df_wider&quot;                       &quot;dunn_res&quot;                      
+ [46] &quot;dunn_stat_df&quot;                   &quot;expr&quot;                           &quot;expr_data&quot;                      &quot;expr_data_t&quot;                    &quot;expr_levels&quot;                   
+ [51] &quot;expr_mat_pat&quot;                   &quot;expr_values&quot;                    &quot;f_value&quot;                        &quot;features&quot;                       &quot;female_15_task1yes_chisq_res&quot;  
+ [56] &quot;female_15_task1yes_df&quot;          &quot;female_15_task1yes_expected&quot;    &quot;female_15_task1yes_max_cat&quot;     &quot;female_15_task1yes_mosaic&quot;      &quot;female_15_task1yes_or&quot;         
+ [61] &quot;female_15_task1yes_phi&quot;         &quot;female_15_task1yes_sample_size&quot; &quot;female_15_task1yes_table&quot;       &quot;female_t1_weight_bartlett&quot;      &quot;female_t1_weight_boxplot&quot;      
+ [66] &quot;female_t1_weight_df&quot;            &quot;female_t1_weight_max&quot;           &quot;female_t1_weight_shapiro&quot;       &quot;females_t1_task3_bartlett&quot;      &quot;females_t1_task3_boxplot&quot;      
+ [71] &quot;females_t1_task3_df&quot;            &quot;females_t1_task3_shapiro&quot;       &quot;females_t1_task3_shapiro_pos&quot;   &quot;full_name&quot;                      &quot;gene&quot;                          
+ [76] &quot;gene_2_keep&quot;                    &quot;gene_to_test&quot;                   &quot;gene1&quot;                          &quot;gene2&quot;                          &quot;genes&quot;                         
+ [81] &quot;grep_1&quot;                         &quot;grep_2&quot;                         &quot;grepl_1&quot;                        &quot;grepl_2&quot;                        &quot;gsub_all&quot;                      
+ [86] &quot;heights&quot;                        &quot;idx&quot;                            &quot;interaction_factor&quot;             &quot;is_odd&quot;                         &quot;is_outlier&quot;                    
+ [91] &quot;kruskal_res&quot;                    &quot;LCT&quot;                            &quot;LHX9&quot;                           &quot;male_3_task2yes_df&quot;             &quot;male_3_task2yes_expected&quot;      
+ [96] &quot;male_3_task2yes_fisher_phi&quot;     &quot;male_3_task2yes_fisher_res&quot;     &quot;male_3_task2yes_max_cat&quot;        &quot;male_3_task2yes_mosaic&quot;         &quot;male_3_task2yes_sample_size&quot;   
+[101] &quot;male_3_task2yes_table&quot;          &quot;male_3_task3_bartlett&quot;          &quot;male_3_task3_boxplot&quot;           &quot;male_3_task3_df&quot;                &quot;male_3_task3_max&quot;              
+[106] &quot;male_3_task3_shapiro&quot;           &quot;male_30_task3_boxplot&quot;          &quot;male_30_task3_boxplot_filt&quot;     &quot;male_30_task3_density&quot;          &quot;male_30_task3_density_filt&quot;    
+[111] &quot;male_30_task3_qq&quot;               &quot;male_30_task3_qq_filt&quot;          &quot;male_30_weight_boxplot&quot;         &quot;male_30_weight_boxplot_filt&quot;    &quot;male_30_weight_density&quot;        
+[116] &quot;male_30_weight_density_filt&quot;    &quot;male_30_weight_qq&quot;              &quot;male_30_weight_qq_filt&quot;         &quot;male_30_weight_task3&quot;           &quot;males_data&quot;                    
+[121] &quot;males_females_barplot&quot;          &quot;mann_res&quot;                       &quot;mean_col&quot;                       &quot;mean_res_better&quot;                &quot;mean_res_better_round&quot;         
+[126] &quot;mean_result_calc&quot;               &quot;mean_row&quot;                       &quot;mean_time&quot;                      &quot;mice1&quot;                          &quot;mice2&quot;                         
+[131] &quot;mice3&quot;                          &quot;mice4&quot;                          &quot;mito_genes&quot;                     &quot;ml_to_add&quot;                      &quot;mother_diabetes&quot;               
+[136] &quot;mt_mat&quot;                         &quot;my_col_names&quot;                   &quot;my_df&quot;                          &quot;my_info&quot;                        &quot;my_matrix&quot;                     
+[141] &quot;my_matrix2&quot;                     &quot;my_max&quot;                         &quot;my_mean&quot;                        &quot;my_min&quot;                         &quot;my_row_names&quot;                  
+[146] &quot;my_sum&quot;                         &quot;my_vector&quot;                      &quot;mychar_d&quot;                       &quot;mychar_s&quot;                       &quot;mynumber&quot;                      
+[151] &quot;mystring&quot;                       &quot;myvar&quot;                          &quot;myvar_power&quot;                    &quot;n_15&quot;                           &quot;n_3&quot;                           
+[156] &quot;n_30&quot;                           &quot;n_7&quot;                            &quot;n_out_df&quot;                       &quot;n_rep&quot;                          &quot;n_responders&quot;                  
+[161] &quot;n_t1&quot;                           &quot;n_untreated&quot;                    &quot;nationality&quot;                    &quot;no_seed1&quot;                       &quot;no_seed2&quot;                      
+[166] &quot;non_norm_sample&quot;                &quot;non_norm_sample_density&quot;        &quot;non_norm_sample_ks_res&quot;         &quot;non_norm_sample_shapiro_res&quot;    &quot;norm_sample&quot;                   
+[171] &quot;norm_sample_density&quot;            &quot;norm_sample_ks_res&quot;             &quot;norm_sample_shapiro_res&quot;        &quot;normality_df&quot;                   &quot;not_center&quot;                    
+[176] &quot;num1&quot;                           &quot;num2&quot;                           &quot;only_1&quot;                         &quot;only_2&quot;                         &quot;p_responders&quot;                  
+[181] &quot;pairwise_res&quot;                   &quot;patien1_sub&quot;                    &quot;patien2_sub&quot;                    &quot;patien3_sub&quot;                    &quot;patient_age&quot;                   
+[186] &quot;patient_state&quot;                  &quot;patient_weight&quot;                 &quot;patient1&quot;                       &quot;patient2&quot;                       &quot;patient3&quot;                      
+[191] &quot;pattern_to_check_1&quot;             &quot;pattern_to_check_2&quot;             &quot;pearson_res&quot;                    &quot;perc_mito&quot;                      &quot;perc_no_mito&quot;                  
+[196] &quot;pmi_thresh&quot;                     &quot;proteins&quot;                       &quot;proteins1&quot;                      &quot;proteins2&quot;                      &quot;PTPN7&quot;                         
+[201] &quot;pvalue&quot;                         &quot;pvalue_to_plot&quot;                 &quot;quantiles&quot;                      &quot;r_numb&quot;                         &quot;r_patients&quot;                    
+[206] &quot;read_sum_gene&quot;                  &quot;read_sum_pat&quot;                   &quot;read_sum_pat_filt&quot;              &quot;rep1&quot;                           &quot;rep2&quot;                          
+[211] &quot;rep3&quot;                           &quot;response&quot;                       &quot;rin_area_boxplot&quot;               &quot;rin_area_boxplot_edit&quot;          &quot;rin_area_boxplot_manual&quot;       
+[216] &quot;rin_area_boxplots_arr&quot;          &quot;sample&quot;                         &quot;sample0&quot;                        &quot;sample1&quot;                        &quot;sample1_fr&quot;                    
+[221] &quot;sample2&quot;                        &quot;sample2_fr&quot;                     &quot;sample3&quot;                        &quot;sample3_fr&quot;                     &quot;sd_calc&quot;                       
+[226] &quot;sd_calc_ceil&quot;                   &quot;sd_calc_floor&quot;                  &quot;sd_calc_round&quot;                  &quot;sd_time&quot;                        &quot;sex&quot;                           
+[231] &quot;sex_bar_arr&quot;                    &quot;sex_barplot&quot;                    &quot;sex_df&quot;                         &quot;sliced_odd&quot;                     &quot;sub_only&quot;                      
+[236] &quot;sum_aa&quot;                         &quot;sum_tbl_sex&quot;                    &quot;sum_time&quot;                       &quot;sum_weights&quot;                    &quot;t_test_res&quot;                    
+[241] &quot;t_value&quot;                        &quot;t1_3_weight_bartlett&quot;           &quot;t1_3_weight_boxplot&quot;            &quot;t1_3_weight_df&quot;                 &quot;t1_3_weight_max&quot;               
+[246] &quot;t1_3_weight_shapiro&quot;            &quot;Task3_bartlett_result&quot;          &quot;Task3_max_label&quot;                &quot;tbl_sex&quot;                        &quot;tbl_sex_diagnosis&quot;             
+[251] &quot;tbl_sex_diagnosis_colsum&quot;       &quot;tbl_sex_diagnosis_rowsum&quot;       &quot;time&quot;                           &quot;to_extract&quot;                     &quot;to_print&quot;                      
+[256] &quot;to_remove&quot;                      &quot;to_remove2&quot;                     &quot;total_mito&quot;                     &quot;total_no_mito&quot;                  &quot;treatment&quot;                     
+[261] &quot;tukey_res&quot;                      &quot;untreated_chisq_res&quot;            &quot;untreated_cramer&quot;               &quot;untreated_df&quot;                   &quot;untreated_max_cat&quot;             
+[266] &quot;untreated_mosaic&quot;               &quot;untreated_sample_size&quot;          &quot;untreated_table&quot;                &quot;untreated_weight_bartlett&quot;      &quot;untreated_weight_boxplot&quot;      
+[271] &quot;untreated_weight_df&quot;            &quot;untreated_weight_lineplot&quot;      &quot;untreated_weight_shapiro&quot;       &quot;untreated_weight_shapiro_pos&quot;   &quot;untreated_weight_stats_pos&quot;    
+[276] &quot;upregulated_1&quot;                  &quot;upregulated_2&quot;                  &quot;var_calc&quot;                       &quot;var1&quot;                           &quot;var2&quot;                          
+[281] &quot;var3&quot;                           &quot;weight&quot;                         &quot;weight_bartlett_result&quot;         &quot;weight_c&quot;                       &quot;weight_data&quot;                   
+[286] &quot;weight_max_label&quot;               &quot;weight_n&quot;                       &quot;weight_sup_threshold&quot;           &quot;welch_res&quot;                      &quot;with_seed1&quot;                    
+[291] &quot;with_seed2&quot;                    </code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="variables.html#cb26-1" tabindex="-1"></a><span class="co"># delete just-created variables</span></span>
+<span id="cb26-2"><a href="variables.html#cb26-2" tabindex="-1"></a><span class="fu">rm</span>(to_remove, to_remove2)</span>
+<span id="cb26-3"><a href="variables.html#cb26-3" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="variables.html#cb26-4" tabindex="-1"></a><span class="co"># list all variables</span></span>
+<span id="cb26-5"><a href="variables.html#cb26-5" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                         &quot;abbreviations&quot;                  &quot;age&quot;                            &quot;age_inf_threshold&quot;              &quot;age_sup_threshold&quot;             
+  [6] &quot;all_plots&quot;                      &quot;all_string&quot;                     &quot;aod_pmi&quot;                        &quot;aod_pmi_all&quot;                    &quot;aod_pmi_arr&quot;                   
+ [11] &quot;aod_pmi_sex_rin_aes&quot;            &quot;aod_thresh&quot;                     &quot;aov_res&quot;                        &quot;area_color_vector&quot;              &quot;area_df&quot;                       
+ [16] &quot;areas&quot;                          &quot;c_patients&quot;                     &quot;caption&quot;                        &quot;ch1&quot;                            &quot;ch2&quot;                           
+ [21] &quot;ch3&quot;                            &quot;ch4&quot;                            &quot;ch5&quot;                            &quot;ch6&quot;                            &quot;color_df&quot;                      
+ [26] &quot;common&quot;                         &quot;common_all&quot;                     &quot;common_mean&quot;                    &quot;common1_2&quot;                      &quot;comparison_ks_res&quot;             
+ [31] &quot;condition&quot;                      &quot;ctrl_sex_age&quot;                   &quot;CXCR4&quot;                          &quot;description&quot;                    &quot;df&quot;                            
+ [36] &quot;df_AOD_dataset&quot;                 &quot;df_female_rin3q&quot;                &quot;df_filtered&quot;                    &quot;df_grouped&quot;                     &quot;df_male_ctrl_cdr4&quot;             
+ [41] &quot;df_nas_diag_dataset&quot;            &quot;df_PMI_area_sex&quot;                &quot;df_RIN_dataset&quot;                 &quot;df_wider&quot;                       &quot;dunn_res&quot;                      
+ [46] &quot;dunn_stat_df&quot;                   &quot;expr&quot;                           &quot;expr_data&quot;                      &quot;expr_data_t&quot;                    &quot;expr_levels&quot;                   
+ [51] &quot;expr_mat_pat&quot;                   &quot;expr_values&quot;                    &quot;f_value&quot;                        &quot;features&quot;                       &quot;female_15_task1yes_chisq_res&quot;  
+ [56] &quot;female_15_task1yes_df&quot;          &quot;female_15_task1yes_expected&quot;    &quot;female_15_task1yes_max_cat&quot;     &quot;female_15_task1yes_mosaic&quot;      &quot;female_15_task1yes_or&quot;         
+ [61] &quot;female_15_task1yes_phi&quot;         &quot;female_15_task1yes_sample_size&quot; &quot;female_15_task1yes_table&quot;       &quot;female_t1_weight_bartlett&quot;      &quot;female_t1_weight_boxplot&quot;      
+ [66] &quot;female_t1_weight_df&quot;            &quot;female_t1_weight_max&quot;           &quot;female_t1_weight_shapiro&quot;       &quot;females_t1_task3_bartlett&quot;      &quot;females_t1_task3_boxplot&quot;      
+ [71] &quot;females_t1_task3_df&quot;            &quot;females_t1_task3_shapiro&quot;       &quot;females_t1_task3_shapiro_pos&quot;   &quot;full_name&quot;                      &quot;gene&quot;                          
+ [76] &quot;gene_2_keep&quot;                    &quot;gene_to_test&quot;                   &quot;gene1&quot;                          &quot;gene2&quot;                          &quot;genes&quot;                         
+ [81] &quot;grep_1&quot;                         &quot;grep_2&quot;                         &quot;grepl_1&quot;                        &quot;grepl_2&quot;                        &quot;gsub_all&quot;                      
+ [86] &quot;heights&quot;                        &quot;idx&quot;                            &quot;interaction_factor&quot;             &quot;is_odd&quot;                         &quot;is_outlier&quot;                    
+ [91] &quot;kruskal_res&quot;                    &quot;LCT&quot;                            &quot;LHX9&quot;                           &quot;male_3_task2yes_df&quot;             &quot;male_3_task2yes_expected&quot;      
+ [96] &quot;male_3_task2yes_fisher_phi&quot;     &quot;male_3_task2yes_fisher_res&quot;     &quot;male_3_task2yes_max_cat&quot;        &quot;male_3_task2yes_mosaic&quot;         &quot;male_3_task2yes_sample_size&quot;   
+[101] &quot;male_3_task2yes_table&quot;          &quot;male_3_task3_bartlett&quot;          &quot;male_3_task3_boxplot&quot;           &quot;male_3_task3_df&quot;                &quot;male_3_task3_max&quot;              
+[106] &quot;male_3_task3_shapiro&quot;           &quot;male_30_task3_boxplot&quot;          &quot;male_30_task3_boxplot_filt&quot;     &quot;male_30_task3_density&quot;          &quot;male_30_task3_density_filt&quot;    
+[111] &quot;male_30_task3_qq&quot;               &quot;male_30_task3_qq_filt&quot;          &quot;male_30_weight_boxplot&quot;         &quot;male_30_weight_boxplot_filt&quot;    &quot;male_30_weight_density&quot;        
+[116] &quot;male_30_weight_density_filt&quot;    &quot;male_30_weight_qq&quot;              &quot;male_30_weight_qq_filt&quot;         &quot;male_30_weight_task3&quot;           &quot;males_data&quot;                    
+[121] &quot;males_females_barplot&quot;          &quot;mann_res&quot;                       &quot;mean_col&quot;                       &quot;mean_res_better&quot;                &quot;mean_res_better_round&quot;         
+[126] &quot;mean_result_calc&quot;               &quot;mean_row&quot;                       &quot;mean_time&quot;                      &quot;mice1&quot;                          &quot;mice2&quot;                         
+[131] &quot;mice3&quot;                          &quot;mice4&quot;                          &quot;mito_genes&quot;                     &quot;ml_to_add&quot;                      &quot;mother_diabetes&quot;               
+[136] &quot;mt_mat&quot;                         &quot;my_col_names&quot;                   &quot;my_df&quot;                          &quot;my_info&quot;                        &quot;my_matrix&quot;                     
+[141] &quot;my_matrix2&quot;                     &quot;my_max&quot;                         &quot;my_mean&quot;                        &quot;my_min&quot;                         &quot;my_row_names&quot;                  
+[146] &quot;my_sum&quot;                         &quot;my_vector&quot;                      &quot;mychar_d&quot;                       &quot;mychar_s&quot;                       &quot;mynumber&quot;                      
+[151] &quot;mystring&quot;                       &quot;myvar&quot;                          &quot;myvar_power&quot;                    &quot;n_15&quot;                           &quot;n_3&quot;                           
+[156] &quot;n_30&quot;                           &quot;n_7&quot;                            &quot;n_out_df&quot;                       &quot;n_rep&quot;                          &quot;n_responders&quot;                  
+[161] &quot;n_t1&quot;                           &quot;n_untreated&quot;                    &quot;nationality&quot;                    &quot;no_seed1&quot;                       &quot;no_seed2&quot;                      
+[166] &quot;non_norm_sample&quot;                &quot;non_norm_sample_density&quot;        &quot;non_norm_sample_ks_res&quot;         &quot;non_norm_sample_shapiro_res&quot;    &quot;norm_sample&quot;                   
+[171] &quot;norm_sample_density&quot;            &quot;norm_sample_ks_res&quot;             &quot;norm_sample_shapiro_res&quot;        &quot;normality_df&quot;                   &quot;not_center&quot;                    
+[176] &quot;num1&quot;                           &quot;num2&quot;                           &quot;only_1&quot;                         &quot;only_2&quot;                         &quot;p_responders&quot;                  
+[181] &quot;pairwise_res&quot;                   &quot;patien1_sub&quot;                    &quot;patien2_sub&quot;                    &quot;patien3_sub&quot;                    &quot;patient_age&quot;                   
+[186] &quot;patient_state&quot;                  &quot;patient_weight&quot;                 &quot;patient1&quot;                       &quot;patient2&quot;                       &quot;patient3&quot;                      
+[191] &quot;pattern_to_check_1&quot;             &quot;pattern_to_check_2&quot;             &quot;pearson_res&quot;                    &quot;perc_mito&quot;                      &quot;perc_no_mito&quot;                  
+[196] &quot;pmi_thresh&quot;                     &quot;proteins&quot;                       &quot;proteins1&quot;                      &quot;proteins2&quot;                      &quot;PTPN7&quot;                         
+[201] &quot;pvalue&quot;                         &quot;pvalue_to_plot&quot;                 &quot;quantiles&quot;                      &quot;r_numb&quot;                         &quot;r_patients&quot;                    
+[206] &quot;read_sum_gene&quot;                  &quot;read_sum_pat&quot;                   &quot;read_sum_pat_filt&quot;              &quot;rep1&quot;                           &quot;rep2&quot;                          
+[211] &quot;rep3&quot;                           &quot;response&quot;                       &quot;rin_area_boxplot&quot;               &quot;rin_area_boxplot_edit&quot;          &quot;rin_area_boxplot_manual&quot;       
+[216] &quot;rin_area_boxplots_arr&quot;          &quot;sample&quot;                         &quot;sample0&quot;                        &quot;sample1&quot;                        &quot;sample1_fr&quot;                    
+[221] &quot;sample2&quot;                        &quot;sample2_fr&quot;                     &quot;sample3&quot;                        &quot;sample3_fr&quot;                     &quot;sd_calc&quot;                       
+[226] &quot;sd_calc_ceil&quot;                   &quot;sd_calc_floor&quot;                  &quot;sd_calc_round&quot;                  &quot;sd_time&quot;                        &quot;sex&quot;                           
+[231] &quot;sex_bar_arr&quot;                    &quot;sex_barplot&quot;                    &quot;sex_df&quot;                         &quot;sliced_odd&quot;                     &quot;sub_only&quot;                      
+[236] &quot;sum_aa&quot;                         &quot;sum_tbl_sex&quot;                    &quot;sum_time&quot;                       &quot;sum_weights&quot;                    &quot;t_test_res&quot;                    
+[241] &quot;t_value&quot;                        &quot;t1_3_weight_bartlett&quot;           &quot;t1_3_weight_boxplot&quot;            &quot;t1_3_weight_df&quot;                 &quot;t1_3_weight_max&quot;               
+[246] &quot;t1_3_weight_shapiro&quot;            &quot;Task3_bartlett_result&quot;          &quot;Task3_max_label&quot;                &quot;tbl_sex&quot;                        &quot;tbl_sex_diagnosis&quot;             
+[251] &quot;tbl_sex_diagnosis_colsum&quot;       &quot;tbl_sex_diagnosis_rowsum&quot;       &quot;time&quot;                           &quot;to_extract&quot;                     &quot;to_print&quot;                      
+[256] &quot;total_mito&quot;                     &quot;total_no_mito&quot;                  &quot;treatment&quot;                      &quot;tukey_res&quot;                      &quot;untreated_chisq_res&quot;           
+[261] &quot;untreated_cramer&quot;               &quot;untreated_df&quot;                   &quot;untreated_max_cat&quot;              &quot;untreated_mosaic&quot;               &quot;untreated_sample_size&quot;         
+[266] &quot;untreated_table&quot;                &quot;untreated_weight_bartlett&quot;      &quot;untreated_weight_boxplot&quot;       &quot;untreated_weight_df&quot;            &quot;untreated_weight_lineplot&quot;     
+[271] &quot;untreated_weight_shapiro&quot;       &quot;untreated_weight_shapiro_pos&quot;   &quot;untreated_weight_stats_pos&quot;     &quot;upregulated_1&quot;                  &quot;upregulated_2&quot;                 
+[276] &quot;var_calc&quot;                       &quot;var1&quot;                           &quot;var2&quot;                           &quot;var3&quot;                           &quot;weight&quot;                        
+[281] &quot;weight_bartlett_result&quot;         &quot;weight_c&quot;                       &quot;weight_data&quot;                    &quot;weight_max_label&quot;               &quot;weight_n&quot;                      
+[286] &quot;weight_sup_threshold&quot;           &quot;welch_res&quot;                      &quot;with_seed1&quot;                     &quot;with_seed2&quot;                    </code></pre>
 <p>The two variables have been removed.
 <br>
 But looking closely at these codes, we see that some start with <code>#</code> and are not evaluated. What are they? These are the <strong>comments</strong>, i.e. messages that you will write in the scripts (and we will see later how to create them) to help you understand what you are doing. They are actual comments that you can add, and will not be “evaluated” as code as the line starts with <code>#</code>.
 <br></p>
 </div>
-<div id="type-of-variables" class="section level2 unnumbered">
-<h2>Type of variables</h2>
+<div id="type-of-variables" class="section level2 unnumbered hasAnchor">
+<h2>Type of variables<a href="variables.html#type-of-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 So far so linear, right? Great, it will continue to be as easy 🙃.
 <br>
 <p class="plist">
@@ -552,12 +848,12 @@ Let’s see what are the basic types of variables that exist in R:
 </li>
 </ul>
 <p>We will see each type of variable in detail in next chapters. To find out what type a variable is we use the <code>typeof()</code> function:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="variables.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(myvar)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="variables.html#cb28-1" tabindex="-1"></a><span class="fu">typeof</span>(myvar)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;double&quot;</code></pre>
 <p>We see that myvar is a double (although it is an integer value), this is because R basically interprets every number as a double, so as to increase its precision and the possibility of operations between various numbers without having type problems.</p>
 </div>
-<div id="exercises" class="section level2 unnumbered">
-<h2>Exercises</h2>
+<div id="exercises" class="section level2 unnumbered hasAnchor">
+<h2>Exercises<a href="variables.html#exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Ok, this chapter was long enough, let’s do some exercises to fix well these concepts.</p>
 <div class="exercise">
 <p><span id="exr:create-variables" class="exercise"><strong>Exercise 3.1  </strong></span>Create 3 variables indicating the weights of 3 mice.</p>
@@ -566,15 +862,15 @@ Let’s see what are the basic types of variables that exist in R:
 <summary>
 Solution
 </summary>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="variables.html#cb30-1" aria-hidden="true" tabindex="-1"></a>mice1 <span class="ot">&lt;-</span> <span class="fl">5.8</span></span>
-<span id="cb30-2"><a href="variables.html#cb30-2" aria-hidden="true" tabindex="-1"></a>mice2 <span class="ot">&lt;-</span> <span class="fl">4.8</span></span>
-<span id="cb30-3"><a href="variables.html#cb30-3" aria-hidden="true" tabindex="-1"></a>mice3 <span class="ot">&lt;-</span> <span class="fl">7.5</span></span>
-<span id="cb30-4"><a href="variables.html#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-5"><a href="variables.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice1)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="variables.html#cb30-1" tabindex="-1"></a>mice1 <span class="ot">&lt;-</span> <span class="fl">5.8</span></span>
+<span id="cb30-2"><a href="variables.html#cb30-2" tabindex="-1"></a>mice2 <span class="ot">&lt;-</span> <span class="fl">4.8</span></span>
+<span id="cb30-3"><a href="variables.html#cb30-3" tabindex="-1"></a>mice3 <span class="ot">&lt;-</span> <span class="fl">7.5</span></span>
+<span id="cb30-4"><a href="variables.html#cb30-4" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="variables.html#cb30-5" tabindex="-1"></a><span class="fu">print</span>(mice1)</span></code></pre></div>
 <pre class="code-out"><code>[1] 5.8</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="variables.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice2)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="variables.html#cb32-1" tabindex="-1"></a><span class="fu">print</span>(mice2)</span></code></pre></div>
 <pre class="code-out"><code>[1] 4.8</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="variables.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice3)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="variables.html#cb34-1" tabindex="-1"></a><span class="fu">print</span>(mice3)</span></code></pre></div>
 <pre class="code-out"><code>[1] 7.5</code></pre>
 </details>
 <div class="exercise">
@@ -584,8 +880,8 @@ Solution
 <summary>
 Solution
 </summary>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="variables.html#cb36-1" aria-hidden="true" tabindex="-1"></a>sum_weights <span class="ot">&lt;-</span> mice1 <span class="sc">+</span> mice2 <span class="sc">+</span> mice3</span>
-<span id="cb36-2"><a href="variables.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum_weights)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="variables.html#cb36-1" tabindex="-1"></a>sum_weights <span class="ot">&lt;-</span> mice1 <span class="sc">+</span> mice2 <span class="sc">+</span> mice3</span>
+<span id="cb36-2"><a href="variables.html#cb36-2" tabindex="-1"></a><span class="fu">print</span>(sum_weights)</span></code></pre></div>
 <pre class="code-out"><code>[1] 18.1</code></pre>
 </details>
 <div class="exercise">
@@ -595,24 +891,137 @@ Solution
 <summary>
 Solution
 </summary>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="variables.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create 4 variables</span></span>
-<span id="cb38-2"><a href="variables.html#cb38-2" aria-hidden="true" tabindex="-1"></a>mice4 <span class="ot">&lt;-</span> mice5 <span class="ot">&lt;-</span> mice6 <span class="ot">&lt;-</span> mice7 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb38-3"><a href="variables.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="variables.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
-<span id="cb38-5"><a href="variables.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;mice5&quot;       &quot;mice6&quot;       &quot;mice7&quot;      
- [8] &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot; &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="variables.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delete 3 of the just-created variables</span></span>
-<span id="cb40-2"><a href="variables.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(mice5, mice6, mice7)</span>
-<span id="cb40-3"><a href="variables.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-4"><a href="variables.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list all variables</span></span>
-<span id="cb40-5"><a href="variables.html#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre class="code-out"><code> [1] &quot;mice1&quot;       &quot;mice2&quot;       &quot;mice3&quot;       &quot;mice4&quot;       &quot;myvar&quot;       &quot;myvar_power&quot; &quot;sum_weights&quot;
- [8] &quot;var1&quot;        &quot;var2&quot;        &quot;var3&quot;       </code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="variables.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change the value of one variable</span></span>
-<span id="cb42-2"><a href="variables.html#cb42-2" aria-hidden="true" tabindex="-1"></a>mice4 <span class="ot">&lt;-</span> <span class="fl">7.7</span></span>
-<span id="cb42-3"><a href="variables.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="variables.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mice4)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="variables.html#cb38-1" tabindex="-1"></a><span class="co"># create 4 variables</span></span>
+<span id="cb38-2"><a href="variables.html#cb38-2" tabindex="-1"></a>mice4 <span class="ot">&lt;-</span> mice5 <span class="ot">&lt;-</span> mice6 <span class="ot">&lt;-</span> mice7 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb38-3"><a href="variables.html#cb38-3" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="variables.html#cb38-4" tabindex="-1"></a><span class="co"># list all variables</span></span>
+<span id="cb38-5"><a href="variables.html#cb38-5" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                         &quot;abbreviations&quot;                  &quot;age&quot;                            &quot;age_inf_threshold&quot;              &quot;age_sup_threshold&quot;             
+  [6] &quot;all_plots&quot;                      &quot;all_string&quot;                     &quot;aod_pmi&quot;                        &quot;aod_pmi_all&quot;                    &quot;aod_pmi_arr&quot;                   
+ [11] &quot;aod_pmi_sex_rin_aes&quot;            &quot;aod_thresh&quot;                     &quot;aov_res&quot;                        &quot;area_color_vector&quot;              &quot;area_df&quot;                       
+ [16] &quot;areas&quot;                          &quot;c_patients&quot;                     &quot;caption&quot;                        &quot;ch1&quot;                            &quot;ch2&quot;                           
+ [21] &quot;ch3&quot;                            &quot;ch4&quot;                            &quot;ch5&quot;                            &quot;ch6&quot;                            &quot;color_df&quot;                      
+ [26] &quot;common&quot;                         &quot;common_all&quot;                     &quot;common_mean&quot;                    &quot;common1_2&quot;                      &quot;comparison_ks_res&quot;             
+ [31] &quot;condition&quot;                      &quot;ctrl_sex_age&quot;                   &quot;CXCR4&quot;                          &quot;description&quot;                    &quot;df&quot;                            
+ [36] &quot;df_AOD_dataset&quot;                 &quot;df_female_rin3q&quot;                &quot;df_filtered&quot;                    &quot;df_grouped&quot;                     &quot;df_male_ctrl_cdr4&quot;             
+ [41] &quot;df_nas_diag_dataset&quot;            &quot;df_PMI_area_sex&quot;                &quot;df_RIN_dataset&quot;                 &quot;df_wider&quot;                       &quot;dunn_res&quot;                      
+ [46] &quot;dunn_stat_df&quot;                   &quot;expr&quot;                           &quot;expr_data&quot;                      &quot;expr_data_t&quot;                    &quot;expr_levels&quot;                   
+ [51] &quot;expr_mat_pat&quot;                   &quot;expr_values&quot;                    &quot;f_value&quot;                        &quot;features&quot;                       &quot;female_15_task1yes_chisq_res&quot;  
+ [56] &quot;female_15_task1yes_df&quot;          &quot;female_15_task1yes_expected&quot;    &quot;female_15_task1yes_max_cat&quot;     &quot;female_15_task1yes_mosaic&quot;      &quot;female_15_task1yes_or&quot;         
+ [61] &quot;female_15_task1yes_phi&quot;         &quot;female_15_task1yes_sample_size&quot; &quot;female_15_task1yes_table&quot;       &quot;female_t1_weight_bartlett&quot;      &quot;female_t1_weight_boxplot&quot;      
+ [66] &quot;female_t1_weight_df&quot;            &quot;female_t1_weight_max&quot;           &quot;female_t1_weight_shapiro&quot;       &quot;females_t1_task3_bartlett&quot;      &quot;females_t1_task3_boxplot&quot;      
+ [71] &quot;females_t1_task3_df&quot;            &quot;females_t1_task3_shapiro&quot;       &quot;females_t1_task3_shapiro_pos&quot;   &quot;full_name&quot;                      &quot;gene&quot;                          
+ [76] &quot;gene_2_keep&quot;                    &quot;gene_to_test&quot;                   &quot;gene1&quot;                          &quot;gene2&quot;                          &quot;genes&quot;                         
+ [81] &quot;grep_1&quot;                         &quot;grep_2&quot;                         &quot;grepl_1&quot;                        &quot;grepl_2&quot;                        &quot;gsub_all&quot;                      
+ [86] &quot;heights&quot;                        &quot;idx&quot;                            &quot;interaction_factor&quot;             &quot;is_odd&quot;                         &quot;is_outlier&quot;                    
+ [91] &quot;kruskal_res&quot;                    &quot;LCT&quot;                            &quot;LHX9&quot;                           &quot;male_3_task2yes_df&quot;             &quot;male_3_task2yes_expected&quot;      
+ [96] &quot;male_3_task2yes_fisher_phi&quot;     &quot;male_3_task2yes_fisher_res&quot;     &quot;male_3_task2yes_max_cat&quot;        &quot;male_3_task2yes_mosaic&quot;         &quot;male_3_task2yes_sample_size&quot;   
+[101] &quot;male_3_task2yes_table&quot;          &quot;male_3_task3_bartlett&quot;          &quot;male_3_task3_boxplot&quot;           &quot;male_3_task3_df&quot;                &quot;male_3_task3_max&quot;              
+[106] &quot;male_3_task3_shapiro&quot;           &quot;male_30_task3_boxplot&quot;          &quot;male_30_task3_boxplot_filt&quot;     &quot;male_30_task3_density&quot;          &quot;male_30_task3_density_filt&quot;    
+[111] &quot;male_30_task3_qq&quot;               &quot;male_30_task3_qq_filt&quot;          &quot;male_30_weight_boxplot&quot;         &quot;male_30_weight_boxplot_filt&quot;    &quot;male_30_weight_density&quot;        
+[116] &quot;male_30_weight_density_filt&quot;    &quot;male_30_weight_qq&quot;              &quot;male_30_weight_qq_filt&quot;         &quot;male_30_weight_task3&quot;           &quot;males_data&quot;                    
+[121] &quot;males_females_barplot&quot;          &quot;mann_res&quot;                       &quot;mean_col&quot;                       &quot;mean_res_better&quot;                &quot;mean_res_better_round&quot;         
+[126] &quot;mean_result_calc&quot;               &quot;mean_row&quot;                       &quot;mean_time&quot;                      &quot;mice1&quot;                          &quot;mice2&quot;                         
+[131] &quot;mice3&quot;                          &quot;mice4&quot;                          &quot;mice5&quot;                          &quot;mice6&quot;                          &quot;mice7&quot;                         
+[136] &quot;mito_genes&quot;                     &quot;ml_to_add&quot;                      &quot;mother_diabetes&quot;                &quot;mt_mat&quot;                         &quot;my_col_names&quot;                  
+[141] &quot;my_df&quot;                          &quot;my_info&quot;                        &quot;my_matrix&quot;                      &quot;my_matrix2&quot;                     &quot;my_max&quot;                        
+[146] &quot;my_mean&quot;                        &quot;my_min&quot;                         &quot;my_row_names&quot;                   &quot;my_sum&quot;                         &quot;my_vector&quot;                     
+[151] &quot;mychar_d&quot;                       &quot;mychar_s&quot;                       &quot;mynumber&quot;                       &quot;mystring&quot;                       &quot;myvar&quot;                         
+[156] &quot;myvar_power&quot;                    &quot;n_15&quot;                           &quot;n_3&quot;                            &quot;n_30&quot;                           &quot;n_7&quot;                           
+[161] &quot;n_out_df&quot;                       &quot;n_rep&quot;                          &quot;n_responders&quot;                   &quot;n_t1&quot;                           &quot;n_untreated&quot;                   
+[166] &quot;nationality&quot;                    &quot;no_seed1&quot;                       &quot;no_seed2&quot;                       &quot;non_norm_sample&quot;                &quot;non_norm_sample_density&quot;       
+[171] &quot;non_norm_sample_ks_res&quot;         &quot;non_norm_sample_shapiro_res&quot;    &quot;norm_sample&quot;                    &quot;norm_sample_density&quot;            &quot;norm_sample_ks_res&quot;            
+[176] &quot;norm_sample_shapiro_res&quot;        &quot;normality_df&quot;                   &quot;not_center&quot;                     &quot;num1&quot;                           &quot;num2&quot;                          
+[181] &quot;only_1&quot;                         &quot;only_2&quot;                         &quot;p_responders&quot;                   &quot;pairwise_res&quot;                   &quot;patien1_sub&quot;                   
+[186] &quot;patien2_sub&quot;                    &quot;patien3_sub&quot;                    &quot;patient_age&quot;                    &quot;patient_state&quot;                  &quot;patient_weight&quot;                
+[191] &quot;patient1&quot;                       &quot;patient2&quot;                       &quot;patient3&quot;                       &quot;pattern_to_check_1&quot;             &quot;pattern_to_check_2&quot;            
+[196] &quot;pearson_res&quot;                    &quot;perc_mito&quot;                      &quot;perc_no_mito&quot;                   &quot;pmi_thresh&quot;                     &quot;proteins&quot;                      
+[201] &quot;proteins1&quot;                      &quot;proteins2&quot;                      &quot;PTPN7&quot;                          &quot;pvalue&quot;                         &quot;pvalue_to_plot&quot;                
+[206] &quot;quantiles&quot;                      &quot;r_numb&quot;                         &quot;r_patients&quot;                     &quot;read_sum_gene&quot;                  &quot;read_sum_pat&quot;                  
+[211] &quot;read_sum_pat_filt&quot;              &quot;rep1&quot;                           &quot;rep2&quot;                           &quot;rep3&quot;                           &quot;response&quot;                      
+[216] &quot;rin_area_boxplot&quot;               &quot;rin_area_boxplot_edit&quot;          &quot;rin_area_boxplot_manual&quot;        &quot;rin_area_boxplots_arr&quot;          &quot;sample&quot;                        
+[221] &quot;sample0&quot;                        &quot;sample1&quot;                        &quot;sample1_fr&quot;                     &quot;sample2&quot;                        &quot;sample2_fr&quot;                    
+[226] &quot;sample3&quot;                        &quot;sample3_fr&quot;                     &quot;sd_calc&quot;                        &quot;sd_calc_ceil&quot;                   &quot;sd_calc_floor&quot;                 
+[231] &quot;sd_calc_round&quot;                  &quot;sd_time&quot;                        &quot;sex&quot;                            &quot;sex_bar_arr&quot;                    &quot;sex_barplot&quot;                   
+[236] &quot;sex_df&quot;                         &quot;sliced_odd&quot;                     &quot;sub_only&quot;                       &quot;sum_aa&quot;                         &quot;sum_tbl_sex&quot;                   
+[241] &quot;sum_time&quot;                       &quot;sum_weights&quot;                    &quot;t_test_res&quot;                     &quot;t_value&quot;                        &quot;t1_3_weight_bartlett&quot;          
+[246] &quot;t1_3_weight_boxplot&quot;            &quot;t1_3_weight_df&quot;                 &quot;t1_3_weight_max&quot;                &quot;t1_3_weight_shapiro&quot;            &quot;Task3_bartlett_result&quot;         
+[251] &quot;Task3_max_label&quot;                &quot;tbl_sex&quot;                        &quot;tbl_sex_diagnosis&quot;              &quot;tbl_sex_diagnosis_colsum&quot;       &quot;tbl_sex_diagnosis_rowsum&quot;      
+[256] &quot;time&quot;                           &quot;to_extract&quot;                     &quot;to_print&quot;                       &quot;total_mito&quot;                     &quot;total_no_mito&quot;                 
+[261] &quot;treatment&quot;                      &quot;tukey_res&quot;                      &quot;untreated_chisq_res&quot;            &quot;untreated_cramer&quot;               &quot;untreated_df&quot;                  
+[266] &quot;untreated_max_cat&quot;              &quot;untreated_mosaic&quot;               &quot;untreated_sample_size&quot;          &quot;untreated_table&quot;                &quot;untreated_weight_bartlett&quot;     
+[271] &quot;untreated_weight_boxplot&quot;       &quot;untreated_weight_df&quot;            &quot;untreated_weight_lineplot&quot;      &quot;untreated_weight_shapiro&quot;       &quot;untreated_weight_shapiro_pos&quot;  
+[276] &quot;untreated_weight_stats_pos&quot;     &quot;upregulated_1&quot;                  &quot;upregulated_2&quot;                  &quot;var_calc&quot;                       &quot;var1&quot;                          
+[281] &quot;var2&quot;                           &quot;var3&quot;                           &quot;weight&quot;                         &quot;weight_bartlett_result&quot;         &quot;weight_c&quot;                      
+[286] &quot;weight_data&quot;                    &quot;weight_max_label&quot;               &quot;weight_n&quot;                       &quot;weight_sup_threshold&quot;           &quot;welch_res&quot;                     
+[291] &quot;with_seed1&quot;                     &quot;with_seed2&quot;                    </code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="variables.html#cb40-1" tabindex="-1"></a><span class="co"># delete 3 of the just-created variables</span></span>
+<span id="cb40-2"><a href="variables.html#cb40-2" tabindex="-1"></a><span class="fu">rm</span>(mice5, mice6, mice7)</span>
+<span id="cb40-3"><a href="variables.html#cb40-3" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="variables.html#cb40-4" tabindex="-1"></a><span class="co"># list all variables</span></span>
+<span id="cb40-5"><a href="variables.html#cb40-5" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre class="code-out"><code>  [1] &quot;aa_num&quot;                         &quot;abbreviations&quot;                  &quot;age&quot;                            &quot;age_inf_threshold&quot;              &quot;age_sup_threshold&quot;             
+  [6] &quot;all_plots&quot;                      &quot;all_string&quot;                     &quot;aod_pmi&quot;                        &quot;aod_pmi_all&quot;                    &quot;aod_pmi_arr&quot;                   
+ [11] &quot;aod_pmi_sex_rin_aes&quot;            &quot;aod_thresh&quot;                     &quot;aov_res&quot;                        &quot;area_color_vector&quot;              &quot;area_df&quot;                       
+ [16] &quot;areas&quot;                          &quot;c_patients&quot;                     &quot;caption&quot;                        &quot;ch1&quot;                            &quot;ch2&quot;                           
+ [21] &quot;ch3&quot;                            &quot;ch4&quot;                            &quot;ch5&quot;                            &quot;ch6&quot;                            &quot;color_df&quot;                      
+ [26] &quot;common&quot;                         &quot;common_all&quot;                     &quot;common_mean&quot;                    &quot;common1_2&quot;                      &quot;comparison_ks_res&quot;             
+ [31] &quot;condition&quot;                      &quot;ctrl_sex_age&quot;                   &quot;CXCR4&quot;                          &quot;description&quot;                    &quot;df&quot;                            
+ [36] &quot;df_AOD_dataset&quot;                 &quot;df_female_rin3q&quot;                &quot;df_filtered&quot;                    &quot;df_grouped&quot;                     &quot;df_male_ctrl_cdr4&quot;             
+ [41] &quot;df_nas_diag_dataset&quot;            &quot;df_PMI_area_sex&quot;                &quot;df_RIN_dataset&quot;                 &quot;df_wider&quot;                       &quot;dunn_res&quot;                      
+ [46] &quot;dunn_stat_df&quot;                   &quot;expr&quot;                           &quot;expr_data&quot;                      &quot;expr_data_t&quot;                    &quot;expr_levels&quot;                   
+ [51] &quot;expr_mat_pat&quot;                   &quot;expr_values&quot;                    &quot;f_value&quot;                        &quot;features&quot;                       &quot;female_15_task1yes_chisq_res&quot;  
+ [56] &quot;female_15_task1yes_df&quot;          &quot;female_15_task1yes_expected&quot;    &quot;female_15_task1yes_max_cat&quot;     &quot;female_15_task1yes_mosaic&quot;      &quot;female_15_task1yes_or&quot;         
+ [61] &quot;female_15_task1yes_phi&quot;         &quot;female_15_task1yes_sample_size&quot; &quot;female_15_task1yes_table&quot;       &quot;female_t1_weight_bartlett&quot;      &quot;female_t1_weight_boxplot&quot;      
+ [66] &quot;female_t1_weight_df&quot;            &quot;female_t1_weight_max&quot;           &quot;female_t1_weight_shapiro&quot;       &quot;females_t1_task3_bartlett&quot;      &quot;females_t1_task3_boxplot&quot;      
+ [71] &quot;females_t1_task3_df&quot;            &quot;females_t1_task3_shapiro&quot;       &quot;females_t1_task3_shapiro_pos&quot;   &quot;full_name&quot;                      &quot;gene&quot;                          
+ [76] &quot;gene_2_keep&quot;                    &quot;gene_to_test&quot;                   &quot;gene1&quot;                          &quot;gene2&quot;                          &quot;genes&quot;                         
+ [81] &quot;grep_1&quot;                         &quot;grep_2&quot;                         &quot;grepl_1&quot;                        &quot;grepl_2&quot;                        &quot;gsub_all&quot;                      
+ [86] &quot;heights&quot;                        &quot;idx&quot;                            &quot;interaction_factor&quot;             &quot;is_odd&quot;                         &quot;is_outlier&quot;                    
+ [91] &quot;kruskal_res&quot;                    &quot;LCT&quot;                            &quot;LHX9&quot;                           &quot;male_3_task2yes_df&quot;             &quot;male_3_task2yes_expected&quot;      
+ [96] &quot;male_3_task2yes_fisher_phi&quot;     &quot;male_3_task2yes_fisher_res&quot;     &quot;male_3_task2yes_max_cat&quot;        &quot;male_3_task2yes_mosaic&quot;         &quot;male_3_task2yes_sample_size&quot;   
+[101] &quot;male_3_task2yes_table&quot;          &quot;male_3_task3_bartlett&quot;          &quot;male_3_task3_boxplot&quot;           &quot;male_3_task3_df&quot;                &quot;male_3_task3_max&quot;              
+[106] &quot;male_3_task3_shapiro&quot;           &quot;male_30_task3_boxplot&quot;          &quot;male_30_task3_boxplot_filt&quot;     &quot;male_30_task3_density&quot;          &quot;male_30_task3_density_filt&quot;    
+[111] &quot;male_30_task3_qq&quot;               &quot;male_30_task3_qq_filt&quot;          &quot;male_30_weight_boxplot&quot;         &quot;male_30_weight_boxplot_filt&quot;    &quot;male_30_weight_density&quot;        
+[116] &quot;male_30_weight_density_filt&quot;    &quot;male_30_weight_qq&quot;              &quot;male_30_weight_qq_filt&quot;         &quot;male_30_weight_task3&quot;           &quot;males_data&quot;                    
+[121] &quot;males_females_barplot&quot;          &quot;mann_res&quot;                       &quot;mean_col&quot;                       &quot;mean_res_better&quot;                &quot;mean_res_better_round&quot;         
+[126] &quot;mean_result_calc&quot;               &quot;mean_row&quot;                       &quot;mean_time&quot;                      &quot;mice1&quot;                          &quot;mice2&quot;                         
+[131] &quot;mice3&quot;                          &quot;mice4&quot;                          &quot;mito_genes&quot;                     &quot;ml_to_add&quot;                      &quot;mother_diabetes&quot;               
+[136] &quot;mt_mat&quot;                         &quot;my_col_names&quot;                   &quot;my_df&quot;                          &quot;my_info&quot;                        &quot;my_matrix&quot;                     
+[141] &quot;my_matrix2&quot;                     &quot;my_max&quot;                         &quot;my_mean&quot;                        &quot;my_min&quot;                         &quot;my_row_names&quot;                  
+[146] &quot;my_sum&quot;                         &quot;my_vector&quot;                      &quot;mychar_d&quot;                       &quot;mychar_s&quot;                       &quot;mynumber&quot;                      
+[151] &quot;mystring&quot;                       &quot;myvar&quot;                          &quot;myvar_power&quot;                    &quot;n_15&quot;                           &quot;n_3&quot;                           
+[156] &quot;n_30&quot;                           &quot;n_7&quot;                            &quot;n_out_df&quot;                       &quot;n_rep&quot;                          &quot;n_responders&quot;                  
+[161] &quot;n_t1&quot;                           &quot;n_untreated&quot;                    &quot;nationality&quot;                    &quot;no_seed1&quot;                       &quot;no_seed2&quot;                      
+[166] &quot;non_norm_sample&quot;                &quot;non_norm_sample_density&quot;        &quot;non_norm_sample_ks_res&quot;         &quot;non_norm_sample_shapiro_res&quot;    &quot;norm_sample&quot;                   
+[171] &quot;norm_sample_density&quot;            &quot;norm_sample_ks_res&quot;             &quot;norm_sample_shapiro_res&quot;        &quot;normality_df&quot;                   &quot;not_center&quot;                    
+[176] &quot;num1&quot;                           &quot;num2&quot;                           &quot;only_1&quot;                         &quot;only_2&quot;                         &quot;p_responders&quot;                  
+[181] &quot;pairwise_res&quot;                   &quot;patien1_sub&quot;                    &quot;patien2_sub&quot;                    &quot;patien3_sub&quot;                    &quot;patient_age&quot;                   
+[186] &quot;patient_state&quot;                  &quot;patient_weight&quot;                 &quot;patient1&quot;                       &quot;patient2&quot;                       &quot;patient3&quot;                      
+[191] &quot;pattern_to_check_1&quot;             &quot;pattern_to_check_2&quot;             &quot;pearson_res&quot;                    &quot;perc_mito&quot;                      &quot;perc_no_mito&quot;                  
+[196] &quot;pmi_thresh&quot;                     &quot;proteins&quot;                       &quot;proteins1&quot;                      &quot;proteins2&quot;                      &quot;PTPN7&quot;                         
+[201] &quot;pvalue&quot;                         &quot;pvalue_to_plot&quot;                 &quot;quantiles&quot;                      &quot;r_numb&quot;                         &quot;r_patients&quot;                    
+[206] &quot;read_sum_gene&quot;                  &quot;read_sum_pat&quot;                   &quot;read_sum_pat_filt&quot;              &quot;rep1&quot;                           &quot;rep2&quot;                          
+[211] &quot;rep3&quot;                           &quot;response&quot;                       &quot;rin_area_boxplot&quot;               &quot;rin_area_boxplot_edit&quot;          &quot;rin_area_boxplot_manual&quot;       
+[216] &quot;rin_area_boxplots_arr&quot;          &quot;sample&quot;                         &quot;sample0&quot;                        &quot;sample1&quot;                        &quot;sample1_fr&quot;                    
+[221] &quot;sample2&quot;                        &quot;sample2_fr&quot;                     &quot;sample3&quot;                        &quot;sample3_fr&quot;                     &quot;sd_calc&quot;                       
+[226] &quot;sd_calc_ceil&quot;                   &quot;sd_calc_floor&quot;                  &quot;sd_calc_round&quot;                  &quot;sd_time&quot;                        &quot;sex&quot;                           
+[231] &quot;sex_bar_arr&quot;                    &quot;sex_barplot&quot;                    &quot;sex_df&quot;                         &quot;sliced_odd&quot;                     &quot;sub_only&quot;                      
+[236] &quot;sum_aa&quot;                         &quot;sum_tbl_sex&quot;                    &quot;sum_time&quot;                       &quot;sum_weights&quot;                    &quot;t_test_res&quot;                    
+[241] &quot;t_value&quot;                        &quot;t1_3_weight_bartlett&quot;           &quot;t1_3_weight_boxplot&quot;            &quot;t1_3_weight_df&quot;                 &quot;t1_3_weight_max&quot;               
+[246] &quot;t1_3_weight_shapiro&quot;            &quot;Task3_bartlett_result&quot;          &quot;Task3_max_label&quot;                &quot;tbl_sex&quot;                        &quot;tbl_sex_diagnosis&quot;             
+[251] &quot;tbl_sex_diagnosis_colsum&quot;       &quot;tbl_sex_diagnosis_rowsum&quot;       &quot;time&quot;                           &quot;to_extract&quot;                     &quot;to_print&quot;                      
+[256] &quot;total_mito&quot;                     &quot;total_no_mito&quot;                  &quot;treatment&quot;                      &quot;tukey_res&quot;                      &quot;untreated_chisq_res&quot;           
+[261] &quot;untreated_cramer&quot;               &quot;untreated_df&quot;                   &quot;untreated_max_cat&quot;              &quot;untreated_mosaic&quot;               &quot;untreated_sample_size&quot;         
+[266] &quot;untreated_table&quot;                &quot;untreated_weight_bartlett&quot;      &quot;untreated_weight_boxplot&quot;       &quot;untreated_weight_df&quot;            &quot;untreated_weight_lineplot&quot;     
+[271] &quot;untreated_weight_shapiro&quot;       &quot;untreated_weight_shapiro_pos&quot;   &quot;untreated_weight_stats_pos&quot;     &quot;upregulated_1&quot;                  &quot;upregulated_2&quot;                 
+[276] &quot;var_calc&quot;                       &quot;var1&quot;                           &quot;var2&quot;                           &quot;var3&quot;                           &quot;weight&quot;                        
+[281] &quot;weight_bartlett_result&quot;         &quot;weight_c&quot;                       &quot;weight_data&quot;                    &quot;weight_max_label&quot;               &quot;weight_n&quot;                      
+[286] &quot;weight_sup_threshold&quot;           &quot;welch_res&quot;                      &quot;with_seed1&quot;                     &quot;with_seed2&quot;                    </code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="variables.html#cb42-1" tabindex="-1"></a><span class="co"># change the value of one variable</span></span>
+<span id="cb42-2"><a href="variables.html#cb42-2" tabindex="-1"></a>mice4 <span class="ot">&lt;-</span> <span class="fl">7.7</span></span>
+<span id="cb42-3"><a href="variables.html#cb42-3" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="variables.html#cb42-4" tabindex="-1"></a><span class="fu">print</span>(mice4)</span></code></pre></div>
 <pre class="code-out"><code>[1] 7.7</code></pre>
 </details>
 <p>Alright, if you have done all the exercises (and I’m sure you have), we can move on to the next chapter in which we briefly talk about scripts and saving the environment.</p>

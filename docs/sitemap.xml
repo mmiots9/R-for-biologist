@@ -69,7 +69,15 @@
     <changefreq>daily</changefreq>
   </url>
   <url>
-    <loc>https://mmiots9.github.io/R-for-biologist/18-Comparing_more_groups/</loc>
+    <loc>https://mmiots9.github.io/R-for-biologist/18-Comparin-more-groups/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://mmiots9.github.io/R-for-biologist/19-Correlation/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://mmiots9.github.io/R-for-biologist/20-Farewell/</loc>
     <changefreq>daily</changefreq>
   </url>
   <url>

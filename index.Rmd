@@ -6,7 +6,7 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 description: |
- To you, who never gives up, for your future. You can make it!
+ This course is for biologists who want to optimize their analysis, making them faster and reproducible.
 link-citations: yes
 ---
 
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 ```
 
 # About {-}
-Ciao Fede, here we are. You really don't know how happy I am for both of us: I'll learn how to "teach", while you'll learn a coding language that will revolutionize your life, I'm sure of it hahaha
+Hi, here we are. You really don't know how happy I am for both of us: I'll learn how to "teach", while you'll learn a coding language that will revolutionize your life, I'm sure of it hahaha
 
 We'll see how to speed up analyses, how to automate them, how to untie ourselves from that cancer that is Excel, how to make beautiful graphs and how to gain time to do other things.
 
