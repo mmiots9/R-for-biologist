@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-12-09" />
+<meta name="date" content="2024-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="aggregate-data-with-tidyverse.html"/>
 <link rel="next" href="intro-stat-chapter.html"/>
-<script src="libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <meta property="og:description" content="To you, who never gives up, for your future. You can make it!">
 <meta name="keywords" content="R, biology, data analysis">
 <meta name="author" content="Matteo Miotto">
@@ -71,7 +70,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -384,8 +383,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="plot-our-data-with-ggplot2" class="section level1 hasAnchor" number="14">
-<h1><span class="header-section-number">14</span> Plot our data with ggplot2<a href="plot-our-data-with-ggplot2.html#plot-our-data-with-ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="plot-our-data-with-ggplot2" class="section level1" number="14">
+<h1><span class="header-section-number">14</span> Plot our data with ggplot2</h1>
 <p>What is the best way to present data/results to someone? Of course, it’s through <strong>plots</strong>. You can have the best results in the world, you can have discovered the cure for the cancer, but without an efficient way to present your findings, you will not be able to share them.
 <br>
 So, here we are talking about <em>ggplot2</em>, which is one of the most used library for plotting in R (in my opinion, the <u>best</u> option to create plots, both in R and Python). Here is the official <a href="https://ggplot2.tidyverse.org/" target="_blank">website</a> of this magical library; it is part of the tidyverse and it has a lot of “extensions” (packages built up on ggplot that add functionalities, but let’s start with the basic).
@@ -393,21 +392,21 @@ So, here we are talking about <em>ggplot2</em>, which is one of the most used li
 To be honest, it would take an entire book to talk about ggplot2 (<a href="https://ggplot2-book.org/" target="_blank">here</a> an example); for this reason, here I will “just” show you what I think is enough to create wonderful graphs for transimitting experiment results. In next chapters I may use some functions and functionalities that are not covered in this one, but if you are interested and want to master in ggplot, I recommend: practice, explore and search on the internet!
 <br>
 Let’s now dive into the ocean of ggplot, starting by loading some data: we will use the same we used in previous chapters on tidyverse so you should be an expert on them 😄.</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="plot-our-data-with-ggplot2.html#cb447-1" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
-<span id="cb447-2"><a href="plot-our-data-with-ggplot2.html#cb447-2" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb447-3"><a href="plot-our-data-with-ggplot2.html#cb447-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb447-4"><a href="plot-our-data-with-ggplot2.html#cb447-4" tabindex="-1"></a></span>
-<span id="cb447-5"><a href="plot-our-data-with-ggplot2.html#cb447-5" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
-<span id="cb447-6"><a href="plot-our-data-with-ggplot2.html#cb447-6" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Supplementary_table_13.csv&quot;</span>)</span>
-<span id="cb447-7"><a href="plot-our-data-with-ggplot2.html#cb447-7" tabindex="-1"></a></span>
-<span id="cb447-8"><a href="plot-our-data-with-ggplot2.html#cb447-8" tabindex="-1"></a><span class="co"># 3. Change come column types</span></span>
-<span id="cb447-9"><a href="plot-our-data-with-ggplot2.html#cb447-9" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb447-10"><a href="plot-our-data-with-ggplot2.html#cb447-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;Diagnosis&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Diagnosis, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;AD&quot;</span>)),</span>
-<span id="cb447-11"><a href="plot-our-data-with-ggplot2.html#cb447-11" tabindex="-1"></a>         <span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
-<span id="cb447-12"><a href="plot-our-data-with-ggplot2.html#cb447-12" tabindex="-1"></a>         <span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Area),</span>
-<span id="cb447-13"><a href="plot-our-data-with-ggplot2.html#cb447-13" tabindex="-1"></a>         <span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(dataset))</span>
-<span id="cb447-14"><a href="plot-our-data-with-ggplot2.html#cb447-14" tabindex="-1"></a></span>
-<span id="cb447-15"><a href="plot-our-data-with-ggplot2.html#cb447-15" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="plot-our-data-with-ggplot2.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
+<span id="cb447-2"><a href="plot-our-data-with-ggplot2.html#cb447-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb447-3"><a href="plot-our-data-with-ggplot2.html#cb447-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb447-4"><a href="plot-our-data-with-ggplot2.html#cb447-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb447-5"><a href="plot-our-data-with-ggplot2.html#cb447-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
+<span id="cb447-6"><a href="plot-our-data-with-ggplot2.html#cb447-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Supplementary_table_13.csv&quot;</span>)</span>
+<span id="cb447-7"><a href="plot-our-data-with-ggplot2.html#cb447-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb447-8"><a href="plot-our-data-with-ggplot2.html#cb447-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Change come column types</span></span>
+<span id="cb447-9"><a href="plot-our-data-with-ggplot2.html#cb447-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb447-10"><a href="plot-our-data-with-ggplot2.html#cb447-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;Diagnosis&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Diagnosis, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;AD&quot;</span>)),</span>
+<span id="cb447-11"><a href="plot-our-data-with-ggplot2.html#cb447-11" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb447-12"><a href="plot-our-data-with-ggplot2.html#cb447-12" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Area),</span>
+<span id="cb447-13"><a href="plot-our-data-with-ggplot2.html#cb447-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(dataset))</span>
+<span id="cb447-14"><a href="plot-our-data-with-ggplot2.html#cb447-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb447-15"><a href="plot-our-data-with-ggplot2.html#cb447-15" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>&#39;data.frame&#39;:   1493 obs. of  10 variables:
  $ SampleID : chr  &quot;1005_TCX&quot; &quot;1019_TCX&quot; &quot;1029_TCX&quot; &quot;1034_TCX&quot; ...
  $ Diagnosis: Factor w/ 2 levels &quot;Control&quot;,&quot;AD&quot;: 2 2 2 2 2 2 2 2 2 2 ...
@@ -419,16 +418,16 @@ Let’s now dive into the ocean of ggplot, starting by loading some data: we wil
  $ CDR      : num  NA NA NA NA NA NA NA NA NA NA ...
  $ Area     : Factor w/ 6 levels &quot;BM10&quot;,&quot;BM22&quot;,..: 6 6 6 6 6 6 6 6 6 6 ...
  $ dataset  : Factor w/ 3 levels &quot;MAYO&quot;,&quot;MSBB&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
-<div id="command-structure" class="section level2 unnumbered hasAnchor">
-<h2>Command structure<a href="plot-our-data-with-ggplot2.html#command-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="command-structure" class="section level2 unnumbered">
+<h2>Command structure</h2>
 <p>Data are loaded, we are ready! Here, it is important to know how we should structure the code to create a plot with ggplot. The cool thing about this package, is that code is structured in a very intuitive way (at least, I find it very intuitive): this is the “skeleton” of a ggplot code:</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="plot-our-data-with-ggplot2.html#cb449-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>data<span class="sc">&gt;</span>, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>misc<span class="sc">&gt;</span>)) <span class="sc">+</span></span>
-<span id="cb449-2"><a href="plot-our-data-with-ggplot2.html#cb449-2" tabindex="-1"></a>  geom_<span class="sc">&lt;</span>type<span class="sc">&gt;</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>misc<span class="sc">&gt;</span>)) <span class="sc">+</span></span>
-<span id="cb449-3"><a href="plot-our-data-with-ggplot2.html#cb449-3" tabindex="-1"></a>  scale_<span class="sc">&lt;</span>type<span class="sc">&gt;</span>() <span class="sc">+</span></span>
-<span id="cb449-4"><a href="plot-our-data-with-ggplot2.html#cb449-4" tabindex="-1"></a>  <span class="fu">labs</span>() <span class="sc">+</span></span>
-<span id="cb449-5"><a href="plot-our-data-with-ggplot2.html#cb449-5" tabindex="-1"></a>  coord_<span class="sc">&lt;</span>type<span class="sc">&gt;</span> <span class="sc">+</span></span>
-<span id="cb449-6"><a href="plot-our-data-with-ggplot2.html#cb449-6" tabindex="-1"></a>  theme_<span class="sc">&lt;</span>type<span class="sc">&gt;</span> <span class="sc">+</span></span>
-<span id="cb449-7"><a href="plot-our-data-with-ggplot2.html#cb449-7" tabindex="-1"></a>  <span class="fu">theme</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="plot-our-data-with-ggplot2.html#cb449-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>data<span class="sc">&gt;</span>, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>misc<span class="sc">&gt;</span>)) <span class="sc">+</span></span>
+<span id="cb449-2"><a href="plot-our-data-with-ggplot2.html#cb449-2" aria-hidden="true" tabindex="-1"></a>  geom_<span class="sc">&lt;</span>type<span class="sc">&gt;</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>misc<span class="sc">&gt;</span>)) <span class="sc">+</span></span>
+<span id="cb449-3"><a href="plot-our-data-with-ggplot2.html#cb449-3" aria-hidden="true" tabindex="-1"></a>  scale_<span class="sc">&lt;</span>type<span class="sc">&gt;</span>() <span class="sc">+</span></span>
+<span id="cb449-4"><a href="plot-our-data-with-ggplot2.html#cb449-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>() <span class="sc">+</span></span>
+<span id="cb449-5"><a href="plot-our-data-with-ggplot2.html#cb449-5" aria-hidden="true" tabindex="-1"></a>  coord_<span class="sc">&lt;</span>type<span class="sc">&gt;</span> <span class="sc">+</span></span>
+<span id="cb449-6"><a href="plot-our-data-with-ggplot2.html#cb449-6" aria-hidden="true" tabindex="-1"></a>  theme_<span class="sc">&lt;</span>type<span class="sc">&gt;</span> <span class="sc">+</span></span>
+<span id="cb449-7"><a href="plot-our-data-with-ggplot2.html#cb449-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>()</span></code></pre></div>
 <p>This is just an example, with lots of placeholders (<type> and <data>) that we will explore during this trip. <br>
 You can see that each function is connected with the next one with a plus “+” sign, that’s because you can imagine the structure of this code as a chain of commands, whose order is not that important (only the first two lines of code must be in those positions). Each function define different aspects of the graph, and you can have multiple function of the same type in the same command. <br>
 Don’t worry, I know it sounds confusing, but by the end of the chapter you will understand everything.
@@ -438,36 +437,36 @@ Don’t worry, I know it sounds confusing, but by the end of the chapter you wil
 <code>ggplot(data = &lt;data&gt;)</code> is the initiating function of the plot. It is fundamental and all ggplot codes <u>must</u> start with it. In this code, we can (usually we do) define which is the dataframe we will use to create the plot. In fact, the input of ggplot is a data.frame object.
 <br></p>
 </div>
-<div id="type-of-graph-geom_-and-stat_" class="section level2 unnumbered hasAnchor">
-<h2>Type of graph (geom_ and stat_)<a href="plot-our-data-with-ggplot2.html#type-of-graph-geom_-and-stat_" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="type-of-graph-geom_-and-stat_" class="section level2 unnumbered">
+<h2>Type of graph (geom_ and stat_)</h2>
 <p>Next, you have to decide which <em>kind</em> of graph you want to create, and you set it by choosing the corresponding <code>geom_</code> function. For example, to create a lineplot you will use the <code>geom_line</code> function, to create a boxplot you will use the <code>geom_boxplot</code> function and so on. There are plenty of them and you can find the full list <a href="https://ggplot2.tidyverse.org/reference/index.html#geoms" target="_blank">here</a>; you will find yourself using mostly <code>geom_bar</code> (for barplots), <code>geom_line</code>, <code>geom_boxplot</code>, <code>geom_histogram</code> (for histograms), <code>geom_density</code> (for density plot), <code>geom_text</code> (for text) and <code>geom_hline</code>, <code>geom_vline</code> and <code>geom_abline</code> for horizontal, vertical and general lines.
 <br></p>
-<div id="mapping-values-to-graph-elements-aes" class="section level3 unnumbered hasAnchor">
-<h3>Mapping values to graph elements (aes)<a href="plot-our-data-with-ggplot2.html#mapping-values-to-graph-elements-aes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="mapping-values-to-graph-elements-aes" class="section level3 unnumbered">
+<h3>Mapping values to graph elements (aes)</h3>
 <p>“Ok, I’m on it. But where I can set which values to plot?” I know this is what you want to ask me; and here is the answer: what to plot must be given in the form of <code>aes</code> function to <code>mapping</code> argument.
 <br>
 The basic elements of <code>aes</code> are <code>x</code> and <code>y</code> argument, where you define which variable should be plot on x axis and which one on y axis. Let’s make our first example of a plot by creating a dotplot to evaluate a possible correlation between AOD and PMI. Remember, a basic plot can be created just using <code>ggplot() + geom_&lt;type&gt;()</code>!</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="plot-our-data-with-ggplot2.html#cb450-1" tabindex="-1"></a>aod_pmi <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> AOD, <span class="at">y =</span> PMI)) <span class="sc">+</span></span>
-<span id="cb450-2"><a href="plot-our-data-with-ggplot2.html#cb450-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
-<span id="cb450-3"><a href="plot-our-data-with-ggplot2.html#cb450-3" tabindex="-1"></a></span>
-<span id="cb450-4"><a href="plot-our-data-with-ggplot2.html#cb450-4" tabindex="-1"></a>aod_pmi</span></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="plot-our-data-with-ggplot2.html#cb450-1" aria-hidden="true" tabindex="-1"></a>aod_pmi <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> AOD, <span class="at">y =</span> PMI)) <span class="sc">+</span></span>
+<span id="cb450-2"><a href="plot-our-data-with-ggplot2.html#cb450-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb450-3"><a href="plot-our-data-with-ggplot2.html#cb450-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb450-4"><a href="plot-our-data-with-ggplot2.html#cb450-4" aria-hidden="true" tabindex="-1"></a>aod_pmi</span></code></pre></div>
 <p><img src="_main_files/figure-html/aod_pmi_base_dotplot-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Cool! We have created our first graph using ggplot. As you can see, as we have passed a data.frame to <code>data =</code> and ggplot is part of tidyverse, we can use column name as variables in the code.
 <br>
 Now, we can create even a better code because each geom_ function has its own aesthetic properties that can be set. For example, we can change the size and the color of the dots in this plot: we can do by giving a value to all the points, or (and you will find this very cool), based on the values of another vector. What do I mean? Let’s see it together.</p>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="plot-our-data-with-ggplot2.html#cb451-1" tabindex="-1"></a><span class="co"># 1. Create a plot with color and size set equal for all points</span></span>
-<span id="cb451-2"><a href="plot-our-data-with-ggplot2.html#cb451-2" tabindex="-1"></a>aod_pmi_all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> AOD, <span class="at">y =</span> PMI)) <span class="sc">+</span></span>
-<span id="cb451-3"><a href="plot-our-data-with-ggplot2.html#cb451-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;#BD4F6C&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>)</span>
-<span id="cb451-4"><a href="plot-our-data-with-ggplot2.html#cb451-4" tabindex="-1"></a></span>
-<span id="cb451-5"><a href="plot-our-data-with-ggplot2.html#cb451-5" tabindex="-1"></a><span class="co"># 2. Create a plot with color based on sex and size based on RIN</span></span>
-<span id="cb451-6"><a href="plot-our-data-with-ggplot2.html#cb451-6" tabindex="-1"></a>aod_pmi_sex_rin_aes <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> AOD, <span class="at">y =</span> PMI)) <span class="sc">+</span></span>
-<span id="cb451-7"><a href="plot-our-data-with-ggplot2.html#cb451-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> sex, <span class="at">size =</span> RIN))</span>
-<span id="cb451-8"><a href="plot-our-data-with-ggplot2.html#cb451-8" tabindex="-1"></a></span>
-<span id="cb451-9"><a href="plot-our-data-with-ggplot2.html#cb451-9" tabindex="-1"></a><span class="co"># 3. Arrange the plots together (we will see this in details soon)</span></span>
-<span id="cb451-10"><a href="plot-our-data-with-ggplot2.html#cb451-10" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggpubr))</span>
-<span id="cb451-11"><a href="plot-our-data-with-ggplot2.html#cb451-11" tabindex="-1"></a>aod_pmi_arr <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(aod_pmi_all, aod_pmi_sex_rin_aes, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>)</span>
-<span id="cb451-12"><a href="plot-our-data-with-ggplot2.html#cb451-12" tabindex="-1"></a></span>
-<span id="cb451-13"><a href="plot-our-data-with-ggplot2.html#cb451-13" tabindex="-1"></a>aod_pmi_arr</span></code></pre></div>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="plot-our-data-with-ggplot2.html#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create a plot with color and size set equal for all points</span></span>
+<span id="cb451-2"><a href="plot-our-data-with-ggplot2.html#cb451-2" aria-hidden="true" tabindex="-1"></a>aod_pmi_all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> AOD, <span class="at">y =</span> PMI)) <span class="sc">+</span></span>
+<span id="cb451-3"><a href="plot-our-data-with-ggplot2.html#cb451-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;#BD4F6C&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>)</span>
+<span id="cb451-4"><a href="plot-our-data-with-ggplot2.html#cb451-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb451-5"><a href="plot-our-data-with-ggplot2.html#cb451-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create a plot with color based on sex and size based on RIN</span></span>
+<span id="cb451-6"><a href="plot-our-data-with-ggplot2.html#cb451-6" aria-hidden="true" tabindex="-1"></a>aod_pmi_sex_rin_aes <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> AOD, <span class="at">y =</span> PMI)) <span class="sc">+</span></span>
+<span id="cb451-7"><a href="plot-our-data-with-ggplot2.html#cb451-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> sex, <span class="at">size =</span> RIN))</span>
+<span id="cb451-8"><a href="plot-our-data-with-ggplot2.html#cb451-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb451-9"><a href="plot-our-data-with-ggplot2.html#cb451-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Arrange the plots together (we will see this in details soon)</span></span>
+<span id="cb451-10"><a href="plot-our-data-with-ggplot2.html#cb451-10" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggpubr))</span>
+<span id="cb451-11"><a href="plot-our-data-with-ggplot2.html#cb451-11" aria-hidden="true" tabindex="-1"></a>aod_pmi_arr <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(aod_pmi_all, aod_pmi_sex_rin_aes, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>)</span>
+<span id="cb451-12"><a href="plot-our-data-with-ggplot2.html#cb451-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb451-13"><a href="plot-our-data-with-ggplot2.html#cb451-13" aria-hidden="true" tabindex="-1"></a>aod_pmi_arr</span></code></pre></div>
 <p><img src="_main_files/figure-html/aod_pmi_comparison_dotplot-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p class="plist">
 Let’s focus on point 1 and 2 (the creation of the two plots):
@@ -481,48 +480,48 @@ When setting the mapping, you can think like “for EACH point, what characteris
 </li>
 </ul>
 </div>
-<div id="change-the-stat-associated-to-the-graph" class="section level3 unnumbered hasAnchor">
-<h3>Change the “stat” associated to the graph<a href="plot-our-data-with-ggplot2.html#change-the-stat-associated-to-the-graph" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="change-the-stat-associated-to-the-graph" class="section level3 unnumbered">
+<h3>Change the “stat” associated to the graph</h3>
 <p>I have to introduce a more advance concept now: <em>stat</em>. Let’s first see an example, and then understand what stat are.
 <br>
 Let’s create a barplot that summarize the number of males and females in the data.frame:</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="plot-our-data-with-ggplot2.html#cb452-1" tabindex="-1"></a>males_females_barplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> df) <span class="sc">+</span></span>
-<span id="cb452-2"><a href="plot-our-data-with-ggplot2.html#cb452-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex))</span>
-<span id="cb452-3"><a href="plot-our-data-with-ggplot2.html#cb452-3" tabindex="-1"></a></span>
-<span id="cb452-4"><a href="plot-our-data-with-ggplot2.html#cb452-4" tabindex="-1"></a>males_females_barplot</span></code></pre></div>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="plot-our-data-with-ggplot2.html#cb452-1" aria-hidden="true" tabindex="-1"></a>males_females_barplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> df) <span class="sc">+</span></span>
+<span id="cb452-2"><a href="plot-our-data-with-ggplot2.html#cb452-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex))</span>
+<span id="cb452-3"><a href="plot-our-data-with-ggplot2.html#cb452-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb452-4"><a href="plot-our-data-with-ggplot2.html#cb452-4" aria-hidden="true" tabindex="-1"></a>males_females_barplot</span></code></pre></div>
 <p><img src="_main_files/figure-html/males_females_barplot-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>“Hey, wait a minute! The data.frame contains multiple entries, you gave only one mapping (x). How does it summarize the values?” That’s <em>stat</em>, the way ggplot “operates” on the given data. Each <code>geom_</code> function has its own default stat and sometimes you want to change it.
 <br>
 In this case, geom_bar has as defualt stat <em>“count”</em>, which means that for each x value, it counts the occurrence and plot the value. Other geom have “identity” as default transformation that associate an y value to each x value (as <code>geom_point</code>).
 <br>
 I’m telling you this, because sometimes you may find yourself in the situation where you have a data.frame with x and y values, and you want to create a barplot with them. Let’s see an example by recreating the same plot as before, but with a different approach:</p>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="plot-our-data-with-ggplot2.html#cb453-1" tabindex="-1"></a><span class="co"># 1. Create a dataframe with the number of males and females</span></span>
-<span id="cb453-2"><a href="plot-our-data-with-ggplot2.html#cb453-2" tabindex="-1"></a>sex_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb453-3"><a href="plot-our-data-with-ggplot2.html#cb453-3" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
-<span id="cb453-4"><a href="plot-our-data-with-ggplot2.html#cb453-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb453-5"><a href="plot-our-data-with-ggplot2.html#cb453-5" tabindex="-1"></a></span>
-<span id="cb453-6"><a href="plot-our-data-with-ggplot2.html#cb453-6" tabindex="-1"></a><span class="co"># 2. Create the plot</span></span>
-<span id="cb453-7"><a href="plot-our-data-with-ggplot2.html#cb453-7" tabindex="-1"></a>sex_barplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> sex_df) <span class="sc">+</span></span>
-<span id="cb453-8"><a href="plot-our-data-with-ggplot2.html#cb453-8" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> n), <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>)</span>
-<span id="cb453-9"><a href="plot-our-data-with-ggplot2.html#cb453-9" tabindex="-1"></a></span>
-<span id="cb453-10"><a href="plot-our-data-with-ggplot2.html#cb453-10" tabindex="-1"></a>sex_bar_arr <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(males_females_barplot, sex_barplot, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>)</span>
-<span id="cb453-11"><a href="plot-our-data-with-ggplot2.html#cb453-11" tabindex="-1"></a>sex_bar_arr</span></code></pre></div>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="plot-our-data-with-ggplot2.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create a dataframe with the number of males and females</span></span>
+<span id="cb453-2"><a href="plot-our-data-with-ggplot2.html#cb453-2" aria-hidden="true" tabindex="-1"></a>sex_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb453-3"><a href="plot-our-data-with-ggplot2.html#cb453-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb453-4"><a href="plot-our-data-with-ggplot2.html#cb453-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb453-5"><a href="plot-our-data-with-ggplot2.html#cb453-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb453-6"><a href="plot-our-data-with-ggplot2.html#cb453-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create the plot</span></span>
+<span id="cb453-7"><a href="plot-our-data-with-ggplot2.html#cb453-7" aria-hidden="true" tabindex="-1"></a>sex_barplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> sex_df) <span class="sc">+</span></span>
+<span id="cb453-8"><a href="plot-our-data-with-ggplot2.html#cb453-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> n), <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>)</span>
+<span id="cb453-9"><a href="plot-our-data-with-ggplot2.html#cb453-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb453-10"><a href="plot-our-data-with-ggplot2.html#cb453-10" aria-hidden="true" tabindex="-1"></a>sex_bar_arr <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(males_females_barplot, sex_barplot, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>)</span>
+<span id="cb453-11"><a href="plot-our-data-with-ggplot2.html#cb453-11" aria-hidden="true" tabindex="-1"></a>sex_bar_arr</span></code></pre></div>
 <p><img src="_main_files/figure-html/males_females_barplot2-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>The two graphs are identical! This because changing the stat to “identity” in the second plot, allow us to plot dataframes that are already “summarized”. However, I suggest the first approach.</p>
 </div>
-<div id="multiple-geometries-in-the-same-plot" class="section level3 unnumbered hasAnchor">
-<h3>Multiple geometries in the same plot<a href="plot-our-data-with-ggplot2.html#multiple-geometries-in-the-same-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="multiple-geometries-in-the-same-plot" class="section level3 unnumbered">
+<h3>Multiple geometries in the same plot</h3>
 <p>We can use multiple geom_ on the same graph. For example, we can add two lines in the previous dotplot (AOD vs. PMI) representing “thresholds”. From a coding point of view, we could start again from the beginning, but it is easier to add the lines to the previous stored graph object:</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="plot-our-data-with-ggplot2.html#cb454-1" tabindex="-1"></a><span class="co"># 1. Define thresholds as 10th quantile</span></span>
-<span id="cb454-2"><a href="plot-our-data-with-ggplot2.html#cb454-2" tabindex="-1"></a>aod_thresh <span class="ot">&lt;-</span> <span class="fu">quantile</span>(df<span class="sc">$</span>AOD, <span class="at">probs =</span> <span class="fl">0.1</span>, <span class="at">na.rm =</span> T)</span>
-<span id="cb454-3"><a href="plot-our-data-with-ggplot2.html#cb454-3" tabindex="-1"></a>pmi_thresh <span class="ot">&lt;-</span> <span class="fu">quantile</span>(df<span class="sc">$</span>PMI, <span class="at">probs =</span> <span class="fl">0.1</span>, <span class="at">na.rm =</span> T)</span>
-<span id="cb454-4"><a href="plot-our-data-with-ggplot2.html#cb454-4" tabindex="-1"></a></span>
-<span id="cb454-5"><a href="plot-our-data-with-ggplot2.html#cb454-5" tabindex="-1"></a><span class="co"># 2. Add to graph</span></span>
-<span id="cb454-6"><a href="plot-our-data-with-ggplot2.html#cb454-6" tabindex="-1"></a>aod_pmi_sex_rin_aes <span class="ot">&lt;-</span> aod_pmi_sex_rin_aes <span class="sc">+</span></span>
-<span id="cb454-7"><a href="plot-our-data-with-ggplot2.html#cb454-7" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> pmi_thresh, <span class="at">color =</span> <span class="st">&quot;#FF0000&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
-<span id="cb454-8"><a href="plot-our-data-with-ggplot2.html#cb454-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> aod_thresh, <span class="at">color =</span> <span class="st">&quot;#0000FF&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dotted&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>)</span>
-<span id="cb454-9"><a href="plot-our-data-with-ggplot2.html#cb454-9" tabindex="-1"></a>  </span>
-<span id="cb454-10"><a href="plot-our-data-with-ggplot2.html#cb454-10" tabindex="-1"></a>aod_pmi_sex_rin_aes</span></code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="plot-our-data-with-ggplot2.html#cb454-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Define thresholds as 10th quantile</span></span>
+<span id="cb454-2"><a href="plot-our-data-with-ggplot2.html#cb454-2" aria-hidden="true" tabindex="-1"></a>aod_thresh <span class="ot">&lt;-</span> <span class="fu">quantile</span>(df<span class="sc">$</span>AOD, <span class="at">probs =</span> <span class="fl">0.1</span>, <span class="at">na.rm =</span> T)</span>
+<span id="cb454-3"><a href="plot-our-data-with-ggplot2.html#cb454-3" aria-hidden="true" tabindex="-1"></a>pmi_thresh <span class="ot">&lt;-</span> <span class="fu">quantile</span>(df<span class="sc">$</span>PMI, <span class="at">probs =</span> <span class="fl">0.1</span>, <span class="at">na.rm =</span> T)</span>
+<span id="cb454-4"><a href="plot-our-data-with-ggplot2.html#cb454-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb454-5"><a href="plot-our-data-with-ggplot2.html#cb454-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Add to graph</span></span>
+<span id="cb454-6"><a href="plot-our-data-with-ggplot2.html#cb454-6" aria-hidden="true" tabindex="-1"></a>aod_pmi_sex_rin_aes <span class="ot">&lt;-</span> aod_pmi_sex_rin_aes <span class="sc">+</span></span>
+<span id="cb454-7"><a href="plot-our-data-with-ggplot2.html#cb454-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> pmi_thresh, <span class="at">color =</span> <span class="st">&quot;#FF0000&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb454-8"><a href="plot-our-data-with-ggplot2.html#cb454-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> aod_thresh, <span class="at">color =</span> <span class="st">&quot;#0000FF&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dotted&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>)</span>
+<span id="cb454-9"><a href="plot-our-data-with-ggplot2.html#cb454-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb454-10"><a href="plot-our-data-with-ggplot2.html#cb454-10" aria-hidden="true" tabindex="-1"></a>aod_pmi_sex_rin_aes</span></code></pre></div>
 <p><img src="_main_files/figure-html/aod_pmi_thresh_dotplot-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>We have used <code>geom_hline</code> and <code>geom_vline</code>, giving the values of yintecept and xintercept respectively; we also set the color and the linetype (dashed and dotted).
 <br>
@@ -530,16 +529,16 @@ We should have the lowest 10% of PMI values below the red line and the lowest 10
 <br></p>
 </div>
 </div>
-<div id="change-axis-and-colors-scale_" class="section level2 unnumbered hasAnchor">
-<h2>Change axis and colors (scale_)<a href="plot-our-data-with-ggplot2.html#change-axis-and-colors-scale_" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="change-axis-and-colors-scale_" class="section level2 unnumbered">
+<h2>Change axis and colors (scale_)</h2>
 <p>The previous graphs are ok, they show what we want but we didn’t set anything apart from the data to show and the type of graph.
 <br>
 Let’s now create a basic boxplot to investigate how RIN values changes based on the Area, and modify the axis ticks and setting the colors we want.
 <br></p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="plot-our-data-with-ggplot2.html#cb455-1" tabindex="-1"></a>rin_area_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
-<span id="cb455-2"><a href="plot-our-data-with-ggplot2.html#cb455-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Area, <span class="at">fill =</span> Area, <span class="at">y =</span> RIN), <span class="at">na.rm =</span> T, <span class="at">outlier.shape =</span> <span class="dv">2</span>)</span>
-<span id="cb455-3"><a href="plot-our-data-with-ggplot2.html#cb455-3" tabindex="-1"></a></span>
-<span id="cb455-4"><a href="plot-our-data-with-ggplot2.html#cb455-4" tabindex="-1"></a>rin_area_boxplot</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="plot-our-data-with-ggplot2.html#cb455-1" aria-hidden="true" tabindex="-1"></a>rin_area_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb455-2"><a href="plot-our-data-with-ggplot2.html#cb455-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Area, <span class="at">fill =</span> Area, <span class="at">y =</span> RIN), <span class="at">na.rm =</span> T, <span class="at">outlier.shape =</span> <span class="dv">2</span>)</span>
+<span id="cb455-3"><a href="plot-our-data-with-ggplot2.html#cb455-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb455-4"><a href="plot-our-data-with-ggplot2.html#cb455-4" aria-hidden="true" tabindex="-1"></a>rin_area_boxplot</span></code></pre></div>
 <img src="_main_files/figure-html/rin_area_basic_boxplot-1.svg" width="85%" style="display: block; margin: auto;" />
 Cool, we can see that the distributions of RIN values for some areas are different than the others. We have also changed the shape of the outliers, making them easier to identify.
 <br>
@@ -560,13 +559,13 @@ Colorscheme is ok, but let’s change it
 <p>All these things can be achieved usng different <code>scale_&lt;type&gt;</code> functions, in particular we will use <code>scale_y_continuous</code> to address the first two points and <code>scale_fill_brewer</code> for the last one. Can you guess which is the naming scheme of the scale_ functions?
 <br>
 Let me answer it: it starts with <code>scale_</code>, than what to change (y or fill in this case) and the type of data we have (continuous and brewer).</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="plot-our-data-with-ggplot2.html#cb456-1" tabindex="-1"></a>rin_area_boxplot_edit <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
-<span id="cb456-2"><a href="plot-our-data-with-ggplot2.html#cb456-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Area, <span class="at">fill =</span> Area, <span class="at">y =</span> RIN), <span class="at">na.rm =</span> T, <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb456-3"><a href="plot-our-data-with-ggplot2.html#cb456-3" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb456-4"><a href="plot-our-data-with-ggplot2.html#cb456-4" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set1&quot;</span>)</span>
-<span id="cb456-5"><a href="plot-our-data-with-ggplot2.html#cb456-5" tabindex="-1"></a></span>
-<span id="cb456-6"><a href="plot-our-data-with-ggplot2.html#cb456-6" tabindex="-1"></a>rin_area_boxplots_arr <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(rin_area_boxplot, rin_area_boxplot_edit, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>)</span>
-<span id="cb456-7"><a href="plot-our-data-with-ggplot2.html#cb456-7" tabindex="-1"></a>rin_area_boxplots_arr</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="plot-our-data-with-ggplot2.html#cb456-1" aria-hidden="true" tabindex="-1"></a>rin_area_boxplot_edit <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb456-2"><a href="plot-our-data-with-ggplot2.html#cb456-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Area, <span class="at">fill =</span> Area, <span class="at">y =</span> RIN), <span class="at">na.rm =</span> T, <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb456-3"><a href="plot-our-data-with-ggplot2.html#cb456-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb456-4"><a href="plot-our-data-with-ggplot2.html#cb456-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set1&quot;</span>)</span>
+<span id="cb456-5"><a href="plot-our-data-with-ggplot2.html#cb456-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb456-6"><a href="plot-our-data-with-ggplot2.html#cb456-6" aria-hidden="true" tabindex="-1"></a>rin_area_boxplots_arr <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(rin_area_boxplot, rin_area_boxplot_edit, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>)</span>
+<span id="cb456-7"><a href="plot-our-data-with-ggplot2.html#cb456-7" aria-hidden="true" tabindex="-1"></a>rin_area_boxplots_arr</span></code></pre></div>
 <p><img src="_main_files/figure-html/rin_area_boxplots-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 Great! we succesfully changed the y axis breaks and limits, and the fill colors. Let’s dissect the code a bit: <code>limits =</code> accepts a vector of two values, representing the lower and upper limits of the axis, <code>breaks =</code> accepts a vector of the values used to create the breaks.
 <br>
@@ -586,66 +585,66 @@ I use <code>scale_&lt;type&gt;_manual(values = named_vector)</code>. This functi
 </ol>
 <p>This approach ensures that we use the same color/shape/linetype ecc for each label in a project and, most important, it is super easy to change something when we want: instead of change it in each code of the project, we change the value of the csv file and launch again all the scripts.</p>
 <p>Let’s do it:</p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="plot-our-data-with-ggplot2.html#cb457-1" tabindex="-1"></a><span class="co"># 1. Load the file</span></span>
-<span id="cb457-2"><a href="plot-our-data-with-ggplot2.html#cb457-2" tabindex="-1"></a>color_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;refs/area_colors.csv&quot;</span>)</span>
-<span id="cb457-3"><a href="plot-our-data-with-ggplot2.html#cb457-3" tabindex="-1"></a></span>
-<span id="cb457-4"><a href="plot-our-data-with-ggplot2.html#cb457-4" tabindex="-1"></a><span class="co"># 2. Create a named vector</span></span>
-<span id="cb457-5"><a href="plot-our-data-with-ggplot2.html#cb457-5" tabindex="-1"></a>area_color_vector <span class="ot">&lt;-</span> <span class="fu">structure</span>(color_df<span class="sc">$</span>Color, <span class="at">names =</span> color_df<span class="sc">$</span>Area)</span>
-<span id="cb457-6"><a href="plot-our-data-with-ggplot2.html#cb457-6" tabindex="-1"></a></span>
-<span id="cb457-7"><a href="plot-our-data-with-ggplot2.html#cb457-7" tabindex="-1"></a><span class="co"># 3. Create the plot</span></span>
-<span id="cb457-8"><a href="plot-our-data-with-ggplot2.html#cb457-8" tabindex="-1"></a>rin_area_boxplot_manual <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
-<span id="cb457-9"><a href="plot-our-data-with-ggplot2.html#cb457-9" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Area, <span class="at">fill =</span> Area, <span class="at">y =</span> RIN), <span class="at">na.rm =</span> T, <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb457-10"><a href="plot-our-data-with-ggplot2.html#cb457-10" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb457-11"><a href="plot-our-data-with-ggplot2.html#cb457-11" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> area_color_vector)</span>
-<span id="cb457-12"><a href="plot-our-data-with-ggplot2.html#cb457-12" tabindex="-1"></a></span>
-<span id="cb457-13"><a href="plot-our-data-with-ggplot2.html#cb457-13" tabindex="-1"></a>rin_area_boxplot_manual</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="plot-our-data-with-ggplot2.html#cb457-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load the file</span></span>
+<span id="cb457-2"><a href="plot-our-data-with-ggplot2.html#cb457-2" aria-hidden="true" tabindex="-1"></a>color_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;refs/area_colors.csv&quot;</span>)</span>
+<span id="cb457-3"><a href="plot-our-data-with-ggplot2.html#cb457-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb457-4"><a href="plot-our-data-with-ggplot2.html#cb457-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create a named vector</span></span>
+<span id="cb457-5"><a href="plot-our-data-with-ggplot2.html#cb457-5" aria-hidden="true" tabindex="-1"></a>area_color_vector <span class="ot">&lt;-</span> <span class="fu">structure</span>(color_df<span class="sc">$</span>Color, <span class="at">names =</span> color_df<span class="sc">$</span>Area)</span>
+<span id="cb457-6"><a href="plot-our-data-with-ggplot2.html#cb457-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb457-7"><a href="plot-our-data-with-ggplot2.html#cb457-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create the plot</span></span>
+<span id="cb457-8"><a href="plot-our-data-with-ggplot2.html#cb457-8" aria-hidden="true" tabindex="-1"></a>rin_area_boxplot_manual <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb457-9"><a href="plot-our-data-with-ggplot2.html#cb457-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Area, <span class="at">fill =</span> Area, <span class="at">y =</span> RIN), <span class="at">na.rm =</span> T, <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb457-10"><a href="plot-our-data-with-ggplot2.html#cb457-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb457-11"><a href="plot-our-data-with-ggplot2.html#cb457-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> area_color_vector)</span>
+<span id="cb457-12"><a href="plot-our-data-with-ggplot2.html#cb457-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb457-13"><a href="plot-our-data-with-ggplot2.html#cb457-13" aria-hidden="true" tabindex="-1"></a>rin_area_boxplot_manual</span></code></pre></div>
 <p><img src="_main_files/figure-html/rin_area_boxplot_manual-1.svg" width="85%" style="display: block; margin: auto;" />
 This is the color <a href="refs/area_colors.csv" download>file</a> I used.
 <br>
 You can try different scales for different aspects of the plotting to create better plots; here I just show you an example, but I’m sure that we will encounter them in next chapters.</p>
 </div>
-<div id="add-title-and-change-labels-labs" class="section level2 unnumbered hasAnchor">
-<h2>Add title and change labels (labs)<a href="plot-our-data-with-ggplot2.html#add-title-and-change-labels-labs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="add-title-and-change-labels-labs" class="section level2 unnumbered">
+<h2>Add title and change labels (labs)</h2>
 <p>To make out plots easier to understand, we can set a title, a subtitle and change the labels of the axes through <code>labs()</code> function. Let’s see it:</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="plot-our-data-with-ggplot2.html#cb458-1" tabindex="-1"></a>rin_area_boxplot_manual <span class="ot">&lt;-</span> rin_area_boxplot_manual <span class="sc">+</span></span>
-<span id="cb458-2"><a href="plot-our-data-with-ggplot2.html#cb458-2" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;RIN distribution across areas&quot;</span>, </span>
-<span id="cb458-3"><a href="plot-our-data-with-ggplot2.html#cb458-3" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;TL samples have higher RIN values compared to the others&quot;</span>, </span>
-<span id="cb458-4"><a href="plot-our-data-with-ggplot2.html#cb458-4" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>, </span>
-<span id="cb458-5"><a href="plot-our-data-with-ggplot2.html#cb458-5" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;2023 R for biologist&quot;</span>, </span>
-<span id="cb458-6"><a href="plot-our-data-with-ggplot2.html#cb458-6" tabindex="-1"></a>       <span class="at">tag =</span> <span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb458-7"><a href="plot-our-data-with-ggplot2.html#cb458-7" tabindex="-1"></a></span>
-<span id="cb458-8"><a href="plot-our-data-with-ggplot2.html#cb458-8" tabindex="-1"></a>rin_area_boxplot_manual</span></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="plot-our-data-with-ggplot2.html#cb458-1" aria-hidden="true" tabindex="-1"></a>rin_area_boxplot_manual <span class="ot">&lt;-</span> rin_area_boxplot_manual <span class="sc">+</span></span>
+<span id="cb458-2"><a href="plot-our-data-with-ggplot2.html#cb458-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;RIN distribution across areas&quot;</span>, </span>
+<span id="cb458-3"><a href="plot-our-data-with-ggplot2.html#cb458-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;TL samples have higher RIN values compared to the others&quot;</span>, </span>
+<span id="cb458-4"><a href="plot-our-data-with-ggplot2.html#cb458-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb458-5"><a href="plot-our-data-with-ggplot2.html#cb458-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;2023 R for biologist&quot;</span>, </span>
+<span id="cb458-6"><a href="plot-our-data-with-ggplot2.html#cb458-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">tag =</span> <span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb458-7"><a href="plot-our-data-with-ggplot2.html#cb458-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb458-8"><a href="plot-our-data-with-ggplot2.html#cb458-8" aria-hidden="true" tabindex="-1"></a>rin_area_boxplot_manual</span></code></pre></div>
 <p><img src="_main_files/figure-html/rin_area_boxplot_labs-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Look, now it is much more detailed and professional. But still, we can improve it. How? with <code>theme_</code> functions.</p>
 </div>
-<div id="change-appearence-theme" class="section level2 unnumbered hasAnchor">
-<h2>Change appearence (theme)<a href="plot-our-data-with-ggplot2.html#change-appearence-theme" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="change-appearence-theme" class="section level2 unnumbered">
+<h2>Change appearence (theme)</h2>
 <p>Through <code>theme_</code> functions we can change the <strong>aspect</strong> of the axes, title, subtitle, legend, and so on… I know you have familiarity with PowerPoint, so let’s imagine them as “Picture Format” menu.
 <br>
 We have a set of pre-built themes, on top of which we can set our own settings. Let’s start woth a pre-built theme, because I love ggplot but I hate the background of the previous plot; I prefere using <code>theme_classic</code> for my plots, with little adjustments.</p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="plot-our-data-with-ggplot2.html#cb459-1" tabindex="-1"></a>rin_area_boxplot_manual <span class="ot">&lt;-</span> rin_area_boxplot_manual <span class="sc">+</span></span>
-<span id="cb459-2"><a href="plot-our-data-with-ggplot2.html#cb459-2" tabindex="-1"></a>  <span class="fu">theme_classic</span>() </span>
-<span id="cb459-3"><a href="plot-our-data-with-ggplot2.html#cb459-3" tabindex="-1"></a></span>
-<span id="cb459-4"><a href="plot-our-data-with-ggplot2.html#cb459-4" tabindex="-1"></a>rin_area_boxplot_manual</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="plot-our-data-with-ggplot2.html#cb459-1" aria-hidden="true" tabindex="-1"></a>rin_area_boxplot_manual <span class="ot">&lt;-</span> rin_area_boxplot_manual <span class="sc">+</span></span>
+<span id="cb459-2"><a href="plot-our-data-with-ggplot2.html#cb459-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() </span>
+<span id="cb459-3"><a href="plot-our-data-with-ggplot2.html#cb459-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb459-4"><a href="plot-our-data-with-ggplot2.html#cb459-4" aria-hidden="true" tabindex="-1"></a>rin_area_boxplot_manual</span></code></pre></div>
 <p><img src="_main_files/figure-html/rin_area_boxplot_classic-1.svg" width="85%" style="display: block; margin: auto;" />
 Wow, now the background is gone and we have a cleaner plot 😍. This is a good starting point; let’s now remove the legend, as it is not adding any information, and highlight the title.</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="plot-our-data-with-ggplot2.html#cb460-1" tabindex="-1"></a>rin_area_boxplot_manual <span class="ot">&lt;-</span> rin_area_boxplot_manual <span class="sc">+</span></span>
-<span id="cb460-2"><a href="plot-our-data-with-ggplot2.html#cb460-2" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb460-3"><a href="plot-our-data-with-ggplot2.html#cb460-3" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">14</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
-<span id="cb460-4"><a href="plot-our-data-with-ggplot2.html#cb460-4" tabindex="-1"></a></span>
-<span id="cb460-5"><a href="plot-our-data-with-ggplot2.html#cb460-5" tabindex="-1"></a>rin_area_boxplot_manual</span></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="plot-our-data-with-ggplot2.html#cb460-1" aria-hidden="true" tabindex="-1"></a>rin_area_boxplot_manual <span class="ot">&lt;-</span> rin_area_boxplot_manual <span class="sc">+</span></span>
+<span id="cb460-2"><a href="plot-our-data-with-ggplot2.html#cb460-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb460-3"><a href="plot-our-data-with-ggplot2.html#cb460-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">14</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb460-4"><a href="plot-our-data-with-ggplot2.html#cb460-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb460-5"><a href="plot-our-data-with-ggplot2.html#cb460-5" aria-hidden="true" tabindex="-1"></a>rin_area_boxplot_manual</span></code></pre></div>
 <p><img src="_main_files/figure-html/rin_area_boxplot_theme-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Perfect! Now the title is bigger and in bold, and we do not have the legened anymore. LEt’s discuss about how we change the title: in ggplot, all the text elements of a plot (title, axis title, axis labels, etc) are controlled through <code>element_text</code> funtion, while all the line elements (axes, grid, axis ticks, etc) are controlled through <code>element_line</code> funtion. The argument of these functions are straightforward and super intuitive, there is no need to explain them now, you can explore yourself!</p>
 </div>
-<div id="save-plot" class="section level2 unnumbered hasAnchor">
-<h2>Save plot<a href="plot-our-data-with-ggplot2.html#save-plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="save-plot" class="section level2 unnumbered">
+<h2>Save plot</h2>
 <p>Now that we have created our plot, it’s time to save it! ggplot comes with its own function to save plots: <code>ggsave</code>. Here is how to use it:</p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="plot-our-data-with-ggplot2.html#cb461-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">&quot;example.pdf&quot;</span>, </span>
-<span id="cb461-2"><a href="plot-our-data-with-ggplot2.html#cb461-2" tabindex="-1"></a>       <span class="at">plot =</span> rin_area_boxplot_manual, </span>
-<span id="cb461-3"><a href="plot-our-data-with-ggplot2.html#cb461-3" tabindex="-1"></a>       <span class="at">device =</span> <span class="st">&quot;pdf&quot;</span>, </span>
-<span id="cb461-4"><a href="plot-our-data-with-ggplot2.html#cb461-4" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">14</span>, </span>
-<span id="cb461-5"><a href="plot-our-data-with-ggplot2.html#cb461-5" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">14</span>, </span>
-<span id="cb461-6"><a href="plot-our-data-with-ggplot2.html#cb461-6" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">&quot;cm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="plot-our-data-with-ggplot2.html#cb461-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">&quot;example.pdf&quot;</span>, </span>
+<span id="cb461-2"><a href="plot-our-data-with-ggplot2.html#cb461-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">plot =</span> rin_area_boxplot_manual, </span>
+<span id="cb461-3"><a href="plot-our-data-with-ggplot2.html#cb461-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">device =</span> <span class="st">&quot;pdf&quot;</span>, </span>
+<span id="cb461-4"><a href="plot-our-data-with-ggplot2.html#cb461-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">14</span>, </span>
+<span id="cb461-5"><a href="plot-our-data-with-ggplot2.html#cb461-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">14</span>, </span>
+<span id="cb461-6"><a href="plot-our-data-with-ggplot2.html#cb461-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">&quot;cm&quot;</span>)</span></code></pre></div>
 <p>The argument are self-explanatory here, so you should not have any issue in saving all of you plots.
 <br>
 <em>Suggestion</em>: play with dimensions in <code>theme_</code> and <code>ggsave</code> functions to optimize your plot. Moreover, saving the file as pdf or svg let’s you easilly modify it with Gimp or Photoshop/Illustrator, scaling them without losing any resolution.</p>

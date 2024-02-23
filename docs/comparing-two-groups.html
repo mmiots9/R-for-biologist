@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-12-09" />
+<meta name="date" content="2024-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="association-between-categorical-variables.html"/>
 <link rel="next" href="comparing-more-groups.html"/>
-<script src="libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <meta property="og:description" content="To you, who never gives up, for your future. You can make it!">
 <meta name="keywords" content="R, biology, data analysis">
 <meta name="author" content="Matteo Miotto">
@@ -71,7 +70,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -384,29 +383,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="comparing-two-groups" class="section level1 hasAnchor" number="17">
-<h1><span class="header-section-number">17</span> Comparing two groups<a href="comparing-two-groups.html#comparing-two-groups" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="comparing-two-groups" class="section level1" number="17">
+<h1><span class="header-section-number">17</span> Comparing two groups</h1>
 <p>Another chapter, another test(s). Here, we will see how to compare two groups with continuous values: t test and Welch’s t-test (parametric data) and Wilkoxon and Mann-Whitney (non-parametric data).<br>
 We have already seen how to decide whether to use parametric and non-parametric tests (if you don’t remember, go and check the Intro to statistics <a href="intro-stat-chapter.html#intro-stat-chapter">chapter</a>), so let’s start by loading our data and decide what we want to compare.</p>
-<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="comparing-two-groups.html#cb554-1" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
-<span id="cb554-2"><a href="comparing-two-groups.html#cb554-2" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb554-3"><a href="comparing-two-groups.html#cb554-3" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
-<span id="cb554-4"><a href="comparing-two-groups.html#cb554-4" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggpubr))</span>
-<span id="cb554-5"><a href="comparing-two-groups.html#cb554-5" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(gginnards))</span>
-<span id="cb554-6"><a href="comparing-two-groups.html#cb554-6" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(glue))</span>
-<span id="cb554-7"><a href="comparing-two-groups.html#cb554-7" tabindex="-1"></a></span>
-<span id="cb554-8"><a href="comparing-two-groups.html#cb554-8" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
-<span id="cb554-9"><a href="comparing-two-groups.html#cb554-9" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Stat-test-dataset.csv&quot;</span>)</span>
-<span id="cb554-10"><a href="comparing-two-groups.html#cb554-10" tabindex="-1"></a></span>
-<span id="cb554-11"><a href="comparing-two-groups.html#cb554-11" tabindex="-1"></a><span class="co"># 3. Change come column types</span></span>
-<span id="cb554-12"><a href="comparing-two-groups.html#cb554-12" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb554-13"><a href="comparing-two-groups.html#cb554-13" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
-<span id="cb554-14"><a href="comparing-two-groups.html#cb554-14" tabindex="-1"></a>         <span class="st">&quot;treatment&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T1&quot;</span>, <span class="st">&quot;Untreated&quot;</span>)),</span>
-<span id="cb554-15"><a href="comparing-two-groups.html#cb554-15" tabindex="-1"></a>         <span class="st">&quot;Task1&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task1, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
-<span id="cb554-16"><a href="comparing-two-groups.html#cb554-16" tabindex="-1"></a>         <span class="st">&quot;Task2&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task2, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
-<span id="cb554-17"><a href="comparing-two-groups.html#cb554-17" tabindex="-1"></a>         )</span>
-<span id="cb554-18"><a href="comparing-two-groups.html#cb554-18" tabindex="-1"></a></span>
-<span id="cb554-19"><a href="comparing-two-groups.html#cb554-19" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="comparing-two-groups.html#cb554-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
+<span id="cb554-2"><a href="comparing-two-groups.html#cb554-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb554-3"><a href="comparing-two-groups.html#cb554-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
+<span id="cb554-4"><a href="comparing-two-groups.html#cb554-4" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggpubr))</span>
+<span id="cb554-5"><a href="comparing-two-groups.html#cb554-5" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(gginnards))</span>
+<span id="cb554-6"><a href="comparing-two-groups.html#cb554-6" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(glue))</span>
+<span id="cb554-7"><a href="comparing-two-groups.html#cb554-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb554-8"><a href="comparing-two-groups.html#cb554-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
+<span id="cb554-9"><a href="comparing-two-groups.html#cb554-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Stat-test-dataset.csv&quot;</span>)</span>
+<span id="cb554-10"><a href="comparing-two-groups.html#cb554-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb554-11"><a href="comparing-two-groups.html#cb554-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Change come column types</span></span>
+<span id="cb554-12"><a href="comparing-two-groups.html#cb554-12" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb554-13"><a href="comparing-two-groups.html#cb554-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb554-14"><a href="comparing-two-groups.html#cb554-14" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;treatment&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T1&quot;</span>, <span class="st">&quot;Untreated&quot;</span>)),</span>
+<span id="cb554-15"><a href="comparing-two-groups.html#cb554-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Task1&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task1, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb554-16"><a href="comparing-two-groups.html#cb554-16" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Task2&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task2, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb554-17"><a href="comparing-two-groups.html#cb554-17" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb554-18"><a href="comparing-two-groups.html#cb554-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb554-19"><a href="comparing-two-groups.html#cb554-19" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>&#39;data.frame&#39;:   600 obs. of  7 variables:
  $ sex      : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 1 2 1 2 1 2 1 2 1 ...
  $ age      : int  3 3 3 3 3 3 3 3 3 3 ...
@@ -430,98 +429,98 @@ Do P30 males behave differently in Task3 based on treatment?
 </li>
 </ol>
 <p>Let’s now decide which test to use for each question. We can start by looking at the boxplots and then check parametric assumptions (it’s important to do so!).<br> But first, we have to subset our dataframe:</p>
-<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="comparing-two-groups.html#cb556-1" tabindex="-1"></a><span class="co"># 1. Filter data</span></span>
-<span id="cb556-2"><a href="comparing-two-groups.html#cb556-2" tabindex="-1"></a>female_t1_weight_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb556-3"><a href="comparing-two-groups.html#cb556-3" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">30</span>) <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span> <span class="sc">&amp;</span> treatment <span class="sc">==</span> <span class="st">&quot;T1&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb556-4"><a href="comparing-two-groups.html#cb556-4" tabindex="-1"></a>  <span class="fu">select</span>(sex, age, treatment, weight) <span class="sc">%&gt;%</span></span>
-<span id="cb556-5"><a href="comparing-two-groups.html#cb556-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">factor</span>(age))</span>
-<span id="cb556-6"><a href="comparing-two-groups.html#cb556-6" tabindex="-1"></a></span>
-<span id="cb556-7"><a href="comparing-two-groups.html#cb556-7" tabindex="-1"></a>t1_3_weight_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb556-8"><a href="comparing-two-groups.html#cb556-8" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span> treatment <span class="sc">==</span> <span class="st">&quot;T1&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb556-9"><a href="comparing-two-groups.html#cb556-9" tabindex="-1"></a>  <span class="fu">select</span>(sex, age, treatment, weight)</span>
-<span id="cb556-10"><a href="comparing-two-groups.html#cb556-10" tabindex="-1"></a></span>
-<span id="cb556-11"><a href="comparing-two-groups.html#cb556-11" tabindex="-1"></a>male_3_task3_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb556-12"><a href="comparing-two-groups.html#cb556-12" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb556-13"><a href="comparing-two-groups.html#cb556-13" tabindex="-1"></a>  <span class="fu">select</span>(sex, age, treatment, Task3)</span></code></pre></div>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="comparing-two-groups.html#cb556-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Filter data</span></span>
+<span id="cb556-2"><a href="comparing-two-groups.html#cb556-2" aria-hidden="true" tabindex="-1"></a>female_t1_weight_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb556-3"><a href="comparing-two-groups.html#cb556-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">30</span>) <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span> <span class="sc">&amp;</span> treatment <span class="sc">==</span> <span class="st">&quot;T1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb556-4"><a href="comparing-two-groups.html#cb556-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, age, treatment, weight) <span class="sc">%&gt;%</span></span>
+<span id="cb556-5"><a href="comparing-two-groups.html#cb556-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">factor</span>(age))</span>
+<span id="cb556-6"><a href="comparing-two-groups.html#cb556-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb556-7"><a href="comparing-two-groups.html#cb556-7" aria-hidden="true" tabindex="-1"></a>t1_3_weight_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb556-8"><a href="comparing-two-groups.html#cb556-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span> treatment <span class="sc">==</span> <span class="st">&quot;T1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb556-9"><a href="comparing-two-groups.html#cb556-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, age, treatment, weight)</span>
+<span id="cb556-10"><a href="comparing-two-groups.html#cb556-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb556-11"><a href="comparing-two-groups.html#cb556-11" aria-hidden="true" tabindex="-1"></a>male_3_task3_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb556-12"><a href="comparing-two-groups.html#cb556-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb556-13"><a href="comparing-two-groups.html#cb556-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, age, treatment, Task3)</span></code></pre></div>
 <p>Then, we will look at the boxplot:</p>
-<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="comparing-two-groups.html#cb557-1" tabindex="-1"></a>female_t1_weight_boxplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(female_t1_weight_df) <span class="sc">+</span></span>
-<span id="cb557-2"><a href="comparing-two-groups.html#cb557-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> weight, <span class="at">fill =</span> age, <span class="at">group =</span> age)) <span class="sc">+</span></span>
-<span id="cb557-3"><a href="comparing-two-groups.html#cb557-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;T1-treated females weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb557-4"><a href="comparing-two-groups.html#cb557-4" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb557-5"><a href="comparing-two-groups.html#cb557-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb557-6"><a href="comparing-two-groups.html#cb557-6" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span>
-<span id="cb557-7"><a href="comparing-two-groups.html#cb557-7" tabindex="-1"></a></span>
-<span id="cb557-8"><a href="comparing-two-groups.html#cb557-8" tabindex="-1"></a>t1_3_weight_boxplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(t1_3_weight_df) <span class="sc">+</span></span>
-<span id="cb557-9"><a href="comparing-two-groups.html#cb557-9" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> weight, <span class="at">fill =</span> sex, <span class="at">group =</span> sex)) <span class="sc">+</span></span>
-<span id="cb557-10"><a href="comparing-two-groups.html#cb557-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Sex&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;T1-treated P3 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb557-11"><a href="comparing-two-groups.html#cb557-11" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb557-12"><a href="comparing-two-groups.html#cb557-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb557-13"><a href="comparing-two-groups.html#cb557-13" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span>
-<span id="cb557-14"><a href="comparing-two-groups.html#cb557-14" tabindex="-1"></a></span>
-<span id="cb557-15"><a href="comparing-two-groups.html#cb557-15" tabindex="-1"></a>male_3_task3_boxplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(male_3_task3_df) <span class="sc">+</span></span>
-<span id="cb557-16"><a href="comparing-two-groups.html#cb557-16" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment, <span class="at">group =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb557-17"><a href="comparing-two-groups.html#cb557-17" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Task3 (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male P3 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb557-18"><a href="comparing-two-groups.html#cb557-18" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb557-19"><a href="comparing-two-groups.html#cb557-19" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb557-20"><a href="comparing-two-groups.html#cb557-20" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span>
-<span id="cb557-21"><a href="comparing-two-groups.html#cb557-21" tabindex="-1"></a></span>
-<span id="cb557-22"><a href="comparing-two-groups.html#cb557-22" tabindex="-1"></a><span class="fu">ggarrange</span>(female_t1_weight_boxplot, t1_3_weight_boxplot, male_3_task3_boxplot, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="comparing-two-groups.html#cb557-1" aria-hidden="true" tabindex="-1"></a>female_t1_weight_boxplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(female_t1_weight_df) <span class="sc">+</span></span>
+<span id="cb557-2"><a href="comparing-two-groups.html#cb557-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> weight, <span class="at">fill =</span> age, <span class="at">group =</span> age)) <span class="sc">+</span></span>
+<span id="cb557-3"><a href="comparing-two-groups.html#cb557-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;T1-treated females weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb557-4"><a href="comparing-two-groups.html#cb557-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb557-5"><a href="comparing-two-groups.html#cb557-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb557-6"><a href="comparing-two-groups.html#cb557-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb557-7"><a href="comparing-two-groups.html#cb557-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb557-8"><a href="comparing-two-groups.html#cb557-8" aria-hidden="true" tabindex="-1"></a>t1_3_weight_boxplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(t1_3_weight_df) <span class="sc">+</span></span>
+<span id="cb557-9"><a href="comparing-two-groups.html#cb557-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> weight, <span class="at">fill =</span> sex, <span class="at">group =</span> sex)) <span class="sc">+</span></span>
+<span id="cb557-10"><a href="comparing-two-groups.html#cb557-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Sex&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;T1-treated P3 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb557-11"><a href="comparing-two-groups.html#cb557-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb557-12"><a href="comparing-two-groups.html#cb557-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb557-13"><a href="comparing-two-groups.html#cb557-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb557-14"><a href="comparing-two-groups.html#cb557-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb557-15"><a href="comparing-two-groups.html#cb557-15" aria-hidden="true" tabindex="-1"></a>male_3_task3_boxplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(male_3_task3_df) <span class="sc">+</span></span>
+<span id="cb557-16"><a href="comparing-two-groups.html#cb557-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment, <span class="at">group =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb557-17"><a href="comparing-two-groups.html#cb557-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Task3 (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male P3 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb557-18"><a href="comparing-two-groups.html#cb557-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb557-19"><a href="comparing-two-groups.html#cb557-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb557-20"><a href="comparing-two-groups.html#cb557-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb557-21"><a href="comparing-two-groups.html#cb557-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb557-22"><a href="comparing-two-groups.html#cb557-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(female_t1_weight_boxplot, t1_3_weight_boxplot, male_3_task3_boxplot, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/two_groups_boxplot-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Great, we can see some differences. And yes, there are some outliers in <b>B.</b>, but we do not want to remove them now, you can try it if you want (it can be a useful exercise).<br>
 We now check the normality and homoschedasticity for each group, and then insert those info in the plot:</p>
-<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="comparing-two-groups.html#cb558-1" tabindex="-1"></a><span class="co"># 1. Shapiro test</span></span>
-<span id="cb558-2"><a href="comparing-two-groups.html#cb558-2" tabindex="-1"></a>female_t1_weight_shapiro <span class="ot">&lt;-</span> female_t1_weight_df <span class="sc">%&gt;%</span></span>
-<span id="cb558-3"><a href="comparing-two-groups.html#cb558-3" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
-<span id="cb558-4"><a href="comparing-two-groups.html#cb558-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">shap =</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p.value)</span>
-<span id="cb558-5"><a href="comparing-two-groups.html#cb558-5" tabindex="-1"></a></span>
-<span id="cb558-6"><a href="comparing-two-groups.html#cb558-6" tabindex="-1"></a>t1_3_weight_shapiro <span class="ot">&lt;-</span> t1_3_weight_df <span class="sc">%&gt;%</span></span>
-<span id="cb558-7"><a href="comparing-two-groups.html#cb558-7" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
-<span id="cb558-8"><a href="comparing-two-groups.html#cb558-8" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">shap =</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p.value)</span>
-<span id="cb558-9"><a href="comparing-two-groups.html#cb558-9" tabindex="-1"></a></span>
-<span id="cb558-10"><a href="comparing-two-groups.html#cb558-10" tabindex="-1"></a>male_3_task3_shapiro <span class="ot">&lt;-</span> male_3_task3_df <span class="sc">%&gt;%</span></span>
-<span id="cb558-11"><a href="comparing-two-groups.html#cb558-11" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb558-12"><a href="comparing-two-groups.html#cb558-12" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">shap =</span> <span class="fu">shapiro.test</span>(Task3)<span class="sc">$</span>p.value)</span>
-<span id="cb558-13"><a href="comparing-two-groups.html#cb558-13" tabindex="-1"></a></span>
-<span id="cb558-14"><a href="comparing-two-groups.html#cb558-14" tabindex="-1"></a><span class="co"># 2. Bartlett test</span></span>
-<span id="cb558-15"><a href="comparing-two-groups.html#cb558-15" tabindex="-1"></a>female_t1_weight_bartlett <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(female_t1_weight_df<span class="sc">$</span>weight, female_t1_weight_df<span class="sc">$</span>age)<span class="sc">$</span>p.value</span>
-<span id="cb558-16"><a href="comparing-two-groups.html#cb558-16" tabindex="-1"></a>t1_3_weight_bartlett <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(t1_3_weight_df<span class="sc">$</span>weight, t1_3_weight_df<span class="sc">$</span>sex)<span class="sc">$</span>p.value</span>
-<span id="cb558-17"><a href="comparing-two-groups.html#cb558-17" tabindex="-1"></a>male_3_task3_bartlett <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(male_3_task3_df<span class="sc">$</span>Task3, male_3_task3_df<span class="sc">$</span>treatment)<span class="sc">$</span>p.value</span>
-<span id="cb558-18"><a href="comparing-two-groups.html#cb558-18" tabindex="-1"></a></span>
-<span id="cb558-19"><a href="comparing-two-groups.html#cb558-19" tabindex="-1"></a><span class="co"># 3. Get labels position</span></span>
-<span id="cb558-20"><a href="comparing-two-groups.html#cb558-20" tabindex="-1"></a>female_t1_weight_max <span class="ot">&lt;-</span> <span class="fu">max</span>(female_t1_weight_df<span class="sc">$</span>weight, <span class="at">na.rm =</span> T) <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb558-21"><a href="comparing-two-groups.html#cb558-21" tabindex="-1"></a>t1_3_weight_max <span class="ot">&lt;-</span> <span class="fu">max</span>(t1_3_weight_df<span class="sc">$</span>weight, <span class="at">na.rm =</span> T) <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb558-22"><a href="comparing-two-groups.html#cb558-22" tabindex="-1"></a>male_3_task3_max <span class="ot">&lt;-</span> <span class="fu">max</span>(male_3_task3_df<span class="sc">$</span>Task3, <span class="at">na.rm =</span> T) <span class="sc">+</span> <span class="dv">20</span></span>
-<span id="cb558-23"><a href="comparing-two-groups.html#cb558-23" tabindex="-1"></a></span>
-<span id="cb558-24"><a href="comparing-two-groups.html#cb558-24" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
-<span id="cb558-25"><a href="comparing-two-groups.html#cb558-25" tabindex="-1"></a>female_t1_weight_boxplot <span class="ot">&lt;-</span> female_t1_weight_boxplot <span class="sc">+</span></span>
-<span id="cb558-26"><a href="comparing-two-groups.html#cb558-26" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> female_t1_weight_shapiro, </span>
-<span id="cb558-27"><a href="comparing-two-groups.html#cb558-27" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age, </span>
-<span id="cb558-28"><a href="comparing-two-groups.html#cb558-28" tabindex="-1"></a>                           <span class="at">y =</span> female_t1_weight_max, </span>
-<span id="cb558-29"><a href="comparing-two-groups.html#cb558-29" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shap, <span class="dv">3</span>)))</span>
-<span id="cb558-30"><a href="comparing-two-groups.html#cb558-30" tabindex="-1"></a>            ) <span class="sc">+</span></span>
-<span id="cb558-31"><a href="comparing-two-groups.html#cb558-31" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(female_t1_weight_bartlett, <span class="dv">3</span>)))</span>
-<span id="cb558-32"><a href="comparing-two-groups.html#cb558-32" tabindex="-1"></a></span>
-<span id="cb558-33"><a href="comparing-two-groups.html#cb558-33" tabindex="-1"></a>t1_3_weight_boxplot <span class="ot">&lt;-</span> t1_3_weight_boxplot <span class="sc">+</span></span>
-<span id="cb558-34"><a href="comparing-two-groups.html#cb558-34" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> t1_3_weight_shapiro, </span>
-<span id="cb558-35"><a href="comparing-two-groups.html#cb558-35" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, </span>
-<span id="cb558-36"><a href="comparing-two-groups.html#cb558-36" tabindex="-1"></a>                           <span class="at">y =</span> t1_3_weight_max, </span>
-<span id="cb558-37"><a href="comparing-two-groups.html#cb558-37" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shap, <span class="dv">3</span>)))</span>
-<span id="cb558-38"><a href="comparing-two-groups.html#cb558-38" tabindex="-1"></a>            ) <span class="sc">+</span></span>
-<span id="cb558-39"><a href="comparing-two-groups.html#cb558-39" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(t1_3_weight_bartlett, <span class="dv">3</span>)))</span>
-<span id="cb558-40"><a href="comparing-two-groups.html#cb558-40" tabindex="-1"></a></span>
-<span id="cb558-41"><a href="comparing-two-groups.html#cb558-41" tabindex="-1"></a>male_3_task3_boxplot <span class="ot">&lt;-</span> male_3_task3_boxplot <span class="sc">+</span></span>
-<span id="cb558-42"><a href="comparing-two-groups.html#cb558-42" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> male_3_task3_shapiro, </span>
-<span id="cb558-43"><a href="comparing-two-groups.html#cb558-43" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, </span>
-<span id="cb558-44"><a href="comparing-two-groups.html#cb558-44" tabindex="-1"></a>                           <span class="at">y =</span> male_3_task3_max, </span>
-<span id="cb558-45"><a href="comparing-two-groups.html#cb558-45" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shap, <span class="dv">3</span>)))</span>
-<span id="cb558-46"><a href="comparing-two-groups.html#cb558-46" tabindex="-1"></a>            ) <span class="sc">+</span></span>
-<span id="cb558-47"><a href="comparing-two-groups.html#cb558-47" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(male_3_task3_bartlett, <span class="dv">3</span>)))</span>
-<span id="cb558-48"><a href="comparing-two-groups.html#cb558-48" tabindex="-1"></a></span>
-<span id="cb558-49"><a href="comparing-two-groups.html#cb558-49" tabindex="-1"></a><span class="fu">ggarrange</span>(female_t1_weight_boxplot, t1_3_weight_boxplot, male_3_task3_boxplot, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="comparing-two-groups.html#cb558-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Shapiro test</span></span>
+<span id="cb558-2"><a href="comparing-two-groups.html#cb558-2" aria-hidden="true" tabindex="-1"></a>female_t1_weight_shapiro <span class="ot">&lt;-</span> female_t1_weight_df <span class="sc">%&gt;%</span></span>
+<span id="cb558-3"><a href="comparing-two-groups.html#cb558-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
+<span id="cb558-4"><a href="comparing-two-groups.html#cb558-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">shap =</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p.value)</span>
+<span id="cb558-5"><a href="comparing-two-groups.html#cb558-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb558-6"><a href="comparing-two-groups.html#cb558-6" aria-hidden="true" tabindex="-1"></a>t1_3_weight_shapiro <span class="ot">&lt;-</span> t1_3_weight_df <span class="sc">%&gt;%</span></span>
+<span id="cb558-7"><a href="comparing-two-groups.html#cb558-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb558-8"><a href="comparing-two-groups.html#cb558-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">shap =</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p.value)</span>
+<span id="cb558-9"><a href="comparing-two-groups.html#cb558-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb558-10"><a href="comparing-two-groups.html#cb558-10" aria-hidden="true" tabindex="-1"></a>male_3_task3_shapiro <span class="ot">&lt;-</span> male_3_task3_df <span class="sc">%&gt;%</span></span>
+<span id="cb558-11"><a href="comparing-two-groups.html#cb558-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb558-12"><a href="comparing-two-groups.html#cb558-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">shap =</span> <span class="fu">shapiro.test</span>(Task3)<span class="sc">$</span>p.value)</span>
+<span id="cb558-13"><a href="comparing-two-groups.html#cb558-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb558-14"><a href="comparing-two-groups.html#cb558-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Bartlett test</span></span>
+<span id="cb558-15"><a href="comparing-two-groups.html#cb558-15" aria-hidden="true" tabindex="-1"></a>female_t1_weight_bartlett <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(female_t1_weight_df<span class="sc">$</span>weight, female_t1_weight_df<span class="sc">$</span>age)<span class="sc">$</span>p.value</span>
+<span id="cb558-16"><a href="comparing-two-groups.html#cb558-16" aria-hidden="true" tabindex="-1"></a>t1_3_weight_bartlett <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(t1_3_weight_df<span class="sc">$</span>weight, t1_3_weight_df<span class="sc">$</span>sex)<span class="sc">$</span>p.value</span>
+<span id="cb558-17"><a href="comparing-two-groups.html#cb558-17" aria-hidden="true" tabindex="-1"></a>male_3_task3_bartlett <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(male_3_task3_df<span class="sc">$</span>Task3, male_3_task3_df<span class="sc">$</span>treatment)<span class="sc">$</span>p.value</span>
+<span id="cb558-18"><a href="comparing-two-groups.html#cb558-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb558-19"><a href="comparing-two-groups.html#cb558-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Get labels position</span></span>
+<span id="cb558-20"><a href="comparing-two-groups.html#cb558-20" aria-hidden="true" tabindex="-1"></a>female_t1_weight_max <span class="ot">&lt;-</span> <span class="fu">max</span>(female_t1_weight_df<span class="sc">$</span>weight, <span class="at">na.rm =</span> T) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb558-21"><a href="comparing-two-groups.html#cb558-21" aria-hidden="true" tabindex="-1"></a>t1_3_weight_max <span class="ot">&lt;-</span> <span class="fu">max</span>(t1_3_weight_df<span class="sc">$</span>weight, <span class="at">na.rm =</span> T) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb558-22"><a href="comparing-two-groups.html#cb558-22" aria-hidden="true" tabindex="-1"></a>male_3_task3_max <span class="ot">&lt;-</span> <span class="fu">max</span>(male_3_task3_df<span class="sc">$</span>Task3, <span class="at">na.rm =</span> T) <span class="sc">+</span> <span class="dv">20</span></span>
+<span id="cb558-23"><a href="comparing-two-groups.html#cb558-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb558-24"><a href="comparing-two-groups.html#cb558-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
+<span id="cb558-25"><a href="comparing-two-groups.html#cb558-25" aria-hidden="true" tabindex="-1"></a>female_t1_weight_boxplot <span class="ot">&lt;-</span> female_t1_weight_boxplot <span class="sc">+</span></span>
+<span id="cb558-26"><a href="comparing-two-groups.html#cb558-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> female_t1_weight_shapiro, </span>
+<span id="cb558-27"><a href="comparing-two-groups.html#cb558-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age, </span>
+<span id="cb558-28"><a href="comparing-two-groups.html#cb558-28" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> female_t1_weight_max, </span>
+<span id="cb558-29"><a href="comparing-two-groups.html#cb558-29" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shap, <span class="dv">3</span>)))</span>
+<span id="cb558-30"><a href="comparing-two-groups.html#cb558-30" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">+</span></span>
+<span id="cb558-31"><a href="comparing-two-groups.html#cb558-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(female_t1_weight_bartlett, <span class="dv">3</span>)))</span>
+<span id="cb558-32"><a href="comparing-two-groups.html#cb558-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb558-33"><a href="comparing-two-groups.html#cb558-33" aria-hidden="true" tabindex="-1"></a>t1_3_weight_boxplot <span class="ot">&lt;-</span> t1_3_weight_boxplot <span class="sc">+</span></span>
+<span id="cb558-34"><a href="comparing-two-groups.html#cb558-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> t1_3_weight_shapiro, </span>
+<span id="cb558-35"><a href="comparing-two-groups.html#cb558-35" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, </span>
+<span id="cb558-36"><a href="comparing-two-groups.html#cb558-36" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> t1_3_weight_max, </span>
+<span id="cb558-37"><a href="comparing-two-groups.html#cb558-37" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shap, <span class="dv">3</span>)))</span>
+<span id="cb558-38"><a href="comparing-two-groups.html#cb558-38" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">+</span></span>
+<span id="cb558-39"><a href="comparing-two-groups.html#cb558-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(t1_3_weight_bartlett, <span class="dv">3</span>)))</span>
+<span id="cb558-40"><a href="comparing-two-groups.html#cb558-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb558-41"><a href="comparing-two-groups.html#cb558-41" aria-hidden="true" tabindex="-1"></a>male_3_task3_boxplot <span class="ot">&lt;-</span> male_3_task3_boxplot <span class="sc">+</span></span>
+<span id="cb558-42"><a href="comparing-two-groups.html#cb558-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> male_3_task3_shapiro, </span>
+<span id="cb558-43"><a href="comparing-two-groups.html#cb558-43" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, </span>
+<span id="cb558-44"><a href="comparing-two-groups.html#cb558-44" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> male_3_task3_max, </span>
+<span id="cb558-45"><a href="comparing-two-groups.html#cb558-45" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shap, <span class="dv">3</span>)))</span>
+<span id="cb558-46"><a href="comparing-two-groups.html#cb558-46" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">+</span></span>
+<span id="cb558-47"><a href="comparing-two-groups.html#cb558-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(male_3_task3_bartlett, <span class="dv">3</span>)))</span>
+<span id="cb558-48"><a href="comparing-two-groups.html#cb558-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb558-49"><a href="comparing-two-groups.html#cb558-49" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(female_t1_weight_boxplot, t1_3_weight_boxplot, male_3_task3_boxplot, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/two_groups_boxplot2-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Amazing! We have to use simple t-test in <b>A</b>, Welch’s t-test in <b>B</b> and Mann-Whitney test in <b>C</b>. Let’s see how to perform these tests in R.</p>
-<div id="t-test" class="section level2 unnumbered hasAnchor">
-<h2>T-test<a href="comparing-two-groups.html#t-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="t-test" class="section level2 unnumbered">
+<h2>T-test</h2>
 T-test is one of the most famous test and the one that most of people try to apply every time, even if it’s not possible (sigh, but after this course, I know you won’t be one of them).
 <p class="plist">
 You can use the t-test to compare:
@@ -539,11 +538,11 @@ The difference of the mean values of two independent populations (unpaired t-tes
 </ul>
 <p>In our case, we want to evaluate whether the untreated females at P30 weight more than the ones at P15. As the samples are independent, we will use the unpaired t-test, but don’t worry, I will explain you all the possible scenarios and how to write the proper code.<br>
 The function to use is <code>t.test()</code>, and there are plenty of cool arguments that we can use to apply the right test in the right conditions. Let’s look how we apply it in our case, and then explain each bit of code:</p>
-<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="comparing-two-groups.html#cb559-1" tabindex="-1"></a>t_test_res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="at">formula =</span> female_t1_weight_df<span class="sc">$</span>weight <span class="sc">~</span> female_t1_weight_df<span class="sc">$</span>age,</span>
-<span id="cb559-2"><a href="comparing-two-groups.html#cb559-2" tabindex="-1"></a>                     <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span>,</span>
-<span id="cb559-3"><a href="comparing-two-groups.html#cb559-3" tabindex="-1"></a>                     <span class="at">mu =</span> <span class="dv">0</span>,</span>
-<span id="cb559-4"><a href="comparing-two-groups.html#cb559-4" tabindex="-1"></a>                     <span class="at">paired =</span> F,</span>
-<span id="cb559-5"><a href="comparing-two-groups.html#cb559-5" tabindex="-1"></a>                     <span class="at">var.equal =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="comparing-two-groups.html#cb559-1" aria-hidden="true" tabindex="-1"></a>t_test_res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="at">formula =</span> female_t1_weight_df<span class="sc">$</span>weight <span class="sc">~</span> female_t1_weight_df<span class="sc">$</span>age,</span>
+<span id="cb559-2"><a href="comparing-two-groups.html#cb559-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span>,</span>
+<span id="cb559-3"><a href="comparing-two-groups.html#cb559-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">mu =</span> <span class="dv">0</span>,</span>
+<span id="cb559-4"><a href="comparing-two-groups.html#cb559-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">paired =</span> F,</span>
+<span id="cb559-5"><a href="comparing-two-groups.html#cb559-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">var.equal =</span> T)</span></code></pre></div>
 <p class="plist">
 Wow, lots of things to explain:
 </p>
@@ -565,7 +564,7 @@ Wow, lots of things to explain:
 </li>
 </ul>
 <p>And now, let’s see the results. Remember to store the results in a variable, so we can get all the values that we needed for further analysis/plots.</p>
-<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="comparing-two-groups.html#cb560-1" tabindex="-1"></a>t_test_res</span></code></pre></div>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="comparing-two-groups.html#cb560-1" aria-hidden="true" tabindex="-1"></a>t_test_res</span></code></pre></div>
 <pre class="code-out"><code>
     Two Sample t-test
 
@@ -580,19 +579,19 @@ mean in group 15 mean in group 30
 <p>We have a lot of information. I think that there is not much to say, as it is kind of self-explanatory, with type of test, p-value, confidence interval, alternative hypothesis and mean values.<br>
 We can confirm that this is significant (as expected, otherwise females are not growing and that’s a problem).</p>
 </div>
-<div id="welchs-test" class="section level2 unnumbered hasAnchor">
-<h2>Welch’s test<a href="comparing-two-groups.html#welchs-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="welchs-test" class="section level2 unnumbered">
+<h2>Welch’s test</h2>
 <p>To address the second question, we have to use Welch’s t-test, as the two samples have normal distributions, but different variances. We have just seen how to perform Welch’s t-test just by setting <code>var.equal = FALSE</code> in <code>t.test()</code> function. <br>
 So, we talks are over, here is the answer to our question:</p>
-<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="comparing-two-groups.html#cb562-1" tabindex="-1"></a><span class="co"># 1. Perform the test</span></span>
-<span id="cb562-2"><a href="comparing-two-groups.html#cb562-2" tabindex="-1"></a>welch_res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="at">formula =</span> t1_3_weight_df<span class="sc">$</span>weight <span class="sc">~</span> t1_3_weight_df<span class="sc">$</span>sex,</span>
-<span id="cb562-3"><a href="comparing-two-groups.html#cb562-3" tabindex="-1"></a>                     <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
-<span id="cb562-4"><a href="comparing-two-groups.html#cb562-4" tabindex="-1"></a>                     <span class="at">mu =</span> <span class="dv">0</span>,</span>
-<span id="cb562-5"><a href="comparing-two-groups.html#cb562-5" tabindex="-1"></a>                     <span class="at">paired =</span> F,</span>
-<span id="cb562-6"><a href="comparing-two-groups.html#cb562-6" tabindex="-1"></a>                     <span class="at">var.equal =</span> F)</span>
-<span id="cb562-7"><a href="comparing-two-groups.html#cb562-7" tabindex="-1"></a></span>
-<span id="cb562-8"><a href="comparing-two-groups.html#cb562-8" tabindex="-1"></a><span class="co"># 2. Show the results</span></span>
-<span id="cb562-9"><a href="comparing-two-groups.html#cb562-9" tabindex="-1"></a>welch_res</span></code></pre></div>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="comparing-two-groups.html#cb562-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Perform the test</span></span>
+<span id="cb562-2"><a href="comparing-two-groups.html#cb562-2" aria-hidden="true" tabindex="-1"></a>welch_res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="at">formula =</span> t1_3_weight_df<span class="sc">$</span>weight <span class="sc">~</span> t1_3_weight_df<span class="sc">$</span>sex,</span>
+<span id="cb562-3"><a href="comparing-two-groups.html#cb562-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb562-4"><a href="comparing-two-groups.html#cb562-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">mu =</span> <span class="dv">0</span>,</span>
+<span id="cb562-5"><a href="comparing-two-groups.html#cb562-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">paired =</span> F,</span>
+<span id="cb562-6"><a href="comparing-two-groups.html#cb562-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">var.equal =</span> F)</span>
+<span id="cb562-7"><a href="comparing-two-groups.html#cb562-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb562-8"><a href="comparing-two-groups.html#cb562-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Show the results</span></span>
+<span id="cb562-9"><a href="comparing-two-groups.html#cb562-9" aria-hidden="true" tabindex="-1"></a>welch_res</span></code></pre></div>
 <pre class="code-out"><code>
     Welch Two Sample t-test
 
@@ -606,18 +605,18 @@ mean in group Female   mean in group Male
             3.556757             5.403514 </code></pre>
 <p>And yes! There is difference between males and females at P3, with males that weight significantly more than females.</p>
 </div>
-<div id="mann-whitney-and-wilcoxon" class="section level2 unnumbered hasAnchor">
-<h2>Mann-Whitney and Wilcoxon<a href="comparing-two-groups.html#mann-whitney-and-wilcoxon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="mann-whitney-and-wilcoxon" class="section level2 unnumbered">
+<h2>Mann-Whitney and Wilcoxon</h2>
 <p>We will now address the last question through Mann-Whitney test, which is the non-parametric analogous of the unpaired t-test (we will not cover the Wilcoxon, which is the non-parametric analogous of the paired t-test, but you will see now hot to perform it as well).<br>
 The function we will use is <code>wilcox.test()</code>. Yeah, I know it sounds weird, but that’s it. It takes the same arguments as the parametric counterpart, so we won’t see them again. To notice, if we set <code>paired = T</code>, we will perform the Wilcoxon test, otherwise we will perform Mann-Whitney.</p>
-<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="comparing-two-groups.html#cb564-1" tabindex="-1"></a><span class="co"># 1. Perform the test</span></span>
-<span id="cb564-2"><a href="comparing-two-groups.html#cb564-2" tabindex="-1"></a>mann_res <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(<span class="at">formula =</span> male_3_task3_df<span class="sc">$</span>Task3 <span class="sc">~</span> male_3_task3_df<span class="sc">$</span>treatment,</span>
-<span id="cb564-3"><a href="comparing-two-groups.html#cb564-3" tabindex="-1"></a>                     <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
-<span id="cb564-4"><a href="comparing-two-groups.html#cb564-4" tabindex="-1"></a>                     <span class="at">mu =</span> <span class="dv">0</span>,</span>
-<span id="cb564-5"><a href="comparing-two-groups.html#cb564-5" tabindex="-1"></a>                     <span class="at">paired =</span> F)</span>
-<span id="cb564-6"><a href="comparing-two-groups.html#cb564-6" tabindex="-1"></a></span>
-<span id="cb564-7"><a href="comparing-two-groups.html#cb564-7" tabindex="-1"></a><span class="co"># 2. Show the results</span></span>
-<span id="cb564-8"><a href="comparing-two-groups.html#cb564-8" tabindex="-1"></a>mann_res</span></code></pre></div>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="comparing-two-groups.html#cb564-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Perform the test</span></span>
+<span id="cb564-2"><a href="comparing-two-groups.html#cb564-2" aria-hidden="true" tabindex="-1"></a>mann_res <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(<span class="at">formula =</span> male_3_task3_df<span class="sc">$</span>Task3 <span class="sc">~</span> male_3_task3_df<span class="sc">$</span>treatment,</span>
+<span id="cb564-3"><a href="comparing-two-groups.html#cb564-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb564-4"><a href="comparing-two-groups.html#cb564-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">mu =</span> <span class="dv">0</span>,</span>
+<span id="cb564-5"><a href="comparing-two-groups.html#cb564-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">paired =</span> F)</span>
+<span id="cb564-6"><a href="comparing-two-groups.html#cb564-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb564-7"><a href="comparing-two-groups.html#cb564-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Show the results</span></span>
+<span id="cb564-8"><a href="comparing-two-groups.html#cb564-8" aria-hidden="true" tabindex="-1"></a>mann_res</span></code></pre></div>
 <pre class="code-out"><code>
     Wilcoxon rank sum test with continuity correction
 
@@ -627,51 +626,51 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>The output is slightly different, but we still have p-value and alternative hypothesis.<br>
 <strong>Remember</strong>: with non-parametric tests, you are not comparing the mean directly. That’s why here are not indicated.</p>
 </div>
-<div id="add-values-to-graph" class="section level2 unnumbered hasAnchor">
-<h2>Add values to graph<a href="comparing-two-groups.html#add-values-to-graph" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="add-values-to-graph" class="section level2 unnumbered">
+<h2>Add values to graph</h2>
 <p>We can now add the results of the statistical tests to the previous plot; but first, we will use <em>gginnards</em> package to removes the shapiro test values on the plot, because we want to put statistics there, moving shapiro results in the plot description.<br>
 I will now write the whole code, you have already seen much of this stuff; the only difference is that I will use <code>delete_layers()</code> to remove Shapiro results:</p>
-<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="comparing-two-groups.html#cb566-1" tabindex="-1"></a><span class="co"># 1. Remove shapiro results </span></span>
-<span id="cb566-2"><a href="comparing-two-groups.html#cb566-2" tabindex="-1"></a>female_t1_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">delete_layers</span>(female_t1_weight_boxplot, <span class="st">&quot;GeomText&quot;</span>)</span>
-<span id="cb566-3"><a href="comparing-two-groups.html#cb566-3" tabindex="-1"></a>t1_3_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">delete_layers</span>(t1_3_weight_boxplot, <span class="st">&quot;GeomText&quot;</span>)</span>
-<span id="cb566-4"><a href="comparing-two-groups.html#cb566-4" tabindex="-1"></a>male_3_task3_boxplot <span class="ot">&lt;-</span> <span class="fu">delete_layers</span>(male_3_task3_boxplot, <span class="st">&quot;GeomText&quot;</span>)</span>
-<span id="cb566-5"><a href="comparing-two-groups.html#cb566-5" tabindex="-1"></a></span>
-<span id="cb566-6"><a href="comparing-two-groups.html#cb566-6" tabindex="-1"></a><span class="co"># 2. Create a function to map *, **, *** and ns to statistics</span></span>
-<span id="cb566-7"><a href="comparing-two-groups.html#cb566-7" tabindex="-1"></a>pvalue_to_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb566-8"><a href="comparing-two-groups.html#cb566-8" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">case_when</span>(</span>
-<span id="cb566-9"><a href="comparing-two-groups.html#cb566-9" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">&quot;***&quot;</span>,</span>
-<span id="cb566-10"><a href="comparing-two-groups.html#cb566-10" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">~</span> <span class="st">&quot;**&quot;</span>,</span>
-<span id="cb566-11"><a href="comparing-two-groups.html#cb566-11" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">&quot;*&quot;</span>,</span>
-<span id="cb566-12"><a href="comparing-two-groups.html#cb566-12" tabindex="-1"></a>    <span class="at">.default =</span> <span class="st">&quot;ns&quot;</span></span>
-<span id="cb566-13"><a href="comparing-two-groups.html#cb566-13" tabindex="-1"></a>  )</span>
-<span id="cb566-14"><a href="comparing-two-groups.html#cb566-14" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
-<span id="cb566-15"><a href="comparing-two-groups.html#cb566-15" tabindex="-1"></a>}</span>
-<span id="cb566-16"><a href="comparing-two-groups.html#cb566-16" tabindex="-1"></a></span>
-<span id="cb566-17"><a href="comparing-two-groups.html#cb566-17" tabindex="-1"></a><span class="co"># 3. Add pvalues of statistics and remove Bartlett results</span></span>
-<span id="cb566-18"><a href="comparing-two-groups.html#cb566-18" tabindex="-1"></a>female_t1_weight_boxplot <span class="ot">&lt;-</span> female_t1_weight_boxplot <span class="sc">+</span></span>
-<span id="cb566-19"><a href="comparing-two-groups.html#cb566-19" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> female_t1_weight_max, <span class="at">xend =</span> <span class="dv">2</span>, <span class="at">yend =</span> female_t1_weight_max)) <span class="sc">+</span></span>
-<span id="cb566-20"><a href="comparing-two-groups.html#cb566-20" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> female_t1_weight_max <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">label =</span> <span class="fu">pvalue_to_plot</span>(t_test_res<span class="sc">$</span>p.value))) <span class="sc">+</span></span>
-<span id="cb566-21"><a href="comparing-two-groups.html#cb566-21" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb566-22"><a href="comparing-two-groups.html#cb566-22" tabindex="-1"></a></span>
-<span id="cb566-23"><a href="comparing-two-groups.html#cb566-23" tabindex="-1"></a>t1_3_weight_boxplot <span class="ot">&lt;-</span> t1_3_weight_boxplot <span class="sc">+</span></span>
-<span id="cb566-24"><a href="comparing-two-groups.html#cb566-24" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> t1_3_weight_max, <span class="at">xend =</span> <span class="dv">2</span>, <span class="at">yend =</span> t1_3_weight_max)) <span class="sc">+</span></span>
-<span id="cb566-25"><a href="comparing-two-groups.html#cb566-25" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> t1_3_weight_max <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">label =</span> <span class="fu">pvalue_to_plot</span>(welch_res<span class="sc">$</span>p.value))) <span class="sc">+</span></span>
-<span id="cb566-26"><a href="comparing-two-groups.html#cb566-26" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb566-27"><a href="comparing-two-groups.html#cb566-27" tabindex="-1"></a></span>
-<span id="cb566-28"><a href="comparing-two-groups.html#cb566-28" tabindex="-1"></a>male_3_task3_boxplot <span class="ot">&lt;-</span> male_3_task3_boxplot <span class="sc">+</span></span>
-<span id="cb566-29"><a href="comparing-two-groups.html#cb566-29" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> male_3_task3_max, <span class="at">xend =</span> <span class="dv">2</span>, <span class="at">yend =</span> male_3_task3_max)) <span class="sc">+</span></span>
-<span id="cb566-30"><a href="comparing-two-groups.html#cb566-30" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> male_3_task3_max <span class="sc">+</span> <span class="dv">5</span>, <span class="at">label =</span> <span class="fu">pvalue_to_plot</span>(mann_res<span class="sc">$</span>p.value))) <span class="sc">+</span></span>
-<span id="cb566-31"><a href="comparing-two-groups.html#cb566-31" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb566-32"><a href="comparing-two-groups.html#cb566-32" tabindex="-1"></a></span>
-<span id="cb566-33"><a href="comparing-two-groups.html#cb566-33" tabindex="-1"></a><span class="co"># 4. Create one unique plot to annotate</span></span>
-<span id="cb566-34"><a href="comparing-two-groups.html#cb566-34" tabindex="-1"></a>all_plots <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(female_t1_weight_boxplot, t1_3_weight_boxplot, male_3_task3_boxplot, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>)</span>
-<span id="cb566-35"><a href="comparing-two-groups.html#cb566-35" tabindex="-1"></a></span>
-<span id="cb566-36"><a href="comparing-two-groups.html#cb566-36" tabindex="-1"></a><span class="co"># 5. Create the plot description</span></span>
-<span id="cb566-37"><a href="comparing-two-groups.html#cb566-37" tabindex="-1"></a>description <span class="ot">&lt;-</span> <span class="fu">glue</span>(<span class="st">&quot;A. Weight difference between T1-treated females at P15 vs. P30 (n = {sum(female_t1_weight_df$age == 15)} and {sum(female_t1_weight_df$age == 30)} respectively, Shapiro-Wilk p-value = {round(female_t1_weight_shapiro$shap[female_t1_weight_shapiro$age == 15], 3)} and {round(female_t1_weight_shapiro$shap[female_t1_weight_shapiro$age == 30], 3)} respectively, Bartlett&#39;s test p-value = {round(female_t1_weight_bartlett, 3)}, t-test p-value = {t_test_res$p.value}). B. Weight difference between T1-treated males and females at P3 (n = {sum(t1_3_weight_df$sex == &#39;Male&#39;)} and {sum(t1_3_weight_df$sex == &#39;Female&#39;)} respectively, Shapiro-Wilk p-value = {round(t1_3_weight_shapiro$shap[t1_3_weight_shapiro$sex == &#39;Male&#39;], 3)} and {round(t1_3_weight_shapiro$shap[t1_3_weight_shapiro$sex == &#39;Male&#39;], 3)} respectively, Bartlett&#39;s test p-value = {round(t1_3_weight_bartlett, 3)}, Welch&#39;s t-test p-value = {welch_res$p.value}). C. Task3 time difference between T1-treated and untreated males at P3 (n = {sum(male_3_task3_df$treatment == &#39;T1&#39;)} and {sum(male_3_task3_df$treatment == &#39;Untreated&#39;)} respectively, Shapiro-Wilk p-value = {round(male_3_task3_shapiro$shap[male_3_task3_shapiro$treatment == &#39;T1&#39;], 3)} and {round(male_3_task3_shapiro$shap[male_3_task3_shapiro$treatment == &#39;Untreated&#39;], 3)} respectively, MAnn-Whitney p-value = {mann_res$p.value}).&quot;</span>)</span>
-<span id="cb566-38"><a href="comparing-two-groups.html#cb566-38" tabindex="-1"></a></span>
-<span id="cb566-39"><a href="comparing-two-groups.html#cb566-39" tabindex="-1"></a><span class="co"># 6. Annotate plots</span></span>
-<span id="cb566-40"><a href="comparing-two-groups.html#cb566-40" tabindex="-1"></a>all_plots <span class="ot">&lt;-</span> <span class="fu">annotate_figure</span>(all_plots, <span class="at">bottom =</span> <span class="fu">str_wrap</span>(description, <span class="dv">135</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="comparing-two-groups.html#cb567-1" tabindex="-1"></a>all_plots</span></code></pre></div>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="comparing-two-groups.html#cb566-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Remove shapiro results </span></span>
+<span id="cb566-2"><a href="comparing-two-groups.html#cb566-2" aria-hidden="true" tabindex="-1"></a>female_t1_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">delete_layers</span>(female_t1_weight_boxplot, <span class="st">&quot;GeomText&quot;</span>)</span>
+<span id="cb566-3"><a href="comparing-two-groups.html#cb566-3" aria-hidden="true" tabindex="-1"></a>t1_3_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">delete_layers</span>(t1_3_weight_boxplot, <span class="st">&quot;GeomText&quot;</span>)</span>
+<span id="cb566-4"><a href="comparing-two-groups.html#cb566-4" aria-hidden="true" tabindex="-1"></a>male_3_task3_boxplot <span class="ot">&lt;-</span> <span class="fu">delete_layers</span>(male_3_task3_boxplot, <span class="st">&quot;GeomText&quot;</span>)</span>
+<span id="cb566-5"><a href="comparing-two-groups.html#cb566-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-6"><a href="comparing-two-groups.html#cb566-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create a function to map *, **, *** and ns to statistics</span></span>
+<span id="cb566-7"><a href="comparing-two-groups.html#cb566-7" aria-hidden="true" tabindex="-1"></a>pvalue_to_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb566-8"><a href="comparing-two-groups.html#cb566-8" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">case_when</span>(</span>
+<span id="cb566-9"><a href="comparing-two-groups.html#cb566-9" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">&quot;***&quot;</span>,</span>
+<span id="cb566-10"><a href="comparing-two-groups.html#cb566-10" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">~</span> <span class="st">&quot;**&quot;</span>,</span>
+<span id="cb566-11"><a href="comparing-two-groups.html#cb566-11" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">&quot;*&quot;</span>,</span>
+<span id="cb566-12"><a href="comparing-two-groups.html#cb566-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="st">&quot;ns&quot;</span></span>
+<span id="cb566-13"><a href="comparing-two-groups.html#cb566-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb566-14"><a href="comparing-two-groups.html#cb566-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb566-15"><a href="comparing-two-groups.html#cb566-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb566-16"><a href="comparing-two-groups.html#cb566-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-17"><a href="comparing-two-groups.html#cb566-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Add pvalues of statistics and remove Bartlett results</span></span>
+<span id="cb566-18"><a href="comparing-two-groups.html#cb566-18" aria-hidden="true" tabindex="-1"></a>female_t1_weight_boxplot <span class="ot">&lt;-</span> female_t1_weight_boxplot <span class="sc">+</span></span>
+<span id="cb566-19"><a href="comparing-two-groups.html#cb566-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> female_t1_weight_max, <span class="at">xend =</span> <span class="dv">2</span>, <span class="at">yend =</span> female_t1_weight_max)) <span class="sc">+</span></span>
+<span id="cb566-20"><a href="comparing-two-groups.html#cb566-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> female_t1_weight_max <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">label =</span> <span class="fu">pvalue_to_plot</span>(t_test_res<span class="sc">$</span>p.value))) <span class="sc">+</span></span>
+<span id="cb566-21"><a href="comparing-two-groups.html#cb566-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb566-22"><a href="comparing-two-groups.html#cb566-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-23"><a href="comparing-two-groups.html#cb566-23" aria-hidden="true" tabindex="-1"></a>t1_3_weight_boxplot <span class="ot">&lt;-</span> t1_3_weight_boxplot <span class="sc">+</span></span>
+<span id="cb566-24"><a href="comparing-two-groups.html#cb566-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> t1_3_weight_max, <span class="at">xend =</span> <span class="dv">2</span>, <span class="at">yend =</span> t1_3_weight_max)) <span class="sc">+</span></span>
+<span id="cb566-25"><a href="comparing-two-groups.html#cb566-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> t1_3_weight_max <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">label =</span> <span class="fu">pvalue_to_plot</span>(welch_res<span class="sc">$</span>p.value))) <span class="sc">+</span></span>
+<span id="cb566-26"><a href="comparing-two-groups.html#cb566-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb566-27"><a href="comparing-two-groups.html#cb566-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-28"><a href="comparing-two-groups.html#cb566-28" aria-hidden="true" tabindex="-1"></a>male_3_task3_boxplot <span class="ot">&lt;-</span> male_3_task3_boxplot <span class="sc">+</span></span>
+<span id="cb566-29"><a href="comparing-two-groups.html#cb566-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> male_3_task3_max, <span class="at">xend =</span> <span class="dv">2</span>, <span class="at">yend =</span> male_3_task3_max)) <span class="sc">+</span></span>
+<span id="cb566-30"><a href="comparing-two-groups.html#cb566-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> male_3_task3_max <span class="sc">+</span> <span class="dv">5</span>, <span class="at">label =</span> <span class="fu">pvalue_to_plot</span>(mann_res<span class="sc">$</span>p.value))) <span class="sc">+</span></span>
+<span id="cb566-31"><a href="comparing-two-groups.html#cb566-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb566-32"><a href="comparing-two-groups.html#cb566-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-33"><a href="comparing-two-groups.html#cb566-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Create one unique plot to annotate</span></span>
+<span id="cb566-34"><a href="comparing-two-groups.html#cb566-34" aria-hidden="true" tabindex="-1"></a>all_plots <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(female_t1_weight_boxplot, t1_3_weight_boxplot, male_3_task3_boxplot, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;h&quot;</span>)</span>
+<span id="cb566-35"><a href="comparing-two-groups.html#cb566-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-36"><a href="comparing-two-groups.html#cb566-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Create the plot description</span></span>
+<span id="cb566-37"><a href="comparing-two-groups.html#cb566-37" aria-hidden="true" tabindex="-1"></a>description <span class="ot">&lt;-</span> <span class="fu">glue</span>(<span class="st">&quot;A. Weight difference between T1-treated females at P15 vs. P30 (n = {sum(female_t1_weight_df$age == 15)} and {sum(female_t1_weight_df$age == 30)} respectively, Shapiro-Wilk p-value = {round(female_t1_weight_shapiro$shap[female_t1_weight_shapiro$age == 15], 3)} and {round(female_t1_weight_shapiro$shap[female_t1_weight_shapiro$age == 30], 3)} respectively, Bartlett&#39;s test p-value = {round(female_t1_weight_bartlett, 3)}, t-test p-value = {t_test_res$p.value}). B. Weight difference between T1-treated males and females at P3 (n = {sum(t1_3_weight_df$sex == &#39;Male&#39;)} and {sum(t1_3_weight_df$sex == &#39;Female&#39;)} respectively, Shapiro-Wilk p-value = {round(t1_3_weight_shapiro$shap[t1_3_weight_shapiro$sex == &#39;Male&#39;], 3)} and {round(t1_3_weight_shapiro$shap[t1_3_weight_shapiro$sex == &#39;Male&#39;], 3)} respectively, Bartlett&#39;s test p-value = {round(t1_3_weight_bartlett, 3)}, Welch&#39;s t-test p-value = {welch_res$p.value}). C. Task3 time difference between T1-treated and untreated males at P3 (n = {sum(male_3_task3_df$treatment == &#39;T1&#39;)} and {sum(male_3_task3_df$treatment == &#39;Untreated&#39;)} respectively, Shapiro-Wilk p-value = {round(male_3_task3_shapiro$shap[male_3_task3_shapiro$treatment == &#39;T1&#39;], 3)} and {round(male_3_task3_shapiro$shap[male_3_task3_shapiro$treatment == &#39;Untreated&#39;], 3)} respectively, MAnn-Whitney p-value = {mann_res$p.value}).&quot;</span>)</span>
+<span id="cb566-38"><a href="comparing-two-groups.html#cb566-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-39"><a href="comparing-two-groups.html#cb566-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Annotate plots</span></span>
+<span id="cb566-40"><a href="comparing-two-groups.html#cb566-40" aria-hidden="true" tabindex="-1"></a>all_plots <span class="ot">&lt;-</span> <span class="fu">annotate_figure</span>(all_plots, <span class="at">bottom =</span> <span class="fu">str_wrap</span>(description, <span class="dv">135</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="comparing-two-groups.html#cb567-1" aria-hidden="true" tabindex="-1"></a>all_plots</span></code></pre></div>
 <p><img src="_main_files/figure-html/two_groups_boxplot3-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>We can still improve our figure, but I think it sends a clear message.
 I think that this is all you need to know to start your analysis when you have two groups.<br> In the next chapter, we will see how to deal with more than 2 groups.</p>

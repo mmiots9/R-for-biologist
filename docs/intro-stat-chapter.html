@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-12-09" />
+<meta name="date" content="2024-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="plot-our-data-with-ggplot2.html"/>
 <link rel="next" href="association-between-categorical-variables.html"/>
-<script src="libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <meta property="og:description" content="To you, who never gives up, for your future. You can make it!">
 <meta name="keywords" content="R, biology, data analysis">
 <meta name="author" content="Matteo Miotto">
@@ -71,7 +70,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -384,8 +383,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="intro-stat-chapter" class="section level1 hasAnchor" number="15">
-<h1><span class="header-section-number">15</span> Introduction to statistics in R<a href="intro-stat-chapter.html#intro-stat-chapter" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="intro-stat-chapter" class="section level1" number="15">
+<h1><span class="header-section-number">15</span> Introduction to statistics in R</h1>
 <p>What a journey so far! And now, maybe the scariest thing for a researcher: statistics. <br>
 Don’t worry, thanks to R it is easier than ever; in fact, R is the best programming language for statistics, it has lot of built-in functions and other packages for computing the right statistic you want.
 <br>
@@ -394,8 +393,8 @@ Here, I will do a brief introduction to statistical tests, focusing in next chap
 <p>This scheme is huge, but should be your mantra while doing analysis and, in particular, <strong>when you are designing your experiment</strong>. Why so much emphasis?! Because you should decide the test, the sample size etc <u>prior</u> to perform the experiments: experimental design makes 90% of the work. Remember it!
 <br>
 That said, we can see that the most asked question in the schema is <em>“Parametric data?”</em>, so let’s discuss about it and how to assess wheteher our data are parametric or not.</p>
-<div id="evaluate-parametric-assumptions" class="section level2 unnumbered hasAnchor">
-<h2>Evaluate parametric assumptions<a href="intro-stat-chapter.html#evaluate-parametric-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="evaluate-parametric-assumptions" class="section level2 unnumbered">
+<h2>Evaluate parametric assumptions</h2>
 <p class="plist">
 Depending on if the data are parametric or not, we will use different tests. Here are the 4 assumptions for data to be parametric:
 </p>
@@ -417,22 +416,22 @@ Depending on if the data are parametric or not, we will use different tests. Her
 <br>
 First of all, let’s import packages and data. We will now use a different dataset for these chapters, as the previous one was a sample-descriptive one, while here we want something with results. <br>
 Through &lt;a href”script/Stat-test-dataset_create” download&gt;this script</a> I created a custom dataset, which you can download <a href="data/Stat-test-dataset.csv" download>here</a></p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="intro-stat-chapter.html#cb462-1" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
-<span id="cb462-2"><a href="intro-stat-chapter.html#cb462-2" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb462-3"><a href="intro-stat-chapter.html#cb462-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb462-4"><a href="intro-stat-chapter.html#cb462-4" tabindex="-1"></a></span>
-<span id="cb462-5"><a href="intro-stat-chapter.html#cb462-5" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
-<span id="cb462-6"><a href="intro-stat-chapter.html#cb462-6" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Stat-test-dataset.csv&quot;</span>)</span>
-<span id="cb462-7"><a href="intro-stat-chapter.html#cb462-7" tabindex="-1"></a></span>
-<span id="cb462-8"><a href="intro-stat-chapter.html#cb462-8" tabindex="-1"></a><span class="co"># 3. Change come column types</span></span>
-<span id="cb462-9"><a href="intro-stat-chapter.html#cb462-9" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb462-10"><a href="intro-stat-chapter.html#cb462-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
-<span id="cb462-11"><a href="intro-stat-chapter.html#cb462-11" tabindex="-1"></a>         <span class="st">&quot;treatment&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Untreated&quot;</span>, <span class="st">&quot;T1&quot;</span>)),</span>
-<span id="cb462-12"><a href="intro-stat-chapter.html#cb462-12" tabindex="-1"></a>         <span class="st">&quot;Task1&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task1),</span>
-<span id="cb462-13"><a href="intro-stat-chapter.html#cb462-13" tabindex="-1"></a>         <span class="st">&quot;Task2&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task2),</span>
-<span id="cb462-14"><a href="intro-stat-chapter.html#cb462-14" tabindex="-1"></a>         )</span>
-<span id="cb462-15"><a href="intro-stat-chapter.html#cb462-15" tabindex="-1"></a></span>
-<span id="cb462-16"><a href="intro-stat-chapter.html#cb462-16" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="intro-stat-chapter.html#cb462-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
+<span id="cb462-2"><a href="intro-stat-chapter.html#cb462-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb462-3"><a href="intro-stat-chapter.html#cb462-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb462-4"><a href="intro-stat-chapter.html#cb462-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb462-5"><a href="intro-stat-chapter.html#cb462-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
+<span id="cb462-6"><a href="intro-stat-chapter.html#cb462-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Stat-test-dataset.csv&quot;</span>)</span>
+<span id="cb462-7"><a href="intro-stat-chapter.html#cb462-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb462-8"><a href="intro-stat-chapter.html#cb462-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Change come column types</span></span>
+<span id="cb462-9"><a href="intro-stat-chapter.html#cb462-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb462-10"><a href="intro-stat-chapter.html#cb462-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb462-11"><a href="intro-stat-chapter.html#cb462-11" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;treatment&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Untreated&quot;</span>, <span class="st">&quot;T1&quot;</span>)),</span>
+<span id="cb462-12"><a href="intro-stat-chapter.html#cb462-12" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Task1&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task1),</span>
+<span id="cb462-13"><a href="intro-stat-chapter.html#cb462-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Task2&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task2),</span>
+<span id="cb462-14"><a href="intro-stat-chapter.html#cb462-14" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb462-15"><a href="intro-stat-chapter.html#cb462-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb462-16"><a href="intro-stat-chapter.html#cb462-16" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>&#39;data.frame&#39;:   600 obs. of  7 variables:
  $ sex      : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 1 2 1 2 1 2 1 2 1 ...
  $ age      : int  3 3 3 3 3 3 3 3 3 3 ...
@@ -457,11 +456,11 @@ Task3: this indicates the time spent by the mouse to complete the task, in secon
 </ul>
 <p>You can produce some plots at this point, if you want to explore the dataset. We will now move on to explore the parametric assumptions.</p>
 <p>For this example, we will test if for comparing both weight and Task3 between T1-treated males at age == 30 vs. Untreated we should use parametric or non-parametric tests; we will see in details all the others comparisons when we will Samplely see the statistical tests. So, just for now, we will extrapolate from the df the data of interest:</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="intro-stat-chapter.html#cb464-1" tabindex="-1"></a>male_30_weight_task3 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb464-2"><a href="intro-stat-chapter.html#cb464-2" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span> <span class="sc">&amp;</span> age <span class="sc">==</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb464-3"><a href="intro-stat-chapter.html#cb464-3" tabindex="-1"></a>  <span class="fu">select</span>(sex, age, treatment, weight, Task3)</span>
-<span id="cb464-4"><a href="intro-stat-chapter.html#cb464-4" tabindex="-1"></a></span>
-<span id="cb464-5"><a href="intro-stat-chapter.html#cb464-5" tabindex="-1"></a><span class="fu">head</span>(male_30_weight_task3)</span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="intro-stat-chapter.html#cb464-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb464-2"><a href="intro-stat-chapter.html#cb464-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span> <span class="sc">&amp;</span> age <span class="sc">==</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb464-3"><a href="intro-stat-chapter.html#cb464-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, age, treatment, weight, Task3)</span>
+<span id="cb464-4"><a href="intro-stat-chapter.html#cb464-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb464-5"><a href="intro-stat-chapter.html#cb464-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(male_30_weight_task3)</span></code></pre></div>
 <pre class="code-out"><code>   sex age treatment weight  Task3
 1 Male  30        T1  19.38 290.04
 2 Male  30 Untreated  19.17 123.19
@@ -470,83 +469,83 @@ Task3: this indicates the time spent by the mouse to complete the task, in secon
 5 Male  30        T1  18.85 312.12
 6 Male  30 Untreated  19.98 183.93</code></pre>
 <p>Alright, here are the data we need. I used a function that we didn’t see in the tidyverse <a href="tidyverse-manage.html#tidyverse-manage">chapter</a>: <code>select</code>. It is used to select only specific columns of the dataset; in this case we use it to extrapolate columns of interest.</p>
-<div id="visual-inspection" class="section level3 unnumbered hasAnchor">
-<h3>Visual inspection<a href="intro-stat-chapter.html#visual-inspection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="visual-inspection" class="section level3 unnumbered">
+<h3>Visual inspection</h3>
 <p>Visual inspection is always recommended, as it can give us an idea of how our data are distributed and the eventual presence of outliers. We will see boxplot, density plot and QQ plot (read about it <a href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot" target="_blank">here</a>).
 <br></p>
 <p>Here the code to produce the three plots:</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="intro-stat-chapter.html#cb466-1" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
-<span id="cb466-2"><a href="intro-stat-chapter.html#cb466-2" tabindex="-1"></a>male_30_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb466-3"><a href="intro-stat-chapter.html#cb466-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb466-4"><a href="intro-stat-chapter.html#cb466-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb466-5"><a href="intro-stat-chapter.html#cb466-5" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb466-6"><a href="intro-stat-chapter.html#cb466-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb466-7"><a href="intro-stat-chapter.html#cb466-7" tabindex="-1"></a></span>
-<span id="cb466-8"><a href="intro-stat-chapter.html#cb466-8" tabindex="-1"></a>male_30_task3_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb466-9"><a href="intro-stat-chapter.html#cb466-9" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb466-10"><a href="intro-stat-chapter.html#cb466-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb466-11"><a href="intro-stat-chapter.html#cb466-11" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb466-12"><a href="intro-stat-chapter.html#cb466-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb466-13"><a href="intro-stat-chapter.html#cb466-13" tabindex="-1"></a></span>
-<span id="cb466-14"><a href="intro-stat-chapter.html#cb466-14" tabindex="-1"></a><span class="co"># 2. Create density plots</span></span>
-<span id="cb466-15"><a href="intro-stat-chapter.html#cb466-15" tabindex="-1"></a>male_30_weight_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb466-16"><a href="intro-stat-chapter.html#cb466-16" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb466-17"><a href="intro-stat-chapter.html#cb466-17" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb466-18"><a href="intro-stat-chapter.html#cb466-18" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb466-19"><a href="intro-stat-chapter.html#cb466-19" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb466-20"><a href="intro-stat-chapter.html#cb466-20" tabindex="-1"></a></span>
-<span id="cb466-21"><a href="intro-stat-chapter.html#cb466-21" tabindex="-1"></a>male_30_task3_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb466-22"><a href="intro-stat-chapter.html#cb466-22" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb466-23"><a href="intro-stat-chapter.html#cb466-23" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb466-24"><a href="intro-stat-chapter.html#cb466-24" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb466-25"><a href="intro-stat-chapter.html#cb466-25" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb466-26"><a href="intro-stat-chapter.html#cb466-26" tabindex="-1"></a></span>
-<span id="cb466-27"><a href="intro-stat-chapter.html#cb466-27" tabindex="-1"></a><span class="co"># 3. Create QQ plots</span></span>
-<span id="cb466-28"><a href="intro-stat-chapter.html#cb466-28" tabindex="-1"></a>male_30_weight_qq <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> weight, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb466-29"><a href="intro-stat-chapter.html#cb466-29" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
-<span id="cb466-30"><a href="intro-stat-chapter.html#cb466-30" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb466-31"><a href="intro-stat-chapter.html#cb466-31" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb466-32"><a href="intro-stat-chapter.html#cb466-32" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb466-33"><a href="intro-stat-chapter.html#cb466-33" tabindex="-1"></a>  <span class="fu">theme</span>()</span>
-<span id="cb466-34"><a href="intro-stat-chapter.html#cb466-34" tabindex="-1"></a></span>
-<span id="cb466-35"><a href="intro-stat-chapter.html#cb466-35" tabindex="-1"></a>male_30_task3_qq <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> Task3, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb466-36"><a href="intro-stat-chapter.html#cb466-36" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
-<span id="cb466-37"><a href="intro-stat-chapter.html#cb466-37" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb466-38"><a href="intro-stat-chapter.html#cb466-38" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb466-39"><a href="intro-stat-chapter.html#cb466-39" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb466-40"><a href="intro-stat-chapter.html#cb466-40" tabindex="-1"></a>  <span class="fu">theme</span>()</span>
-<span id="cb466-41"><a href="intro-stat-chapter.html#cb466-41" tabindex="-1"></a></span>
-<span id="cb466-42"><a href="intro-stat-chapter.html#cb466-42" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot, male_30_weight_density, male_30_weight_qq,</span>
-<span id="cb466-43"><a href="intro-stat-chapter.html#cb466-43" tabindex="-1"></a>          male_30_task3_boxplot, male_30_task3_density, male_30_task3_qq,</span>
-<span id="cb466-44"><a href="intro-stat-chapter.html#cb466-44" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="intro-stat-chapter.html#cb466-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
+<span id="cb466-2"><a href="intro-stat-chapter.html#cb466-2" aria-hidden="true" tabindex="-1"></a>male_30_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb466-3"><a href="intro-stat-chapter.html#cb466-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb466-4"><a href="intro-stat-chapter.html#cb466-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb466-5"><a href="intro-stat-chapter.html#cb466-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb466-6"><a href="intro-stat-chapter.html#cb466-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb466-7"><a href="intro-stat-chapter.html#cb466-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-8"><a href="intro-stat-chapter.html#cb466-8" aria-hidden="true" tabindex="-1"></a>male_30_task3_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb466-9"><a href="intro-stat-chapter.html#cb466-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb466-10"><a href="intro-stat-chapter.html#cb466-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb466-11"><a href="intro-stat-chapter.html#cb466-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb466-12"><a href="intro-stat-chapter.html#cb466-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb466-13"><a href="intro-stat-chapter.html#cb466-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-14"><a href="intro-stat-chapter.html#cb466-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create density plots</span></span>
+<span id="cb466-15"><a href="intro-stat-chapter.html#cb466-15" aria-hidden="true" tabindex="-1"></a>male_30_weight_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb466-16"><a href="intro-stat-chapter.html#cb466-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb466-17"><a href="intro-stat-chapter.html#cb466-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb466-18"><a href="intro-stat-chapter.html#cb466-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb466-19"><a href="intro-stat-chapter.html#cb466-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb466-20"><a href="intro-stat-chapter.html#cb466-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-21"><a href="intro-stat-chapter.html#cb466-21" aria-hidden="true" tabindex="-1"></a>male_30_task3_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb466-22"><a href="intro-stat-chapter.html#cb466-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb466-23"><a href="intro-stat-chapter.html#cb466-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb466-24"><a href="intro-stat-chapter.html#cb466-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb466-25"><a href="intro-stat-chapter.html#cb466-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb466-26"><a href="intro-stat-chapter.html#cb466-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-27"><a href="intro-stat-chapter.html#cb466-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create QQ plots</span></span>
+<span id="cb466-28"><a href="intro-stat-chapter.html#cb466-28" aria-hidden="true" tabindex="-1"></a>male_30_weight_qq <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> weight, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb466-29"><a href="intro-stat-chapter.html#cb466-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb466-30"><a href="intro-stat-chapter.html#cb466-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb466-31"><a href="intro-stat-chapter.html#cb466-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb466-32"><a href="intro-stat-chapter.html#cb466-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb466-33"><a href="intro-stat-chapter.html#cb466-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>()</span>
+<span id="cb466-34"><a href="intro-stat-chapter.html#cb466-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-35"><a href="intro-stat-chapter.html#cb466-35" aria-hidden="true" tabindex="-1"></a>male_30_task3_qq <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> Task3, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb466-36"><a href="intro-stat-chapter.html#cb466-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb466-37"><a href="intro-stat-chapter.html#cb466-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb466-38"><a href="intro-stat-chapter.html#cb466-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb466-39"><a href="intro-stat-chapter.html#cb466-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb466-40"><a href="intro-stat-chapter.html#cb466-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>()</span>
+<span id="cb466-41"><a href="intro-stat-chapter.html#cb466-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-42"><a href="intro-stat-chapter.html#cb466-42" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot, male_30_weight_density, male_30_weight_qq,</span>
+<span id="cb466-43"><a href="intro-stat-chapter.html#cb466-43" aria-hidden="true" tabindex="-1"></a>          male_30_task3_boxplot, male_30_task3_density, male_30_task3_qq,</span>
+<span id="cb466-44"><a href="intro-stat-chapter.html#cb466-44" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/parametric_visual_inspection-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Yet from these graph we can start to say that while for weight we can think of using parametric tests (after having removed possible outliers in T1-treated), for Task3 this is not possible as T1-treated distribution is far away from being normal or having same variances.
 <br>
 Now, we apply some statistical tests to evaluate all the assumptions.</p>
 </div>
-<div id="no-outliers" class="section level3 unnumbered hasAnchor">
-<h3>No outliers<a href="intro-stat-chapter.html#no-outliers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="no-outliers" class="section level3 unnumbered">
+<h3>No outliers</h3>
 <p>As outliers may influence tests for normality and homoschedasticity, we start evaluating possible outliers in our data. To do so, I like to use InterQuartile Range (IQR) method: data that are 1.5 * IQR below 25<upper>th</upper> quantile or 1.5 * IQR over 75<upper>th</upper> quantile are considered as outlier. I usually use a function that takes as input a vector of values and returns one of booleans indicating whether the value is an outlier (TRUE) or not (FALSE), and create a column in the dataframe with this information. <br>
 This is the function:</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="intro-stat-chapter.html#cb467-1" tabindex="-1"></a>is_outlier <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb467-2"><a href="intro-stat-chapter.html#cb467-2" tabindex="-1"></a>  <span class="co"># 1. Check if x is numeric </span></span>
-<span id="cb467-3"><a href="intro-stat-chapter.html#cb467-3" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(x)) {<span class="fu">stop</span>(<span class="st">&quot;x must be a numeric vector&quot;</span>)}</span>
-<span id="cb467-4"><a href="intro-stat-chapter.html#cb467-4" tabindex="-1"></a>  </span>
-<span id="cb467-5"><a href="intro-stat-chapter.html#cb467-5" tabindex="-1"></a>  <span class="co"># 2. Check if at least 3 values in x</span></span>
-<span id="cb467-6"><a href="intro-stat-chapter.html#cb467-6" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(x) <span class="sc">&lt;</span> <span class="dv">3</span>) {<span class="fu">stop</span>(<span class="st">&quot;x must have at least 3 values&quot;</span>)}</span>
-<span id="cb467-7"><a href="intro-stat-chapter.html#cb467-7" tabindex="-1"></a>  </span>
-<span id="cb467-8"><a href="intro-stat-chapter.html#cb467-8" tabindex="-1"></a>  <span class="co"># 3. Calculate IQR</span></span>
-<span id="cb467-9"><a href="intro-stat-chapter.html#cb467-9" tabindex="-1"></a>  q1 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="fl">0.25</span>, <span class="at">na.rm =</span> T)</span>
-<span id="cb467-10"><a href="intro-stat-chapter.html#cb467-10" tabindex="-1"></a>  q3 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="fl">0.75</span>, <span class="at">na.rm =</span> T)</span>
-<span id="cb467-11"><a href="intro-stat-chapter.html#cb467-11" tabindex="-1"></a>  iqr <span class="ot">&lt;-</span> q3 <span class="sc">-</span> q1</span>
-<span id="cb467-12"><a href="intro-stat-chapter.html#cb467-12" tabindex="-1"></a>  </span>
-<span id="cb467-13"><a href="intro-stat-chapter.html#cb467-13" tabindex="-1"></a>  <span class="co"># 4. Calculate thresholds</span></span>
-<span id="cb467-14"><a href="intro-stat-chapter.html#cb467-14" tabindex="-1"></a>  lower_threshold <span class="ot">&lt;-</span> q1 <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
-<span id="cb467-15"><a href="intro-stat-chapter.html#cb467-15" tabindex="-1"></a>  upper_threshold <span class="ot">&lt;-</span> q3 <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
-<span id="cb467-16"><a href="intro-stat-chapter.html#cb467-16" tabindex="-1"></a>  </span>
-<span id="cb467-17"><a href="intro-stat-chapter.html#cb467-17" tabindex="-1"></a>  <span class="co"># 5. Create boolean vector</span></span>
-<span id="cb467-18"><a href="intro-stat-chapter.html#cb467-18" tabindex="-1"></a>  <span class="fu">return</span> (x <span class="sc">&lt;</span> lower_threshold <span class="sc">|</span> x <span class="sc">&gt;</span> upper_threshold)</span>
-<span id="cb467-19"><a href="intro-stat-chapter.html#cb467-19" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="intro-stat-chapter.html#cb467-1" aria-hidden="true" tabindex="-1"></a>is_outlier <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb467-2"><a href="intro-stat-chapter.html#cb467-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1. Check if x is numeric </span></span>
+<span id="cb467-3"><a href="intro-stat-chapter.html#cb467-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(x)) {<span class="fu">stop</span>(<span class="st">&quot;x must be a numeric vector&quot;</span>)}</span>
+<span id="cb467-4"><a href="intro-stat-chapter.html#cb467-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb467-5"><a href="intro-stat-chapter.html#cb467-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2. Check if at least 3 values in x</span></span>
+<span id="cb467-6"><a href="intro-stat-chapter.html#cb467-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(x) <span class="sc">&lt;</span> <span class="dv">3</span>) {<span class="fu">stop</span>(<span class="st">&quot;x must have at least 3 values&quot;</span>)}</span>
+<span id="cb467-7"><a href="intro-stat-chapter.html#cb467-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb467-8"><a href="intro-stat-chapter.html#cb467-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3. Calculate IQR</span></span>
+<span id="cb467-9"><a href="intro-stat-chapter.html#cb467-9" aria-hidden="true" tabindex="-1"></a>  q1 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="fl">0.25</span>, <span class="at">na.rm =</span> T)</span>
+<span id="cb467-10"><a href="intro-stat-chapter.html#cb467-10" aria-hidden="true" tabindex="-1"></a>  q3 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="fl">0.75</span>, <span class="at">na.rm =</span> T)</span>
+<span id="cb467-11"><a href="intro-stat-chapter.html#cb467-11" aria-hidden="true" tabindex="-1"></a>  iqr <span class="ot">&lt;-</span> q3 <span class="sc">-</span> q1</span>
+<span id="cb467-12"><a href="intro-stat-chapter.html#cb467-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb467-13"><a href="intro-stat-chapter.html#cb467-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4. Calculate thresholds</span></span>
+<span id="cb467-14"><a href="intro-stat-chapter.html#cb467-14" aria-hidden="true" tabindex="-1"></a>  lower_threshold <span class="ot">&lt;-</span> q1 <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
+<span id="cb467-15"><a href="intro-stat-chapter.html#cb467-15" aria-hidden="true" tabindex="-1"></a>  upper_threshold <span class="ot">&lt;-</span> q3 <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
+<span id="cb467-16"><a href="intro-stat-chapter.html#cb467-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb467-17"><a href="intro-stat-chapter.html#cb467-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 5. Create boolean vector</span></span>
+<span id="cb467-18"><a href="intro-stat-chapter.html#cb467-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> (x <span class="sc">&lt;</span> lower_threshold <span class="sc">|</span> x <span class="sc">&gt;</span> upper_threshold)</span>
+<span id="cb467-19"><a href="intro-stat-chapter.html#cb467-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 If you want to see the explanation of the function steps, expand following section.
 <details>
 <summary>
@@ -557,12 +556,12 @@ Here, I created a function called <code>is_outlier</code> that accepts one input
 Once checked the input, we calculated IQR using <code>quantile</code> function that we already seen. Then, we compute the thresholds and return a boolean vector after having evaluated if values are below lower threshold or above upper one.
 </details>
 <p>Let’s now use this function to find possible outliers in our data:</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="intro-stat-chapter.html#cb468-1" tabindex="-1"></a>male_30_weight_task3 <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
-<span id="cb468-2"><a href="intro-stat-chapter.html#cb468-2" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb468-3"><a href="intro-stat-chapter.html#cb468-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;outlier_weight&quot;</span> <span class="ot">=</span> <span class="fu">is_outlier</span>(weight),</span>
-<span id="cb468-4"><a href="intro-stat-chapter.html#cb468-4" tabindex="-1"></a>         <span class="st">&quot;outlier_Task3&quot;</span> <span class="ot">=</span> <span class="fu">is_outlier</span>(Task3))</span>
-<span id="cb468-5"><a href="intro-stat-chapter.html#cb468-5" tabindex="-1"></a></span>
-<span id="cb468-6"><a href="intro-stat-chapter.html#cb468-6" tabindex="-1"></a><span class="fu">head</span>(male_30_weight_task3)</span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="intro-stat-chapter.html#cb468-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3 <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb468-2"><a href="intro-stat-chapter.html#cb468-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb468-3"><a href="intro-stat-chapter.html#cb468-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;outlier_weight&quot;</span> <span class="ot">=</span> <span class="fu">is_outlier</span>(weight),</span>
+<span id="cb468-4"><a href="intro-stat-chapter.html#cb468-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;outlier_Task3&quot;</span> <span class="ot">=</span> <span class="fu">is_outlier</span>(Task3))</span>
+<span id="cb468-5"><a href="intro-stat-chapter.html#cb468-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb468-6"><a href="intro-stat-chapter.html#cb468-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(male_30_weight_task3)</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 6 × 7
 # Groups:   sex, age, treatment [2]
   sex     age treatment weight Task3 outlier_weight outlier_Task3
@@ -574,12 +573,12 @@ Once checked the input, we calculated IQR using <code>quantile</code> function t
 5 Male     30 T1          18.8 312.  FALSE          FALSE        
 6 Male     30 Untreated   20.0 184.  FALSE          FALSE        </code></pre>
 <p>Great, we can now see how many outliers we have per group and which are, to then decide what to do with them. We can start looking at how many outliers we have:</p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="intro-stat-chapter.html#cb470-1" tabindex="-1"></a>n_out_df <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
-<span id="cb470-2"><a href="intro-stat-chapter.html#cb470-2" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb470-3"><a href="intro-stat-chapter.html#cb470-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">&quot;n_out_weight&quot;</span> <span class="ot">=</span> <span class="fu">sum</span>(outlier_weight),</span>
-<span id="cb470-4"><a href="intro-stat-chapter.html#cb470-4" tabindex="-1"></a>            <span class="st">&quot;n_out_Task3&quot;</span> <span class="ot">=</span> <span class="fu">sum</span>(outlier_Task3))</span>
-<span id="cb470-5"><a href="intro-stat-chapter.html#cb470-5" tabindex="-1"></a></span>
-<span id="cb470-6"><a href="intro-stat-chapter.html#cb470-6" tabindex="-1"></a>n_out_df</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="intro-stat-chapter.html#cb470-1" aria-hidden="true" tabindex="-1"></a>n_out_df <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb470-2"><a href="intro-stat-chapter.html#cb470-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb470-3"><a href="intro-stat-chapter.html#cb470-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">&quot;n_out_weight&quot;</span> <span class="ot">=</span> <span class="fu">sum</span>(outlier_weight),</span>
+<span id="cb470-4"><a href="intro-stat-chapter.html#cb470-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;n_out_Task3&quot;</span> <span class="ot">=</span> <span class="fu">sum</span>(outlier_Task3))</span>
+<span id="cb470-5"><a href="intro-stat-chapter.html#cb470-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb470-6"><a href="intro-stat-chapter.html#cb470-6" aria-hidden="true" tabindex="-1"></a>n_out_df</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 2 × 5
 # Groups:   sex, age [1]
   sex     age treatment n_out_weight n_out_Task3
@@ -587,8 +586,8 @@ Once checked the input, we calculated IQR using <code>quantile</code> function t
 1 Male     30 Untreated            0           0
 2 Male     30 T1                   3           0</code></pre>
 <p>Alright, we have 3 outliers for weight in T1-treated group. Let’s see which are those values:</p>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="intro-stat-chapter.html#cb472-1" tabindex="-1"></a>male_30_weight_task3 <span class="sc">%&gt;%</span></span>
-<span id="cb472-2"><a href="intro-stat-chapter.html#cb472-2" tabindex="-1"></a>  <span class="fu">filter</span>(outlier_weight)</span></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="intro-stat-chapter.html#cb472-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb472-2"><a href="intro-stat-chapter.html#cb472-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(outlier_weight)</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 3 × 7
 # Groups:   sex, age, treatment [1]
   sex     age treatment weight Task3 outlier_weight outlier_Task3
@@ -599,219 +598,219 @@ Once checked the input, we calculated IQR using <code>quantile</code> function t
 <p>They are exactly the values we have identified in the boxplot before! Now, we have to decide what to do with these values; there are many options depending on your design, number of samples, and other factors. In this case, for example, we could see if those mice are outliers at other ages (if we have evaluated the same mice over time).
 <br>
 As we have good number of samples for each group, we can decide to exclude these mice at this time point: we can delete those rows or replace values with NA. For now, we use the latter, as we want to keep Task3 values for the remaining part of the examples; usually, you should evaluate one variable at a time, so you can remove values directly.</p>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="intro-stat-chapter.html#cb474-1" tabindex="-1"></a>male_30_weight_task3<span class="sc">$</span>weight[male_30_weight_task3<span class="sc">$</span>outlier_weight] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="intro-stat-chapter.html#cb474-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3<span class="sc">$</span>weight[male_30_weight_task3<span class="sc">$</span>outlier_weight] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
 <p>We can now re-evaluate outliers:</p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="intro-stat-chapter.html#cb475-1" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
-<span id="cb475-2"><a href="intro-stat-chapter.html#cb475-2" tabindex="-1"></a>male_30_weight_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb475-3"><a href="intro-stat-chapter.html#cb475-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb475-4"><a href="intro-stat-chapter.html#cb475-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb475-5"><a href="intro-stat-chapter.html#cb475-5" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb475-6"><a href="intro-stat-chapter.html#cb475-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb475-7"><a href="intro-stat-chapter.html#cb475-7" tabindex="-1"></a></span>
-<span id="cb475-8"><a href="intro-stat-chapter.html#cb475-8" tabindex="-1"></a>male_30_task3_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb475-9"><a href="intro-stat-chapter.html#cb475-9" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb475-10"><a href="intro-stat-chapter.html#cb475-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb475-11"><a href="intro-stat-chapter.html#cb475-11" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb475-12"><a href="intro-stat-chapter.html#cb475-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb475-13"><a href="intro-stat-chapter.html#cb475-13" tabindex="-1"></a></span>
-<span id="cb475-14"><a href="intro-stat-chapter.html#cb475-14" tabindex="-1"></a><span class="co"># 2. Create density plots</span></span>
-<span id="cb475-15"><a href="intro-stat-chapter.html#cb475-15" tabindex="-1"></a>male_30_weight_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb475-16"><a href="intro-stat-chapter.html#cb475-16" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb475-17"><a href="intro-stat-chapter.html#cb475-17" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb475-18"><a href="intro-stat-chapter.html#cb475-18" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb475-19"><a href="intro-stat-chapter.html#cb475-19" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb475-20"><a href="intro-stat-chapter.html#cb475-20" tabindex="-1"></a></span>
-<span id="cb475-21"><a href="intro-stat-chapter.html#cb475-21" tabindex="-1"></a>male_30_task3_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb475-22"><a href="intro-stat-chapter.html#cb475-22" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb475-23"><a href="intro-stat-chapter.html#cb475-23" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb475-24"><a href="intro-stat-chapter.html#cb475-24" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb475-25"><a href="intro-stat-chapter.html#cb475-25" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb475-26"><a href="intro-stat-chapter.html#cb475-26" tabindex="-1"></a></span>
-<span id="cb475-27"><a href="intro-stat-chapter.html#cb475-27" tabindex="-1"></a><span class="co"># 3. Create QQ plots</span></span>
-<span id="cb475-28"><a href="intro-stat-chapter.html#cb475-28" tabindex="-1"></a>male_30_weight_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> weight, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb475-29"><a href="intro-stat-chapter.html#cb475-29" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
-<span id="cb475-30"><a href="intro-stat-chapter.html#cb475-30" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb475-31"><a href="intro-stat-chapter.html#cb475-31" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb475-32"><a href="intro-stat-chapter.html#cb475-32" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb475-33"><a href="intro-stat-chapter.html#cb475-33" tabindex="-1"></a></span>
-<span id="cb475-34"><a href="intro-stat-chapter.html#cb475-34" tabindex="-1"></a>male_30_task3_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> Task3, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb475-35"><a href="intro-stat-chapter.html#cb475-35" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
-<span id="cb475-36"><a href="intro-stat-chapter.html#cb475-36" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb475-37"><a href="intro-stat-chapter.html#cb475-37" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb475-38"><a href="intro-stat-chapter.html#cb475-38" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb475-39"><a href="intro-stat-chapter.html#cb475-39" tabindex="-1"></a></span>
-<span id="cb475-40"><a href="intro-stat-chapter.html#cb475-40" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot_filt, male_30_weight_density_filt, male_30_weight_qq_filt,</span>
-<span id="cb475-41"><a href="intro-stat-chapter.html#cb475-41" tabindex="-1"></a>          male_30_task3_boxplot_filt, male_30_task3_density_filt, male_30_task3_qq_filt,</span>
-<span id="cb475-42"><a href="intro-stat-chapter.html#cb475-42" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="intro-stat-chapter.html#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
+<span id="cb475-2"><a href="intro-stat-chapter.html#cb475-2" aria-hidden="true" tabindex="-1"></a>male_30_weight_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb475-3"><a href="intro-stat-chapter.html#cb475-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb475-4"><a href="intro-stat-chapter.html#cb475-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-5"><a href="intro-stat-chapter.html#cb475-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb475-6"><a href="intro-stat-chapter.html#cb475-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb475-7"><a href="intro-stat-chapter.html#cb475-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-8"><a href="intro-stat-chapter.html#cb475-8" aria-hidden="true" tabindex="-1"></a>male_30_task3_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb475-9"><a href="intro-stat-chapter.html#cb475-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb475-10"><a href="intro-stat-chapter.html#cb475-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-11"><a href="intro-stat-chapter.html#cb475-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb475-12"><a href="intro-stat-chapter.html#cb475-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb475-13"><a href="intro-stat-chapter.html#cb475-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-14"><a href="intro-stat-chapter.html#cb475-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create density plots</span></span>
+<span id="cb475-15"><a href="intro-stat-chapter.html#cb475-15" aria-hidden="true" tabindex="-1"></a>male_30_weight_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb475-16"><a href="intro-stat-chapter.html#cb475-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb475-17"><a href="intro-stat-chapter.html#cb475-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-18"><a href="intro-stat-chapter.html#cb475-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb475-19"><a href="intro-stat-chapter.html#cb475-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb475-20"><a href="intro-stat-chapter.html#cb475-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-21"><a href="intro-stat-chapter.html#cb475-21" aria-hidden="true" tabindex="-1"></a>male_30_task3_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb475-22"><a href="intro-stat-chapter.html#cb475-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb475-23"><a href="intro-stat-chapter.html#cb475-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-24"><a href="intro-stat-chapter.html#cb475-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb475-25"><a href="intro-stat-chapter.html#cb475-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb475-26"><a href="intro-stat-chapter.html#cb475-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-27"><a href="intro-stat-chapter.html#cb475-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create QQ plots</span></span>
+<span id="cb475-28"><a href="intro-stat-chapter.html#cb475-28" aria-hidden="true" tabindex="-1"></a>male_30_weight_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> weight, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb475-29"><a href="intro-stat-chapter.html#cb475-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb475-30"><a href="intro-stat-chapter.html#cb475-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb475-31"><a href="intro-stat-chapter.html#cb475-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-32"><a href="intro-stat-chapter.html#cb475-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb475-33"><a href="intro-stat-chapter.html#cb475-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-34"><a href="intro-stat-chapter.html#cb475-34" aria-hidden="true" tabindex="-1"></a>male_30_task3_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> Task3, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb475-35"><a href="intro-stat-chapter.html#cb475-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb475-36"><a href="intro-stat-chapter.html#cb475-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb475-37"><a href="intro-stat-chapter.html#cb475-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-38"><a href="intro-stat-chapter.html#cb475-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb475-39"><a href="intro-stat-chapter.html#cb475-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-40"><a href="intro-stat-chapter.html#cb475-40" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot_filt, male_30_weight_density_filt, male_30_weight_qq_filt,</span>
+<span id="cb475-41"><a href="intro-stat-chapter.html#cb475-41" aria-hidden="true" tabindex="-1"></a>          male_30_task3_boxplot_filt, male_30_task3_density_filt, male_30_task3_qq_filt,</span>
+<span id="cb475-42"><a href="intro-stat-chapter.html#cb475-42" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/parametric_visual_inspection_filtered-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>We can see that we still have one outlier for weight in T1-treated. This is perfectly normal, as we have changed the quantiles by removing 3 values. Here, it is up to you to decide what to do based on your experience, other data etc. In this case, I will exclude it as weight usually is normally distributed.</p>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="intro-stat-chapter.html#cb476-1" tabindex="-1"></a>male_30_weight_task3 <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
-<span id="cb476-2"><a href="intro-stat-chapter.html#cb476-2" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb476-3"><a href="intro-stat-chapter.html#cb476-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;outlier_weight&quot;</span> <span class="ot">=</span> <span class="fu">is_outlier</span>(weight))</span>
-<span id="cb476-4"><a href="intro-stat-chapter.html#cb476-4" tabindex="-1"></a></span>
-<span id="cb476-5"><a href="intro-stat-chapter.html#cb476-5" tabindex="-1"></a>n_out_df <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
-<span id="cb476-6"><a href="intro-stat-chapter.html#cb476-6" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb476-7"><a href="intro-stat-chapter.html#cb476-7" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">&quot;n_out_weight&quot;</span> <span class="ot">=</span> <span class="fu">sum</span>(outlier_weight, <span class="at">na.rm =</span> T))</span>
-<span id="cb476-8"><a href="intro-stat-chapter.html#cb476-8" tabindex="-1"></a></span>
-<span id="cb476-9"><a href="intro-stat-chapter.html#cb476-9" tabindex="-1"></a>n_out_df</span></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="intro-stat-chapter.html#cb476-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3 <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb476-2"><a href="intro-stat-chapter.html#cb476-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb476-3"><a href="intro-stat-chapter.html#cb476-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;outlier_weight&quot;</span> <span class="ot">=</span> <span class="fu">is_outlier</span>(weight))</span>
+<span id="cb476-4"><a href="intro-stat-chapter.html#cb476-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb476-5"><a href="intro-stat-chapter.html#cb476-5" aria-hidden="true" tabindex="-1"></a>n_out_df <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb476-6"><a href="intro-stat-chapter.html#cb476-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb476-7"><a href="intro-stat-chapter.html#cb476-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">&quot;n_out_weight&quot;</span> <span class="ot">=</span> <span class="fu">sum</span>(outlier_weight, <span class="at">na.rm =</span> T))</span>
+<span id="cb476-8"><a href="intro-stat-chapter.html#cb476-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb476-9"><a href="intro-stat-chapter.html#cb476-9" aria-hidden="true" tabindex="-1"></a>n_out_df</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 2 × 4
 # Groups:   sex, age [1]
   sex     age treatment n_out_weight
   &lt;fct&gt; &lt;int&gt; &lt;fct&gt;            &lt;int&gt;
 1 Male     30 Untreated            0
 2 Male     30 T1                   1</code></pre>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="intro-stat-chapter.html#cb478-1" tabindex="-1"></a>male_30_weight_task3<span class="sc">$</span>weight[male_30_weight_task3<span class="sc">$</span>outlier_weight] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="intro-stat-chapter.html#cb478-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3<span class="sc">$</span>weight[male_30_weight_task3<span class="sc">$</span>outlier_weight] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
 <p>We can now re-evaluate outliers:</p>
-<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="intro-stat-chapter.html#cb479-1" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
-<span id="cb479-2"><a href="intro-stat-chapter.html#cb479-2" tabindex="-1"></a>male_30_weight_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb479-3"><a href="intro-stat-chapter.html#cb479-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb479-4"><a href="intro-stat-chapter.html#cb479-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb479-5"><a href="intro-stat-chapter.html#cb479-5" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb479-6"><a href="intro-stat-chapter.html#cb479-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb479-7"><a href="intro-stat-chapter.html#cb479-7" tabindex="-1"></a></span>
-<span id="cb479-8"><a href="intro-stat-chapter.html#cb479-8" tabindex="-1"></a>male_30_task3_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb479-9"><a href="intro-stat-chapter.html#cb479-9" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb479-10"><a href="intro-stat-chapter.html#cb479-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb479-11"><a href="intro-stat-chapter.html#cb479-11" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb479-12"><a href="intro-stat-chapter.html#cb479-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb479-13"><a href="intro-stat-chapter.html#cb479-13" tabindex="-1"></a></span>
-<span id="cb479-14"><a href="intro-stat-chapter.html#cb479-14" tabindex="-1"></a><span class="co"># 2. Create density plots</span></span>
-<span id="cb479-15"><a href="intro-stat-chapter.html#cb479-15" tabindex="-1"></a>male_30_weight_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb479-16"><a href="intro-stat-chapter.html#cb479-16" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb479-17"><a href="intro-stat-chapter.html#cb479-17" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb479-18"><a href="intro-stat-chapter.html#cb479-18" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb479-19"><a href="intro-stat-chapter.html#cb479-19" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb479-20"><a href="intro-stat-chapter.html#cb479-20" tabindex="-1"></a></span>
-<span id="cb479-21"><a href="intro-stat-chapter.html#cb479-21" tabindex="-1"></a>male_30_task3_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb479-22"><a href="intro-stat-chapter.html#cb479-22" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb479-23"><a href="intro-stat-chapter.html#cb479-23" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb479-24"><a href="intro-stat-chapter.html#cb479-24" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb479-25"><a href="intro-stat-chapter.html#cb479-25" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb479-26"><a href="intro-stat-chapter.html#cb479-26" tabindex="-1"></a></span>
-<span id="cb479-27"><a href="intro-stat-chapter.html#cb479-27" tabindex="-1"></a><span class="co"># 3. Create QQ plots</span></span>
-<span id="cb479-28"><a href="intro-stat-chapter.html#cb479-28" tabindex="-1"></a>male_30_weight_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> weight, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb479-29"><a href="intro-stat-chapter.html#cb479-29" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
-<span id="cb479-30"><a href="intro-stat-chapter.html#cb479-30" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb479-31"><a href="intro-stat-chapter.html#cb479-31" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb479-32"><a href="intro-stat-chapter.html#cb479-32" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb479-33"><a href="intro-stat-chapter.html#cb479-33" tabindex="-1"></a></span>
-<span id="cb479-34"><a href="intro-stat-chapter.html#cb479-34" tabindex="-1"></a>male_30_task3_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> Task3, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb479-35"><a href="intro-stat-chapter.html#cb479-35" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
-<span id="cb479-36"><a href="intro-stat-chapter.html#cb479-36" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb479-37"><a href="intro-stat-chapter.html#cb479-37" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb479-38"><a href="intro-stat-chapter.html#cb479-38" tabindex="-1"></a>  <span class="fu">theme_classic</span>() </span>
-<span id="cb479-39"><a href="intro-stat-chapter.html#cb479-39" tabindex="-1"></a></span>
-<span id="cb479-40"><a href="intro-stat-chapter.html#cb479-40" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot_filt, male_30_weight_density_filt, male_30_weight_qq_filt,</span>
-<span id="cb479-41"><a href="intro-stat-chapter.html#cb479-41" tabindex="-1"></a>          male_30_task3_boxplot_filt, male_30_task3_density_filt, male_30_task3_qq_filt,</span>
-<span id="cb479-42"><a href="intro-stat-chapter.html#cb479-42" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="intro-stat-chapter.html#cb479-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
+<span id="cb479-2"><a href="intro-stat-chapter.html#cb479-2" aria-hidden="true" tabindex="-1"></a>male_30_weight_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb479-3"><a href="intro-stat-chapter.html#cb479-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb479-4"><a href="intro-stat-chapter.html#cb479-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-5"><a href="intro-stat-chapter.html#cb479-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb479-6"><a href="intro-stat-chapter.html#cb479-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-7"><a href="intro-stat-chapter.html#cb479-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb479-8"><a href="intro-stat-chapter.html#cb479-8" aria-hidden="true" tabindex="-1"></a>male_30_task3_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb479-9"><a href="intro-stat-chapter.html#cb479-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb479-10"><a href="intro-stat-chapter.html#cb479-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-11"><a href="intro-stat-chapter.html#cb479-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb479-12"><a href="intro-stat-chapter.html#cb479-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-13"><a href="intro-stat-chapter.html#cb479-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb479-14"><a href="intro-stat-chapter.html#cb479-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create density plots</span></span>
+<span id="cb479-15"><a href="intro-stat-chapter.html#cb479-15" aria-hidden="true" tabindex="-1"></a>male_30_weight_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb479-16"><a href="intro-stat-chapter.html#cb479-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb479-17"><a href="intro-stat-chapter.html#cb479-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-18"><a href="intro-stat-chapter.html#cb479-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb479-19"><a href="intro-stat-chapter.html#cb479-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-20"><a href="intro-stat-chapter.html#cb479-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb479-21"><a href="intro-stat-chapter.html#cb479-21" aria-hidden="true" tabindex="-1"></a>male_30_task3_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb479-22"><a href="intro-stat-chapter.html#cb479-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb479-23"><a href="intro-stat-chapter.html#cb479-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-24"><a href="intro-stat-chapter.html#cb479-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb479-25"><a href="intro-stat-chapter.html#cb479-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-26"><a href="intro-stat-chapter.html#cb479-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb479-27"><a href="intro-stat-chapter.html#cb479-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create QQ plots</span></span>
+<span id="cb479-28"><a href="intro-stat-chapter.html#cb479-28" aria-hidden="true" tabindex="-1"></a>male_30_weight_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> weight, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb479-29"><a href="intro-stat-chapter.html#cb479-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb479-30"><a href="intro-stat-chapter.html#cb479-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb479-31"><a href="intro-stat-chapter.html#cb479-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-32"><a href="intro-stat-chapter.html#cb479-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb479-33"><a href="intro-stat-chapter.html#cb479-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb479-34"><a href="intro-stat-chapter.html#cb479-34" aria-hidden="true" tabindex="-1"></a>male_30_task3_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> Task3, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb479-35"><a href="intro-stat-chapter.html#cb479-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb479-36"><a href="intro-stat-chapter.html#cb479-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb479-37"><a href="intro-stat-chapter.html#cb479-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-38"><a href="intro-stat-chapter.html#cb479-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() </span>
+<span id="cb479-39"><a href="intro-stat-chapter.html#cb479-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb479-40"><a href="intro-stat-chapter.html#cb479-40" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot_filt, male_30_weight_density_filt, male_30_weight_qq_filt,</span>
+<span id="cb479-41"><a href="intro-stat-chapter.html#cb479-41" aria-hidden="true" tabindex="-1"></a>          male_30_task3_boxplot_filt, male_30_task3_density_filt, male_30_task3_qq_filt,</span>
+<span id="cb479-42"><a href="intro-stat-chapter.html#cb479-42" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/parametric_visual_inspection_filtered_2-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Again, let’s for the last time try to exclude the outlier:</p>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="intro-stat-chapter.html#cb480-1" tabindex="-1"></a>male_30_weight_task3 <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
-<span id="cb480-2"><a href="intro-stat-chapter.html#cb480-2" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb480-3"><a href="intro-stat-chapter.html#cb480-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;outlier_weight&quot;</span> <span class="ot">=</span> <span class="fu">is_outlier</span>(weight))</span>
-<span id="cb480-4"><a href="intro-stat-chapter.html#cb480-4" tabindex="-1"></a></span>
-<span id="cb480-5"><a href="intro-stat-chapter.html#cb480-5" tabindex="-1"></a>n_out_df <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
-<span id="cb480-6"><a href="intro-stat-chapter.html#cb480-6" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb480-7"><a href="intro-stat-chapter.html#cb480-7" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">&quot;n_out_weight&quot;</span> <span class="ot">=</span> <span class="fu">sum</span>(outlier_weight, <span class="at">na.rm =</span> T))</span>
-<span id="cb480-8"><a href="intro-stat-chapter.html#cb480-8" tabindex="-1"></a></span>
-<span id="cb480-9"><a href="intro-stat-chapter.html#cb480-9" tabindex="-1"></a>n_out_df</span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="intro-stat-chapter.html#cb480-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3 <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb480-2"><a href="intro-stat-chapter.html#cb480-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb480-3"><a href="intro-stat-chapter.html#cb480-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;outlier_weight&quot;</span> <span class="ot">=</span> <span class="fu">is_outlier</span>(weight))</span>
+<span id="cb480-4"><a href="intro-stat-chapter.html#cb480-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb480-5"><a href="intro-stat-chapter.html#cb480-5" aria-hidden="true" tabindex="-1"></a>n_out_df <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb480-6"><a href="intro-stat-chapter.html#cb480-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb480-7"><a href="intro-stat-chapter.html#cb480-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">&quot;n_out_weight&quot;</span> <span class="ot">=</span> <span class="fu">sum</span>(outlier_weight, <span class="at">na.rm =</span> T))</span>
+<span id="cb480-8"><a href="intro-stat-chapter.html#cb480-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb480-9"><a href="intro-stat-chapter.html#cb480-9" aria-hidden="true" tabindex="-1"></a>n_out_df</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 2 × 4
 # Groups:   sex, age [1]
   sex     age treatment n_out_weight
   &lt;fct&gt; &lt;int&gt; &lt;fct&gt;            &lt;int&gt;
 1 Male     30 Untreated            0
 2 Male     30 T1                   1</code></pre>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="intro-stat-chapter.html#cb482-1" tabindex="-1"></a>male_30_weight_task3<span class="sc">$</span>weight[male_30_weight_task3<span class="sc">$</span>outlier_weight] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="intro-stat-chapter.html#cb482-1" aria-hidden="true" tabindex="-1"></a>male_30_weight_task3<span class="sc">$</span>weight[male_30_weight_task3<span class="sc">$</span>outlier_weight] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
 <p>We can now re-evaluate outliers:</p>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="intro-stat-chapter.html#cb483-1" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
-<span id="cb483-2"><a href="intro-stat-chapter.html#cb483-2" tabindex="-1"></a>male_30_weight_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb483-3"><a href="intro-stat-chapter.html#cb483-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb483-4"><a href="intro-stat-chapter.html#cb483-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb483-5"><a href="intro-stat-chapter.html#cb483-5" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb483-6"><a href="intro-stat-chapter.html#cb483-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb483-7"><a href="intro-stat-chapter.html#cb483-7" tabindex="-1"></a></span>
-<span id="cb483-8"><a href="intro-stat-chapter.html#cb483-8" tabindex="-1"></a>male_30_task3_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb483-9"><a href="intro-stat-chapter.html#cb483-9" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb483-10"><a href="intro-stat-chapter.html#cb483-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb483-11"><a href="intro-stat-chapter.html#cb483-11" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb483-12"><a href="intro-stat-chapter.html#cb483-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb483-13"><a href="intro-stat-chapter.html#cb483-13" tabindex="-1"></a></span>
-<span id="cb483-14"><a href="intro-stat-chapter.html#cb483-14" tabindex="-1"></a><span class="co"># 2. Create density plots</span></span>
-<span id="cb483-15"><a href="intro-stat-chapter.html#cb483-15" tabindex="-1"></a>male_30_weight_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb483-16"><a href="intro-stat-chapter.html#cb483-16" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb483-17"><a href="intro-stat-chapter.html#cb483-17" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb483-18"><a href="intro-stat-chapter.html#cb483-18" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb483-19"><a href="intro-stat-chapter.html#cb483-19" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb483-20"><a href="intro-stat-chapter.html#cb483-20" tabindex="-1"></a></span>
-<span id="cb483-21"><a href="intro-stat-chapter.html#cb483-21" tabindex="-1"></a>male_30_task3_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
-<span id="cb483-22"><a href="intro-stat-chapter.html#cb483-22" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb483-23"><a href="intro-stat-chapter.html#cb483-23" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb483-24"><a href="intro-stat-chapter.html#cb483-24" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb483-25"><a href="intro-stat-chapter.html#cb483-25" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb483-26"><a href="intro-stat-chapter.html#cb483-26" tabindex="-1"></a></span>
-<span id="cb483-27"><a href="intro-stat-chapter.html#cb483-27" tabindex="-1"></a><span class="co"># 3. Create QQ plots</span></span>
-<span id="cb483-28"><a href="intro-stat-chapter.html#cb483-28" tabindex="-1"></a>male_30_weight_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> weight, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb483-29"><a href="intro-stat-chapter.html#cb483-29" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
-<span id="cb483-30"><a href="intro-stat-chapter.html#cb483-30" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb483-31"><a href="intro-stat-chapter.html#cb483-31" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
-<span id="cb483-32"><a href="intro-stat-chapter.html#cb483-32" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb483-33"><a href="intro-stat-chapter.html#cb483-33" tabindex="-1"></a></span>
-<span id="cb483-34"><a href="intro-stat-chapter.html#cb483-34" tabindex="-1"></a>male_30_task3_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> Task3, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb483-35"><a href="intro-stat-chapter.html#cb483-35" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
-<span id="cb483-36"><a href="intro-stat-chapter.html#cb483-36" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb483-37"><a href="intro-stat-chapter.html#cb483-37" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb483-38"><a href="intro-stat-chapter.html#cb483-38" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb483-39"><a href="intro-stat-chapter.html#cb483-39" tabindex="-1"></a></span>
-<span id="cb483-40"><a href="intro-stat-chapter.html#cb483-40" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot_filt, male_30_weight_density_filt, male_30_weight_qq_filt,</span>
-<span id="cb483-41"><a href="intro-stat-chapter.html#cb483-41" tabindex="-1"></a>          male_30_task3_boxplot_filt, male_30_task3_density_filt, male_30_task3_qq_filt,</span>
-<span id="cb483-42"><a href="intro-stat-chapter.html#cb483-42" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="intro-stat-chapter.html#cb483-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
+<span id="cb483-2"><a href="intro-stat-chapter.html#cb483-2" aria-hidden="true" tabindex="-1"></a>male_30_weight_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb483-3"><a href="intro-stat-chapter.html#cb483-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb483-4"><a href="intro-stat-chapter.html#cb483-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb483-5"><a href="intro-stat-chapter.html#cb483-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb483-6"><a href="intro-stat-chapter.html#cb483-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb483-7"><a href="intro-stat-chapter.html#cb483-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb483-8"><a href="intro-stat-chapter.html#cb483-8" aria-hidden="true" tabindex="-1"></a>male_30_task3_boxplot_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb483-9"><a href="intro-stat-chapter.html#cb483-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">outlier.shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb483-10"><a href="intro-stat-chapter.html#cb483-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb483-11"><a href="intro-stat-chapter.html#cb483-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb483-12"><a href="intro-stat-chapter.html#cb483-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb483-13"><a href="intro-stat-chapter.html#cb483-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb483-14"><a href="intro-stat-chapter.html#cb483-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create density plots</span></span>
+<span id="cb483-15"><a href="intro-stat-chapter.html#cb483-15" aria-hidden="true" tabindex="-1"></a>male_30_weight_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb483-16"><a href="intro-stat-chapter.html#cb483-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb483-17"><a href="intro-stat-chapter.html#cb483-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb483-18"><a href="intro-stat-chapter.html#cb483-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb483-19"><a href="intro-stat-chapter.html#cb483-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb483-20"><a href="intro-stat-chapter.html#cb483-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb483-21"><a href="intro-stat-chapter.html#cb483-21" aria-hidden="true" tabindex="-1"></a>male_30_task3_density_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3) <span class="sc">+</span></span>
+<span id="cb483-22"><a href="intro-stat-chapter.html#cb483-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> Task3, <span class="at">fill =</span> treatment), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb483-23"><a href="intro-stat-chapter.html#cb483-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb483-24"><a href="intro-stat-chapter.html#cb483-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb483-25"><a href="intro-stat-chapter.html#cb483-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb483-26"><a href="intro-stat-chapter.html#cb483-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb483-27"><a href="intro-stat-chapter.html#cb483-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create QQ plots</span></span>
+<span id="cb483-28"><a href="intro-stat-chapter.html#cb483-28" aria-hidden="true" tabindex="-1"></a>male_30_weight_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> weight, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb483-29"><a href="intro-stat-chapter.html#cb483-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb483-30"><a href="intro-stat-chapter.html#cb483-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb483-31"><a href="intro-stat-chapter.html#cb483-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb483-32"><a href="intro-stat-chapter.html#cb483-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb483-33"><a href="intro-stat-chapter.html#cb483-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb483-34"><a href="intro-stat-chapter.html#cb483-34" aria-hidden="true" tabindex="-1"></a>male_30_task3_qq_filt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(male_30_weight_task3, <span class="fu">aes</span>(<span class="at">sample =</span> Task3, <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb483-35"><a href="intro-stat-chapter.html#cb483-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb483-36"><a href="intro-stat-chapter.html#cb483-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb483-37"><a href="intro-stat-chapter.html#cb483-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Theoretical quantiles&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample quantiles&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Male age = 30 Task3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb483-38"><a href="intro-stat-chapter.html#cb483-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb483-39"><a href="intro-stat-chapter.html#cb483-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb483-40"><a href="intro-stat-chapter.html#cb483-40" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot_filt, male_30_weight_density_filt, male_30_weight_qq_filt,</span>
+<span id="cb483-41"><a href="intro-stat-chapter.html#cb483-41" aria-hidden="true" tabindex="-1"></a>          male_30_task3_boxplot_filt, male_30_task3_density_filt, male_30_task3_qq_filt,</span>
+<span id="cb483-42"><a href="intro-stat-chapter.html#cb483-42" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/parametric_visual_inspection_filtered_3-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Great, we now have not any outlier and we can move on with the other checks.</p>
 </div>
-<div id="normality" class="section level3 unnumbered hasAnchor">
-<h3>Normality<a href="intro-stat-chapter.html#normality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="normality" class="section level3 unnumbered">
+<h3>Normality</h3>
 <p>We now check if our data are normally distributed. There are two main tests that are used for this: <em>Shapiro-Wilk normality test</em> and <em>Kolmogorov-Smirnov test</em>. The first one is specific for normal distributions, while the second one compares two samples and returns whether they belong to the same distribution, by setting the second sample as a normal distribution, it comes that is like Shapiro-Wlik test.
 <br>
 As all frequentest statistical tests, these two have null and alternative hypothesis and returns p.values: the null hypothesis is that the distribution of the sample is normal (or comes from the same distribution in the case we have two samples). So, a p.value &gt; 0.05 (or another user-defined threshold) means we <strong>cannot refuse the null hypothesis</strong>,so the sample has a normal distribution (or comes from the same distribution as the other sample).
 <br>
 However, they both hae <u>limitatios</u> when dealing with large samples (n &gt;150/200); in those cases, you could look at the plots and decide, together with the fact that Central Limit Theorem often comes into play in these cases; you should test homoschedasticity as well.</p>
 <p>We will now see the structure of the results of these test, and then apply them to our data. Let’s create two samples, one normally distributed and one not.</p>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="intro-stat-chapter.html#cb484-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">111</span>)</span>
-<span id="cb484-2"><a href="intro-stat-chapter.html#cb484-2" tabindex="-1"></a></span>
-<span id="cb484-3"><a href="intro-stat-chapter.html#cb484-3" tabindex="-1"></a><span class="co"># 1. Create normally distributed sample</span></span>
-<span id="cb484-4"><a href="intro-stat-chapter.html#cb484-4" tabindex="-1"></a>quantiles <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.99</span>, <span class="at">length.out =</span> <span class="dv">100</span>)</span>
-<span id="cb484-5"><a href="intro-stat-chapter.html#cb484-5" tabindex="-1"></a>norm_sample <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(quantiles, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb484-6"><a href="intro-stat-chapter.html#cb484-6" tabindex="-1"></a></span>
-<span id="cb484-7"><a href="intro-stat-chapter.html#cb484-7" tabindex="-1"></a><span class="co"># 2. Create non-normally distributed sample</span></span>
-<span id="cb484-8"><a href="intro-stat-chapter.html#cb484-8" tabindex="-1"></a>non_norm_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>) <span class="sc">*</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="intro-stat-chapter.html#cb484-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">111</span>)</span>
+<span id="cb484-2"><a href="intro-stat-chapter.html#cb484-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb484-3"><a href="intro-stat-chapter.html#cb484-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create normally distributed sample</span></span>
+<span id="cb484-4"><a href="intro-stat-chapter.html#cb484-4" aria-hidden="true" tabindex="-1"></a>quantiles <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.99</span>, <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb484-5"><a href="intro-stat-chapter.html#cb484-5" aria-hidden="true" tabindex="-1"></a>norm_sample <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(quantiles, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb484-6"><a href="intro-stat-chapter.html#cb484-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb484-7"><a href="intro-stat-chapter.html#cb484-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create non-normally distributed sample</span></span>
+<span id="cb484-8"><a href="intro-stat-chapter.html#cb484-8" aria-hidden="true" tabindex="-1"></a>non_norm_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>) <span class="sc">*</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>Now, we just visualize the data as we would do in a real-life scenario:</p>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="intro-stat-chapter.html#cb485-1" tabindex="-1"></a>norm_sample_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb485-2"><a href="intro-stat-chapter.html#cb485-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(norm_sample)) <span class="sc">+</span></span>
-<span id="cb485-3"><a href="intro-stat-chapter.html#cb485-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Normally distributed data&quot;</span>) <span class="sc">+</span></span>
-<span id="cb485-4"><a href="intro-stat-chapter.html#cb485-4" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb485-5"><a href="intro-stat-chapter.html#cb485-5" tabindex="-1"></a></span>
-<span id="cb485-6"><a href="intro-stat-chapter.html#cb485-6" tabindex="-1"></a>non_norm_sample_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb485-7"><a href="intro-stat-chapter.html#cb485-7" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(non_norm_sample)) <span class="sc">+</span></span>
-<span id="cb485-8"><a href="intro-stat-chapter.html#cb485-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Non normally distributed data&quot;</span>) <span class="sc">+</span></span>
-<span id="cb485-9"><a href="intro-stat-chapter.html#cb485-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb485-10"><a href="intro-stat-chapter.html#cb485-10" tabindex="-1"></a></span>
-<span id="cb485-11"><a href="intro-stat-chapter.html#cb485-11" tabindex="-1"></a><span class="fu">ggarrange</span>(norm_sample_density, non_norm_sample_density, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;v&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="intro-stat-chapter.html#cb485-1" aria-hidden="true" tabindex="-1"></a>norm_sample_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb485-2"><a href="intro-stat-chapter.html#cb485-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(norm_sample)) <span class="sc">+</span></span>
+<span id="cb485-3"><a href="intro-stat-chapter.html#cb485-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Normally distributed data&quot;</span>) <span class="sc">+</span></span>
+<span id="cb485-4"><a href="intro-stat-chapter.html#cb485-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb485-5"><a href="intro-stat-chapter.html#cb485-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb485-6"><a href="intro-stat-chapter.html#cb485-6" aria-hidden="true" tabindex="-1"></a>non_norm_sample_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb485-7"><a href="intro-stat-chapter.html#cb485-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(non_norm_sample)) <span class="sc">+</span></span>
+<span id="cb485-8"><a href="intro-stat-chapter.html#cb485-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Non normally distributed data&quot;</span>) <span class="sc">+</span></span>
+<span id="cb485-9"><a href="intro-stat-chapter.html#cb485-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb485-10"><a href="intro-stat-chapter.html#cb485-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb485-11"><a href="intro-stat-chapter.html#cb485-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(norm_sample_density, non_norm_sample_density, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;v&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/normal_vs_non_normal_distribution-1.svg" width="85%" style="display: block; margin: auto;" />
 Great! We can clearly see by visual inspection that the first is normmally distributed and the second one not, but we are here to see statistical tests.</p>
-<div id="shapiro-wilk-normality-test" class="section level4 unnumbered hasAnchor">
-<h4>Shapiro-Wilk normality test<a href="intro-stat-chapter.html#shapiro-wilk-normality-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="shapiro-wilk-normality-test" class="section level4 unnumbered">
+<h4>Shapiro-Wilk normality test</h4>
 <p>We start with <code>shapiro.test</code>:</p>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="intro-stat-chapter.html#cb486-1" tabindex="-1"></a><span class="co"># 1. Shapiro-Wilk test</span></span>
-<span id="cb486-2"><a href="intro-stat-chapter.html#cb486-2" tabindex="-1"></a>norm_sample_shapiro_res <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(<span class="at">x =</span> norm_sample)</span>
-<span id="cb486-3"><a href="intro-stat-chapter.html#cb486-3" tabindex="-1"></a>non_norm_sample_shapiro_res <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(<span class="at">x =</span> non_norm_sample)</span>
-<span id="cb486-4"><a href="intro-stat-chapter.html#cb486-4" tabindex="-1"></a></span>
-<span id="cb486-5"><a href="intro-stat-chapter.html#cb486-5" tabindex="-1"></a>norm_sample_shapiro_res</span></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="intro-stat-chapter.html#cb486-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Shapiro-Wilk test</span></span>
+<span id="cb486-2"><a href="intro-stat-chapter.html#cb486-2" aria-hidden="true" tabindex="-1"></a>norm_sample_shapiro_res <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(<span class="at">x =</span> norm_sample)</span>
+<span id="cb486-3"><a href="intro-stat-chapter.html#cb486-3" aria-hidden="true" tabindex="-1"></a>non_norm_sample_shapiro_res <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(<span class="at">x =</span> non_norm_sample)</span>
+<span id="cb486-4"><a href="intro-stat-chapter.html#cb486-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb486-5"><a href="intro-stat-chapter.html#cb486-5" aria-hidden="true" tabindex="-1"></a>norm_sample_shapiro_res</span></code></pre></div>
 <pre class="code-out"><code>
     Shapiro-Wilk normality test
 
 data:  norm_sample
 W = 0.9977, p-value = 0.9999</code></pre>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="intro-stat-chapter.html#cb488-1" tabindex="-1"></a>non_norm_sample_shapiro_res</span></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="intro-stat-chapter.html#cb488-1" aria-hidden="true" tabindex="-1"></a>non_norm_sample_shapiro_res</span></code></pre></div>
 <pre class="code-out"><code>
     Shapiro-Wilk normality test
 
@@ -833,35 +832,35 @@ Running the function is very simple, the only input you have to give is the nume
 </ul>
 <p>So, we can say that the Shapiro-Wilk test confirms that the first sample is normally distributed, while the second one not.</p>
 </div>
-<div id="kolmogorov-smirnov-test" class="section level4 unnumbered hasAnchor">
-<h4>Kolmogorov-Smirnov test<a href="intro-stat-chapter.html#kolmogorov-smirnov-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="kolmogorov-smirnov-test" class="section level4 unnumbered">
+<h4>Kolmogorov-Smirnov test</h4>
 <p>Let’s now see the Kolgomorov-Smirnov test. The function is <code>ks.test</code>, and it differs a lot from the previous one, so let’s see some examples and then comment them:</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="intro-stat-chapter.html#cb490-1" tabindex="-1"></a><span class="co"># 1. Test normal data</span></span>
-<span id="cb490-2"><a href="intro-stat-chapter.html#cb490-2" tabindex="-1"></a>norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="st">&quot;pnorm&quot;</span>)</span>
-<span id="cb490-3"><a href="intro-stat-chapter.html#cb490-3" tabindex="-1"></a></span>
-<span id="cb490-4"><a href="intro-stat-chapter.html#cb490-4" tabindex="-1"></a><span class="co"># 2. Test non-normal data</span></span>
-<span id="cb490-5"><a href="intro-stat-chapter.html#cb490-5" tabindex="-1"></a>non_norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> non_norm_sample, <span class="st">&quot;pnorm&quot;</span>)</span>
-<span id="cb490-6"><a href="intro-stat-chapter.html#cb490-6" tabindex="-1"></a></span>
-<span id="cb490-7"><a href="intro-stat-chapter.html#cb490-7" tabindex="-1"></a><span class="co"># 3. Test if the two belongs to the same distributions</span></span>
-<span id="cb490-8"><a href="intro-stat-chapter.html#cb490-8" tabindex="-1"></a>comparison_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="at">y =</span> non_norm_sample)</span>
-<span id="cb490-9"><a href="intro-stat-chapter.html#cb490-9" tabindex="-1"></a></span>
-<span id="cb490-10"><a href="intro-stat-chapter.html#cb490-10" tabindex="-1"></a>norm_sample_ks_res</span></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="intro-stat-chapter.html#cb490-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Test normal data</span></span>
+<span id="cb490-2"><a href="intro-stat-chapter.html#cb490-2" aria-hidden="true" tabindex="-1"></a>norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="st">&quot;pnorm&quot;</span>)</span>
+<span id="cb490-3"><a href="intro-stat-chapter.html#cb490-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb490-4"><a href="intro-stat-chapter.html#cb490-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Test non-normal data</span></span>
+<span id="cb490-5"><a href="intro-stat-chapter.html#cb490-5" aria-hidden="true" tabindex="-1"></a>non_norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> non_norm_sample, <span class="st">&quot;pnorm&quot;</span>)</span>
+<span id="cb490-6"><a href="intro-stat-chapter.html#cb490-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb490-7"><a href="intro-stat-chapter.html#cb490-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Test if the two belongs to the same distributions</span></span>
+<span id="cb490-8"><a href="intro-stat-chapter.html#cb490-8" aria-hidden="true" tabindex="-1"></a>comparison_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="at">y =</span> non_norm_sample)</span>
+<span id="cb490-9"><a href="intro-stat-chapter.html#cb490-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb490-10"><a href="intro-stat-chapter.html#cb490-10" aria-hidden="true" tabindex="-1"></a>norm_sample_ks_res</span></code></pre></div>
 <pre class="code-out"><code>
-    Asymptotic one-sample Kolmogorov-Smirnov test
+    One-sample Kolmogorov-Smirnov test
 
 data:  norm_sample
 D = 1, p-value &lt; 2.2e-16
 alternative hypothesis: two-sided</code></pre>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="intro-stat-chapter.html#cb492-1" tabindex="-1"></a>non_norm_sample_ks_res</span></code></pre></div>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="intro-stat-chapter.html#cb492-1" aria-hidden="true" tabindex="-1"></a>non_norm_sample_ks_res</span></code></pre></div>
 <pre class="code-out"><code>
-    Asymptotic one-sample Kolmogorov-Smirnov test
+    One-sample Kolmogorov-Smirnov test
 
 data:  non_norm_sample
 D = 0.74044, p-value &lt; 2.2e-16
 alternative hypothesis: two-sided</code></pre>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="intro-stat-chapter.html#cb494-1" tabindex="-1"></a>comparison_ks_res</span></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="intro-stat-chapter.html#cb494-1" aria-hidden="true" tabindex="-1"></a>comparison_ks_res</span></code></pre></div>
 <pre class="code-out"><code>
-    Asymptotic two-sample Kolmogorov-Smirnov test
+    Two-sample Kolmogorov-Smirnov test
 
 data:  norm_sample and non_norm_sample
 D = 0.63, p-value &lt; 2.2e-16
@@ -869,32 +868,32 @@ alternative hypothesis: two-sided</code></pre>
 <p>“Wait, what has happened? Why they are all not normal?! The first one should have a p-value &gt; 0.05”. You are perfectly right, that is because we didn’t specify anything about the normal distribution, just “pnorm”, and it assumes that you want to compare your data with the standard normal distribution (mean = 0, sd = 1). To fix it, we can provide to the function, the info about mean and sd of the distribution we want (usually, the mean and the sd of our data).
 <br>
 So, we can do this:</p>
-<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="intro-stat-chapter.html#cb496-1" tabindex="-1"></a><span class="co"># 1. Test normal data</span></span>
-<span id="cb496-2"><a href="intro-stat-chapter.html#cb496-2" tabindex="-1"></a>norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(norm_sample), <span class="at">sd =</span> <span class="fu">sd</span>(norm_sample))</span>
-<span id="cb496-3"><a href="intro-stat-chapter.html#cb496-3" tabindex="-1"></a></span>
-<span id="cb496-4"><a href="intro-stat-chapter.html#cb496-4" tabindex="-1"></a><span class="co"># 2. Test non-normal data</span></span>
-<span id="cb496-5"><a href="intro-stat-chapter.html#cb496-5" tabindex="-1"></a>non_norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> non_norm_sample, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(norm_sample), <span class="at">sd =</span> <span class="fu">sd</span>(norm_sample))</span>
-<span id="cb496-6"><a href="intro-stat-chapter.html#cb496-6" tabindex="-1"></a></span>
-<span id="cb496-7"><a href="intro-stat-chapter.html#cb496-7" tabindex="-1"></a><span class="co"># 3. Test if the two belongs to the same distributions</span></span>
-<span id="cb496-8"><a href="intro-stat-chapter.html#cb496-8" tabindex="-1"></a>comparison_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="at">y =</span> non_norm_sample)</span>
-<span id="cb496-9"><a href="intro-stat-chapter.html#cb496-9" tabindex="-1"></a></span>
-<span id="cb496-10"><a href="intro-stat-chapter.html#cb496-10" tabindex="-1"></a>norm_sample_ks_res</span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="intro-stat-chapter.html#cb496-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Test normal data</span></span>
+<span id="cb496-2"><a href="intro-stat-chapter.html#cb496-2" aria-hidden="true" tabindex="-1"></a>norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(norm_sample), <span class="at">sd =</span> <span class="fu">sd</span>(norm_sample))</span>
+<span id="cb496-3"><a href="intro-stat-chapter.html#cb496-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb496-4"><a href="intro-stat-chapter.html#cb496-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Test non-normal data</span></span>
+<span id="cb496-5"><a href="intro-stat-chapter.html#cb496-5" aria-hidden="true" tabindex="-1"></a>non_norm_sample_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> non_norm_sample, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(norm_sample), <span class="at">sd =</span> <span class="fu">sd</span>(norm_sample))</span>
+<span id="cb496-6"><a href="intro-stat-chapter.html#cb496-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb496-7"><a href="intro-stat-chapter.html#cb496-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Test if the two belongs to the same distributions</span></span>
+<span id="cb496-8"><a href="intro-stat-chapter.html#cb496-8" aria-hidden="true" tabindex="-1"></a>comparison_ks_res <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(<span class="at">x =</span> norm_sample, <span class="at">y =</span> non_norm_sample)</span>
+<span id="cb496-9"><a href="intro-stat-chapter.html#cb496-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb496-10"><a href="intro-stat-chapter.html#cb496-10" aria-hidden="true" tabindex="-1"></a>norm_sample_ks_res</span></code></pre></div>
 <pre class="code-out"><code>
-    Asymptotic one-sample Kolmogorov-Smirnov test
+    One-sample Kolmogorov-Smirnov test
 
 data:  norm_sample
 D = 0.010407, p-value = 1
 alternative hypothesis: two-sided</code></pre>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="intro-stat-chapter.html#cb498-1" tabindex="-1"></a>non_norm_sample_ks_res</span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="intro-stat-chapter.html#cb498-1" aria-hidden="true" tabindex="-1"></a>non_norm_sample_ks_res</span></code></pre></div>
 <pre class="code-out"><code>
-    Asymptotic one-sample Kolmogorov-Smirnov test
+    One-sample Kolmogorov-Smirnov test
 
 data:  non_norm_sample
 D = 0.63413, p-value &lt; 2.2e-16
 alternative hypothesis: two-sided</code></pre>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="intro-stat-chapter.html#cb500-1" tabindex="-1"></a>comparison_ks_res</span></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="intro-stat-chapter.html#cb500-1" aria-hidden="true" tabindex="-1"></a>comparison_ks_res</span></code></pre></div>
 <pre class="code-out"><code>
-    Asymptotic two-sample Kolmogorov-Smirnov test
+    Two-sample Kolmogorov-Smirnov test
 
 data:  norm_sample and non_norm_sample
 D = 0.63, p-value &lt; 2.2e-16
@@ -902,14 +901,14 @@ alternative hypothesis: two-sided</code></pre>
 <p>🎉 This is exactly what we were expecting!
 <br>
 You can choose whichever test you want. I personally prefer Shapiro-Wilk, but it is up to you. We can now evaluate our example samples with outlier excluded; I will show you now how to perform both test and get only the pvalues to create a new data.frame:</p>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="intro-stat-chapter.html#cb502-1" tabindex="-1"></a>normality_df <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
-<span id="cb502-2"><a href="intro-stat-chapter.html#cb502-2" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb502-3"><a href="intro-stat-chapter.html#cb502-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">&quot;shapiro_p_value&quot;</span> <span class="ot">=</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p.value,</span>
-<span id="cb502-4"><a href="intro-stat-chapter.html#cb502-4" tabindex="-1"></a>            <span class="st">&quot;ks_p_value&quot;</span> <span class="ot">=</span> <span class="fu">ks.test</span>(weight, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(weight, <span class="at">na.rm =</span> T), <span class="at">sd =</span> <span class="fu">sd</span>(weight, <span class="at">na.rm =</span> T))<span class="sc">$</span>p.value,</span>
-<span id="cb502-5"><a href="intro-stat-chapter.html#cb502-5" tabindex="-1"></a>            <span class="st">&quot;shapiro_p_value_Task3&quot;</span> <span class="ot">=</span> <span class="fu">shapiro.test</span>(Task3)<span class="sc">$</span>p.value,</span>
-<span id="cb502-6"><a href="intro-stat-chapter.html#cb502-6" tabindex="-1"></a>            <span class="st">&quot;ks_p_value_Task3&quot;</span> <span class="ot">=</span> <span class="fu">ks.test</span>(Task3, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(Task3), <span class="at">sd =</span> <span class="fu">sd</span>(Task3))<span class="sc">$</span>p.value)</span>
-<span id="cb502-7"><a href="intro-stat-chapter.html#cb502-7" tabindex="-1"></a></span>
-<span id="cb502-8"><a href="intro-stat-chapter.html#cb502-8" tabindex="-1"></a>normality_df</span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="intro-stat-chapter.html#cb502-1" aria-hidden="true" tabindex="-1"></a>normality_df <span class="ot">&lt;-</span> male_30_weight_task3 <span class="sc">%&gt;%</span></span>
+<span id="cb502-2"><a href="intro-stat-chapter.html#cb502-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, age, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb502-3"><a href="intro-stat-chapter.html#cb502-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">&quot;shapiro_p_value&quot;</span> <span class="ot">=</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p.value,</span>
+<span id="cb502-4"><a href="intro-stat-chapter.html#cb502-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;ks_p_value&quot;</span> <span class="ot">=</span> <span class="fu">ks.test</span>(weight, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(weight, <span class="at">na.rm =</span> T), <span class="at">sd =</span> <span class="fu">sd</span>(weight, <span class="at">na.rm =</span> T))<span class="sc">$</span>p.value,</span>
+<span id="cb502-5"><a href="intro-stat-chapter.html#cb502-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;shapiro_p_value_Task3&quot;</span> <span class="ot">=</span> <span class="fu">shapiro.test</span>(Task3)<span class="sc">$</span>p.value,</span>
+<span id="cb502-6"><a href="intro-stat-chapter.html#cb502-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;ks_p_value_Task3&quot;</span> <span class="ot">=</span> <span class="fu">ks.test</span>(Task3, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(Task3), <span class="at">sd =</span> <span class="fu">sd</span>(Task3))<span class="sc">$</span>p.value)</span>
+<span id="cb502-7"><a href="intro-stat-chapter.html#cb502-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb502-8"><a href="intro-stat-chapter.html#cb502-8" aria-hidden="true" tabindex="-1"></a>normality_df</span></code></pre></div>
 <pre class="code-out"><code># A tibble: 2 × 7
 # Groups:   sex, age [1]
   sex     age treatment shapiro_p_value ks_p_value shapiro_p_value_Task3 ks_p_value_Task3
@@ -920,25 +919,25 @@ You can choose whichever test you want. I personally prefer Shapiro-Wilk, but it
 <br></p>
 </div>
 </div>
-<div id="homogeneity-of-variances-homoschedaticity" class="section level3 unnumbered hasAnchor">
-<h3>Homogeneity of variances (homoschedaticity)<a href="intro-stat-chapter.html#homogeneity-of-variances-homoschedaticity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="homogeneity-of-variances-homoschedaticity" class="section level3 unnumbered">
+<h3>Homogeneity of variances (homoschedaticity)</h3>
 <p>Finally, we can evaluate the homogeneity of variances between samples. We will use the <em>Bartlett test</em>, with the function <code>bartlett.test</code>. It needs two main inputs: a value vector and a vector of groups into which divide the values.
 <br>
 Here, a significant p-value means that the <strong>variances are <u>NOT</u> homogeneous</strong>.
 Here is an example with our data:</p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="intro-stat-chapter.html#cb504-1" tabindex="-1"></a><span class="co"># 1. Perform test on weight</span></span>
-<span id="cb504-2"><a href="intro-stat-chapter.html#cb504-2" tabindex="-1"></a>weight_bartlett_result <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(male_30_weight_task3<span class="sc">$</span>weight, male_30_weight_task3<span class="sc">$</span>treatment)</span>
-<span id="cb504-3"><a href="intro-stat-chapter.html#cb504-3" tabindex="-1"></a></span>
-<span id="cb504-4"><a href="intro-stat-chapter.html#cb504-4" tabindex="-1"></a><span class="co"># 2. Perform test on Task3</span></span>
-<span id="cb504-5"><a href="intro-stat-chapter.html#cb504-5" tabindex="-1"></a>Task3_bartlett_result <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(male_30_weight_task3<span class="sc">$</span>Task3, male_30_weight_task3<span class="sc">$</span>treatment)</span>
-<span id="cb504-6"><a href="intro-stat-chapter.html#cb504-6" tabindex="-1"></a></span>
-<span id="cb504-7"><a href="intro-stat-chapter.html#cb504-7" tabindex="-1"></a>weight_bartlett_result</span></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="intro-stat-chapter.html#cb504-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Perform test on weight</span></span>
+<span id="cb504-2"><a href="intro-stat-chapter.html#cb504-2" aria-hidden="true" tabindex="-1"></a>weight_bartlett_result <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(male_30_weight_task3<span class="sc">$</span>weight, male_30_weight_task3<span class="sc">$</span>treatment)</span>
+<span id="cb504-3"><a href="intro-stat-chapter.html#cb504-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb504-4"><a href="intro-stat-chapter.html#cb504-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Perform test on Task3</span></span>
+<span id="cb504-5"><a href="intro-stat-chapter.html#cb504-5" aria-hidden="true" tabindex="-1"></a>Task3_bartlett_result <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(male_30_weight_task3<span class="sc">$</span>Task3, male_30_weight_task3<span class="sc">$</span>treatment)</span>
+<span id="cb504-6"><a href="intro-stat-chapter.html#cb504-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb504-7"><a href="intro-stat-chapter.html#cb504-7" aria-hidden="true" tabindex="-1"></a>weight_bartlett_result</span></code></pre></div>
 <pre class="code-out"><code>
     Bartlett test of homogeneity of variances
 
 data:  male_30_weight_task3$weight and male_30_weight_task3$treatment
 Bartlett&#39;s K-squared = 4.7979, df = 1, p-value = 0.02849</code></pre>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="intro-stat-chapter.html#cb506-1" tabindex="-1"></a>Task3_bartlett_result</span></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="intro-stat-chapter.html#cb506-1" aria-hidden="true" tabindex="-1"></a>Task3_bartlett_result</span></code></pre></div>
 <pre class="code-out"><code>
     Bartlett test of homogeneity of variances
 
@@ -947,31 +946,31 @@ Bartlett&#39;s K-squared = 32.09, df = 1, p-value = 1.472e-08</code></pre>
 <p>From these results, we can say that the variances are not homogeneous.</p>
 <p><br>
 As an extra exercise, let’s add these info to the plots:</p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="intro-stat-chapter.html#cb508-1" tabindex="-1"></a><span class="co"># 1. Get labels position</span></span>
-<span id="cb508-2"><a href="intro-stat-chapter.html#cb508-2" tabindex="-1"></a>weight_max_label <span class="ot">&lt;-</span> <span class="fu">max</span>(male_30_weight_task3<span class="sc">$</span>weight, <span class="at">na.rm =</span> T) <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb508-3"><a href="intro-stat-chapter.html#cb508-3" tabindex="-1"></a>Task3_max_label <span class="ot">&lt;-</span> <span class="fu">max</span>(male_30_weight_task3<span class="sc">$</span>Task3, <span class="at">na.rm =</span> T) <span class="sc">+</span> <span class="dv">50</span></span>
-<span id="cb508-4"><a href="intro-stat-chapter.html#cb508-4" tabindex="-1"></a></span>
-<span id="cb508-5"><a href="intro-stat-chapter.html#cb508-5" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
-<span id="cb508-6"><a href="intro-stat-chapter.html#cb508-6" tabindex="-1"></a>male_30_weight_boxplot_filt <span class="ot">&lt;-</span> male_30_weight_boxplot_filt <span class="sc">+</span></span>
-<span id="cb508-7"><a href="intro-stat-chapter.html#cb508-7" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> normality_df, </span>
-<span id="cb508-8"><a href="intro-stat-chapter.html#cb508-8" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, </span>
-<span id="cb508-9"><a href="intro-stat-chapter.html#cb508-9" tabindex="-1"></a>                           <span class="at">y =</span> weight_max_label, </span>
-<span id="cb508-10"><a href="intro-stat-chapter.html#cb508-10" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shapiro_p_value, <span class="dv">3</span>)))</span>
-<span id="cb508-11"><a href="intro-stat-chapter.html#cb508-11" tabindex="-1"></a>            ) <span class="sc">+</span></span>
-<span id="cb508-12"><a href="intro-stat-chapter.html#cb508-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(weight_bartlett_result<span class="sc">$</span>p.value, <span class="dv">3</span>)))</span>
-<span id="cb508-13"><a href="intro-stat-chapter.html#cb508-13" tabindex="-1"></a>  </span>
-<span id="cb508-14"><a href="intro-stat-chapter.html#cb508-14" tabindex="-1"></a></span>
-<span id="cb508-15"><a href="intro-stat-chapter.html#cb508-15" tabindex="-1"></a>male_30_task3_boxplot_filt <span class="ot">&lt;-</span> male_30_task3_boxplot_filt <span class="sc">+</span></span>
-<span id="cb508-16"><a href="intro-stat-chapter.html#cb508-16" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> normality_df, </span>
-<span id="cb508-17"><a href="intro-stat-chapter.html#cb508-17" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, </span>
-<span id="cb508-18"><a href="intro-stat-chapter.html#cb508-18" tabindex="-1"></a>                           <span class="at">y =</span> Task3_max_label, </span>
-<span id="cb508-19"><a href="intro-stat-chapter.html#cb508-19" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shapiro_p_value_Task3, <span class="dv">3</span>)))</span>
-<span id="cb508-20"><a href="intro-stat-chapter.html#cb508-20" tabindex="-1"></a>            ) <span class="sc">+</span></span>
-<span id="cb508-21"><a href="intro-stat-chapter.html#cb508-21" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(weight_bartlett_result<span class="sc">$</span>p.value, <span class="dv">3</span>)))</span>
-<span id="cb508-22"><a href="intro-stat-chapter.html#cb508-22" tabindex="-1"></a></span>
-<span id="cb508-23"><a href="intro-stat-chapter.html#cb508-23" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot_filt, male_30_weight_density_filt, male_30_weight_qq_filt,</span>
-<span id="cb508-24"><a href="intro-stat-chapter.html#cb508-24" tabindex="-1"></a>          male_30_task3_boxplot_filt, male_30_task3_density_filt, male_30_task3_qq_filt,</span>
-<span id="cb508-25"><a href="intro-stat-chapter.html#cb508-25" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="intro-stat-chapter.html#cb508-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Get labels position</span></span>
+<span id="cb508-2"><a href="intro-stat-chapter.html#cb508-2" aria-hidden="true" tabindex="-1"></a>weight_max_label <span class="ot">&lt;-</span> <span class="fu">max</span>(male_30_weight_task3<span class="sc">$</span>weight, <span class="at">na.rm =</span> T) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb508-3"><a href="intro-stat-chapter.html#cb508-3" aria-hidden="true" tabindex="-1"></a>Task3_max_label <span class="ot">&lt;-</span> <span class="fu">max</span>(male_30_weight_task3<span class="sc">$</span>Task3, <span class="at">na.rm =</span> T) <span class="sc">+</span> <span class="dv">50</span></span>
+<span id="cb508-4"><a href="intro-stat-chapter.html#cb508-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb508-5"><a href="intro-stat-chapter.html#cb508-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create boxplots</span></span>
+<span id="cb508-6"><a href="intro-stat-chapter.html#cb508-6" aria-hidden="true" tabindex="-1"></a>male_30_weight_boxplot_filt <span class="ot">&lt;-</span> male_30_weight_boxplot_filt <span class="sc">+</span></span>
+<span id="cb508-7"><a href="intro-stat-chapter.html#cb508-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> normality_df, </span>
+<span id="cb508-8"><a href="intro-stat-chapter.html#cb508-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, </span>
+<span id="cb508-9"><a href="intro-stat-chapter.html#cb508-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> weight_max_label, </span>
+<span id="cb508-10"><a href="intro-stat-chapter.html#cb508-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shapiro_p_value, <span class="dv">3</span>)))</span>
+<span id="cb508-11"><a href="intro-stat-chapter.html#cb508-11" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">+</span></span>
+<span id="cb508-12"><a href="intro-stat-chapter.html#cb508-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(weight_bartlett_result<span class="sc">$</span>p.value, <span class="dv">3</span>)))</span>
+<span id="cb508-13"><a href="intro-stat-chapter.html#cb508-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb508-14"><a href="intro-stat-chapter.html#cb508-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb508-15"><a href="intro-stat-chapter.html#cb508-15" aria-hidden="true" tabindex="-1"></a>male_30_task3_boxplot_filt <span class="ot">&lt;-</span> male_30_task3_boxplot_filt <span class="sc">+</span></span>
+<span id="cb508-16"><a href="intro-stat-chapter.html#cb508-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> normality_df, </span>
+<span id="cb508-17"><a href="intro-stat-chapter.html#cb508-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, </span>
+<span id="cb508-18"><a href="intro-stat-chapter.html#cb508-18" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> Task3_max_label, </span>
+<span id="cb508-19"><a href="intro-stat-chapter.html#cb508-19" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shapiro_p_value_Task3, <span class="dv">3</span>)))</span>
+<span id="cb508-20"><a href="intro-stat-chapter.html#cb508-20" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">+</span></span>
+<span id="cb508-21"><a href="intro-stat-chapter.html#cb508-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(weight_bartlett_result<span class="sc">$</span>p.value, <span class="dv">3</span>)))</span>
+<span id="cb508-22"><a href="intro-stat-chapter.html#cb508-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb508-23"><a href="intro-stat-chapter.html#cb508-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(male_30_weight_boxplot_filt, male_30_weight_density_filt, male_30_weight_qq_filt,</span>
+<span id="cb508-24"><a href="intro-stat-chapter.html#cb508-24" aria-hidden="true" tabindex="-1"></a>          male_30_task3_boxplot_filt, male_30_task3_density_filt, male_30_task3_qq_filt,</span>
+<span id="cb508-25"><a href="intro-stat-chapter.html#cb508-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/parametric_visual_inspection_filtered_pvalues-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Alright, in this chapter we have seen just an example on how to evaluate whether to use or not parametric tests in further analyses. Another important take home message of this chapter is: choose the right test for your analysis and planning and experimental design are fundamental steps.
 <br>

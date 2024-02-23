@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-12-09" />
+<meta name="date" content="2024-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="comparing-two-groups.html"/>
 <link rel="next" href="correlation.html"/>
-<script src="libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <meta property="og:description" content="To you, who never gives up, for your future. You can make it!">
 <meta name="keywords" content="R, biology, data analysis">
 <meta name="author" content="Matteo Miotto">
@@ -71,7 +70,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -384,32 +383,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="comparing-more-groups" class="section level1 hasAnchor" number="18">
-<h1><span class="header-section-number">18</span> Comparing more groups<a href="comparing-more-groups.html#comparing-more-groups" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="comparing-more-groups" class="section level1" number="18">
+<h1><span class="header-section-number">18</span> Comparing more groups</h1>
 <p>Last time, we have compared two groups to get if there were differences in their distributions. In this chapter, we will see how to compares more groups.
 <br>
 As mentioned before, if we want to compare groups with a parametric test, we will use the ANOVA, otherwise we will use the Kruskal Wallis test; then, if the test results significant, we will apply post-hoc test to compare the different groups (Tukey’s or Pairwise t-test after ANOVA, or Dunn’s test after Kruskal Wallis test).</p>
 <p>Let’s start by loading our data and decide what we want to compare.</p>
-<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="comparing-more-groups.html#cb568-1" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
-<span id="cb568-2"><a href="comparing-more-groups.html#cb568-2" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb568-3"><a href="comparing-more-groups.html#cb568-3" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
-<span id="cb568-4"><a href="comparing-more-groups.html#cb568-4" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggpubr))</span>
-<span id="cb568-5"><a href="comparing-more-groups.html#cb568-5" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(gginnards))</span>
-<span id="cb568-6"><a href="comparing-more-groups.html#cb568-6" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(glue))</span>
-<span id="cb568-7"><a href="comparing-more-groups.html#cb568-7" tabindex="-1"></a><span class="fu">options</span>(<span class="at">dplyr.summarise.inform =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb568-8"><a href="comparing-more-groups.html#cb568-8" tabindex="-1"></a></span>
-<span id="cb568-9"><a href="comparing-more-groups.html#cb568-9" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
-<span id="cb568-10"><a href="comparing-more-groups.html#cb568-10" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Stat-test-dataset.csv&quot;</span>)</span>
-<span id="cb568-11"><a href="comparing-more-groups.html#cb568-11" tabindex="-1"></a></span>
-<span id="cb568-12"><a href="comparing-more-groups.html#cb568-12" tabindex="-1"></a><span class="co"># 3. Change come column types</span></span>
-<span id="cb568-13"><a href="comparing-more-groups.html#cb568-13" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb568-14"><a href="comparing-more-groups.html#cb568-14" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
-<span id="cb568-15"><a href="comparing-more-groups.html#cb568-15" tabindex="-1"></a>         <span class="st">&quot;treatment&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T1&quot;</span>, <span class="st">&quot;Untreated&quot;</span>)),</span>
-<span id="cb568-16"><a href="comparing-more-groups.html#cb568-16" tabindex="-1"></a>         <span class="st">&quot;Task1&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task1, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
-<span id="cb568-17"><a href="comparing-more-groups.html#cb568-17" tabindex="-1"></a>         <span class="st">&quot;Task2&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task2, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
-<span id="cb568-18"><a href="comparing-more-groups.html#cb568-18" tabindex="-1"></a>         )</span>
-<span id="cb568-19"><a href="comparing-more-groups.html#cb568-19" tabindex="-1"></a></span>
-<span id="cb568-20"><a href="comparing-more-groups.html#cb568-20" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="comparing-more-groups.html#cb568-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
+<span id="cb568-2"><a href="comparing-more-groups.html#cb568-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb568-3"><a href="comparing-more-groups.html#cb568-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
+<span id="cb568-4"><a href="comparing-more-groups.html#cb568-4" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggpubr))</span>
+<span id="cb568-5"><a href="comparing-more-groups.html#cb568-5" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(gginnards))</span>
+<span id="cb568-6"><a href="comparing-more-groups.html#cb568-6" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(glue))</span>
+<span id="cb568-7"><a href="comparing-more-groups.html#cb568-7" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">dplyr.summarise.inform =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb568-8"><a href="comparing-more-groups.html#cb568-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb568-9"><a href="comparing-more-groups.html#cb568-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
+<span id="cb568-10"><a href="comparing-more-groups.html#cb568-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Stat-test-dataset.csv&quot;</span>)</span>
+<span id="cb568-11"><a href="comparing-more-groups.html#cb568-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb568-12"><a href="comparing-more-groups.html#cb568-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Change come column types</span></span>
+<span id="cb568-13"><a href="comparing-more-groups.html#cb568-13" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb568-14"><a href="comparing-more-groups.html#cb568-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb568-15"><a href="comparing-more-groups.html#cb568-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;treatment&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T1&quot;</span>, <span class="st">&quot;Untreated&quot;</span>)),</span>
+<span id="cb568-16"><a href="comparing-more-groups.html#cb568-16" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Task1&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task1, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb568-17"><a href="comparing-more-groups.html#cb568-17" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Task2&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task2, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb568-18"><a href="comparing-more-groups.html#cb568-18" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb568-19"><a href="comparing-more-groups.html#cb568-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb568-20"><a href="comparing-more-groups.html#cb568-20" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>&#39;data.frame&#39;:   600 obs. of  7 variables:
  $ sex      : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 1 2 1 2 1 2 1 2 1 ...
  $ age      : int  3 3 3 3 3 3 3 3 3 3 ...
@@ -430,88 +429,88 @@ Do T1-treated females Task3 completing time changes over time?
 </li>
 </ol>
 <p>Let’s now decide which test to use for each question. We can start by looking at the boxplots and then check parametric assumptions (it’s important to do so!).<br> But first, we have to subset our dataframe:</p>
-<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="comparing-more-groups.html#cb570-1" tabindex="-1"></a><span class="co"># 1. Filter data</span></span>
-<span id="cb570-2"><a href="comparing-more-groups.html#cb570-2" tabindex="-1"></a>untreated_weight_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb570-3"><a href="comparing-more-groups.html#cb570-3" tabindex="-1"></a>  <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">&quot;Untreated&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb570-4"><a href="comparing-more-groups.html#cb570-4" tabindex="-1"></a>  <span class="fu">select</span>(sex, age, treatment, weight) <span class="sc">%&gt;%</span></span>
-<span id="cb570-5"><a href="comparing-more-groups.html#cb570-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">factor</span>(age))</span>
-<span id="cb570-6"><a href="comparing-more-groups.html#cb570-6" tabindex="-1"></a></span>
-<span id="cb570-7"><a href="comparing-more-groups.html#cb570-7" tabindex="-1"></a>females_t1_task3_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb570-8"><a href="comparing-more-groups.html#cb570-8" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span> <span class="sc">&amp;</span> treatment <span class="sc">==</span> <span class="st">&quot;T1&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb570-9"><a href="comparing-more-groups.html#cb570-9" tabindex="-1"></a>  <span class="fu">select</span>(age, treatment, Task3) <span class="sc">%&gt;%</span></span>
-<span id="cb570-10"><a href="comparing-more-groups.html#cb570-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">factor</span>(age))</span></code></pre></div>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="comparing-more-groups.html#cb570-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Filter data</span></span>
+<span id="cb570-2"><a href="comparing-more-groups.html#cb570-2" aria-hidden="true" tabindex="-1"></a>untreated_weight_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb570-3"><a href="comparing-more-groups.html#cb570-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">&quot;Untreated&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb570-4"><a href="comparing-more-groups.html#cb570-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, age, treatment, weight) <span class="sc">%&gt;%</span></span>
+<span id="cb570-5"><a href="comparing-more-groups.html#cb570-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">factor</span>(age))</span>
+<span id="cb570-6"><a href="comparing-more-groups.html#cb570-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb570-7"><a href="comparing-more-groups.html#cb570-7" aria-hidden="true" tabindex="-1"></a>females_t1_task3_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb570-8"><a href="comparing-more-groups.html#cb570-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span> <span class="sc">&amp;</span> treatment <span class="sc">==</span> <span class="st">&quot;T1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb570-9"><a href="comparing-more-groups.html#cb570-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, treatment, Task3) <span class="sc">%&gt;%</span></span>
+<span id="cb570-10"><a href="comparing-more-groups.html#cb570-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">factor</span>(age))</span></code></pre></div>
 <p>Then, we will look at the boxplot:</p>
-<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="comparing-more-groups.html#cb571-1" tabindex="-1"></a>untreated_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(untreated_weight_df) <span class="sc">+</span></span>
-<span id="cb571-2"><a href="comparing-more-groups.html#cb571-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> weight, <span class="at">fill =</span> sex, <span class="at">group =</span> sex)) <span class="sc">+</span></span>
-<span id="cb571-3"><a href="comparing-more-groups.html#cb571-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Untreated mice weights&quot;</span>) <span class="sc">+</span></span>
-<span id="cb571-4"><a href="comparing-more-groups.html#cb571-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> age, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
-<span id="cb571-5"><a href="comparing-more-groups.html#cb571-5" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb571-6"><a href="comparing-more-groups.html#cb571-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb571-7"><a href="comparing-more-groups.html#cb571-7" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span>
-<span id="cb571-8"><a href="comparing-more-groups.html#cb571-8" tabindex="-1"></a></span>
-<span id="cb571-9"><a href="comparing-more-groups.html#cb571-9" tabindex="-1"></a>females_t1_task3_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(females_t1_task3_df) <span class="sc">+</span></span>
-<span id="cb571-10"><a href="comparing-more-groups.html#cb571-10" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> Task3, <span class="at">fill =</span> age, <span class="at">group =</span> age)) <span class="sc">+</span></span>
-<span id="cb571-11"><a href="comparing-more-groups.html#cb571-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Task3 (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;T1-treated females Task3 completition time&quot;</span>) <span class="sc">+</span></span>
-<span id="cb571-12"><a href="comparing-more-groups.html#cb571-12" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;PuBu&quot;</span>) <span class="sc">+</span></span>
-<span id="cb571-13"><a href="comparing-more-groups.html#cb571-13" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb571-14"><a href="comparing-more-groups.html#cb571-14" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb571-15"><a href="comparing-more-groups.html#cb571-15" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span>
-<span id="cb571-16"><a href="comparing-more-groups.html#cb571-16" tabindex="-1"></a></span>
-<span id="cb571-17"><a href="comparing-more-groups.html#cb571-17" tabindex="-1"></a><span class="fu">ggarrange</span>(untreated_weight_boxplot, females_t1_task3_boxplot, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="comparing-more-groups.html#cb571-1" aria-hidden="true" tabindex="-1"></a>untreated_weight_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(untreated_weight_df) <span class="sc">+</span></span>
+<span id="cb571-2"><a href="comparing-more-groups.html#cb571-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> weight, <span class="at">fill =</span> sex, <span class="at">group =</span> sex)) <span class="sc">+</span></span>
+<span id="cb571-3"><a href="comparing-more-groups.html#cb571-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Untreated mice weights&quot;</span>) <span class="sc">+</span></span>
+<span id="cb571-4"><a href="comparing-more-groups.html#cb571-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> age, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb571-5"><a href="comparing-more-groups.html#cb571-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb571-6"><a href="comparing-more-groups.html#cb571-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb571-7"><a href="comparing-more-groups.html#cb571-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb571-8"><a href="comparing-more-groups.html#cb571-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb571-9"><a href="comparing-more-groups.html#cb571-9" aria-hidden="true" tabindex="-1"></a>females_t1_task3_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(females_t1_task3_df) <span class="sc">+</span></span>
+<span id="cb571-10"><a href="comparing-more-groups.html#cb571-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> Task3, <span class="at">fill =</span> age, <span class="at">group =</span> age)) <span class="sc">+</span></span>
+<span id="cb571-11"><a href="comparing-more-groups.html#cb571-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Task3 (s)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;T1-treated females Task3 completition time&quot;</span>) <span class="sc">+</span></span>
+<span id="cb571-12"><a href="comparing-more-groups.html#cb571-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;PuBu&quot;</span>) <span class="sc">+</span></span>
+<span id="cb571-13"><a href="comparing-more-groups.html#cb571-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb571-14"><a href="comparing-more-groups.html#cb571-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb571-15"><a href="comparing-more-groups.html#cb571-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb571-16"><a href="comparing-more-groups.html#cb571-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb571-17"><a href="comparing-more-groups.html#cb571-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(untreated_weight_boxplot, females_t1_task3_boxplot, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/more_groups_boxplots-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Great, we can see some differences. And yes, there are some outliers in <b>B.</b>, but we do not want to remove them now, as it is out of the scope of this chapter, but you could try.<br>
 We now check the normality and homoschedasticity for each group, and then insert those info in the plot:</p>
-<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="comparing-more-groups.html#cb572-1" tabindex="-1"></a><span class="co"># 1. Shapiro test</span></span>
-<span id="cb572-2"><a href="comparing-more-groups.html#cb572-2" tabindex="-1"></a>untreated_weight_shapiro <span class="ot">&lt;-</span> untreated_weight_df <span class="sc">%&gt;%</span></span>
-<span id="cb572-3"><a href="comparing-more-groups.html#cb572-3" tabindex="-1"></a>  <span class="fu">group_by</span>(age, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb572-4"><a href="comparing-more-groups.html#cb572-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">shap =</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p.value)</span>
-<span id="cb572-5"><a href="comparing-more-groups.html#cb572-5" tabindex="-1"></a></span>
-<span id="cb572-6"><a href="comparing-more-groups.html#cb572-6" tabindex="-1"></a>females_t1_task3_shapiro <span class="ot">&lt;-</span> females_t1_task3_df <span class="sc">%&gt;%</span></span>
-<span id="cb572-7"><a href="comparing-more-groups.html#cb572-7" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
-<span id="cb572-8"><a href="comparing-more-groups.html#cb572-8" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">shap =</span> <span class="fu">shapiro.test</span>(Task3)<span class="sc">$</span>p.value)</span>
-<span id="cb572-9"><a href="comparing-more-groups.html#cb572-9" tabindex="-1"></a></span>
-<span id="cb572-10"><a href="comparing-more-groups.html#cb572-10" tabindex="-1"></a><span class="co"># 2. Bartlett test</span></span>
-<span id="cb572-11"><a href="comparing-more-groups.html#cb572-11" tabindex="-1"></a>untreated_weight_bartlett <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(untreated_weight_df<span class="sc">$</span>weight, untreated_weight_df<span class="sc">$</span>age, untreated_weight_df<span class="sc">$</span>sex)<span class="sc">$</span>p.value</span>
-<span id="cb572-12"><a href="comparing-more-groups.html#cb572-12" tabindex="-1"></a>females_t1_task3_bartlett <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(females_t1_task3_df<span class="sc">$</span>Task3, females_t1_task3_df<span class="sc">$</span>age)<span class="sc">$</span>p.value</span>
-<span id="cb572-13"><a href="comparing-more-groups.html#cb572-13" tabindex="-1"></a></span>
-<span id="cb572-14"><a href="comparing-more-groups.html#cb572-14" tabindex="-1"></a></span>
-<span id="cb572-15"><a href="comparing-more-groups.html#cb572-15" tabindex="-1"></a><span class="co"># 3. Get labels position</span></span>
-<span id="cb572-16"><a href="comparing-more-groups.html#cb572-16" tabindex="-1"></a>untreated_weight_shapiro_pos <span class="ot">&lt;-</span> untreated_weight_df <span class="sc">%&gt;%</span></span>
-<span id="cb572-17"><a href="comparing-more-groups.html#cb572-17" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
-<span id="cb572-18"><a href="comparing-more-groups.html#cb572-18" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">max =</span> <span class="fu">max</span>(weight) <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb572-19"><a href="comparing-more-groups.html#cb572-19" tabindex="-1"></a></span>
-<span id="cb572-20"><a href="comparing-more-groups.html#cb572-20" tabindex="-1"></a>females_t1_task3_shapiro_pos <span class="ot">&lt;-</span> females_t1_task3_df <span class="sc">%&gt;%</span></span>
-<span id="cb572-21"><a href="comparing-more-groups.html#cb572-21" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
-<span id="cb572-22"><a href="comparing-more-groups.html#cb572-22" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">max =</span> <span class="fu">max</span>(Task3) <span class="sc">+</span> <span class="dv">10</span>)</span>
-<span id="cb572-23"><a href="comparing-more-groups.html#cb572-23" tabindex="-1"></a></span>
-<span id="cb572-24"><a href="comparing-more-groups.html#cb572-24" tabindex="-1"></a>untreated_weight_shapiro <span class="ot">&lt;-</span> untreated_weight_shapiro <span class="sc">%&gt;%</span></span>
-<span id="cb572-25"><a href="comparing-more-groups.html#cb572-25" tabindex="-1"></a>  <span class="fu">left_join</span>(untreated_weight_shapiro_pos, <span class="at">by =</span> <span class="st">&quot;age&quot;</span>)</span>
-<span id="cb572-26"><a href="comparing-more-groups.html#cb572-26" tabindex="-1"></a></span>
-<span id="cb572-27"><a href="comparing-more-groups.html#cb572-27" tabindex="-1"></a>females_t1_task3_shapiro <span class="ot">&lt;-</span> females_t1_task3_shapiro <span class="sc">%&gt;%</span></span>
-<span id="cb572-28"><a href="comparing-more-groups.html#cb572-28" tabindex="-1"></a>  <span class="fu">left_join</span>(females_t1_task3_shapiro_pos, <span class="at">by =</span> <span class="st">&quot;age&quot;</span>)</span>
-<span id="cb572-29"><a href="comparing-more-groups.html#cb572-29" tabindex="-1"></a></span>
-<span id="cb572-30"><a href="comparing-more-groups.html#cb572-30" tabindex="-1"></a><span class="co"># 4. Update boxplots</span></span>
-<span id="cb572-31"><a href="comparing-more-groups.html#cb572-31" tabindex="-1"></a>untreated_weight_boxplot <span class="ot">&lt;-</span> untreated_weight_boxplot <span class="sc">+</span></span>
-<span id="cb572-32"><a href="comparing-more-groups.html#cb572-32" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> untreated_weight_shapiro, </span>
-<span id="cb572-33"><a href="comparing-more-groups.html#cb572-33" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, </span>
-<span id="cb572-34"><a href="comparing-more-groups.html#cb572-34" tabindex="-1"></a>                           <span class="at">y =</span> max, </span>
-<span id="cb572-35"><a href="comparing-more-groups.html#cb572-35" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shap, <span class="dv">3</span>)))</span>
-<span id="cb572-36"><a href="comparing-more-groups.html#cb572-36" tabindex="-1"></a>            ) <span class="sc">+</span></span>
-<span id="cb572-37"><a href="comparing-more-groups.html#cb572-37" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(untreated_weight_bartlett, <span class="dv">3</span>)))</span>
-<span id="cb572-38"><a href="comparing-more-groups.html#cb572-38" tabindex="-1"></a></span>
-<span id="cb572-39"><a href="comparing-more-groups.html#cb572-39" tabindex="-1"></a>females_t1_task3_boxplot <span class="ot">&lt;-</span> females_t1_task3_boxplot <span class="sc">+</span></span>
-<span id="cb572-40"><a href="comparing-more-groups.html#cb572-40" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> females_t1_task3_shapiro, </span>
-<span id="cb572-41"><a href="comparing-more-groups.html#cb572-41" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age, </span>
-<span id="cb572-42"><a href="comparing-more-groups.html#cb572-42" tabindex="-1"></a>                           <span class="at">y =</span> max, </span>
-<span id="cb572-43"><a href="comparing-more-groups.html#cb572-43" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shap, <span class="dv">3</span>)))</span>
-<span id="cb572-44"><a href="comparing-more-groups.html#cb572-44" tabindex="-1"></a>            ) <span class="sc">+</span></span>
-<span id="cb572-45"><a href="comparing-more-groups.html#cb572-45" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(females_t1_task3_bartlett, <span class="dv">3</span>)))</span>
-<span id="cb572-46"><a href="comparing-more-groups.html#cb572-46" tabindex="-1"></a></span>
-<span id="cb572-47"><a href="comparing-more-groups.html#cb572-47" tabindex="-1"></a><span class="fu">ggarrange</span>(untreated_weight_boxplot, females_t1_task3_boxplot, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="comparing-more-groups.html#cb572-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Shapiro test</span></span>
+<span id="cb572-2"><a href="comparing-more-groups.html#cb572-2" aria-hidden="true" tabindex="-1"></a>untreated_weight_shapiro <span class="ot">&lt;-</span> untreated_weight_df <span class="sc">%&gt;%</span></span>
+<span id="cb572-3"><a href="comparing-more-groups.html#cb572-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb572-4"><a href="comparing-more-groups.html#cb572-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">shap =</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p.value)</span>
+<span id="cb572-5"><a href="comparing-more-groups.html#cb572-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb572-6"><a href="comparing-more-groups.html#cb572-6" aria-hidden="true" tabindex="-1"></a>females_t1_task3_shapiro <span class="ot">&lt;-</span> females_t1_task3_df <span class="sc">%&gt;%</span></span>
+<span id="cb572-7"><a href="comparing-more-groups.html#cb572-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
+<span id="cb572-8"><a href="comparing-more-groups.html#cb572-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">shap =</span> <span class="fu">shapiro.test</span>(Task3)<span class="sc">$</span>p.value)</span>
+<span id="cb572-9"><a href="comparing-more-groups.html#cb572-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb572-10"><a href="comparing-more-groups.html#cb572-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Bartlett test</span></span>
+<span id="cb572-11"><a href="comparing-more-groups.html#cb572-11" aria-hidden="true" tabindex="-1"></a>untreated_weight_bartlett <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(untreated_weight_df<span class="sc">$</span>weight, untreated_weight_df<span class="sc">$</span>age, untreated_weight_df<span class="sc">$</span>sex)<span class="sc">$</span>p.value</span>
+<span id="cb572-12"><a href="comparing-more-groups.html#cb572-12" aria-hidden="true" tabindex="-1"></a>females_t1_task3_bartlett <span class="ot">&lt;-</span> <span class="fu">bartlett.test</span>(females_t1_task3_df<span class="sc">$</span>Task3, females_t1_task3_df<span class="sc">$</span>age)<span class="sc">$</span>p.value</span>
+<span id="cb572-13"><a href="comparing-more-groups.html#cb572-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb572-14"><a href="comparing-more-groups.html#cb572-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb572-15"><a href="comparing-more-groups.html#cb572-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Get labels position</span></span>
+<span id="cb572-16"><a href="comparing-more-groups.html#cb572-16" aria-hidden="true" tabindex="-1"></a>untreated_weight_shapiro_pos <span class="ot">&lt;-</span> untreated_weight_df <span class="sc">%&gt;%</span></span>
+<span id="cb572-17"><a href="comparing-more-groups.html#cb572-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
+<span id="cb572-18"><a href="comparing-more-groups.html#cb572-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">max =</span> <span class="fu">max</span>(weight) <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb572-19"><a href="comparing-more-groups.html#cb572-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb572-20"><a href="comparing-more-groups.html#cb572-20" aria-hidden="true" tabindex="-1"></a>females_t1_task3_shapiro_pos <span class="ot">&lt;-</span> females_t1_task3_df <span class="sc">%&gt;%</span></span>
+<span id="cb572-21"><a href="comparing-more-groups.html#cb572-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
+<span id="cb572-22"><a href="comparing-more-groups.html#cb572-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">max =</span> <span class="fu">max</span>(Task3) <span class="sc">+</span> <span class="dv">10</span>)</span>
+<span id="cb572-23"><a href="comparing-more-groups.html#cb572-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb572-24"><a href="comparing-more-groups.html#cb572-24" aria-hidden="true" tabindex="-1"></a>untreated_weight_shapiro <span class="ot">&lt;-</span> untreated_weight_shapiro <span class="sc">%&gt;%</span></span>
+<span id="cb572-25"><a href="comparing-more-groups.html#cb572-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(untreated_weight_shapiro_pos, <span class="at">by =</span> <span class="st">&quot;age&quot;</span>)</span>
+<span id="cb572-26"><a href="comparing-more-groups.html#cb572-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb572-27"><a href="comparing-more-groups.html#cb572-27" aria-hidden="true" tabindex="-1"></a>females_t1_task3_shapiro <span class="ot">&lt;-</span> females_t1_task3_shapiro <span class="sc">%&gt;%</span></span>
+<span id="cb572-28"><a href="comparing-more-groups.html#cb572-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(females_t1_task3_shapiro_pos, <span class="at">by =</span> <span class="st">&quot;age&quot;</span>)</span>
+<span id="cb572-29"><a href="comparing-more-groups.html#cb572-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb572-30"><a href="comparing-more-groups.html#cb572-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Update boxplots</span></span>
+<span id="cb572-31"><a href="comparing-more-groups.html#cb572-31" aria-hidden="true" tabindex="-1"></a>untreated_weight_boxplot <span class="ot">&lt;-</span> untreated_weight_boxplot <span class="sc">+</span></span>
+<span id="cb572-32"><a href="comparing-more-groups.html#cb572-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> untreated_weight_shapiro, </span>
+<span id="cb572-33"><a href="comparing-more-groups.html#cb572-33" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, </span>
+<span id="cb572-34"><a href="comparing-more-groups.html#cb572-34" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> max, </span>
+<span id="cb572-35"><a href="comparing-more-groups.html#cb572-35" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shap, <span class="dv">3</span>)))</span>
+<span id="cb572-36"><a href="comparing-more-groups.html#cb572-36" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">+</span></span>
+<span id="cb572-37"><a href="comparing-more-groups.html#cb572-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(untreated_weight_bartlett, <span class="dv">3</span>)))</span>
+<span id="cb572-38"><a href="comparing-more-groups.html#cb572-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb572-39"><a href="comparing-more-groups.html#cb572-39" aria-hidden="true" tabindex="-1"></a>females_t1_task3_boxplot <span class="ot">&lt;-</span> females_t1_task3_boxplot <span class="sc">+</span></span>
+<span id="cb572-40"><a href="comparing-more-groups.html#cb572-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> females_t1_task3_shapiro, </span>
+<span id="cb572-41"><a href="comparing-more-groups.html#cb572-41" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age, </span>
+<span id="cb572-42"><a href="comparing-more-groups.html#cb572-42" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> max, </span>
+<span id="cb572-43"><a href="comparing-more-groups.html#cb572-43" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Shapiro-Wilk</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">round</span>(shap, <span class="dv">3</span>)))</span>
+<span id="cb572-44"><a href="comparing-more-groups.html#cb572-44" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">+</span></span>
+<span id="cb572-45"><a href="comparing-more-groups.html#cb572-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">&quot;Bartlett test p-value:&quot;</span>, <span class="fu">round</span>(females_t1_task3_bartlett, <span class="dv">3</span>)))</span>
+<span id="cb572-46"><a href="comparing-more-groups.html#cb572-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb572-47"><a href="comparing-more-groups.html#cb572-47" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(untreated_weight_boxplot, females_t1_task3_boxplot, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">&quot;AUTO&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/more_groups_boxplots2-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Alright! We can use ANOVA to answer the first question, while we have to use Kruskal Wallis test for the second one.</p>
-<div id="anova" class="section level2 unnumbered hasAnchor">
-<h2>ANOVA<a href="comparing-more-groups.html#anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="anova" class="section level2 unnumbered">
+<h2>ANOVA</h2>
 So, to get if <em>untreated males weight more than untreated females mice at all time points</em>, we should perform a two-way ANOVA test, as we are interested in both sex and age, and in their interaction (to see if the effect of sex changes based on age). <br>
 <p class="plist">
 To perform this test, we will use the <code>aov()</code> function, which takes as inputs <code>formula</code> and <code>data</code>. An important note about the formula is how it is written (it will be the same also when we will see other tests):
@@ -525,8 +524,8 @@ Two-way ANOVA: here situation changes based on what you are interested on. If on
 </li>
 </ul>
 <p>Let’s do it:</p>
-<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="comparing-more-groups.html#cb573-1" tabindex="-1"></a>aov_res <span class="ot">&lt;-</span> <span class="fu">aov</span>(<span class="at">formula =</span> weight <span class="sc">~</span> sex<span class="sc">*</span>age, <span class="at">data =</span> untreated_weight_df)</span>
-<span id="cb573-2"><a href="comparing-more-groups.html#cb573-2" tabindex="-1"></a><span class="fu">summary</span>(aov_res)</span></code></pre></div>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="comparing-more-groups.html#cb573-1" aria-hidden="true" tabindex="-1"></a>aov_res <span class="ot">&lt;-</span> <span class="fu">aov</span>(<span class="at">formula =</span> weight <span class="sc">~</span> sex<span class="sc">*</span>age, <span class="at">data =</span> untreated_weight_df)</span>
+<span id="cb573-2"><a href="comparing-more-groups.html#cb573-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_res)</span></code></pre></div>
 <pre class="code-out"><code>             Df Sum Sq Mean Sq  F value Pr(&gt;F)    
 sex           1    293   293.4  367.986 &lt;2e-16 ***
 age           3   7874  2624.5 3291.977 &lt;2e-16 ***
@@ -537,13 +536,13 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>To better see the results, it is useful to store them in a variable and call <code>summary()</code> out of them. In this way we have all the summary statistics for this test: degree of freedom for each variable (Df), sum of the square root of the variance (Sum Sq), mean square root (Mean Sq), F statistics value and the p-value (Pr(&gt;F)).
 <br>
 From this, we can say that both sex and age main effects are significant, and that the effect of the sex does NOT change at different time point, so we are expecting differences at all age. Let’s test it with post-hoc tests.</p>
-<div id="post-hoc-test" class="section level3 unnumbered hasAnchor">
-<h3>Post-hoc test<a href="comparing-more-groups.html#post-hoc-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="post-hoc-test" class="section level3 unnumbered">
+<h3>Post-hoc test</h3>
 <p>As ANOVA test is significant for the variable we are interested in (sex), we will perform post-hoc tests. I said tests here just to show you how to perform them, but you can either perform Tukey’s test or pairwise t-test.
 <br>
 We can start by Tukey’s test. It needs the object of the results of the ANOVA and, optionally, which term/s we are interested in (sex:age) for us.</p>
-<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="comparing-more-groups.html#cb575-1" tabindex="-1"></a>tukey_res <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(aov_res, <span class="at">which =</span> <span class="st">&quot;sex:age&quot;</span>)</span>
-<span id="cb575-2"><a href="comparing-more-groups.html#cb575-2" tabindex="-1"></a>tukey_res</span></code></pre></div>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="comparing-more-groups.html#cb575-1" aria-hidden="true" tabindex="-1"></a>tukey_res <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(aov_res, <span class="at">which =</span> <span class="st">&quot;sex:age&quot;</span>)</span>
+<span id="cb575-2"><a href="comparing-more-groups.html#cb575-2" aria-hidden="true" tabindex="-1"></a>tukey_res</span></code></pre></div>
 <pre class="code-out"><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
 
@@ -582,13 +581,13 @@ Male:30-Female:30    2.23513514  1.6013446  2.8689257     0</code></pre>
 <p>At all time points, female weight less than males.
 <br>
 However, I don’t find this results so clear. In fact, I personally prefer to perform pairwise t test:</p>
-<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="comparing-more-groups.html#cb577-1" tabindex="-1"></a><span class="co"># 1. Create an interaction factor of sex and age</span></span>
-<span id="cb577-2"><a href="comparing-more-groups.html#cb577-2" tabindex="-1"></a>interaction_factor <span class="ot">&lt;-</span> <span class="fu">interaction</span>(untreated_weight_df<span class="sc">$</span>sex, untreated_weight_df<span class="sc">$</span>age)</span>
-<span id="cb577-3"><a href="comparing-more-groups.html#cb577-3" tabindex="-1"></a></span>
-<span id="cb577-4"><a href="comparing-more-groups.html#cb577-4" tabindex="-1"></a><span class="co"># 2. Perform pairwise t-tests</span></span>
-<span id="cb577-5"><a href="comparing-more-groups.html#cb577-5" tabindex="-1"></a>pairwise_res <span class="ot">&lt;-</span> <span class="fu">pairwise.t.test</span>(untreated_weight_df<span class="sc">$</span>weight, interaction_factor, <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span>
-<span id="cb577-6"><a href="comparing-more-groups.html#cb577-6" tabindex="-1"></a></span>
-<span id="cb577-7"><a href="comparing-more-groups.html#cb577-7" tabindex="-1"></a>pairwise_res</span></code></pre></div>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="comparing-more-groups.html#cb577-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create an interaction factor of sex and age</span></span>
+<span id="cb577-2"><a href="comparing-more-groups.html#cb577-2" aria-hidden="true" tabindex="-1"></a>interaction_factor <span class="ot">&lt;-</span> <span class="fu">interaction</span>(untreated_weight_df<span class="sc">$</span>sex, untreated_weight_df<span class="sc">$</span>age)</span>
+<span id="cb577-3"><a href="comparing-more-groups.html#cb577-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb577-4"><a href="comparing-more-groups.html#cb577-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Perform pairwise t-tests</span></span>
+<span id="cb577-5"><a href="comparing-more-groups.html#cb577-5" aria-hidden="true" tabindex="-1"></a>pairwise_res <span class="ot">&lt;-</span> <span class="fu">pairwise.t.test</span>(untreated_weight_df<span class="sc">$</span>weight, interaction_factor, <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span>
+<span id="cb577-6"><a href="comparing-more-groups.html#cb577-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb577-7"><a href="comparing-more-groups.html#cb577-7" aria-hidden="true" tabindex="-1"></a>pairwise_res</span></code></pre></div>
 <pre class="code-out"><code>
     Pairwise comparisons using t tests with pooled SD 
 
@@ -607,63 +606,63 @@ P value adjustment method: bonferroni </code></pre>
 <p>Tadaaa! I find this table way clearer.
 <br>
 Let’s now create a beautiful figure. In this case, as it is a timeline, I like to create some lineplots with mean and sd.</p>
-<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="comparing-more-groups.html#cb579-1" tabindex="-1"></a><span class="co"># 1. Create a function to map *, **, *** and ns to statistics</span></span>
-<span id="cb579-2"><a href="comparing-more-groups.html#cb579-2" tabindex="-1"></a>pvalue_to_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb579-3"><a href="comparing-more-groups.html#cb579-3" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">case_when</span>(</span>
-<span id="cb579-4"><a href="comparing-more-groups.html#cb579-4" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">&quot;***&quot;</span>,</span>
-<span id="cb579-5"><a href="comparing-more-groups.html#cb579-5" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">~</span> <span class="st">&quot;**&quot;</span>,</span>
-<span id="cb579-6"><a href="comparing-more-groups.html#cb579-6" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">&quot;*&quot;</span>,</span>
-<span id="cb579-7"><a href="comparing-more-groups.html#cb579-7" tabindex="-1"></a>    <span class="at">.default =</span> <span class="st">&quot;ns&quot;</span></span>
-<span id="cb579-8"><a href="comparing-more-groups.html#cb579-8" tabindex="-1"></a>  )</span>
-<span id="cb579-9"><a href="comparing-more-groups.html#cb579-9" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
-<span id="cb579-10"><a href="comparing-more-groups.html#cb579-10" tabindex="-1"></a>}</span>
-<span id="cb579-11"><a href="comparing-more-groups.html#cb579-11" tabindex="-1"></a></span>
-<span id="cb579-12"><a href="comparing-more-groups.html#cb579-12" tabindex="-1"></a><span class="co"># 2. Create df of statistics</span></span>
-<span id="cb579-13"><a href="comparing-more-groups.html#cb579-13" tabindex="-1"></a>untreated_weight_stats_pos <span class="ot">&lt;-</span> untreated_weight_shapiro_pos <span class="sc">%&gt;%</span></span>
-<span id="cb579-14"><a href="comparing-more-groups.html#cb579-14" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;stats&quot;</span> <span class="ot">=</span> <span class="fu">pvalue_to_plot</span>(<span class="fu">c</span>(pairwise_res<span class="sc">$</span>p.value[<span class="st">&quot;Male.3&quot;</span>, <span class="st">&quot;Female.3&quot;</span>],</span>
-<span id="cb579-15"><a href="comparing-more-groups.html#cb579-15" tabindex="-1"></a>                                    pairwise_res<span class="sc">$</span>p.value[<span class="st">&quot;Male.7&quot;</span>, <span class="st">&quot;Female.7&quot;</span>],</span>
-<span id="cb579-16"><a href="comparing-more-groups.html#cb579-16" tabindex="-1"></a>                                    pairwise_res<span class="sc">$</span>p.value[<span class="st">&quot;Male.15&quot;</span>, <span class="st">&quot;Female.15&quot;</span>],</span>
-<span id="cb579-17"><a href="comparing-more-groups.html#cb579-17" tabindex="-1"></a>                                    pairwise_res<span class="sc">$</span>p.value[<span class="st">&quot;Male.30&quot;</span>, <span class="st">&quot;Female.30&quot;</span>])))</span>
-<span id="cb579-18"><a href="comparing-more-groups.html#cb579-18" tabindex="-1"></a></span>
-<span id="cb579-19"><a href="comparing-more-groups.html#cb579-19" tabindex="-1"></a><span class="co"># 3. Create the plot</span></span>
-<span id="cb579-20"><a href="comparing-more-groups.html#cb579-20" tabindex="-1"></a>untreated_weight_lineplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(untreated_weight_df) <span class="sc">+</span></span>
-<span id="cb579-21"><a href="comparing-more-groups.html#cb579-21" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> weight, <span class="at">col =</span> sex, <span class="at">group =</span> sex), <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>) <span class="sc">+</span></span>
-<span id="cb579-22"><a href="comparing-more-groups.html#cb579-22" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> weight, <span class="at">col =</span> sex, <span class="at">group =</span> sex), <span class="at">fun.data =</span> <span class="st">&quot;mean_sd&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb579-23"><a href="comparing-more-groups.html#cb579-23" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> weight, <span class="at">col =</span> sex, <span class="at">group =</span> sex), <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb579-24"><a href="comparing-more-groups.html#cb579-24" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> untreated_weight_stats_pos, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> max, <span class="at">label =</span> stats)) <span class="sc">+</span></span>
-<span id="cb579-25"><a href="comparing-more-groups.html#cb579-25" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Untreated mice weights&quot;</span>) <span class="sc">+</span></span>
-<span id="cb579-26"><a href="comparing-more-groups.html#cb579-26" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb579-27"><a href="comparing-more-groups.html#cb579-27" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="comparing-more-groups.html#cb580-1" tabindex="-1"></a>untreated_weight_lineplot</span></code></pre></div>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="comparing-more-groups.html#cb579-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create a function to map *, **, *** and ns to statistics</span></span>
+<span id="cb579-2"><a href="comparing-more-groups.html#cb579-2" aria-hidden="true" tabindex="-1"></a>pvalue_to_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb579-3"><a href="comparing-more-groups.html#cb579-3" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">case_when</span>(</span>
+<span id="cb579-4"><a href="comparing-more-groups.html#cb579-4" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">&quot;***&quot;</span>,</span>
+<span id="cb579-5"><a href="comparing-more-groups.html#cb579-5" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">~</span> <span class="st">&quot;**&quot;</span>,</span>
+<span id="cb579-6"><a href="comparing-more-groups.html#cb579-6" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">&lt;=</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">&quot;*&quot;</span>,</span>
+<span id="cb579-7"><a href="comparing-more-groups.html#cb579-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="st">&quot;ns&quot;</span></span>
+<span id="cb579-8"><a href="comparing-more-groups.html#cb579-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb579-9"><a href="comparing-more-groups.html#cb579-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb579-10"><a href="comparing-more-groups.html#cb579-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb579-11"><a href="comparing-more-groups.html#cb579-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb579-12"><a href="comparing-more-groups.html#cb579-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create df of statistics</span></span>
+<span id="cb579-13"><a href="comparing-more-groups.html#cb579-13" aria-hidden="true" tabindex="-1"></a>untreated_weight_stats_pos <span class="ot">&lt;-</span> untreated_weight_shapiro_pos <span class="sc">%&gt;%</span></span>
+<span id="cb579-14"><a href="comparing-more-groups.html#cb579-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;stats&quot;</span> <span class="ot">=</span> <span class="fu">pvalue_to_plot</span>(<span class="fu">c</span>(pairwise_res<span class="sc">$</span>p.value[<span class="st">&quot;Male.3&quot;</span>, <span class="st">&quot;Female.3&quot;</span>],</span>
+<span id="cb579-15"><a href="comparing-more-groups.html#cb579-15" aria-hidden="true" tabindex="-1"></a>                                    pairwise_res<span class="sc">$</span>p.value[<span class="st">&quot;Male.7&quot;</span>, <span class="st">&quot;Female.7&quot;</span>],</span>
+<span id="cb579-16"><a href="comparing-more-groups.html#cb579-16" aria-hidden="true" tabindex="-1"></a>                                    pairwise_res<span class="sc">$</span>p.value[<span class="st">&quot;Male.15&quot;</span>, <span class="st">&quot;Female.15&quot;</span>],</span>
+<span id="cb579-17"><a href="comparing-more-groups.html#cb579-17" aria-hidden="true" tabindex="-1"></a>                                    pairwise_res<span class="sc">$</span>p.value[<span class="st">&quot;Male.30&quot;</span>, <span class="st">&quot;Female.30&quot;</span>])))</span>
+<span id="cb579-18"><a href="comparing-more-groups.html#cb579-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb579-19"><a href="comparing-more-groups.html#cb579-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create the plot</span></span>
+<span id="cb579-20"><a href="comparing-more-groups.html#cb579-20" aria-hidden="true" tabindex="-1"></a>untreated_weight_lineplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(untreated_weight_df) <span class="sc">+</span></span>
+<span id="cb579-21"><a href="comparing-more-groups.html#cb579-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> weight, <span class="at">col =</span> sex, <span class="at">group =</span> sex), <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>) <span class="sc">+</span></span>
+<span id="cb579-22"><a href="comparing-more-groups.html#cb579-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> weight, <span class="at">col =</span> sex, <span class="at">group =</span> sex), <span class="at">fun.data =</span> <span class="st">&quot;mean_sd&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb579-23"><a href="comparing-more-groups.html#cb579-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> weight, <span class="at">col =</span> sex, <span class="at">group =</span> sex), <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb579-24"><a href="comparing-more-groups.html#cb579-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> untreated_weight_stats_pos, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> max, <span class="at">label =</span> stats)) <span class="sc">+</span></span>
+<span id="cb579-25"><a href="comparing-more-groups.html#cb579-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Untreated mice weights&quot;</span>) <span class="sc">+</span></span>
+<span id="cb579-26"><a href="comparing-more-groups.html#cb579-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb579-27"><a href="comparing-more-groups.html#cb579-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="comparing-more-groups.html#cb580-1" aria-hidden="true" tabindex="-1"></a>untreated_weight_lineplot</span></code></pre></div>
 <p><img src="_main_files/figure-html/more_groups_weight_lineplot-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>I find it very clear, and almost ready to be published!</p>
 </div>
 </div>
-<div id="kruskal-wallis" class="section level2 unnumbered hasAnchor">
-<h2>Kruskal Wallis<a href="comparing-more-groups.html#kruskal-wallis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="kruskal-wallis" class="section level2 unnumbered">
+<h2>Kruskal Wallis</h2>
 <p>It’s now time to check whether <em>T1-treated females Task3 completing time changes over time</em>.
 <br>
 We’ll use <code>kruskal.test()</code> function, which needs as inputs the dependent variable and the independent one (<strong>remember</strong>: kruskal wallis is the corresponding of the one-way ANOVA, there is not a non parametric test resembling the two-way ANOVA).</p>
-<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="comparing-more-groups.html#cb581-1" tabindex="-1"></a>kruskal_res <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(<span class="at">x =</span> females_t1_task3_df<span class="sc">$</span>Task3, <span class="at">g =</span> females_t1_task3_df<span class="sc">$</span>age)</span>
-<span id="cb581-2"><a href="comparing-more-groups.html#cb581-2" tabindex="-1"></a>kruskal_res</span></code></pre></div>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="comparing-more-groups.html#cb581-1" aria-hidden="true" tabindex="-1"></a>kruskal_res <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(<span class="at">x =</span> females_t1_task3_df<span class="sc">$</span>Task3, <span class="at">g =</span> females_t1_task3_df<span class="sc">$</span>age)</span>
+<span id="cb581-2"><a href="comparing-more-groups.html#cb581-2" aria-hidden="true" tabindex="-1"></a>kruskal_res</span></code></pre></div>
 <pre class="code-out"><code>
     Kruskal-Wallis rank sum test
 
 data:  females_t1_task3_df$Task3 and females_t1_task3_df$age
 Kruskal-Wallis chi-squared = 28.733, df = 3, p-value = 2.549e-06</code></pre>
 <p>We can say that T1-treated females Task3 time changes in time. How? let’s check it through post-hoc test.</p>
-<div id="post-hoc-test-1" class="section level3 unnumbered hasAnchor">
-<h3>Post-hoc test<a href="comparing-more-groups.html#post-hoc-test-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="post-hoc-test-1" class="section level3 unnumbered">
+<h3>Post-hoc test</h3>
 <p>The non-parametric post-hoc test is the Dunn’s test. We need to install the <code>dunn.test</code> library (I won’t show how to do so, as you should know…).
 <br>
 The function is <code>dunn.test</code> and requires different inputs: <code>x</code> and <code>g</code> as kruskal.test, <code>method</code> which indicates the p-value correction method. By default, it prints out the output, even when assigning it to a variable; for this reason, we will encapsulate all into <code>capture.output</code> function which will capture the output and put into a file (usually, we will instead use <code>nullfile()</code> to not put it anywhere).</p>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="comparing-more-groups.html#cb583-1" tabindex="-1"></a><span class="fu">library</span>(dunn.test)</span>
-<span id="cb583-2"><a href="comparing-more-groups.html#cb583-2" tabindex="-1"></a></span>
-<span id="cb583-3"><a href="comparing-more-groups.html#cb583-3" tabindex="-1"></a><span class="fu">capture.output</span>(dunn_res <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(</span>
-<span id="cb583-4"><a href="comparing-more-groups.html#cb583-4" tabindex="-1"></a>    <span class="fu">dunn.test</span>(<span class="at">x =</span> females_t1_task3_df<span class="sc">$</span>Task3, <span class="at">g =</span> females_t1_task3_df<span class="sc">$</span>age, <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span>
-<span id="cb583-5"><a href="comparing-more-groups.html#cb583-5" tabindex="-1"></a>  ), <span class="at">file =</span> <span class="fu">nullfile</span>())</span>
-<span id="cb583-6"><a href="comparing-more-groups.html#cb583-6" tabindex="-1"></a></span>
-<span id="cb583-7"><a href="comparing-more-groups.html#cb583-7" tabindex="-1"></a>dunn_res</span></code></pre></div>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="comparing-more-groups.html#cb583-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dunn.test)</span>
+<span id="cb583-2"><a href="comparing-more-groups.html#cb583-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb583-3"><a href="comparing-more-groups.html#cb583-3" aria-hidden="true" tabindex="-1"></a><span class="fu">capture.output</span>(dunn_res <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(</span>
+<span id="cb583-4"><a href="comparing-more-groups.html#cb583-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dunn.test</span>(<span class="at">x =</span> females_t1_task3_df<span class="sc">$</span>Task3, <span class="at">g =</span> females_t1_task3_df<span class="sc">$</span>age, <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span>
+<span id="cb583-5"><a href="comparing-more-groups.html#cb583-5" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">file =</span> <span class="fu">nullfile</span>())</span>
+<span id="cb583-6"><a href="comparing-more-groups.html#cb583-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb583-7"><a href="comparing-more-groups.html#cb583-7" aria-hidden="true" tabindex="-1"></a>dunn_res</span></code></pre></div>
 <pre class="code-out"><code>      chi2         Z            P   P.adjusted comparisons
 1 28.73258 -3.267054 5.433646e-04 3.260188e-03      15 - 3
 2 28.73258 -5.265649 6.984754e-08 4.190852e-07     15 - 30
@@ -673,27 +672,27 @@ The function is <code>dunn.test</code> and requires different inputs: <code>x</c
 6 28.73258  1.832353 3.344941e-02 2.006964e-01      30 - 7</code></pre>
 <p>So here we are. It seems that it is only at age of 15 that the T1-treated females change their Task3 completition time.
 Let’s now put these info into our plot, to make a great figure. I know that there are some packages to perform it, but I want to show how to do it manually.</p>
-<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="comparing-more-groups.html#cb585-1" tabindex="-1"></a><span class="co"># 1. Create a df for the statistics</span></span>
-<span id="cb585-2"><a href="comparing-more-groups.html#cb585-2" tabindex="-1"></a>dunn_stat_df <span class="ot">&lt;-</span> dunn_res <span class="sc">%&gt;%</span></span>
-<span id="cb585-3"><a href="comparing-more-groups.html#cb585-3" tabindex="-1"></a>  <span class="fu">filter</span>(P.adjusted <span class="sc">&lt;=</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb585-4"><a href="comparing-more-groups.html#cb585-4" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> comparisons, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;xend&quot;</span>), <span class="at">sep =</span> <span class="st">&quot; - &quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb585-5"><a href="comparing-more-groups.html#cb585-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stats =</span> <span class="fu">pvalue_to_plot</span>(P.adjusted),</span>
-<span id="cb585-6"><a href="comparing-more-groups.html#cb585-6" tabindex="-1"></a>         <span class="at">y_segment =</span> <span class="fu">c</span>(<span class="fu">max</span>(females_t1_task3_df<span class="sc">$</span>Task3) <span class="sc">+</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">35</span>)),</span>
-<span id="cb585-7"><a href="comparing-more-groups.html#cb585-7" tabindex="-1"></a>         <span class="at">y_stats =</span> y_segment <span class="sc">+</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb585-8"><a href="comparing-more-groups.html#cb585-8" tabindex="-1"></a>  <span class="fu">select</span>(x, xend, stats, y_segment, y_stats) <span class="sc">%&gt;%</span></span>
-<span id="cb585-9"><a href="comparing-more-groups.html#cb585-9" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb585-10"><a href="comparing-more-groups.html#cb585-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">x_stats =</span> <span class="fu">mean</span>(<span class="fu">match</span>(<span class="fu">c</span>(x, xend), <span class="fu">levels</span>(females_t1_task3_df<span class="sc">$</span>age)))</span>
-<span id="cb585-11"><a href="comparing-more-groups.html#cb585-11" tabindex="-1"></a>         )</span>
-<span id="cb585-12"><a href="comparing-more-groups.html#cb585-12" tabindex="-1"></a></span>
-<span id="cb585-13"><a href="comparing-more-groups.html#cb585-13" tabindex="-1"></a><span class="co"># 2. Remove Shapiro results from plot</span></span>
-<span id="cb585-14"><a href="comparing-more-groups.html#cb585-14" tabindex="-1"></a>females_t1_task3_boxplot <span class="ot">&lt;-</span> <span class="fu">delete_layers</span>(females_t1_task3_boxplot, <span class="st">&quot;GeomText&quot;</span>)</span>
-<span id="cb585-15"><a href="comparing-more-groups.html#cb585-15" tabindex="-1"></a></span>
-<span id="cb585-16"><a href="comparing-more-groups.html#cb585-16" tabindex="-1"></a><span class="co"># 3. Add stats</span></span>
-<span id="cb585-17"><a href="comparing-more-groups.html#cb585-17" tabindex="-1"></a>females_t1_task3_boxplot <span class="ot">&lt;-</span> females_t1_task3_boxplot <span class="sc">+</span></span>
-<span id="cb585-18"><a href="comparing-more-groups.html#cb585-18" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> dunn_stat_df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">xend =</span> xend, <span class="at">y =</span> y_segment, <span class="at">yend =</span> y_segment), <span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb585-19"><a href="comparing-more-groups.html#cb585-19" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> dunn_stat_df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x_stats, <span class="at">y =</span> y_stats, <span class="at">label =</span> stats), <span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb585-20"><a href="comparing-more-groups.html#cb585-20" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="comparing-more-groups.html#cb586-1" tabindex="-1"></a>females_t1_task3_boxplot</span></code></pre></div>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="comparing-more-groups.html#cb585-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create a df for the statistics</span></span>
+<span id="cb585-2"><a href="comparing-more-groups.html#cb585-2" aria-hidden="true" tabindex="-1"></a>dunn_stat_df <span class="ot">&lt;-</span> dunn_res <span class="sc">%&gt;%</span></span>
+<span id="cb585-3"><a href="comparing-more-groups.html#cb585-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(P.adjusted <span class="sc">&lt;=</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb585-4"><a href="comparing-more-groups.html#cb585-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> comparisons, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;xend&quot;</span>), <span class="at">sep =</span> <span class="st">&quot; - &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb585-5"><a href="comparing-more-groups.html#cb585-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stats =</span> <span class="fu">pvalue_to_plot</span>(P.adjusted),</span>
+<span id="cb585-6"><a href="comparing-more-groups.html#cb585-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">y_segment =</span> <span class="fu">c</span>(<span class="fu">max</span>(females_t1_task3_df<span class="sc">$</span>Task3) <span class="sc">+</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">35</span>)),</span>
+<span id="cb585-7"><a href="comparing-more-groups.html#cb585-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">y_stats =</span> y_segment <span class="sc">+</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb585-8"><a href="comparing-more-groups.html#cb585-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(x, xend, stats, y_segment, y_stats) <span class="sc">%&gt;%</span></span>
+<span id="cb585-9"><a href="comparing-more-groups.html#cb585-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb585-10"><a href="comparing-more-groups.html#cb585-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">x_stats =</span> <span class="fu">mean</span>(<span class="fu">match</span>(<span class="fu">c</span>(x, xend), <span class="fu">levels</span>(females_t1_task3_df<span class="sc">$</span>age)))</span>
+<span id="cb585-11"><a href="comparing-more-groups.html#cb585-11" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb585-12"><a href="comparing-more-groups.html#cb585-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb585-13"><a href="comparing-more-groups.html#cb585-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Remove Shapiro results from plot</span></span>
+<span id="cb585-14"><a href="comparing-more-groups.html#cb585-14" aria-hidden="true" tabindex="-1"></a>females_t1_task3_boxplot <span class="ot">&lt;-</span> <span class="fu">delete_layers</span>(females_t1_task3_boxplot, <span class="st">&quot;GeomText&quot;</span>)</span>
+<span id="cb585-15"><a href="comparing-more-groups.html#cb585-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb585-16"><a href="comparing-more-groups.html#cb585-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Add stats</span></span>
+<span id="cb585-17"><a href="comparing-more-groups.html#cb585-17" aria-hidden="true" tabindex="-1"></a>females_t1_task3_boxplot <span class="ot">&lt;-</span> females_t1_task3_boxplot <span class="sc">+</span></span>
+<span id="cb585-18"><a href="comparing-more-groups.html#cb585-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> dunn_stat_df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">xend =</span> xend, <span class="at">y =</span> y_segment, <span class="at">yend =</span> y_segment), <span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb585-19"><a href="comparing-more-groups.html#cb585-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> dunn_stat_df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x_stats, <span class="at">y =</span> y_stats, <span class="at">label =</span> stats), <span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb585-20"><a href="comparing-more-groups.html#cb585-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="comparing-more-groups.html#cb586-1" aria-hidden="true" tabindex="-1"></a>females_t1_task3_boxplot</span></code></pre></div>
 <p><img src="_main_files/figure-html/more_groups_task3_boxplot-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Another great figure to add to our paper! And that’s all for this chapter; in the next one we will see correlation.</p>
 

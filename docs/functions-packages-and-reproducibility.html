@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-12-09" />
+<meta name="date" content="2024-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="data-frames.html"/>
 <link rel="next" href="tidyverse-manage.html"/>
-<script src="libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <meta property="og:description" content="To you, who never gives up, for your future. You can make it!">
 <meta name="keywords" content="R, biology, data analysis">
 <meta name="author" content="Matteo Miotto">
@@ -71,7 +70,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -384,44 +383,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="functions-packages-and-reproducibility" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">11</span> Functions, packages and reproducibility<a href="functions-packages-and-reproducibility.html#functions-packages-and-reproducibility" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="functions-packages-and-reproducibility" class="section level1" number="11">
+<h1><span class="header-section-number">11</span> Functions, packages and reproducibility</h1>
 <p>I’m sorry, I know last time I told you we would have start exploratory data analysis… but there are some <strong>crucial</strong> concepts that you should know prior to start your analysis: functions, packages and reproducibility.</p>
-<div id="functions" class="section level2 unnumbered hasAnchor">
-<h2>Functions<a href="functions-packages-and-reproducibility.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="functions" class="section level2 unnumbered">
+<h2>Functions</h2>
 <p>We have encountered them quite a few times in previous chapters. We know that in R functions can be used by writing the name of the function, followed by parenthesis with some values in it.<br>
 I’m not here to describe how to write new functions etc (if you want to know more about it, this is a useful <a href="https://r4ds.had.co.nz/functions.html" target="_blank">guide</a>), but you have to know that the functions we’ve seen (e.g. <code>mean()</code>, <code>max()</code>, <code>median()</code>, <code>length()</code>) are so-called “built-in”, so they are accessible in R since its installation.
 <br>
 However, there are lots and lots of functions created by different “users” around the world that are fundamental for different types of analysis but that are not “pre-built” in R. They are collected in different <em>packages</em>.</p>
 </div>
-<div id="packages" class="section level2 unnumbered hasAnchor">
-<h2>Packages<a href="functions-packages-and-reproducibility.html#packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="packages" class="section level2 unnumbered">
+<h2>Packages</h2>
 <p>So, you have to imagine a package as a box containing different functions that you want to use.
 <br>
 “Right, and how can I use them?” Great question, let’s see how to install a package.</p>
-<div id="install-a-package" class="section level3 unnumbered hasAnchor">
-<h3>Install a package<a href="functions-packages-and-reproducibility.html#install-a-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="install-a-package" class="section level3 unnumbered">
+<h3>Install a package</h3>
 <p>To install a package you have to know in which <em>repository</em> it is stored (imagine a repository as a free App Store/Play Store). Most of the packages are store on CRAN (<a href="https://cran.r-project.org/" target="_blank">website</a>), while the majority of genomic-related packages are store in Bioconductor (<a href="https://www.bioconductor.org/" target="_blank">website</a>).
 <br>
 As we are going to use CRAN packages, here I show you how to install those packages.
 <br>
 Let’s say we want to install <code>tidyverse</code> (which is a collection of packages that I love for data analysis), we will use the command <code>install.packages("&lt;name_of_the_package&gt;")</code>.</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="functions-packages-and-reproducibility.html#cb360-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="functions-packages-and-reproducibility.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
 <p>I strongly suggest you to run this code and follow the instructions that pop up in the console.
 <br>
 The process will take a while and if all worked fine, it should prompt “DONE The downloaded source packages are in….” at the end.</p>
 </div>
-<div id="load-a-package" class="section level3 unnumbered hasAnchor">
-<h3>Load a package<a href="functions-packages-and-reproducibility.html#load-a-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="load-a-package" class="section level3 unnumbered">
+<h3>Load a package</h3>
 <p>Installing a package is not sufficient to be able to use its functions, you have to load it in every session you want to use it. So, I now it sounds like a big deal, but it’s easier than it seems: at the beginning of your script you have to write <code>library(&lt;name_of_the_package&gt;)</code> for each package you want to load.
 <br>
 For example, in our case we will write:</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="functions-packages-and-reproducibility.html#cb361-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="functions-packages-and-reproducibility.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>Now that we have loaded the package, we are able to use its functions.<br></p>
 </div>
 </div>
-<div id="reproducibility" class="section level2 unnumbered hasAnchor">
-<h2>Reproducibility<a href="functions-packages-and-reproducibility.html#reproducibility" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="reproducibility" class="section level2 unnumbered">
+<h2>Reproducibility</h2>
 Here we are at the most important part of this chapter: data reproducibility. I mentioned you just few things about functions and packages, I know… but those concepts are important to understand how data reproducibility works.
 <br>
 <p class="plist">
@@ -443,47 +442,49 @@ Use the same version of R and of the packages
 When you are installing a package, you are installing a certain version if it. In fact, during time, packages changes with new functionalities, fixed bugs and so on. For this reason, the results of an analysis done with version 1.0 of a package may be different from the ones using version 5.2… it should not be the case, but some times it happens because the same functions may change a bit.
 <br>
 So, how to control it?</p>
-<div id="control-package-versions" class="section level3 unnumbered hasAnchor">
-<h3>Control package versions<a href="functions-packages-and-reproducibility.html#control-package-versions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="control-package-versions" class="section level3 unnumbered">
+<h3>Control package versions</h3>
 <p>To check which version of a package you have installed you can use the command <code>packageVersion("&lt;name_of_the_package&gt;")</code>. For example:</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="functions-packages-and-reproducibility.html#cb362-1" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="functions-packages-and-reproducibility.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
 <pre class="code-out"><code>[1] &#39;2.0.0&#39;</code></pre>
 <p>I have installed version 2.0.0 of tidyverse. DON’T worry if your version is not the same as mine (I know it sounds controversial, but here we are explaining things, you should stick with you own version).</p>
 </div>
-<div id="session-info" class="section level3 unnumbered hasAnchor">
-<h3>Session info<a href="functions-packages-and-reproducibility.html#session-info" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="session-info" class="section level3 unnumbered">
+<h3>Session info</h3>
 <p>Another way is to look at the sessionInfo, which returns all the package loaded in the current session (remember, a session starts when you start R and ends when you exit or restart R).</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="functions-packages-and-reproducibility.html#cb364-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
-<pre class="code-out"><code>R version 4.3.1 (2023-06-16)
-Platform: aarch64-apple-darwin20 (64-bit)
-Running under: macOS Ventura 13.6
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="functions-packages-and-reproducibility.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<pre class="code-out"><code>R version 4.1.0 (2021-05-18)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS 12.7
 
 Matrix products: default
-BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
-LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-
-time zone: Europe/Rome
-tzcode source: internal
 
 attached base packages:
 [1] grid      stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] dunn.test_1.3.5 vcd_1.4-11      ggmosaic_0.3.3  glue_1.6.2      gginnards_0.1.2 ggpubr_0.6.0    lubridate_1.9.3 forcats_1.0.0   stringr_1.5.0   dplyr_1.1.3    
-[11] purrr_1.0.2     readr_2.1.4     tidyr_1.3.0     tibble_3.2.1    ggplot2_3.4.4   tidyverse_2.0.0
+ [1] dunn.test_1.3.5 glue_1.6.2      gginnards_0.1.2 vcd_1.4-9       ggmosaic_0.3.3  ggpubr_0.4.0   
+ [7] lubridate_1.9.2 forcats_1.0.0   stringr_1.5.0   dplyr_1.1.2     purrr_1.0.1     readr_2.1.4    
+[13] tidyr_1.3.0     tibble_3.2.1    ggplot2_3.4.2   tidyverse_2.0.0
 
 loaded via a namespace (and not attached):
- [1] gtable_0.3.4       xfun_0.40          bslib_0.5.1        htmlwidgets_1.6.2  ggrepel_0.9.4      rstatix_0.7.2      lattice_0.21-8     tzdb_0.4.0        
- [9] vctrs_0.6.4        tools_4.3.1        generics_0.1.3     fansi_1.0.5        pkgconfig_2.0.3    data.table_1.14.8  RColorBrewer_1.1-3 lifecycle_1.0.3   
-[17] compiler_4.3.1     farver_2.1.1       munsell_0.5.0      carData_3.0-5      htmltools_0.5.6.1  sass_0.4.7         lazyeval_0.2.2     yaml_2.3.7        
-[25] plotly_4.10.2      pillar_1.9.0       car_3.1-2          jquerylib_0.1.4    MASS_7.3-60        cachem_1.0.8       abind_1.4-5        tidyselect_1.2.0  
-[33] digest_0.6.33      stringi_1.7.12     bookdown_0.24      labeling_0.4.3     cowplot_1.1.1      fastmap_1.1.1      colorspace_2.1-0   cli_3.6.1         
-[41] magrittr_2.0.3     productplots_0.1.1 utf8_1.2.3         broom_1.0.5        withr_2.5.1        scales_1.2.1       backports_1.4.1    timechange_0.2.0  
-[49] httr_1.4.7         rmarkdown_2.25     gridExtra_2.3      ggsignif_0.6.4     zoo_1.8-12         hms_1.1.3          evaluate_0.22      knitr_1.44        
-[57] lmtest_0.9-40      viridisLite_0.4.2  rlang_1.1.1        Rcpp_1.0.11        rstudioapi_0.15.0  jsonlite_1.8.7     plyr_1.8.9         R6_2.5.1          </code></pre>
+ [1] httr_1.4.6         sass_0.4.0         jsonlite_1.8.4     viridisLite_0.4.0  carData_3.0-4     
+ [6] bslib_0.3.1        highr_0.9          yaml_2.2.1         ggrepel_0.9.1      pillar_1.9.0      
+[11] backports_1.3.0    lattice_0.20-45    digest_0.6.28      RColorBrewer_1.1-2 ggsignif_0.6.3    
+[16] colorspace_2.0-2   productplots_0.1.1 cowplot_1.1.1      htmltools_0.5.2    plyr_1.8.6        
+[21] pkgconfig_2.0.3    broom_1.0.5        bookdown_0.24      scales_1.2.1       tzdb_0.2.0        
+[26] timechange_0.2.0   generics_0.1.1     farver_2.1.0       car_3.0-12         withr_2.5.0       
+[31] lazyeval_0.2.2     cli_3.6.1          magrittr_2.0.3     evaluate_0.14      fansi_0.5.0       
+[36] MASS_7.3-54        rstatix_0.7.0      tools_4.1.0        data.table_1.14.2  hms_1.1.3         
+[41] lifecycle_1.0.3    plotly_4.10.0      munsell_0.5.0      compiler_4.1.0     jquerylib_0.1.4   
+[46] rlang_1.1.1        rstudioapi_0.15.0  htmlwidgets_1.5.4  labeling_0.4.2     rmarkdown_2.11    
+[51] gtable_0.3.0       abind_1.4-5        R6_2.5.1           gridExtra_2.3      zoo_1.8-9         
+[56] knitr_1.36         fastmap_1.1.0      utf8_1.2.2         stringi_1.7.5      Rcpp_1.0.7        
+[61] vctrs_0.6.2        tidyselect_1.2.0   xfun_0.28          lmtest_0.9-39     </code></pre>
 <p>Here it is reported the version of R, and of all the packages loaded during this session.
 <br>
 You should use this command at the end of all your analyses, especially if you are using Markdown (we will see them soon, very soon) and provide it when you want to share the analysis to someone else (or publish a paper with an analysis performed in R). In fact, in “Material and Methods” section of a paper, you should write down the version of R and of the packages used for analyses.</p>

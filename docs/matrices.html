@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-12-09" />
+<meta name="date" content="2024-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="vectors.html"/>
 <link rel="next" href="data-frames.html"/>
-<script src="libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <meta property="og:description" content="To you, who never gives up, for your future. You can make it!">
 <meta name="keywords" content="R, biology, data analysis">
 <meta name="author" content="Matteo Miotto">
@@ -71,7 +70,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -384,23 +383,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="matrices" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">9</span> Matrices<a href="matrices.html#matrices" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="matrices" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Matrices</h1>
 <p>Here we are at the second basic form of data organization in R, and the most important one for expression data: the <strong>matrix</strong>.
 <br>
 As we have seen in the previous chapter, sometimes, especially for expression data, there is the need of having a more complex data structure than the vector. Matrices are 2-dimensional data objects containing the <b>same</b> type of data: usually we have features (genes, proteins, ecc) on rows and samples on columns.</p>
-<div id="create-a-matrix" class="section level2 unnumbered hasAnchor">
-<h2>Create a matrix<a href="matrices.html#create-a-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="create-a-matrix" class="section level2 unnumbered">
+<h2>Create a matrix</h2>
 <p>There are many ways to create a matrix, we will briefly see most of them (the ones we are going to use in real life).
 <br>
 The first one, that is not so used (I know I just told you the opposite, but…) is to change a vector into a matrix using the function <code>matrix()</code> and setting the number :</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="matrices.html#cb252-1" tabindex="-1"></a><span class="co"># 1. create a vector</span></span>
-<span id="cb252-2"><a href="matrices.html#cb252-2" tabindex="-1"></a>my_vector <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
-<span id="cb252-3"><a href="matrices.html#cb252-3" tabindex="-1"></a>my_vector</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="matrices.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. create a vector</span></span>
+<span id="cb252-2"><a href="matrices.html#cb252-2" aria-hidden="true" tabindex="-1"></a>my_vector <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb252-3"><a href="matrices.html#cb252-3" aria-hidden="true" tabindex="-1"></a>my_vector</span></code></pre></div>
 <pre class="code-out"><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12</code></pre>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="matrices.html#cb254-1" tabindex="-1"></a><span class="co"># 2. create the matrix</span></span>
-<span id="cb254-2"><a href="matrices.html#cb254-2" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(my_vector, <span class="at">nrow =</span> <span class="dv">3</span>)</span>
-<span id="cb254-3"><a href="matrices.html#cb254-3" tabindex="-1"></a>my_matrix</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="matrices.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. create the matrix</span></span>
+<span id="cb254-2"><a href="matrices.html#cb254-2" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(my_vector, <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb254-3"><a href="matrices.html#cb254-3" aria-hidden="true" tabindex="-1"></a>my_matrix</span></code></pre></div>
 <pre class="code-out"><code>     [,1] [,2] [,3] [,4]
 [1,]    1    4    7   10
 [2,]    2    5    8   11
@@ -419,26 +418,26 @@ If the length of the vector is not a multiple of nrow or ncol, it starts to repe
 It fills the matrix by column by default, we can change the behavior setting <code>byrow = T</code>, try it
 </li>
 </ul>
-<div id="binding" class="section level3 unnumbered hasAnchor">
-<h3>Binding<a href="matrices.html#binding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="binding" class="section level3 unnumbered">
+<h3>Binding</h3>
 <p>Another method, usually used, is to “bind” two or more vectors to create a matrix through <code>rbind()</code> or <code>cbind()</code>. It is easier with an example.
 <br>
 Do you remember in exercise <a href="vectors.html#exr:multiple-vectors">8.2</a> that we had three patients’ expression levels in three different vectors?! Now we can comine them into a matrix in this way:</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="matrices.html#cb256-1" tabindex="-1"></a><span class="co"># 1. Create the vectors</span></span>
-<span id="cb256-2"><a href="matrices.html#cb256-2" tabindex="-1"></a>patient1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;CDH7&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;LDB2&quot;</span> <span class="ot">=</span> <span class="dv">13</span>, <span class="st">&quot;SEM3A&quot;</span> <span class="ot">=</span> <span class="dv">16</span>, <span class="st">&quot;FEZF2&quot;</span> <span class="ot">=</span> <span class="dv">21</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">43</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">29</span>, <span class="st">&quot;HOMER&quot;</span> <span class="ot">=</span> <span class="dv">22</span>)</span>
-<span id="cb256-3"><a href="matrices.html#cb256-3" tabindex="-1"></a>patient2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;CDH7&quot;</span> <span class="ot">=</span> <span class="dv">11</span>, <span class="st">&quot;LDB2&quot;</span> <span class="ot">=</span> <span class="dv">13</span>, <span class="st">&quot;SEM3A&quot;</span> <span class="ot">=</span> <span class="dv">22</span>, <span class="st">&quot;FEZF2&quot;</span> <span class="ot">=</span> <span class="dv">21</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">31</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;HOMER&quot;</span> <span class="ot">=</span> <span class="dv">8</span>)</span>
-<span id="cb256-4"><a href="matrices.html#cb256-4" tabindex="-1"></a>patient3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span> <span class="ot">=</span> <span class="dv">8</span>, <span class="st">&quot;CDH7&quot;</span> <span class="ot">=</span> <span class="dv">3</span>, <span class="st">&quot;LDB2&quot;</span> <span class="ot">=</span> <span class="dv">22</span>, <span class="st">&quot;SEM3A&quot;</span> <span class="ot">=</span> <span class="dv">14</span>, <span class="st">&quot;FEZF2&quot;</span> <span class="ot">=</span> <span class="dv">13</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">45</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">37</span>, <span class="st">&quot;HOMER&quot;</span> <span class="ot">=</span> <span class="dv">2</span>)</span>
-<span id="cb256-5"><a href="matrices.html#cb256-5" tabindex="-1"></a></span>
-<span id="cb256-6"><a href="matrices.html#cb256-6" tabindex="-1"></a><span class="co"># 2. Bind vectors</span></span>
-<span id="cb256-7"><a href="matrices.html#cb256-7" tabindex="-1"></a>r_patients <span class="ot">&lt;-</span> <span class="fu">rbind</span>(patient1, patient2, patient3)</span>
-<span id="cb256-8"><a href="matrices.html#cb256-8" tabindex="-1"></a>c_patients <span class="ot">&lt;-</span> <span class="fu">cbind</span>(patient1, patient2, patient3)</span>
-<span id="cb256-9"><a href="matrices.html#cb256-9" tabindex="-1"></a></span>
-<span id="cb256-10"><a href="matrices.html#cb256-10" tabindex="-1"></a>r_patients</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="matrices.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create the vectors</span></span>
+<span id="cb256-2"><a href="matrices.html#cb256-2" aria-hidden="true" tabindex="-1"></a>patient1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;CDH7&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;LDB2&quot;</span> <span class="ot">=</span> <span class="dv">13</span>, <span class="st">&quot;SEM3A&quot;</span> <span class="ot">=</span> <span class="dv">16</span>, <span class="st">&quot;FEZF2&quot;</span> <span class="ot">=</span> <span class="dv">21</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">43</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">29</span>, <span class="st">&quot;HOMER&quot;</span> <span class="ot">=</span> <span class="dv">22</span>)</span>
+<span id="cb256-3"><a href="matrices.html#cb256-3" aria-hidden="true" tabindex="-1"></a>patient2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;CDH7&quot;</span> <span class="ot">=</span> <span class="dv">11</span>, <span class="st">&quot;LDB2&quot;</span> <span class="ot">=</span> <span class="dv">13</span>, <span class="st">&quot;SEM3A&quot;</span> <span class="ot">=</span> <span class="dv">22</span>, <span class="st">&quot;FEZF2&quot;</span> <span class="ot">=</span> <span class="dv">21</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">31</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;HOMER&quot;</span> <span class="ot">=</span> <span class="dv">8</span>)</span>
+<span id="cb256-4"><a href="matrices.html#cb256-4" aria-hidden="true" tabindex="-1"></a>patient3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span> <span class="ot">=</span> <span class="dv">8</span>, <span class="st">&quot;CDH7&quot;</span> <span class="ot">=</span> <span class="dv">3</span>, <span class="st">&quot;LDB2&quot;</span> <span class="ot">=</span> <span class="dv">22</span>, <span class="st">&quot;SEM3A&quot;</span> <span class="ot">=</span> <span class="dv">14</span>, <span class="st">&quot;FEZF2&quot;</span> <span class="ot">=</span> <span class="dv">13</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">45</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">37</span>, <span class="st">&quot;HOMER&quot;</span> <span class="ot">=</span> <span class="dv">2</span>)</span>
+<span id="cb256-5"><a href="matrices.html#cb256-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-6"><a href="matrices.html#cb256-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Bind vectors</span></span>
+<span id="cb256-7"><a href="matrices.html#cb256-7" aria-hidden="true" tabindex="-1"></a>r_patients <span class="ot">&lt;-</span> <span class="fu">rbind</span>(patient1, patient2, patient3)</span>
+<span id="cb256-8"><a href="matrices.html#cb256-8" aria-hidden="true" tabindex="-1"></a>c_patients <span class="ot">&lt;-</span> <span class="fu">cbind</span>(patient1, patient2, patient3)</span>
+<span id="cb256-9"><a href="matrices.html#cb256-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-10"><a href="matrices.html#cb256-10" aria-hidden="true" tabindex="-1"></a>r_patients</span></code></pre></div>
 <pre class="code-out"><code>         SEC24C CDH7 LDB2 SEM3A FEZF2 NTMT1 BIP HOMER
 patient1     12    1   13    16    21    43  29    22
 patient2      2   11   13    22    21    31  12     8
 patient3      8    3   22    14    13    45  37     2</code></pre>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="matrices.html#cb258-1" tabindex="-1"></a>c_patients</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="matrices.html#cb258-1" aria-hidden="true" tabindex="-1"></a>c_patients</span></code></pre></div>
 <pre class="code-out"><code>       patient1 patient2 patient3
 SEC24C       12        2        8
 CDH7          1       11        3
@@ -462,159 +461,159 @@ What would have been messed up? The column names in the first matrix and the row
 </li>
 </ul>
 </div>
-<div id="transform-into-a-matrix" class="section level3 unnumbered hasAnchor">
-<h3>Transform into a matrix<a href="matrices.html#transform-into-a-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="transform-into-a-matrix" class="section level3 unnumbered">
+<h3>Transform into a matrix</h3>
 <p>One of the most used function to create a matrix is to transform a <code>data.frame</code> (next chapter) into a matrix using the function <code>as.matrix()</code>.
 <br>
 Let’s use <code>mtcars</code>, a <code>data.frame</code> available in R, and transform it in a matrix:</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="matrices.html#cb260-1" tabindex="-1"></a><span class="co"># 1. See class of mtcars</span></span>
-<span id="cb260-2"><a href="matrices.html#cb260-2" tabindex="-1"></a><span class="fu">class</span>(mtcars)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="matrices.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. See class of mtcars</span></span>
+<span id="cb260-2"><a href="matrices.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mtcars)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="matrices.html#cb262-1" tabindex="-1"></a><span class="co"># 2. Transform to a matrix</span></span>
-<span id="cb262-2"><a href="matrices.html#cb262-2" tabindex="-1"></a>mt_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mtcars)</span>
-<span id="cb262-3"><a href="matrices.html#cb262-3" tabindex="-1"></a></span>
-<span id="cb262-4"><a href="matrices.html#cb262-4" tabindex="-1"></a><span class="co"># 3. See class of new variable</span></span>
-<span id="cb262-5"><a href="matrices.html#cb262-5" tabindex="-1"></a><span class="fu">class</span>(mt_mat)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="matrices.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Transform to a matrix</span></span>
+<span id="cb262-2"><a href="matrices.html#cb262-2" aria-hidden="true" tabindex="-1"></a>mt_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mtcars)</span>
+<span id="cb262-3"><a href="matrices.html#cb262-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb262-4"><a href="matrices.html#cb262-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. See class of new variable</span></span>
+<span id="cb262-5"><a href="matrices.html#cb262-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mt_mat)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;matrix&quot; &quot;array&quot; </code></pre>
 <p>Here we introduced the concept of <code>class</code> in R. This is not important for us at the moment, neither will be in the future. Just think this way: <code>typeof()</code> is for the type of data inside a variable while the <code>class</code> is the “type” of the structure of the variable.</p>
 <p>Ok, now that we’ve seen how to create a matrix, we have to dig into some important concepts.</p>
 </div>
 </div>
-<div id="rownames-and-colnames" class="section level2 unnumbered hasAnchor">
-<h2>Rownames and colnames<a href="matrices.html#rownames-and-colnames" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="rownames-and-colnames" class="section level2 unnumbered">
+<h2>Rownames and colnames</h2>
 <p>Matrices can have row names and column names (think as the extension of a named vector). We have already seen these features in [#Binding], and here we will see them in details.
 <br>
 Let’s start by visualizing the first matrix we have created:</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="matrices.html#cb264-1" tabindex="-1"></a>my_matrix</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="matrices.html#cb264-1" aria-hidden="true" tabindex="-1"></a>my_matrix</span></code></pre></div>
 <pre class="code-out"><code>     [,1] [,2] [,3] [,4]
 [1,]    1    4    7   10
 [2,]    2    5    8   11
 [3,]    3    6    9   12</code></pre>
 <p>We can extract row names and column names with <code>rownames()</code> and <code>colnames()</code> functions, respectively:</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="matrices.html#cb266-1" tabindex="-1"></a><span class="fu">rownames</span>(my_matrix)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="matrices.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(my_matrix)</span></code></pre></div>
 <pre class="code-out"><code>NULL</code></pre>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="matrices.html#cb268-1" tabindex="-1"></a><span class="fu">colnames</span>(my_matrix)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="matrices.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(my_matrix)</span></code></pre></div>
 <pre class="code-out"><code>NULL</code></pre>
 <p>They have not been set, as we can see by the fact that the output of these functions is <code>NULL</code> and that when we printed the matrix we had “[,1] [,2] [,3] [,4]”.</p>
-<div id="set-and-edit-row-and-column-names" class="section level3 unnumbered hasAnchor">
-<h3>Set and edit row and column names<a href="matrices.html#set-and-edit-row-and-column-names" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="set-and-edit-row-and-column-names" class="section level3 unnumbered">
+<h3>Set and edit row and column names</h3>
 <p>You have to think at row and column names as simple vectors, so we can create two vectors (on for rows and one for columns) and assign them to row and column names. <b>Remember</b>: they must be the same length as the rows and the columns.
 <br></p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="matrices.html#cb270-1" tabindex="-1"></a><span class="co"># 1. Create vectors</span></span>
-<span id="cb270-2"><a href="matrices.html#cb270-2" tabindex="-1"></a>my_row_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;First row&quot;</span>, <span class="st">&quot;Second row&quot;</span>, <span class="st">&quot;Third row&quot;</span>)</span>
-<span id="cb270-3"><a href="matrices.html#cb270-3" tabindex="-1"></a>my_col_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;First column&quot;</span>, <span class="st">&quot;Second column&quot;</span>, <span class="st">&quot;Third column&quot;</span>, <span class="st">&quot;Fourth column&quot;</span>)</span>
-<span id="cb270-4"><a href="matrices.html#cb270-4" tabindex="-1"></a></span>
-<span id="cb270-5"><a href="matrices.html#cb270-5" tabindex="-1"></a><span class="co"># 2. Assign vectors to row and column names</span></span>
-<span id="cb270-6"><a href="matrices.html#cb270-6" tabindex="-1"></a><span class="fu">rownames</span>(my_matrix) <span class="ot">&lt;-</span> my_row_names</span>
-<span id="cb270-7"><a href="matrices.html#cb270-7" tabindex="-1"></a><span class="fu">colnames</span>(my_matrix) <span class="ot">&lt;-</span> my_col_names</span>
-<span id="cb270-8"><a href="matrices.html#cb270-8" tabindex="-1"></a></span>
-<span id="cb270-9"><a href="matrices.html#cb270-9" tabindex="-1"></a><span class="co"># 3. Print result</span></span>
-<span id="cb270-10"><a href="matrices.html#cb270-10" tabindex="-1"></a>my_matrix</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="matrices.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create vectors</span></span>
+<span id="cb270-2"><a href="matrices.html#cb270-2" aria-hidden="true" tabindex="-1"></a>my_row_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;First row&quot;</span>, <span class="st">&quot;Second row&quot;</span>, <span class="st">&quot;Third row&quot;</span>)</span>
+<span id="cb270-3"><a href="matrices.html#cb270-3" aria-hidden="true" tabindex="-1"></a>my_col_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;First column&quot;</span>, <span class="st">&quot;Second column&quot;</span>, <span class="st">&quot;Third column&quot;</span>, <span class="st">&quot;Fourth column&quot;</span>)</span>
+<span id="cb270-4"><a href="matrices.html#cb270-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-5"><a href="matrices.html#cb270-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Assign vectors to row and column names</span></span>
+<span id="cb270-6"><a href="matrices.html#cb270-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(my_matrix) <span class="ot">&lt;-</span> my_row_names</span>
+<span id="cb270-7"><a href="matrices.html#cb270-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(my_matrix) <span class="ot">&lt;-</span> my_col_names</span>
+<span id="cb270-8"><a href="matrices.html#cb270-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-9"><a href="matrices.html#cb270-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Print result</span></span>
+<span id="cb270-10"><a href="matrices.html#cb270-10" aria-hidden="true" tabindex="-1"></a>my_matrix</span></code></pre></div>
 <pre class="code-out"><code>           First column Second column Third column Fourth column
 First row             1             4            7            10
 Second row            2             5            8            11
 Third row             3             6            9            12</code></pre>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="matrices.html#cb272-1" tabindex="-1"></a><span class="fu">rownames</span>(my_matrix)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="matrices.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(my_matrix)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;First row&quot;  &quot;Second row&quot; &quot;Third row&quot; </code></pre>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="matrices.html#cb274-1" tabindex="-1"></a><span class="fu">colnames</span>(my_matrix)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="matrices.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(my_matrix)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;First column&quot;  &quot;Second column&quot; &quot;Third column&quot;  &quot;Fourth column&quot;</code></pre>
 <p>Tadaaa. Now we have a more complete matrix. As row names and column names are vectors, you can easily change them all (or part of them). For example:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="matrices.html#cb276-1" tabindex="-1"></a><span class="co"># 1. Change third row names</span></span>
-<span id="cb276-2"><a href="matrices.html#cb276-2" tabindex="-1"></a><span class="fu">rownames</span>(my_matrix)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">&quot;3rd row&quot;</span></span>
-<span id="cb276-3"><a href="matrices.html#cb276-3" tabindex="-1"></a></span>
-<span id="cb276-4"><a href="matrices.html#cb276-4" tabindex="-1"></a><span class="co"># 2. Print</span></span>
-<span id="cb276-5"><a href="matrices.html#cb276-5" tabindex="-1"></a>my_matrix</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="matrices.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Change third row names</span></span>
+<span id="cb276-2"><a href="matrices.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(my_matrix)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">&quot;3rd row&quot;</span></span>
+<span id="cb276-3"><a href="matrices.html#cb276-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb276-4"><a href="matrices.html#cb276-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Print</span></span>
+<span id="cb276-5"><a href="matrices.html#cb276-5" aria-hidden="true" tabindex="-1"></a>my_matrix</span></code></pre></div>
 <pre class="code-out"><code>           First column Second column Third column Fourth column
 First row             1             4            7            10
 Second row            2             5            8            11
 3rd row               3             6            9            12</code></pre>
 </div>
 </div>
-<div id="indexing-matrices" class="section level2 unnumbered hasAnchor">
-<h2>Indexing<a href="matrices.html#indexing-matrices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="indexing-matrices" class="section level2 unnumbered">
+<h2>Indexing</h2>
 <p>As for vectors, we can extract values of the matrix by indexing: we can get a single value, a vector of values and either smaller matrices.
 <br></p>
-<div id="slicing" class="section level3 unnumbered hasAnchor">
-<h3>Slicing<a href="matrices.html#slicing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="slicing" class="section level3 unnumbered">
+<h3>Slicing</h3>
 <p>The first method is similar to vector slicing, the only exception here is that we have to set a value for the row/s and one for the column/s in the form <code>[row/s, column/s]</code>.
 <br>
 Here some examples:</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="matrices.html#cb278-1" tabindex="-1"></a><span class="co"># Get only a value, from second row and third column</span></span>
-<span id="cb278-2"><a href="matrices.html#cb278-2" tabindex="-1"></a>my_matrix[<span class="dv">2</span>, <span class="dv">3</span>] </span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="matrices.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get only a value, from second row and third column</span></span>
+<span id="cb278-2"><a href="matrices.html#cb278-2" aria-hidden="true" tabindex="-1"></a>my_matrix[<span class="dv">2</span>, <span class="dv">3</span>] </span></code></pre></div>
 <pre class="code-out"><code>[1] 8</code></pre>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="matrices.html#cb280-1" tabindex="-1"></a><span class="co"># Get a vector of values, from first and third row and second column</span></span>
-<span id="cb280-2"><a href="matrices.html#cb280-2" tabindex="-1"></a>my_matrix[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="matrices.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a vector of values, from first and third row and second column</span></span>
+<span id="cb280-2"><a href="matrices.html#cb280-2" aria-hidden="true" tabindex="-1"></a>my_matrix[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="dv">2</span>]</span></code></pre></div>
 <pre class="code-out"><code>First row   3rd row 
         4         6 </code></pre>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="matrices.html#cb282-1" tabindex="-1"></a><span class="co"># Get a matrix, from second and third row and second and third column</span></span>
-<span id="cb282-2"><a href="matrices.html#cb282-2" tabindex="-1"></a>my_matrix[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="matrices.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a matrix, from second and third row and second and third column</span></span>
+<span id="cb282-2"><a href="matrices.html#cb282-2" aria-hidden="true" tabindex="-1"></a>my_matrix[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <pre class="code-out"><code>           Second column Third column
 Second row             5            8
 3rd row                6            9</code></pre>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="matrices.html#cb284-1" tabindex="-1"></a><span class="co"># Get ALL elements of a row (leave the column part empty)</span></span>
-<span id="cb284-2"><a href="matrices.html#cb284-2" tabindex="-1"></a>my_matrix[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="matrices.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get ALL elements of a row (leave the column part empty)</span></span>
+<span id="cb284-2"><a href="matrices.html#cb284-2" aria-hidden="true" tabindex="-1"></a>my_matrix[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>,]</span></code></pre></div>
 <pre class="code-out"><code>           First column Second column Third column Fourth column
 Second row            2             5            8            11
 3rd row               3             6            9            12</code></pre>
 <p>You can use every slicing technique seen in <a href="vectors.html#slicing-vectors">slicing section</a> of vectors.</p>
 </div>
-<div id="using-names" class="section level3 unnumbered hasAnchor">
-<h3>Using names<a href="matrices.html#using-names" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="using-names" class="section level3 unnumbered">
+<h3>Using names</h3>
 <p>If we have set rownames and/or column names, we can use them to index a matrix (similarly to named vectors), in the form <code>[row/s, column/s]</code>.</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="matrices.html#cb286-1" tabindex="-1"></a><span class="co"># Get only a value, from second row and third column</span></span>
-<span id="cb286-2"><a href="matrices.html#cb286-2" tabindex="-1"></a>my_matrix[<span class="st">&quot;Second row&quot;</span>, <span class="st">&quot;Third column&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="matrices.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get only a value, from second row and third column</span></span>
+<span id="cb286-2"><a href="matrices.html#cb286-2" aria-hidden="true" tabindex="-1"></a>my_matrix[<span class="st">&quot;Second row&quot;</span>, <span class="st">&quot;Third column&quot;</span>]</span></code></pre></div>
 <pre class="code-out"><code>[1] 8</code></pre>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="matrices.html#cb288-1" tabindex="-1"></a><span class="co"># Get a vector of values, from first and third row and second column</span></span>
-<span id="cb288-2"><a href="matrices.html#cb288-2" tabindex="-1"></a>my_matrix[<span class="fu">c</span>(<span class="st">&quot;First row&quot;</span>, <span class="st">&quot;3rd row&quot;</span>), <span class="st">&quot;Second column&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="matrices.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a vector of values, from first and third row and second column</span></span>
+<span id="cb288-2"><a href="matrices.html#cb288-2" aria-hidden="true" tabindex="-1"></a>my_matrix[<span class="fu">c</span>(<span class="st">&quot;First row&quot;</span>, <span class="st">&quot;3rd row&quot;</span>), <span class="st">&quot;Second column&quot;</span>]</span></code></pre></div>
 <pre class="code-out"><code>First row   3rd row 
         4         6 </code></pre>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="matrices.html#cb290-1" tabindex="-1"></a><span class="co"># Get a matrix, from second and third row and second and third column</span></span>
-<span id="cb290-2"><a href="matrices.html#cb290-2" tabindex="-1"></a>my_matrix[<span class="fu">c</span>(<span class="st">&quot;Second row&quot;</span>, <span class="st">&quot;3rd row&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;Second column&quot;</span>, <span class="st">&quot;Third column&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="matrices.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a matrix, from second and third row and second and third column</span></span>
+<span id="cb290-2"><a href="matrices.html#cb290-2" aria-hidden="true" tabindex="-1"></a>my_matrix[<span class="fu">c</span>(<span class="st">&quot;Second row&quot;</span>, <span class="st">&quot;3rd row&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;Second column&quot;</span>, <span class="st">&quot;Third column&quot;</span>)]</span></code></pre></div>
 <pre class="code-out"><code>           Second column Third column
 Second row             5            8
 3rd row                6            9</code></pre>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="matrices.html#cb292-1" tabindex="-1"></a><span class="co"># Get ALL elements of a row (leave the column part empty)</span></span>
-<span id="cb292-2"><a href="matrices.html#cb292-2" tabindex="-1"></a>my_matrix[<span class="fu">c</span>(<span class="st">&quot;Second row&quot;</span>, <span class="st">&quot;3rd row&quot;</span>),]</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="matrices.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get ALL elements of a row (leave the column part empty)</span></span>
+<span id="cb292-2"><a href="matrices.html#cb292-2" aria-hidden="true" tabindex="-1"></a>my_matrix[<span class="fu">c</span>(<span class="st">&quot;Second row&quot;</span>, <span class="st">&quot;3rd row&quot;</span>),]</span></code></pre></div>
 <pre class="code-out"><code>           First column Second column Third column Fourth column
 Second row            2             5            8            11
 3rd row               3             6            9            12</code></pre>
 <p>Here, you can’t use expansions (<code>:</code>) to select from row with name X to row with name X+3, it is only possible with numbers. In fact, if you remember, the command n:n+m create a vector of numbers from n to n + m. Try it!</p>
 </div>
-<div id="using-logicals-1" class="section level3 unnumbered hasAnchor">
-<h3>Using logicals<a href="matrices.html#using-logicals-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="using-logicals-1" class="section level3 unnumbered">
+<h3>Using logicals</h3>
 <p>Again, as for vectors we can use logicals to extrapolate values of a matrix.
 <br>
 Let’s say we want to get the names of the rows in which the third column has a odd number, we can do as follow:</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="matrices.html#cb294-1" tabindex="-1"></a><span class="co"># 1. Create a boolean vector</span></span>
-<span id="cb294-2"><a href="matrices.html#cb294-2" tabindex="-1"></a>is_odd <span class="ot">&lt;-</span> my_matrix[, <span class="st">&quot;Third column&quot;</span>] <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span></span>
-<span id="cb294-3"><a href="matrices.html#cb294-3" tabindex="-1"></a></span>
-<span id="cb294-4"><a href="matrices.html#cb294-4" tabindex="-1"></a><span class="co"># 2. Slice the matrix based on the boolean vector</span></span>
-<span id="cb294-5"><a href="matrices.html#cb294-5" tabindex="-1"></a>sliced_odd <span class="ot">&lt;-</span> my_matrix[is_odd,]</span>
-<span id="cb294-6"><a href="matrices.html#cb294-6" tabindex="-1"></a></span>
-<span id="cb294-7"><a href="matrices.html#cb294-7" tabindex="-1"></a><span class="co"># 3. Get row names</span></span>
-<span id="cb294-8"><a href="matrices.html#cb294-8" tabindex="-1"></a><span class="fu">rownames</span>(sliced_odd)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="matrices.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create a boolean vector</span></span>
+<span id="cb294-2"><a href="matrices.html#cb294-2" aria-hidden="true" tabindex="-1"></a>is_odd <span class="ot">&lt;-</span> my_matrix[, <span class="st">&quot;Third column&quot;</span>] <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span></span>
+<span id="cb294-3"><a href="matrices.html#cb294-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb294-4"><a href="matrices.html#cb294-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Slice the matrix based on the boolean vector</span></span>
+<span id="cb294-5"><a href="matrices.html#cb294-5" aria-hidden="true" tabindex="-1"></a>sliced_odd <span class="ot">&lt;-</span> my_matrix[is_odd,]</span>
+<span id="cb294-6"><a href="matrices.html#cb294-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb294-7"><a href="matrices.html#cb294-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Get row names</span></span>
+<span id="cb294-8"><a href="matrices.html#cb294-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(sliced_odd)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;First row&quot; &quot;3rd row&quot;  </code></pre>
 <p>This will be so useful when talking about expression matrix (e.g. when we want to extrapolate genes that have tot expression in patient X or Y).</p>
 </div>
 </div>
-<div id="functions-for-all-matrix" class="section level2 unnumbered hasAnchor">
-<h2>Functions for all matrix<a href="matrices.html#functions-for-all-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="functions-for-all-matrix" class="section level2 unnumbered">
+<h2>Functions for all matrix</h2>
 <p>Alright, it is time for some practical applications to explore fundamental matrix functions.</p>
-<div id="head-tail-matrices" class="section level3 unnumbered hasAnchor">
-<h3>Head/Tail<a href="matrices.html#head-tail-matrices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="head-tail-matrices" class="section level3 unnumbered">
+<h3>Head/Tail</h3>
 <p>The first functions are <code>head()</code> and <code>tail()</code>. Let’s say we receive an expression table but they didn’t tell us much about it; we can use these two functions to look up the first and the last rows respectively.
 <br>
 Here is how to use them:</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="matrices.html#cb296-1" tabindex="-1"></a><span class="co"># 1. Load data (first time we see it)</span></span>
-<span id="cb296-2"><a href="matrices.html#cb296-2" tabindex="-1"></a>expr_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/All_counts.csv&quot;</span>, <span class="co"># name of the file</span></span>
-<span id="cb296-3"><a href="matrices.html#cb296-3" tabindex="-1"></a>                      <span class="at">header =</span> T <span class="co"># usually column names are in the first row</span></span>
-<span id="cb296-4"><a href="matrices.html#cb296-4" tabindex="-1"></a>                      )</span>
-<span id="cb296-5"><a href="matrices.html#cb296-5" tabindex="-1"></a></span>
-<span id="cb296-6"><a href="matrices.html#cb296-6" tabindex="-1"></a><span class="co"># 2. Type of</span></span>
-<span id="cb296-7"><a href="matrices.html#cb296-7" tabindex="-1"></a><span class="fu">class</span>(expr_data)</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="matrices.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load data (first time we see it)</span></span>
+<span id="cb296-2"><a href="matrices.html#cb296-2" aria-hidden="true" tabindex="-1"></a>expr_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/All_counts.csv&quot;</span>, <span class="co"># name of the file</span></span>
+<span id="cb296-3"><a href="matrices.html#cb296-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">header =</span> T <span class="co"># usually column names are in the first row</span></span>
+<span id="cb296-4"><a href="matrices.html#cb296-4" aria-hidden="true" tabindex="-1"></a>                      )</span>
+<span id="cb296-5"><a href="matrices.html#cb296-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb296-6"><a href="matrices.html#cb296-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Type of</span></span>
+<span id="cb296-7"><a href="matrices.html#cb296-7" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(expr_data)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="matrices.html#cb298-1" tabindex="-1"></a><span class="co"># 3. Head</span></span>
-<span id="cb298-2"><a href="matrices.html#cb298-2" tabindex="-1"></a><span class="fu">head</span>(expr_data)</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="matrices.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Head</span></span>
+<span id="cb298-2"><a href="matrices.html#cb298-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(expr_data)</span></code></pre></div>
 <pre class="code-out"><code>          X wt1 wt2 wt3 wt4 wt5 wt6 ko1 ko2 ko3 ko4 ko5 ko6
 1   DDX11L1   4   1   2   1   1   1   0   6   3   1   0   2
 2    WASH7P 421  46 342 345 192  18 233 217 125 313 321 726
@@ -637,19 +636,19 @@ Probably these are row counts as we do not have decimal values
 </li>
 </ul>
 <p>We can edit the previous code to fix some issues we encounter</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="matrices.html#cb300-1" tabindex="-1"></a><span class="co"># 1. Gene names as rownames</span></span>
-<span id="cb300-2"><a href="matrices.html#cb300-2" tabindex="-1"></a>expr_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/All_counts.csv&quot;</span>,</span>
-<span id="cb300-3"><a href="matrices.html#cb300-3" tabindex="-1"></a>                      <span class="at">header =</span> T,</span>
-<span id="cb300-4"><a href="matrices.html#cb300-4" tabindex="-1"></a>                      <span class="at">row.names =</span> <span class="dv">1</span> <span class="co"># first column</span></span>
-<span id="cb300-5"><a href="matrices.html#cb300-5" tabindex="-1"></a>                      )</span>
-<span id="cb300-6"><a href="matrices.html#cb300-6" tabindex="-1"></a></span>
-<span id="cb300-7"><a href="matrices.html#cb300-7" tabindex="-1"></a><span class="co"># 2. Transform to matrix</span></span>
-<span id="cb300-8"><a href="matrices.html#cb300-8" tabindex="-1"></a>expr_data <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(expr_data)</span>
-<span id="cb300-9"><a href="matrices.html#cb300-9" tabindex="-1"></a></span>
-<span id="cb300-10"><a href="matrices.html#cb300-10" tabindex="-1"></a><span class="co"># Check</span></span>
-<span id="cb300-11"><a href="matrices.html#cb300-11" tabindex="-1"></a><span class="fu">class</span>(expr_data)</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="matrices.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Gene names as rownames</span></span>
+<span id="cb300-2"><a href="matrices.html#cb300-2" aria-hidden="true" tabindex="-1"></a>expr_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/All_counts.csv&quot;</span>,</span>
+<span id="cb300-3"><a href="matrices.html#cb300-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">header =</span> T,</span>
+<span id="cb300-4"><a href="matrices.html#cb300-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">row.names =</span> <span class="dv">1</span> <span class="co"># first column</span></span>
+<span id="cb300-5"><a href="matrices.html#cb300-5" aria-hidden="true" tabindex="-1"></a>                      )</span>
+<span id="cb300-6"><a href="matrices.html#cb300-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb300-7"><a href="matrices.html#cb300-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Transform to matrix</span></span>
+<span id="cb300-8"><a href="matrices.html#cb300-8" aria-hidden="true" tabindex="-1"></a>expr_data <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(expr_data)</span>
+<span id="cb300-9"><a href="matrices.html#cb300-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb300-10"><a href="matrices.html#cb300-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check</span></span>
+<span id="cb300-11"><a href="matrices.html#cb300-11" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(expr_data)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;matrix&quot; &quot;array&quot; </code></pre>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="matrices.html#cb302-1" tabindex="-1"></a><span class="fu">head</span>(expr_data, <span class="at">n =</span> <span class="dv">10</span>) <span class="co"># we can specify the number of rows we want</span></span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="matrices.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(expr_data, <span class="at">n =</span> <span class="dv">10</span>) <span class="co"># we can specify the number of rows we want</span></span></code></pre></div>
 <pre class="code-out"><code>           wt1 wt2 wt3 wt4 wt5 wt6 ko1 ko2 ko3 ko4 ko5 ko6
 DDX11L1      4   1   2   1   1   1   0   6   3   1   0   2
 WASH7P     421  46 342 345 192  18 233 217 125 313 321 726
@@ -663,44 +662,51 @@ MIR1302-9    0   0   0   0   0   0   0   0   0   0   0   0
 MIR1302-10   0   0   0   0   0   0   0   0   0   0   0   0</code></pre>
 <p>Ok, fine. We are ready to go and explore our first expression matrix.</p>
 </div>
-<div id="dim-nrow-ncol" class="section level3 unnumbered hasAnchor">
-<h3>Dim, nrow, ncol<a href="matrices.html#dim-nrow-ncol" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="dim-nrow-ncol" class="section level3 unnumbered">
+<h3>Dim, nrow, ncol</h3>
 <p>Head and tail are great friends, but you always want to know the dimensions of the matrix. It can be done using <code>dim()</code> function, which returns the number of rows and columns (this order!), or <code>nrow()</code> and <code>ncol()</code>.</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="matrices.html#cb304-1" tabindex="-1"></a><span class="co"># dim</span></span>
-<span id="cb304-2"><a href="matrices.html#cb304-2" tabindex="-1"></a><span class="fu">dim</span>(expr_data)</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="matrices.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dim</span></span>
+<span id="cb304-2"><a href="matrices.html#cb304-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(expr_data)</span></code></pre></div>
 <pre class="code-out"><code>[1] 26475    12</code></pre>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="matrices.html#cb306-1" tabindex="-1"></a><span class="co"># nrow</span></span>
-<span id="cb306-2"><a href="matrices.html#cb306-2" tabindex="-1"></a><span class="fu">nrow</span>(expr_data)</span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="matrices.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="co"># nrow</span></span>
+<span id="cb306-2"><a href="matrices.html#cb306-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(expr_data)</span></code></pre></div>
 <pre class="code-out"><code>[1] 26475</code></pre>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="matrices.html#cb308-1" tabindex="-1"></a><span class="co"># ncol</span></span>
-<span id="cb308-2"><a href="matrices.html#cb308-2" tabindex="-1"></a><span class="fu">ncol</span>(expr_data)</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="matrices.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ncol</span></span>
+<span id="cb308-2"><a href="matrices.html#cb308-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(expr_data)</span></code></pre></div>
 <pre class="code-out"><code>[1] 12</code></pre>
 <p>We see that our matrix has 26475 rows and 12 columns.</p>
 </div>
-<div id="summary-and-transpose" class="section level3 unnumbered hasAnchor">
-<h3>Summary and transpose<a href="matrices.html#summary-and-transpose" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="summary-and-transpose" class="section level3 unnumbered">
+<h3>Summary and transpose</h3>
 <p>After having seen the basic structure of the first and last lines, the number of rows and columns, we usually want to have some info about the distribution of the genes, the counts ecc.
 <br>
 Here comes the function <code>summary()</code>:</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="matrices.html#cb310-1" tabindex="-1"></a><span class="fu">summary</span>(expr_data)</span></code></pre></div>
-<pre class="code-out"><code>      wt1                wt2                wt3                wt4             wt5                wt6                ko1             ko2                ko3          
- Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0   Min.   :     0.0   Min.   :     0.0   Min.   :    0   Min.   :     0.0   Min.   :     0.0  
- 1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0   1st Qu.:     0.0   1st Qu.:     0.0  
- Median :    19.0   Median :    16.0   Median :    16.0   Median :   15   Median :    16.0   Median :    17.0   Median :   13   Median :    18.0   Median :    19.0  
- Mean   :   411.4   Mean   :   324.4   Mean   :   326.7   Mean   :  274   Mean   :   317.3   Mean   :   316.6   Mean   :  250   Mean   :   378.2   Mean   :   351.4  
- 3rd Qu.:   272.0   3rd Qu.:   214.0   3rd Qu.:   218.0   3rd Qu.:  186   3rd Qu.:   212.0   3rd Qu.:   224.0   3rd Qu.:  179   3rd Qu.:   245.0   3rd Qu.:   246.0  
- Max.   :327719.0   Max.   :536733.0   Max.   :377069.0   Max.   :90474   Max.   :352034.0   Max.   :209954.0   Max.   :61650   Max.   :641616.0   Max.   :497463.0  
-      ko4                ko5               ko6          
- Min.   :     0.0   Min.   :    0.0   Min.   :     0.0  
- 1st Qu.:     0.0   1st Qu.:    0.0   1st Qu.:     0.0  
- Median :    17.0   Median :   17.0   Median :    19.0  
- Mean   :   373.8   Mean   :  319.8   Mean   :   423.4  
- 3rd Qu.:   255.0   3rd Qu.:  233.0   3rd Qu.:   288.0  
- Max.   :236803.0   Max.   :62660.0   Max.   :338679.0  </code></pre>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="matrices.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(expr_data)</span></code></pre></div>
+<pre class="code-out"><code>      wt1                wt2                wt3                wt4             wt5          
+ Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0   Min.   :     0.0  
+ 1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0   1st Qu.:     0.0  
+ Median :    19.0   Median :    16.0   Median :    16.0   Median :   15   Median :    16.0  
+ Mean   :   411.4   Mean   :   324.4   Mean   :   326.7   Mean   :  274   Mean   :   317.3  
+ 3rd Qu.:   272.0   3rd Qu.:   214.0   3rd Qu.:   218.0   3rd Qu.:  186   3rd Qu.:   212.0  
+ Max.   :327719.0   Max.   :536733.0   Max.   :377069.0   Max.   :90474   Max.   :352034.0  
+      wt6                ko1               ko2                ko3                ko4          
+ Min.   :     0.0   Min.   :    0.0   Min.   :     0.0   Min.   :     0.0   Min.   :     0.0  
+ 1st Qu.:     0.0   1st Qu.:    0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0  
+ Median :    17.0   Median :   13.0   Median :    18.0   Median :    19.0   Median :    17.0  
+ Mean   :   316.6   Mean   :  250.1   Mean   :   378.2   Mean   :   351.4   Mean   :   373.8  
+ 3rd Qu.:   224.0   3rd Qu.:  179.0   3rd Qu.:   245.0   3rd Qu.:   246.0   3rd Qu.:   255.0  
+ Max.   :209954.0   Max.   :61650.0   Max.   :641616.0   Max.   :497463.0   Max.   :236803.0  
+      ko5               ko6          
+ Min.   :    0.0   Min.   :     0.0  
+ 1st Qu.:    0.0   1st Qu.:     0.0  
+ Median :   17.0   Median :    19.0  
+ Mean   :  319.8   Mean   :   423.4  
+ 3rd Qu.:  233.0   3rd Qu.:   288.0  
+ Max.   :62660.0   Max.   :338679.0  </code></pre>
 <p>For each column it returns some descriptive. But, ehi, on the columns we have the samples, we want this statistics for the genes, how can we do it? Here comes <code>t()</code> that transpose the matrix so that rows became columns and <i>vice versa</i>.</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="matrices.html#cb312-1" tabindex="-1"></a>expr_data_t <span class="ot">&lt;-</span> <span class="fu">t</span>(expr_data)</span>
-<span id="cb312-2"><a href="matrices.html#cb312-2" tabindex="-1"></a></span>
-<span id="cb312-3"><a href="matrices.html#cb312-3" tabindex="-1"></a>expr_data_t[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="matrices.html#cb312-1" aria-hidden="true" tabindex="-1"></a>expr_data_t <span class="ot">&lt;-</span> <span class="fu">t</span>(expr_data)</span>
+<span id="cb312-2"><a href="matrices.html#cb312-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb312-3"><a href="matrices.html#cb312-3" aria-hidden="true" tabindex="-1"></a>expr_data_t[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span></code></pre></div>
 <pre class="code-out"><code>    DDX11L1 WASH7P MIR6859-3 MIR6859-2 MIR6859-1 MIR6859-4 MIR1302-2 MIR1302-11
 wt1       4    421         0         0         0         0         0          0
 wt2       1     46         0         0         0         0         0          0
@@ -708,128 +714,137 @@ wt3       2    342         0         0         0         0         0          0
 wt4       1    345         0         0         0         0         0          0
 wt5       1    192         0         0         0         0         0          0</code></pre>
 <p>Perfect, now we can do summary again (we do a subset of the data because we don’t want to do it for all genes, as it will be huge).</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="matrices.html#cb314-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb314-2"><a href="matrices.html#cb314-2" tabindex="-1"></a></span>
-<span id="cb314-3"><a href="matrices.html#cb314-3" tabindex="-1"></a><span class="co"># 1. Get random numbers to select random genes</span></span>
-<span id="cb314-4"><a href="matrices.html#cb314-4" tabindex="-1"></a>r_numb <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">7</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="fu">ncol</span>(expr_data_t))</span>
-<span id="cb314-5"><a href="matrices.html#cb314-5" tabindex="-1"></a></span>
-<span id="cb314-6"><a href="matrices.html#cb314-6" tabindex="-1"></a><span class="co"># 2. Floor numbers to get integers</span></span>
-<span id="cb314-7"><a href="matrices.html#cb314-7" tabindex="-1"></a>r_numb <span class="ot">&lt;-</span> <span class="fu">floor</span>(r_numb)</span>
-<span id="cb314-8"><a href="matrices.html#cb314-8" tabindex="-1"></a></span>
-<span id="cb314-9"><a href="matrices.html#cb314-9" tabindex="-1"></a><span class="co"># 3. Get the summary of sliced expr_data_t</span></span>
-<span id="cb314-10"><a href="matrices.html#cb314-10" tabindex="-1"></a><span class="fu">summary</span>(expr_data_t[, r_numb])</span></code></pre></div>
-<pre class="code-out"><code>      GPX2            BTN3A3           KRT17         USP17L2        PHF19            DBT             PPM1B       
- Min.   :0.0000   Min.   :  5.00   Min.   :0.00   Min.   :0.0   Min.   : 10.0   Min.   :  23.0   Min.   :  73.0  
- 1st Qu.:0.0000   1st Qu.: 15.00   1st Qu.:0.00   1st Qu.:0.0   1st Qu.: 20.0   1st Qu.: 415.2   1st Qu.: 392.5  
- Median :0.5000   Median : 24.00   Median :0.00   Median :0.0   Median : 97.0   Median : 753.0   Median : 562.0  
- Mean   :0.5833   Mean   : 35.67   Mean   :0.25   Mean   :0.5   Mean   :112.2   Mean   : 642.8   Mean   : 632.7  
- 3rd Qu.:1.0000   3rd Qu.: 32.50   3rd Qu.:0.00   3rd Qu.:1.0   3rd Qu.:168.5   3rd Qu.: 938.2   3rd Qu.: 838.0  
- Max.   :2.0000   Max.   :150.00   Max.   :2.00   Max.   :3.0   Max.   :324.0   Max.   :1107.0   Max.   :1466.0  </code></pre>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="matrices.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb314-2"><a href="matrices.html#cb314-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-3"><a href="matrices.html#cb314-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Get random numbers to select random genes</span></span>
+<span id="cb314-4"><a href="matrices.html#cb314-4" aria-hidden="true" tabindex="-1"></a>r_numb <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">7</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="fu">ncol</span>(expr_data_t))</span>
+<span id="cb314-5"><a href="matrices.html#cb314-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-6"><a href="matrices.html#cb314-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Floor numbers to get integers</span></span>
+<span id="cb314-7"><a href="matrices.html#cb314-7" aria-hidden="true" tabindex="-1"></a>r_numb <span class="ot">&lt;-</span> <span class="fu">floor</span>(r_numb)</span>
+<span id="cb314-8"><a href="matrices.html#cb314-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-9"><a href="matrices.html#cb314-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Get the summary of sliced expr_data_t</span></span>
+<span id="cb314-10"><a href="matrices.html#cb314-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(expr_data_t[, r_numb])</span></code></pre></div>
+<pre class="code-out"><code>      GPX2            BTN3A3           KRT17         USP17L2        PHF19            DBT        
+ Min.   :0.0000   Min.   :  5.00   Min.   :0.00   Min.   :0.0   Min.   : 10.0   Min.   :  23.0  
+ 1st Qu.:0.0000   1st Qu.: 15.00   1st Qu.:0.00   1st Qu.:0.0   1st Qu.: 20.0   1st Qu.: 415.2  
+ Median :0.5000   Median : 24.00   Median :0.00   Median :0.0   Median : 97.0   Median : 753.0  
+ Mean   :0.5833   Mean   : 35.67   Mean   :0.25   Mean   :0.5   Mean   :112.2   Mean   : 642.8  
+ 3rd Qu.:1.0000   3rd Qu.: 32.50   3rd Qu.:0.00   3rd Qu.:1.0   3rd Qu.:168.5   3rd Qu.: 938.2  
+ Max.   :2.0000   Max.   :150.00   Max.   :2.00   Max.   :3.0   Max.   :324.0   Max.   :1107.0  
+     PPM1B       
+ Min.   :  73.0  
+ 1st Qu.: 392.5  
+ Median : 562.0  
+ Mean   : 632.7  
+ 3rd Qu.: 838.0  
+ Max.   :1466.0  </code></pre>
 <p>Here we have some interesting descriptive for each gene: we can see, for example, that DBT has more counts than GPX2, or that PPM1B has the higher Max. counts of all these 7 genes.
 <br>
 There are two new functions here: <code>set.seed</code> and <code>runif</code>. Let’s start from the latter, it returns <code>n</code> random number uniformly distributed between <code>min</code> and <code>max</code> included. Do you understand why I used <code>max = ncol(expr_data_t)</code>? I’m sure you do. But to be sure that it is clear, I did it because I don’t want to hard code (insert the real number) of the number of columns of the expression matrix, because if I change matrix I have to change this number as well. So, I let R calculate it for me. As it is random, in order to let you have the same number as me, I set a seed. The theory behind “randomness” in computer science is complex, so I’m not going to deep it. If you want, there are plenty of resources on the internet on this topic.
 <br>
 Here, just an example of the use of the seed.</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="matrices.html#cb316-1" tabindex="-1"></a><span class="co"># 1. Two random vectors of 5 numbers without set.seed</span></span>
-<span id="cb316-2"><a href="matrices.html#cb316-2" tabindex="-1"></a>no_seed1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>)</span>
-<span id="cb316-3"><a href="matrices.html#cb316-3" tabindex="-1"></a>no_seed2 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>)</span>
-<span id="cb316-4"><a href="matrices.html#cb316-4" tabindex="-1"></a></span>
-<span id="cb316-5"><a href="matrices.html#cb316-5" tabindex="-1"></a><span class="co"># 2. Two random vectors setting the seed</span></span>
-<span id="cb316-6"><a href="matrices.html#cb316-6" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># here you can place any number, each generate a unique random series</span></span>
-<span id="cb316-7"><a href="matrices.html#cb316-7" tabindex="-1"></a>with_seed1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>)</span>
-<span id="cb316-8"><a href="matrices.html#cb316-8" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># here you can place any number, each generate a unique random series</span></span>
-<span id="cb316-9"><a href="matrices.html#cb316-9" tabindex="-1"></a>with_seed2 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>)</span>
-<span id="cb316-10"><a href="matrices.html#cb316-10" tabindex="-1"></a></span>
-<span id="cb316-11"><a href="matrices.html#cb316-11" tabindex="-1"></a><span class="fu">print</span>(no_seed1)</span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="matrices.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Two random vectors of 5 numbers without set.seed</span></span>
+<span id="cb316-2"><a href="matrices.html#cb316-2" aria-hidden="true" tabindex="-1"></a>no_seed1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>)</span>
+<span id="cb316-3"><a href="matrices.html#cb316-3" aria-hidden="true" tabindex="-1"></a>no_seed2 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>)</span>
+<span id="cb316-4"><a href="matrices.html#cb316-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb316-5"><a href="matrices.html#cb316-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Two random vectors setting the seed</span></span>
+<span id="cb316-6"><a href="matrices.html#cb316-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># here you can place any number, each generate a unique random series</span></span>
+<span id="cb316-7"><a href="matrices.html#cb316-7" aria-hidden="true" tabindex="-1"></a>with_seed1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>)</span>
+<span id="cb316-8"><a href="matrices.html#cb316-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># here you can place any number, each generate a unique random series</span></span>
+<span id="cb316-9"><a href="matrices.html#cb316-9" aria-hidden="true" tabindex="-1"></a>with_seed2 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>)</span>
+<span id="cb316-10"><a href="matrices.html#cb316-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb316-11"><a href="matrices.html#cb316-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(no_seed1)</span></code></pre></div>
 <pre class="code-out"><code>[1] 17.955962 11.477265  9.675680 19.179834  9.613349</code></pre>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="matrices.html#cb318-1" tabindex="-1"></a><span class="fu">print</span>(no_seed2)</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="matrices.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(no_seed2)</span></code></pre></div>
 <pre class="code-out"><code>[1] 13.873842 11.880035  2.955569 18.096674  5.675667</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="matrices.html#cb320-1" tabindex="-1"></a><span class="fu">print</span>(with_seed1)</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="matrices.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(with_seed1)</span></code></pre></div>
 <pre class="code-out"><code>[1]  6.463973 15.977798  8.770562 17.777331 18.868878</code></pre>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="matrices.html#cb322-1" tabindex="-1"></a><span class="fu">print</span>(with_seed2)</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="matrices.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(with_seed2)</span></code></pre></div>
 <pre class="code-out"><code>[1]  6.463973 15.977798  8.770562 17.777331 18.868878</code></pre>
 <p>Great! Remember, setting the seed is fundamental in analysis in which randomness take place, so they will always return the same results.</p>
 </div>
-<div id="sum-max-min" class="section level3 unnumbered hasAnchor">
-<h3>Sum, Max, Min, …<a href="matrices.html#sum-max-min" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="sum-max-min" class="section level3 unnumbered">
+<h3>Sum, Max, Min, …</h3>
 <p>Alright, there are plenty of functions that returns useful values of all the data in a matrix, such as the max value, the min one, the sum of all the values, the mean of all the values etc.
 <br>
 There is nothing easier than watch them in action.</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="matrices.html#cb324-1" tabindex="-1"></a><span class="co"># 1. create a random value matrix</span></span>
-<span id="cb324-2"><a href="matrices.html#cb324-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">214</span>)</span>
-<span id="cb324-3"><a href="matrices.html#cb324-3" tabindex="-1"></a>my_matrix2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">24</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">4</span>)</span>
-<span id="cb324-4"><a href="matrices.html#cb324-4" tabindex="-1"></a>my_matrix2</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="matrices.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. create a random value matrix</span></span>
+<span id="cb324-2"><a href="matrices.html#cb324-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">214</span>)</span>
+<span id="cb324-3"><a href="matrices.html#cb324-3" aria-hidden="true" tabindex="-1"></a>my_matrix2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">24</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">4</span>)</span>
+<span id="cb324-4"><a href="matrices.html#cb324-4" aria-hidden="true" tabindex="-1"></a>my_matrix2</span></code></pre></div>
 <pre class="code-out"><code>          [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
 [1,]  7.079653 17.000935 12.786656 15.687742  1.260719  1.082183
 [2,] 18.702227 14.015268  9.345658  4.225409  9.341111 11.385358
 [3,] 10.809797 19.592980 13.632435 13.774924 19.548749  5.461854
 [4,]  8.975963  7.808112 15.024569  6.271463  6.136042 16.151705</code></pre>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="matrices.html#cb326-1" tabindex="-1"></a><span class="co"># 2. Calculate sum</span></span>
-<span id="cb326-2"><a href="matrices.html#cb326-2" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(my_matrix2)</span>
-<span id="cb326-3"><a href="matrices.html#cb326-3" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Sum of the values of my_matrix2:&quot;</span>, my_sum))</span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="matrices.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate sum</span></span>
+<span id="cb326-2"><a href="matrices.html#cb326-2" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(my_matrix2)</span>
+<span id="cb326-3"><a href="matrices.html#cb326-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Sum of the values of my_matrix2:&quot;</span>, my_sum))</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;Sum of the values of my_matrix2: 265.101512494963&quot;</code></pre>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="matrices.html#cb328-1" tabindex="-1"></a><span class="co"># 3. Calculate min</span></span>
-<span id="cb328-2"><a href="matrices.html#cb328-2" tabindex="-1"></a>my_min <span class="ot">&lt;-</span> <span class="fu">min</span>(my_matrix2)</span>
-<span id="cb328-3"><a href="matrices.html#cb328-3" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Min of the values of my_matrix2:&quot;</span>, my_min))</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="matrices.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calculate min</span></span>
+<span id="cb328-2"><a href="matrices.html#cb328-2" aria-hidden="true" tabindex="-1"></a>my_min <span class="ot">&lt;-</span> <span class="fu">min</span>(my_matrix2)</span>
+<span id="cb328-3"><a href="matrices.html#cb328-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Min of the values of my_matrix2:&quot;</span>, my_min))</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;Min of the values of my_matrix2: 1.08218298689462&quot;</code></pre>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="matrices.html#cb330-1" tabindex="-1"></a><span class="co"># 4. Calculate max</span></span>
-<span id="cb330-2"><a href="matrices.html#cb330-2" tabindex="-1"></a>my_max <span class="ot">&lt;-</span> <span class="fu">max</span>(my_matrix2)</span>
-<span id="cb330-3"><a href="matrices.html#cb330-3" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Max of the values of my_matrix2:&quot;</span>, my_max))</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="matrices.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Calculate max</span></span>
+<span id="cb330-2"><a href="matrices.html#cb330-2" aria-hidden="true" tabindex="-1"></a>my_max <span class="ot">&lt;-</span> <span class="fu">max</span>(my_matrix2)</span>
+<span id="cb330-3"><a href="matrices.html#cb330-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Max of the values of my_matrix2:&quot;</span>, my_max))</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;Max of the values of my_matrix2: 19.5929795864504&quot;</code></pre>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="matrices.html#cb332-1" tabindex="-1"></a><span class="co"># 5. Calculate mean</span></span>
-<span id="cb332-2"><a href="matrices.html#cb332-2" tabindex="-1"></a>my_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(my_matrix2)</span>
-<span id="cb332-3"><a href="matrices.html#cb332-3" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Mean of the values of my_matrix2:&quot;</span>, my_mean))</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="matrices.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Calculate mean</span></span>
+<span id="cb332-2"><a href="matrices.html#cb332-2" aria-hidden="true" tabindex="-1"></a>my_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(my_matrix2)</span>
+<span id="cb332-3"><a href="matrices.html#cb332-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Mean of the values of my_matrix2:&quot;</span>, my_mean))</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;Mean of the values of my_matrix2: 11.0458963539568&quot;</code></pre>
 <p>Here, we calculate these stats for all the data in the matrix, but if I want to calculate it by rows or columns? Here it is</p>
 </div>
 </div>
-<div id="apply-a-function-to-all-rows-or-columns" class="section level2 unnumbered hasAnchor">
-<h2>Apply a function to all rows or columns<a href="matrices.html#apply-a-function-to-all-rows-or-columns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="apply-a-function-to-all-rows-or-columns" class="section level2 unnumbered">
+<h2>Apply a function to all rows or columns</h2>
 <p>You can easily think about <code>summary</code> function to answer the previous question. Right, I’ll give it to you, but how if you want to handle the result? How about having only the vector of the mean values for each row? This is achieved through <code>apply</code>. Let’s see it in action, then I’ll explain it.</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="matrices.html#cb334-1" tabindex="-1"></a><span class="co"># 1. Calculate the mean for each column</span></span>
-<span id="cb334-2"><a href="matrices.html#cb334-2" tabindex="-1"></a>mean_col <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="at">X =</span> expr_data_t[, r_numb], <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> mean)</span>
-<span id="cb334-3"><a href="matrices.html#cb334-3" tabindex="-1"></a></span>
-<span id="cb334-4"><a href="matrices.html#cb334-4" tabindex="-1"></a><span class="co"># 2. Calculate the mean for each column</span></span>
-<span id="cb334-5"><a href="matrices.html#cb334-5" tabindex="-1"></a>mean_row <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="at">X =</span> expr_data_t[, r_numb], <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> mean)</span>
-<span id="cb334-6"><a href="matrices.html#cb334-6" tabindex="-1"></a></span>
-<span id="cb334-7"><a href="matrices.html#cb334-7" tabindex="-1"></a>mean_col</span></code></pre></div>
-<pre class="code-out"><code>     wt1      wt2      wt3      wt4      wt5      wt6      ko1      ko2      ko3      ko4      ko5      ko6 
-207.1429 178.2857 149.7143 101.8571 202.4286 209.0000 208.5714 231.8571 141.4286 225.2857 243.2857 343.4286 </code></pre>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="matrices.html#cb336-1" tabindex="-1"></a>mean_row</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="matrices.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Calculate the mean for each column</span></span>
+<span id="cb334-2"><a href="matrices.html#cb334-2" aria-hidden="true" tabindex="-1"></a>mean_col <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="at">X =</span> expr_data_t[, r_numb], <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> mean)</span>
+<span id="cb334-3"><a href="matrices.html#cb334-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb334-4"><a href="matrices.html#cb334-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate the mean for each column</span></span>
+<span id="cb334-5"><a href="matrices.html#cb334-5" aria-hidden="true" tabindex="-1"></a>mean_row <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="at">X =</span> expr_data_t[, r_numb], <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> mean)</span>
+<span id="cb334-6"><a href="matrices.html#cb334-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb334-7"><a href="matrices.html#cb334-7" aria-hidden="true" tabindex="-1"></a>mean_col</span></code></pre></div>
+<pre class="code-out"><code>     wt1      wt2      wt3      wt4      wt5      wt6      ko1      ko2      ko3      ko4      ko5 
+207.1429 178.2857 149.7143 101.8571 202.4286 209.0000 208.5714 231.8571 141.4286 225.2857 243.2857 
+     ko6 
+343.4286 </code></pre>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="matrices.html#cb336-1" aria-hidden="true" tabindex="-1"></a>mean_row</span></code></pre></div>
 <pre class="code-out"><code>       GPX2      BTN3A3       KRT17     USP17L2       PHF19         DBT       PPM1B 
   0.5833333  35.6666667   0.2500000   0.5000000 112.1666667 642.8333333 632.6666667 </code></pre>
 <p>See? It’s super easy. It requires the matrix (X), the function (mean), and the margin used to calculate over (1 for rows, 2 for columns). You can apply all the functions that take as input numeric vectors.
 <br>
 If the matrix has row names or column names set, it returns a named vactor, otherwise it returns a normal vector.</p>
 </div>
-<div id="exercises-5" class="section level2 unnumbered hasAnchor">
-<h2>Exercises<a href="matrices.html#exercises-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercises-5" class="section level2 unnumbered">
+<h2>Exercises</h2>
 <p>Now it’s you turn to familiarize with matrices.</p>
 <div class="exercise">
 <p><span id="exr:calculate-read-sum" class="exercise"><strong>Exercise 9.1  </strong></span>You have collected expression levels of 4 genes of interest of 3 patients. Calculate the sum of the read for each patient, in order to normalize the values in further analysis.
 <br>
 I’ll give you the data.</p>
 </div>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="matrices.html#cb338-1" tabindex="-1"></a>CXCR4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P1&quot;</span> <span class="ot">=</span> <span class="dv">25</span>, <span class="st">&quot;P2&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;P3&quot;</span> <span class="ot">=</span> <span class="dv">14</span>)</span>
-<span id="cb338-2"><a href="matrices.html#cb338-2" tabindex="-1"></a>LCT <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P3&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;P2&quot;</span> <span class="ot">=</span> <span class="dv">10</span>, <span class="st">&quot;P1&quot;</span> <span class="ot">=</span> <span class="dv">17</span>)</span>
-<span id="cb338-3"><a href="matrices.html#cb338-3" tabindex="-1"></a>PTPN7 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P1&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;P3&quot;</span> <span class="ot">=</span> <span class="dv">3</span>, <span class="st">&quot;P2&quot;</span> <span class="ot">=</span> <span class="dv">4</span>)</span>
-<span id="cb338-4"><a href="matrices.html#cb338-4" tabindex="-1"></a>LHX9 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P2&quot;</span> <span class="ot">=</span> <span class="dv">20</span>, <span class="st">&quot;P1&quot;</span> <span class="ot">=</span> <span class="dv">28</span>, <span class="st">&quot;P3&quot;</span> <span class="ot">=</span> <span class="dv">11</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="matrices.html#cb338-1" aria-hidden="true" tabindex="-1"></a>CXCR4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P1&quot;</span> <span class="ot">=</span> <span class="dv">25</span>, <span class="st">&quot;P2&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;P3&quot;</span> <span class="ot">=</span> <span class="dv">14</span>)</span>
+<span id="cb338-2"><a href="matrices.html#cb338-2" aria-hidden="true" tabindex="-1"></a>LCT <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P3&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;P2&quot;</span> <span class="ot">=</span> <span class="dv">10</span>, <span class="st">&quot;P1&quot;</span> <span class="ot">=</span> <span class="dv">17</span>)</span>
+<span id="cb338-3"><a href="matrices.html#cb338-3" aria-hidden="true" tabindex="-1"></a>PTPN7 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P1&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;P3&quot;</span> <span class="ot">=</span> <span class="dv">3</span>, <span class="st">&quot;P2&quot;</span> <span class="ot">=</span> <span class="dv">4</span>)</span>
+<span id="cb338-4"><a href="matrices.html#cb338-4" aria-hidden="true" tabindex="-1"></a>LHX9 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P2&quot;</span> <span class="ot">=</span> <span class="dv">20</span>, <span class="st">&quot;P1&quot;</span> <span class="ot">=</span> <span class="dv">28</span>, <span class="st">&quot;P3&quot;</span> <span class="ot">=</span> <span class="dv">11</span>)</span></code></pre></div>
 <details>
 <summary>
 Solution
 </summary>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="matrices.html#cb339-1" tabindex="-1"></a><span class="co"># 1. Reorder the vectors to have the same order of patients</span></span>
-<span id="cb339-2"><a href="matrices.html#cb339-2" tabindex="-1"></a>LCT <span class="ot">&lt;-</span> LCT[<span class="fu">names</span>(CXCR4)]</span>
-<span id="cb339-3"><a href="matrices.html#cb339-3" tabindex="-1"></a>PTPN7 <span class="ot">&lt;-</span> PTPN7[<span class="fu">names</span>(CXCR4)]</span>
-<span id="cb339-4"><a href="matrices.html#cb339-4" tabindex="-1"></a>LHX9 <span class="ot">&lt;-</span> LHX9[<span class="fu">names</span>(CXCR4)]</span>
-<span id="cb339-5"><a href="matrices.html#cb339-5" tabindex="-1"></a></span>
-<span id="cb339-6"><a href="matrices.html#cb339-6" tabindex="-1"></a><span class="co"># 2. Create the matrix</span></span>
-<span id="cb339-7"><a href="matrices.html#cb339-7" tabindex="-1"></a>expr_mat_pat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(CXCR4, LCT, PTPN7, LHX9)</span>
-<span id="cb339-8"><a href="matrices.html#cb339-8" tabindex="-1"></a></span>
-<span id="cb339-9"><a href="matrices.html#cb339-9" tabindex="-1"></a><span class="co"># 3. Calculate the sum of the reads for each patient</span></span>
-<span id="cb339-10"><a href="matrices.html#cb339-10" tabindex="-1"></a>read_sum_pat <span class="ot">&lt;-</span> <span class="fu">apply</span>(expr_mat_pat, <span class="at">MARGIN =</span> <span class="dv">2</span>, mean)</span>
-<span id="cb339-11"><a href="matrices.html#cb339-11" tabindex="-1"></a></span>
-<span id="cb339-12"><a href="matrices.html#cb339-12" tabindex="-1"></a><span class="fu">print</span>(read_sum_pat)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="matrices.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Reorder the vectors to have the same order of patients</span></span>
+<span id="cb339-2"><a href="matrices.html#cb339-2" aria-hidden="true" tabindex="-1"></a>LCT <span class="ot">&lt;-</span> LCT[<span class="fu">names</span>(CXCR4)]</span>
+<span id="cb339-3"><a href="matrices.html#cb339-3" aria-hidden="true" tabindex="-1"></a>PTPN7 <span class="ot">&lt;-</span> PTPN7[<span class="fu">names</span>(CXCR4)]</span>
+<span id="cb339-4"><a href="matrices.html#cb339-4" aria-hidden="true" tabindex="-1"></a>LHX9 <span class="ot">&lt;-</span> LHX9[<span class="fu">names</span>(CXCR4)]</span>
+<span id="cb339-5"><a href="matrices.html#cb339-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-6"><a href="matrices.html#cb339-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create the matrix</span></span>
+<span id="cb339-7"><a href="matrices.html#cb339-7" aria-hidden="true" tabindex="-1"></a>expr_mat_pat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(CXCR4, LCT, PTPN7, LHX9)</span>
+<span id="cb339-8"><a href="matrices.html#cb339-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-9"><a href="matrices.html#cb339-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calculate the sum of the reads for each patient</span></span>
+<span id="cb339-10"><a href="matrices.html#cb339-10" aria-hidden="true" tabindex="-1"></a>read_sum_pat <span class="ot">&lt;-</span> <span class="fu">apply</span>(expr_mat_pat, <span class="at">MARGIN =</span> <span class="dv">2</span>, mean)</span>
+<span id="cb339-11"><a href="matrices.html#cb339-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-12"><a href="matrices.html#cb339-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(read_sum_pat)</span></code></pre></div>
 <pre class="code-out"><code>  P1   P2   P3 
 18.0 11.5 10.0 </code></pre>
 </details>
@@ -840,16 +855,16 @@ Solution
 <summary>
 Solution
 </summary>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="matrices.html#cb341-1" tabindex="-1"></a><span class="co"># 1. Calculate the mean of the reads for each gene</span></span>
-<span id="cb341-2"><a href="matrices.html#cb341-2" tabindex="-1"></a>read_sum_gene <span class="ot">&lt;-</span> <span class="fu">apply</span>(expr_mat_pat, <span class="at">MARGIN =</span> <span class="dv">1</span>, mean)</span>
-<span id="cb341-3"><a href="matrices.html#cb341-3" tabindex="-1"></a></span>
-<span id="cb341-4"><a href="matrices.html#cb341-4" tabindex="-1"></a><span class="co"># 2. Get the name of the genes to keep</span></span>
-<span id="cb341-5"><a href="matrices.html#cb341-5" tabindex="-1"></a>gene_2_keep <span class="ot">&lt;-</span> <span class="fu">names</span>(read_sum_gene)[read_sum_gene <span class="sc">&gt;</span> <span class="dv">5</span>]</span>
-<span id="cb341-6"><a href="matrices.html#cb341-6" tabindex="-1"></a></span>
-<span id="cb341-7"><a href="matrices.html#cb341-7" tabindex="-1"></a><span class="co"># 3. Use genes_2_keep to subset matrix and calculate sum</span></span>
-<span id="cb341-8"><a href="matrices.html#cb341-8" tabindex="-1"></a>read_sum_pat_filt <span class="ot">&lt;-</span> <span class="fu">apply</span>(expr_mat_pat[gene_2_keep, ], <span class="at">MARGIN =</span> <span class="dv">2</span>, mean)</span>
-<span id="cb341-9"><a href="matrices.html#cb341-9" tabindex="-1"></a></span>
-<span id="cb341-10"><a href="matrices.html#cb341-10" tabindex="-1"></a><span class="fu">print</span>(read_sum_pat_filt)</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="matrices.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Calculate the mean of the reads for each gene</span></span>
+<span id="cb341-2"><a href="matrices.html#cb341-2" aria-hidden="true" tabindex="-1"></a>read_sum_gene <span class="ot">&lt;-</span> <span class="fu">apply</span>(expr_mat_pat, <span class="at">MARGIN =</span> <span class="dv">1</span>, mean)</span>
+<span id="cb341-3"><a href="matrices.html#cb341-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-4"><a href="matrices.html#cb341-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get the name of the genes to keep</span></span>
+<span id="cb341-5"><a href="matrices.html#cb341-5" aria-hidden="true" tabindex="-1"></a>gene_2_keep <span class="ot">&lt;-</span> <span class="fu">names</span>(read_sum_gene)[read_sum_gene <span class="sc">&gt;</span> <span class="dv">5</span>]</span>
+<span id="cb341-6"><a href="matrices.html#cb341-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-7"><a href="matrices.html#cb341-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Use genes_2_keep to subset matrix and calculate sum</span></span>
+<span id="cb341-8"><a href="matrices.html#cb341-8" aria-hidden="true" tabindex="-1"></a>read_sum_pat_filt <span class="ot">&lt;-</span> <span class="fu">apply</span>(expr_mat_pat[gene_2_keep, ], <span class="at">MARGIN =</span> <span class="dv">2</span>, mean)</span>
+<span id="cb341-9"><a href="matrices.html#cb341-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-10"><a href="matrices.html#cb341-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(read_sum_pat_filt)</span></code></pre></div>
 <pre class="code-out"><code>      P1       P2       P3 
 23.33333 14.00000 12.33333 </code></pre>
 </details>

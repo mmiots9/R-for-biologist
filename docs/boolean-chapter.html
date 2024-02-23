@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2023-12-09" />
+<meta name="date" content="2024-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="character.html"/>
 <link rel="next" href="vectors.html"/>
-<script src="libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <meta property="og:description" content="To you, who never gives up, for your future. You can make it!">
 <meta name="keywords" content="R, biology, data analysis">
 <meta name="author" content="Matteo Miotto">
@@ -71,7 +70,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -384,75 +383,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="boolean-chapter" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">7</span> Boolean<a href="boolean-chapter.html#boolean-chapter" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="boolean-chapter" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Boolean</h1>
 <p>We finally arrived to the last data type that needs a deeper explanation: the boolean (or logical).
 <br>
 In programming languages, there are a particular type of data (the boolean) representing what we can imagine as true or false, in R they are represented by two values: <code>TRUE</code> (or <code>T</code>) and <code>FALSE</code> (or <code>F</code>). We can see an example here:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="boolean-chapter.html#cb124-1" tabindex="-1"></a>t_value <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
-<span id="cb124-2"><a href="boolean-chapter.html#cb124-2" tabindex="-1"></a>f_value <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
-<span id="cb124-3"><a href="boolean-chapter.html#cb124-3" tabindex="-1"></a></span>
-<span id="cb124-4"><a href="boolean-chapter.html#cb124-4" tabindex="-1"></a><span class="fu">typeof</span>(t_value)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="boolean-chapter.html#cb124-1" aria-hidden="true" tabindex="-1"></a>t_value <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb124-2"><a href="boolean-chapter.html#cb124-2" aria-hidden="true" tabindex="-1"></a>f_value <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb124-3"><a href="boolean-chapter.html#cb124-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-4"><a href="boolean-chapter.html#cb124-4" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(t_value)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;logical&quot;</code></pre>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="boolean-chapter.html#cb126-1" tabindex="-1"></a><span class="fu">typeof</span>(f_value)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="boolean-chapter.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(f_value)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;logical&quot;</code></pre>
 <p>R calls them <em>logical</em> (as in computer science). They cannot be explained well if not contextualized, so let’s see some basic practical application here, and be patient, in next lessons we will see another examples.</p>
-<div id="boolean-as-results-of-comparison" class="section level2 unnumbered hasAnchor">
-<h2>Boolean as results of comparison<a href="boolean-chapter.html#boolean-as-results-of-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="boolean-as-results-of-comparison" class="section level2 unnumbered">
+<h2>Boolean as results of comparison</h2>
 <p>The most used way to get a logical is to evaluate a comparison, such as compare numbers, compare words ecc. Quickly, for numbers:</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="boolean-chapter.html#cb128-1" tabindex="-1"></a>num1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb128-2"><a href="boolean-chapter.html#cb128-2" tabindex="-1"></a>num2 <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb128-3"><a href="boolean-chapter.html#cb128-3" tabindex="-1"></a></span>
-<span id="cb128-4"><a href="boolean-chapter.html#cb128-4" tabindex="-1"></a><span class="co"># greater than</span></span>
-<span id="cb128-5"><a href="boolean-chapter.html#cb128-5" tabindex="-1"></a>num1 <span class="sc">&gt;</span> num2</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="boolean-chapter.html#cb128-1" aria-hidden="true" tabindex="-1"></a>num1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb128-2"><a href="boolean-chapter.html#cb128-2" aria-hidden="true" tabindex="-1"></a>num2 <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb128-3"><a href="boolean-chapter.html#cb128-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-4"><a href="boolean-chapter.html#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="co"># greater than</span></span>
+<span id="cb128-5"><a href="boolean-chapter.html#cb128-5" aria-hidden="true" tabindex="-1"></a>num1 <span class="sc">&gt;</span> num2</span></code></pre></div>
 <pre class="code-out"><code>[1] FALSE</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="boolean-chapter.html#cb130-1" tabindex="-1"></a><span class="co"># greater equal than</span></span>
-<span id="cb130-2"><a href="boolean-chapter.html#cb130-2" tabindex="-1"></a>num1 <span class="sc">&gt;=</span> num2</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="boolean-chapter.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="co"># greater equal than</span></span>
+<span id="cb130-2"><a href="boolean-chapter.html#cb130-2" aria-hidden="true" tabindex="-1"></a>num1 <span class="sc">&gt;=</span> num2</span></code></pre></div>
 <pre class="code-out"><code>[1] FALSE</code></pre>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="boolean-chapter.html#cb132-1" tabindex="-1"></a><span class="co"># less than</span></span>
-<span id="cb132-2"><a href="boolean-chapter.html#cb132-2" tabindex="-1"></a>num1 <span class="sc">&lt;</span> num2</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="boolean-chapter.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># less than</span></span>
+<span id="cb132-2"><a href="boolean-chapter.html#cb132-2" aria-hidden="true" tabindex="-1"></a>num1 <span class="sc">&lt;</span> num2</span></code></pre></div>
 <pre class="code-out"><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="boolean-chapter.html#cb134-1" tabindex="-1"></a><span class="co"># less equal than </span></span>
-<span id="cb134-2"><a href="boolean-chapter.html#cb134-2" tabindex="-1"></a>num1 <span class="sc">&lt;=</span> num2</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="boolean-chapter.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># less equal than </span></span>
+<span id="cb134-2"><a href="boolean-chapter.html#cb134-2" aria-hidden="true" tabindex="-1"></a>num1 <span class="sc">&lt;=</span> num2</span></code></pre></div>
 <pre class="code-out"><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="boolean-chapter.html#cb136-1" tabindex="-1"></a><span class="co"># equality</span></span>
-<span id="cb136-2"><a href="boolean-chapter.html#cb136-2" tabindex="-1"></a>num1 <span class="sc">==</span> num2</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="boolean-chapter.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="co"># equality</span></span>
+<span id="cb136-2"><a href="boolean-chapter.html#cb136-2" aria-hidden="true" tabindex="-1"></a>num1 <span class="sc">==</span> num2</span></code></pre></div>
 <pre class="code-out"><code>[1] FALSE</code></pre>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="boolean-chapter.html#cb138-1" tabindex="-1"></a><span class="co"># not equal to</span></span>
-<span id="cb138-2"><a href="boolean-chapter.html#cb138-2" tabindex="-1"></a>num1 <span class="sc">!=</span> num2</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="boolean-chapter.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># not equal to</span></span>
+<span id="cb138-2"><a href="boolean-chapter.html#cb138-2" aria-hidden="true" tabindex="-1"></a>num1 <span class="sc">!=</span> num2</span></code></pre></div>
 <pre class="code-out"><code>[1] TRUE</code></pre>
 <p><b>IMPORTANT</b>: I hope you notice that we used <code>==</code> to identity comparison. And I hope you get why we didn’t use only <code>=</code>. If you don’t, remember that one equal sign assign a value to a variable, so in this case you would have overwritten num1 with the value of num2.
 <br>
 And what about character? They behave in this way:</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="boolean-chapter.html#cb140-1" tabindex="-1"></a><span class="co"># define some variables</span></span>
-<span id="cb140-2"><a href="boolean-chapter.html#cb140-2" tabindex="-1"></a>ch1 <span class="ot">&lt;-</span> <span class="st">&quot;Mapk13&quot;</span></span>
-<span id="cb140-3"><a href="boolean-chapter.html#cb140-3" tabindex="-1"></a>ch2 <span class="ot">&lt;-</span> <span class="st">&quot;MAPK13&quot;</span></span>
-<span id="cb140-4"><a href="boolean-chapter.html#cb140-4" tabindex="-1"></a>ch3 <span class="ot">&lt;-</span> <span class="st">&quot;Xist&quot;</span></span>
-<span id="cb140-5"><a href="boolean-chapter.html#cb140-5" tabindex="-1"></a></span>
-<span id="cb140-6"><a href="boolean-chapter.html#cb140-6" tabindex="-1"></a><span class="co"># Greater than</span></span>
-<span id="cb140-7"><a href="boolean-chapter.html#cb140-7" tabindex="-1"></a>ch1 <span class="sc">&gt;</span> ch2</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="boolean-chapter.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define some variables</span></span>
+<span id="cb140-2"><a href="boolean-chapter.html#cb140-2" aria-hidden="true" tabindex="-1"></a>ch1 <span class="ot">&lt;-</span> <span class="st">&quot;Mapk13&quot;</span></span>
+<span id="cb140-3"><a href="boolean-chapter.html#cb140-3" aria-hidden="true" tabindex="-1"></a>ch2 <span class="ot">&lt;-</span> <span class="st">&quot;MAPK13&quot;</span></span>
+<span id="cb140-4"><a href="boolean-chapter.html#cb140-4" aria-hidden="true" tabindex="-1"></a>ch3 <span class="ot">&lt;-</span> <span class="st">&quot;Xist&quot;</span></span>
+<span id="cb140-5"><a href="boolean-chapter.html#cb140-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-6"><a href="boolean-chapter.html#cb140-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Greater than</span></span>
+<span id="cb140-7"><a href="boolean-chapter.html#cb140-7" aria-hidden="true" tabindex="-1"></a>ch1 <span class="sc">&gt;</span> ch2</span></code></pre></div>
 <pre class="code-out"><code>[1] FALSE</code></pre>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="boolean-chapter.html#cb142-1" tabindex="-1"></a>ch3 <span class="sc">&gt;</span> ch1</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="boolean-chapter.html#cb142-1" aria-hidden="true" tabindex="-1"></a>ch3 <span class="sc">&gt;</span> ch1</span></code></pre></div>
 <pre class="code-out"><code>[1] TRUE</code></pre>
 <p><code>&lt;</code> and <code>&gt;</code> with character, contrary to popular belief, do not take into account the number of characters of the string, but the comparison is based on alphabetical order, with lowercase letters that come prior uppercase ones (that’s why Mapk13 is not greater than MAPK13 and Xist).
 <br>
 For this reason, two characters are equal only if they have the same letter/number/special character, in the same order and in the same case. For example:</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="boolean-chapter.html#cb144-1" tabindex="-1"></a>ch4 <span class="ot">&lt;-</span> <span class="st">&quot;Peg3&quot;</span></span>
-<span id="cb144-2"><a href="boolean-chapter.html#cb144-2" tabindex="-1"></a>ch5 <span class="ot">&lt;-</span> <span class="st">&quot;Peg3&quot;</span></span>
-<span id="cb144-3"><a href="boolean-chapter.html#cb144-3" tabindex="-1"></a>ch6 <span class="ot">&lt;-</span> <span class="st">&quot;peg3&quot;</span></span>
-<span id="cb144-4"><a href="boolean-chapter.html#cb144-4" tabindex="-1"></a></span>
-<span id="cb144-5"><a href="boolean-chapter.html#cb144-5" tabindex="-1"></a>ch4 <span class="sc">==</span> ch5</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="boolean-chapter.html#cb144-1" aria-hidden="true" tabindex="-1"></a>ch4 <span class="ot">&lt;-</span> <span class="st">&quot;Peg3&quot;</span></span>
+<span id="cb144-2"><a href="boolean-chapter.html#cb144-2" aria-hidden="true" tabindex="-1"></a>ch5 <span class="ot">&lt;-</span> <span class="st">&quot;Peg3&quot;</span></span>
+<span id="cb144-3"><a href="boolean-chapter.html#cb144-3" aria-hidden="true" tabindex="-1"></a>ch6 <span class="ot">&lt;-</span> <span class="st">&quot;peg3&quot;</span></span>
+<span id="cb144-4"><a href="boolean-chapter.html#cb144-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb144-5"><a href="boolean-chapter.html#cb144-5" aria-hidden="true" tabindex="-1"></a>ch4 <span class="sc">==</span> ch5</span></code></pre></div>
 <pre class="code-out"><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="boolean-chapter.html#cb146-1" tabindex="-1"></a>ch5 <span class="sc">==</span> ch6</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="boolean-chapter.html#cb146-1" aria-hidden="true" tabindex="-1"></a>ch5 <span class="sc">==</span> ch6</span></code></pre></div>
 <pre class="code-out"><code>[1] FALSE</code></pre>
 </div>
-<div id="logical-operator" class="section level2 unnumbered hasAnchor">
-<h2>Logical operator<a href="boolean-chapter.html#logical-operator" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="logical-operator" class="section level2 unnumbered">
+<h2>Logical operator</h2>
 <p>Up to now, we have seen logical as a result of comparisons, but what if we want to compare or combine comparisons? I know it sounds silly, but here is an example of implementation of this concept. We will have to do with dataframes, vectors, matrix and other stuff, and we will always filter for some conditions: let’s say that we want to extrapolate data that are below 10 but above 5. These are two comparisons: x &lt; 10 and x &gt; 5. Here we combine two logicals, derived from the two comparisons.
 <br>
 The main logical operators, the one that will be useful for us, are <code>AND</code>, <code>OR</code> and <code>NOT</code></p>
-<div id="and" class="section level3 unnumbered hasAnchor">
-<h3>AND<a href="boolean-chapter.html#and" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="and" class="section level3 unnumbered">
+<h3>AND</h3>
 <p class="plist">
 The AND operator works as follows:
 </p>
@@ -473,15 +472,15 @@ FALSE and FALSE = TRUE
 <p>An easy trick to remember is: if they are identical (both FALSE or TRUE), the result is TRUE, otherwise is FALSE.
 <br>
 In R, AND operator is the <code>&amp;</code>, some examples:</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="boolean-chapter.html#cb148-1" tabindex="-1"></a>expr <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb148-2"><a href="boolean-chapter.html#cb148-2" tabindex="-1"></a></span>
-<span id="cb148-3"><a href="boolean-chapter.html#cb148-3" tabindex="-1"></a>(expr <span class="sc">&lt;</span> <span class="dv">60</span>) <span class="sc">&amp;</span> (expr <span class="sc">&gt;</span> <span class="dv">40</span>) <span class="co"># TRUE &amp; TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="boolean-chapter.html#cb148-1" aria-hidden="true" tabindex="-1"></a>expr <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb148-2"><a href="boolean-chapter.html#cb148-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb148-3"><a href="boolean-chapter.html#cb148-3" aria-hidden="true" tabindex="-1"></a>(expr <span class="sc">&lt;</span> <span class="dv">60</span>) <span class="sc">&amp;</span> (expr <span class="sc">&gt;</span> <span class="dv">40</span>) <span class="co"># TRUE &amp; TRUE</span></span></code></pre></div>
 <pre class="code-out"><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="boolean-chapter.html#cb150-1" tabindex="-1"></a>(expr <span class="sc">&lt;</span> <span class="dv">60</span>) <span class="sc">&amp;</span> (expr <span class="sc">&lt;</span> <span class="dv">40</span>) <span class="co"># TRUE &amp; FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="boolean-chapter.html#cb150-1" aria-hidden="true" tabindex="-1"></a>(expr <span class="sc">&lt;</span> <span class="dv">60</span>) <span class="sc">&amp;</span> (expr <span class="sc">&lt;</span> <span class="dv">40</span>) <span class="co"># TRUE &amp; FALSE</span></span></code></pre></div>
 <pre class="code-out"><code>[1] FALSE</code></pre>
 </div>
-<div id="or" class="section level3 unnumbered hasAnchor">
-<h3>OR<a href="boolean-chapter.html#or" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="or" class="section level3 unnumbered">
+<h3>OR</h3>
 <p class="plist">
 The OR operator works as follows:
 </p>
@@ -501,22 +500,22 @@ FALSE and FALSE = FALSE
 </ul>
 <p>An easy trick to remember is: if at least one is TRUE, then the result is TRUE, otherwise if are all FALSE, the result is FALSE.
 <br>
-In R, AND operator is the <code>|</code>, some examples:</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="boolean-chapter.html#cb152-1" tabindex="-1"></a>expr <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb152-2"><a href="boolean-chapter.html#cb152-2" tabindex="-1"></a></span>
-<span id="cb152-3"><a href="boolean-chapter.html#cb152-3" tabindex="-1"></a>(expr <span class="sc">&lt;</span> <span class="dv">60</span>) <span class="sc">|</span> (expr <span class="sc">&gt;</span> <span class="dv">40</span>) <span class="co"># TRUE | TRUE</span></span></code></pre></div>
+In R, OR operator is the <code>|</code>, some examples:</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="boolean-chapter.html#cb152-1" aria-hidden="true" tabindex="-1"></a>expr <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb152-2"><a href="boolean-chapter.html#cb152-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb152-3"><a href="boolean-chapter.html#cb152-3" aria-hidden="true" tabindex="-1"></a>(expr <span class="sc">&lt;</span> <span class="dv">60</span>) <span class="sc">|</span> (expr <span class="sc">&gt;</span> <span class="dv">40</span>) <span class="co"># TRUE | TRUE</span></span></code></pre></div>
 <pre class="code-out"><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="boolean-chapter.html#cb154-1" tabindex="-1"></a>(expr <span class="sc">&lt;</span> <span class="dv">60</span>)<span class="sc">|</span> (expr <span class="sc">&lt;</span> <span class="dv">40</span>) <span class="co"># TRUE | FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="boolean-chapter.html#cb154-1" aria-hidden="true" tabindex="-1"></a>(expr <span class="sc">&lt;</span> <span class="dv">60</span>)<span class="sc">|</span> (expr <span class="sc">&lt;</span> <span class="dv">40</span>) <span class="co"># TRUE | FALSE</span></span></code></pre></div>
 <pre class="code-out"><code>[1] TRUE</code></pre>
 </div>
-<div id="not" class="section level3 unnumbered hasAnchor">
-<h3>NOT<a href="boolean-chapter.html#not" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="not" class="section level3 unnumbered">
+<h3>NOT</h3>
 <p>The not operator is used to negate an expression, we have seen an example before, when we compared to numbers to see if they were not equal (<code>!=</code>). It is used before the expression to evaluate, in this form:</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="boolean-chapter.html#cb156-1" tabindex="-1"></a>expr <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb156-2"><a href="boolean-chapter.html#cb156-2" tabindex="-1"></a></span>
-<span id="cb156-3"><a href="boolean-chapter.html#cb156-3" tabindex="-1"></a><span class="sc">!</span>(expr <span class="sc">&lt;</span> <span class="dv">60</span>) <span class="sc">|</span> (expr <span class="sc">&lt;</span> <span class="dv">40</span>) <span class="co"># NOT TRUE | FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="boolean-chapter.html#cb156-1" aria-hidden="true" tabindex="-1"></a>expr <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb156-2"><a href="boolean-chapter.html#cb156-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-3"><a href="boolean-chapter.html#cb156-3" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>(expr <span class="sc">&lt;</span> <span class="dv">60</span>) <span class="sc">|</span> (expr <span class="sc">&lt;</span> <span class="dv">40</span>) <span class="co"># NOT TRUE | FALSE</span></span></code></pre></div>
 <pre class="code-out"><code>[1] FALSE</code></pre>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="boolean-chapter.html#cb158-1" tabindex="-1"></a><span class="sc">!</span>((expr <span class="sc">&lt;</span> <span class="dv">60</span>) <span class="sc">&amp;</span> (expr <span class="sc">&lt;</span> <span class="dv">40</span>)) <span class="co"># NOT (TRUE &amp; FALSE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="boolean-chapter.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>((expr <span class="sc">&lt;</span> <span class="dv">60</span>) <span class="sc">&amp;</span> (expr <span class="sc">&lt;</span> <span class="dv">40</span>)) <span class="co"># NOT (TRUE &amp; FALSE)</span></span></code></pre></div>
 <pre class="code-out"><code>[1] TRUE</code></pre>
 <p class="plist">
 Here we see two important things:
@@ -531,8 +530,8 @@ As for mathematical expressions, <strong>order and parenthesis matters</strong>:
 </ul>
 </div>
 </div>
-<div id="exercises-3" class="section level2 unnumbered hasAnchor">
-<h2>Exercises<a href="boolean-chapter.html#exercises-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercises-3" class="section level2 unnumbered">
+<h2>Exercises</h2>
 <p>Write a R script with the following exercises, they are level pro (I know you can):</p>
 <div class="exercise">
 <p><span id="exr:expr-write" class="exercise"><strong>Exercise 7.1  </strong></span>Write the expression you would use to evaluate the following statement: we want to see if the patient is in his childhood (2-8 years) and one of its weight is less than 45 kg (as threshold variable) or if its mother has diabetes (we know it is true), and if its nationality is not USA.
@@ -543,22 +542,22 @@ Tip: here we have 8 variables. I know I didn’t give neither the age nor the we
 <summary>
 Solution
 </summary>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="boolean-chapter.html#cb160-1" tabindex="-1"></a><span class="co"># create patient variables</span></span>
-<span id="cb160-2"><a href="boolean-chapter.html#cb160-2" tabindex="-1"></a>patient_age <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb160-3"><a href="boolean-chapter.html#cb160-3" tabindex="-1"></a>patient_weight <span class="ot">&lt;-</span> <span class="dv">66</span></span>
-<span id="cb160-4"><a href="boolean-chapter.html#cb160-4" tabindex="-1"></a>mother_diabetes <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
-<span id="cb160-5"><a href="boolean-chapter.html#cb160-5" tabindex="-1"></a>patient_state <span class="ot">&lt;-</span> <span class="st">&quot;Italy&quot;</span></span>
-<span id="cb160-6"><a href="boolean-chapter.html#cb160-6" tabindex="-1"></a></span>
-<span id="cb160-7"><a href="boolean-chapter.html#cb160-7" tabindex="-1"></a><span class="co"># set thresholds and values</span></span>
-<span id="cb160-8"><a href="boolean-chapter.html#cb160-8" tabindex="-1"></a>age_inf_threshold <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb160-9"><a href="boolean-chapter.html#cb160-9" tabindex="-1"></a>age_sup_threshold <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb160-10"><a href="boolean-chapter.html#cb160-10" tabindex="-1"></a></span>
-<span id="cb160-11"><a href="boolean-chapter.html#cb160-11" tabindex="-1"></a>weight_sup_threshold <span class="ot">&lt;-</span> <span class="dv">45</span></span>
-<span id="cb160-12"><a href="boolean-chapter.html#cb160-12" tabindex="-1"></a></span>
-<span id="cb160-13"><a href="boolean-chapter.html#cb160-13" tabindex="-1"></a>nationality <span class="ot">&lt;-</span> <span class="st">&quot;USA&quot;</span></span>
-<span id="cb160-14"><a href="boolean-chapter.html#cb160-14" tabindex="-1"></a></span>
-<span id="cb160-15"><a href="boolean-chapter.html#cb160-15" tabindex="-1"></a>((patient_age <span class="sc">&gt;</span> age_inf_threshold <span class="sc">&amp;</span> patient_age <span class="sc">&lt;</span> age_sup_threshold) <span class="sc">|</span></span>
-<span id="cb160-16"><a href="boolean-chapter.html#cb160-16" tabindex="-1"></a>  (patient_weight <span class="sc">&lt;</span> weight_sup_threshold <span class="sc">|</span> mother_diabetes)) <span class="sc">&amp;</span> (patient_state <span class="sc">!=</span> nationality)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="boolean-chapter.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create patient variables</span></span>
+<span id="cb160-2"><a href="boolean-chapter.html#cb160-2" aria-hidden="true" tabindex="-1"></a>patient_age <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb160-3"><a href="boolean-chapter.html#cb160-3" aria-hidden="true" tabindex="-1"></a>patient_weight <span class="ot">&lt;-</span> <span class="dv">66</span></span>
+<span id="cb160-4"><a href="boolean-chapter.html#cb160-4" aria-hidden="true" tabindex="-1"></a>mother_diabetes <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb160-5"><a href="boolean-chapter.html#cb160-5" aria-hidden="true" tabindex="-1"></a>patient_state <span class="ot">&lt;-</span> <span class="st">&quot;Italy&quot;</span></span>
+<span id="cb160-6"><a href="boolean-chapter.html#cb160-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-7"><a href="boolean-chapter.html#cb160-7" aria-hidden="true" tabindex="-1"></a><span class="co"># set thresholds and values</span></span>
+<span id="cb160-8"><a href="boolean-chapter.html#cb160-8" aria-hidden="true" tabindex="-1"></a>age_inf_threshold <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb160-9"><a href="boolean-chapter.html#cb160-9" aria-hidden="true" tabindex="-1"></a>age_sup_threshold <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb160-10"><a href="boolean-chapter.html#cb160-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-11"><a href="boolean-chapter.html#cb160-11" aria-hidden="true" tabindex="-1"></a>weight_sup_threshold <span class="ot">&lt;-</span> <span class="dv">45</span></span>
+<span id="cb160-12"><a href="boolean-chapter.html#cb160-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-13"><a href="boolean-chapter.html#cb160-13" aria-hidden="true" tabindex="-1"></a>nationality <span class="ot">&lt;-</span> <span class="st">&quot;USA&quot;</span></span>
+<span id="cb160-14"><a href="boolean-chapter.html#cb160-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-15"><a href="boolean-chapter.html#cb160-15" aria-hidden="true" tabindex="-1"></a>((patient_age <span class="sc">&gt;</span> age_inf_threshold <span class="sc">&amp;</span> patient_age <span class="sc">&lt;</span> age_sup_threshold) <span class="sc">|</span></span>
+<span id="cb160-16"><a href="boolean-chapter.html#cb160-16" aria-hidden="true" tabindex="-1"></a>  (patient_weight <span class="sc">&lt;</span> weight_sup_threshold <span class="sc">|</span> mother_diabetes)) <span class="sc">&amp;</span> (patient_state <span class="sc">!=</span> nationality)</span></code></pre></div>
 <pre class="code-out"><code>[1] TRUE</code></pre>
 </details>
 <p>It is best practice to use more parenthesis to help the readability by both human and R

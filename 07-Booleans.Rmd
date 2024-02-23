@@ -94,7 +94,7 @@ expr <- 50
 </ul>
 An easy trick to remember is: if at least one is TRUE, then the result is TRUE, otherwise if are all FALSE, the result is FALSE.
 <br>
-In R, AND operator is the `|`, some examples:
+In R, OR operator is the `|`, some examples:
 ```{r}
 expr <- 50
 
