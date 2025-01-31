@@ -8,11 +8,13 @@ You will <strong>always</strong> write code in scripts, for all these reasons.
 <br>
 Let's see how to create a script, write some code in it and run part of the script or even a small part of it in RStudio.
 
-<div style="text-align:center">
-<video height=500px width=auto controls>
-  <source src="video/create-script.mov">
+<p style="text-align:center;">
+
+<video height="500px" width="auto" controls>
+  <source src="video/create-script.mov" type="video/mp4">
 </video>
-</div>
+
+</p>
 
 <p class="plist">In the video we see a series of actions:</p>
 <ol>
@@ -22,7 +24,7 @@ Let's see how to create a script, write some code in it and run part of the scri
   <li>To run the whole script (R starts from the beginning) click "Source")</li>
 </ol>
 
-<strong>Suggetion</strong>: Comment, comment, comment everything. I know it is time consuming, but you will be so happy and greatful to read comments that help you understand what you've done months (or weeks) before.
+<strong>Suggestion</strong>: Comment, comment, comment everything. I know it is time consuming, but you will be so happy and greatful to read comments that help you understand what you've done months (or weeks) before.
 <br>
 
 

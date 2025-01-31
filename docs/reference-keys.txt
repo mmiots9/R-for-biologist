@@ -3,6 +3,8 @@ exr:sum-weights
 exr:remove-variables
 exr:mean-calc
 exr:sd-calc
+exr:gsub-ex
+exr:paste-ex
 exr:expr-write
 exm:mice-cage
 exm:logical-sum

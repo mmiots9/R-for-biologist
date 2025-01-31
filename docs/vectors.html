@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2024-02-23" />
+<meta name="date" content="2025-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -70,7 +70,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -80,7 +80,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -390,55 +390,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 A vector is a collection of data of the <strong>same type</strong>, for example all the weights of a group of people, all the names of your genes of interest, the expression levels of your genes of interest.
 <br>
 To create a vector in R is simple, just use the function <code>c()</code> and put inside every data you need:</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="vectors.html#cb162-1" aria-hidden="true" tabindex="-1"></a>heights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">160</span>, <span class="dv">148</span>, <span class="dv">158</span>, <span class="dv">170</span>)</span>
-<span id="cb162-2"><a href="vectors.html#cb162-2" aria-hidden="true" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Adcyp1&quot;</span>, <span class="st">&quot;Tle4&quot;</span>, <span class="st">&quot;Psd95&quot;</span>, <span class="st">&quot;Bip&quot;</span>, <span class="st">&quot;Sst&quot;</span>)</span>
-<span id="cb162-3"><a href="vectors.html#cb162-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb162-4"><a href="vectors.html#cb162-4" aria-hidden="true" tabindex="-1"></a>heights</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="vectors.html#cb162-1" tabindex="-1"></a>heights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">160</span>, <span class="dv">148</span>, <span class="dv">158</span>, <span class="dv">170</span>)</span>
+<span id="cb162-2"><a href="vectors.html#cb162-2" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Adcyp1&quot;</span>, <span class="st">&quot;Tle4&quot;</span>, <span class="st">&quot;Psd95&quot;</span>, <span class="st">&quot;Bip&quot;</span>, <span class="st">&quot;Sst&quot;</span>)</span>
+<span id="cb162-3"><a href="vectors.html#cb162-3" tabindex="-1"></a></span>
+<span id="cb162-4"><a href="vectors.html#cb162-4" tabindex="-1"></a>heights</span></code></pre></div>
 <pre class="code-out"><code>[1] 160 148 158 170</code></pre>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="vectors.html#cb164-1" aria-hidden="true" tabindex="-1"></a>genes</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="vectors.html#cb164-1" tabindex="-1"></a>genes</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;Adcyp1&quot; &quot;Tle4&quot;   &quot;Psd95&quot;  &quot;Bip&quot;    &quot;Sst&quot;   </code></pre>
 <p>I told you that the data inside of a vector must be of the same type, in fact</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="vectors.html#cb166-1" aria-hidden="true" tabindex="-1"></a>my_info <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="st">&quot;Most&quot;</span>, <span class="dv">45</span>, <span class="dv">5</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb166-2"><a href="vectors.html#cb166-2" aria-hidden="true" tabindex="-1"></a>my_info</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="vectors.html#cb166-1" tabindex="-1"></a>my_info <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="st">&quot;Most&quot;</span>, <span class="dv">45</span>, <span class="dv">5</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb166-2"><a href="vectors.html#cb166-2" tabindex="-1"></a>my_info</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;14&quot;   &quot;Most&quot; &quot;45&quot;   &quot;5&quot;    &quot;TRUE&quot;</code></pre>
 <p>Transforms everything into strings because we have a string in it. To confirm it, we can ask R to tell us the type of data we have in a vector by using the function <code>typeof()</code>:</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="vectors.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(heights)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="vectors.html#cb168-1" tabindex="-1"></a><span class="fu">typeof</span>(heights)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;double&quot;</code></pre>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="vectors.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(my_info)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="vectors.html#cb170-1" tabindex="-1"></a><span class="fu">typeof</span>(my_info)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;character&quot;</code></pre>
 <div id="named-vectors" class="section level2 unnumbered">
 <h2>Named vectors</h2>
 <p>There is a particular type of vectors called <em>named vectors</em> that come in handy especially when creating graphs: every value in the vector has a “name” associated to it. Imagine like giving a unique name-tag to each value; for example, associate an expression value to each gene.
 <br>
 There are 3 ways of creating a named vector, I will show you here from the most fast to the most complex:</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="vectors.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1st method (the best)</span></span>
-<span id="cb172-2"><a href="vectors.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create gene and value vector first</span></span>
-<span id="cb172-3"><a href="vectors.html#cb172-3" aria-hidden="true" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Adcyp1&quot;</span>, <span class="st">&quot;Tle4&quot;</span>, <span class="st">&quot;Psd95&quot;</span>, <span class="st">&quot;Bip&quot;</span>, <span class="st">&quot;Sst&quot;</span>)</span>
-<span id="cb172-4"><a href="vectors.html#cb172-4" aria-hidden="true" tabindex="-1"></a>expr_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">200</span>, <span class="dv">40</span>, <span class="dv">1</span>, <span class="dv">129</span>)</span>
-<span id="cb172-5"><a href="vectors.html#cb172-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb172-6"><a href="vectors.html#cb172-6" aria-hidden="true" tabindex="-1"></a><span class="co"># assign names to the vector</span></span>
-<span id="cb172-7"><a href="vectors.html#cb172-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(expr_values) <span class="ot">&lt;-</span> genes</span>
-<span id="cb172-8"><a href="vectors.html#cb172-8" aria-hidden="true" tabindex="-1"></a>expr_values</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="vectors.html#cb172-1" tabindex="-1"></a><span class="co"># 1st method (the best)</span></span>
+<span id="cb172-2"><a href="vectors.html#cb172-2" tabindex="-1"></a><span class="co"># create gene and value vector first</span></span>
+<span id="cb172-3"><a href="vectors.html#cb172-3" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Adcyp1&quot;</span>, <span class="st">&quot;Tle4&quot;</span>, <span class="st">&quot;Psd95&quot;</span>, <span class="st">&quot;Bip&quot;</span>, <span class="st">&quot;Sst&quot;</span>)</span>
+<span id="cb172-4"><a href="vectors.html#cb172-4" tabindex="-1"></a>expr_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">200</span>, <span class="dv">40</span>, <span class="dv">1</span>, <span class="dv">129</span>)</span>
+<span id="cb172-5"><a href="vectors.html#cb172-5" tabindex="-1"></a></span>
+<span id="cb172-6"><a href="vectors.html#cb172-6" tabindex="-1"></a><span class="co"># assign names to the vector</span></span>
+<span id="cb172-7"><a href="vectors.html#cb172-7" tabindex="-1"></a><span class="fu">names</span>(expr_values) <span class="ot">&lt;-</span> genes</span>
+<span id="cb172-8"><a href="vectors.html#cb172-8" tabindex="-1"></a>expr_values</span></code></pre></div>
 <pre class="code-out"><code>Adcyp1   Tle4  Psd95    Bip    Sst 
     12    200     40      1    129 </code></pre>
 <p>You can see here that every expression value has its own name.
 <br></p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="vectors.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2nd method (as good as the first)</span></span>
-<span id="cb174-2"><a href="vectors.html#cb174-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create gene and value vector first</span></span>
-<span id="cb174-3"><a href="vectors.html#cb174-3" aria-hidden="true" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Adcyp1&quot;</span>, <span class="st">&quot;Tle4&quot;</span>, <span class="st">&quot;Psd95&quot;</span>, <span class="st">&quot;Bip&quot;</span>, <span class="st">&quot;Sst&quot;</span>)</span>
-<span id="cb174-4"><a href="vectors.html#cb174-4" aria-hidden="true" tabindex="-1"></a>expr_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">200</span>, <span class="dv">40</span>, <span class="dv">1</span>, <span class="dv">129</span>)</span>
-<span id="cb174-5"><a href="vectors.html#cb174-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb174-6"><a href="vectors.html#cb174-6" aria-hidden="true" tabindex="-1"></a><span class="co"># create a structure </span></span>
-<span id="cb174-7"><a href="vectors.html#cb174-7" aria-hidden="true" tabindex="-1"></a>expr_values <span class="ot">&lt;-</span> <span class="fu">structure</span>(genes, <span class="at">names =</span> expr_values)</span>
-<span id="cb174-8"><a href="vectors.html#cb174-8" aria-hidden="true" tabindex="-1"></a>expr_values</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="vectors.html#cb174-1" tabindex="-1"></a><span class="co"># 2nd method (as good as the first)</span></span>
+<span id="cb174-2"><a href="vectors.html#cb174-2" tabindex="-1"></a><span class="co"># create gene and value vector first</span></span>
+<span id="cb174-3"><a href="vectors.html#cb174-3" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Adcyp1&quot;</span>, <span class="st">&quot;Tle4&quot;</span>, <span class="st">&quot;Psd95&quot;</span>, <span class="st">&quot;Bip&quot;</span>, <span class="st">&quot;Sst&quot;</span>)</span>
+<span id="cb174-4"><a href="vectors.html#cb174-4" tabindex="-1"></a>expr_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">200</span>, <span class="dv">40</span>, <span class="dv">1</span>, <span class="dv">129</span>)</span>
+<span id="cb174-5"><a href="vectors.html#cb174-5" tabindex="-1"></a></span>
+<span id="cb174-6"><a href="vectors.html#cb174-6" tabindex="-1"></a><span class="co"># create a structure </span></span>
+<span id="cb174-7"><a href="vectors.html#cb174-7" tabindex="-1"></a>expr_values <span class="ot">&lt;-</span> <span class="fu">structure</span>(genes, <span class="at">names =</span> expr_values)</span>
+<span id="cb174-8"><a href="vectors.html#cb174-8" tabindex="-1"></a>expr_values</span></code></pre></div>
 <pre class="code-out"><code>      12      200       40        1      129 
 &quot;Adcyp1&quot;   &quot;Tle4&quot;  &quot;Psd95&quot;    &quot;Bip&quot;    &quot;Sst&quot; </code></pre>
 <p>This is the preferred method when the values are not in a standalone vectors but, for example, are a column of a dataframe.
 <br></p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="vectors.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3rd method, the worst</span></span>
-<span id="cb176-2"><a href="vectors.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="co"># directly create the named vector</span></span>
-<span id="cb176-3"><a href="vectors.html#cb176-3" aria-hidden="true" tabindex="-1"></a>expr_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Adcyp1&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;Tle4&quot;</span> <span class="ot">=</span> <span class="dv">200</span>, <span class="st">&quot;Psd95&quot;</span> <span class="ot">=</span> <span class="dv">40</span>, <span class="st">&quot;Bip&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Sst&quot;</span> <span class="ot">=</span> <span class="dv">129</span>)</span>
-<span id="cb176-4"><a href="vectors.html#cb176-4" aria-hidden="true" tabindex="-1"></a>expr_values</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="vectors.html#cb176-1" tabindex="-1"></a><span class="co"># 3rd method, the worst</span></span>
+<span id="cb176-2"><a href="vectors.html#cb176-2" tabindex="-1"></a><span class="co"># directly create the named vector</span></span>
+<span id="cb176-3"><a href="vectors.html#cb176-3" tabindex="-1"></a>expr_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Adcyp1&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;Tle4&quot;</span> <span class="ot">=</span> <span class="dv">200</span>, <span class="st">&quot;Psd95&quot;</span> <span class="ot">=</span> <span class="dv">40</span>, <span class="st">&quot;Bip&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Sst&quot;</span> <span class="ot">=</span> <span class="dv">129</span>)</span>
+<span id="cb176-4"><a href="vectors.html#cb176-4" tabindex="-1"></a>expr_values</span></code></pre></div>
 <pre class="code-out"><code>Adcyp1   Tle4  Psd95    Bip    Sst 
     12    200     40      1    129 </code></pre>
 <p>This takes so long to write and it is never used, as you will always have the values and the names as columns of a dataframe or individual vectors already defined or obtained through a function.
@@ -453,17 +453,17 @@ But first, a <b>tip</b>: the <em>key</em> element in indexing is a pair of squar
 <div id="named-vectors-1" class="section level3 unnumbered">
 <h3>Named vectors</h3>
 <p>To extract values from a named vector, we can put inside the square brackets a character (even a character vector or a character variable) with the name of the value we want to extract:</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="vectors.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="co"># one value</span></span>
-<span id="cb178-2"><a href="vectors.html#cb178-2" aria-hidden="true" tabindex="-1"></a>expr_values[<span class="st">&quot;Tle4&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="vectors.html#cb178-1" tabindex="-1"></a><span class="co"># one value</span></span>
+<span id="cb178-2"><a href="vectors.html#cb178-2" tabindex="-1"></a>expr_values[<span class="st">&quot;Tle4&quot;</span>]</span></code></pre></div>
 <pre class="code-out"><code>Tle4 
  200 </code></pre>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="vectors.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a vector</span></span>
-<span id="cb180-2"><a href="vectors.html#cb180-2" aria-hidden="true" tabindex="-1"></a>expr_values[<span class="fu">c</span>(<span class="st">&quot;Tle4&quot;</span>, <span class="st">&quot;Psd95&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="vectors.html#cb180-1" tabindex="-1"></a><span class="co"># a vector</span></span>
+<span id="cb180-2"><a href="vectors.html#cb180-2" tabindex="-1"></a>expr_values[<span class="fu">c</span>(<span class="st">&quot;Tle4&quot;</span>, <span class="st">&quot;Psd95&quot;</span>)]</span></code></pre></div>
 <pre class="code-out"><code> Tle4 Psd95 
   200    40 </code></pre>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="vectors.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a variable</span></span>
-<span id="cb182-2"><a href="vectors.html#cb182-2" aria-hidden="true" tabindex="-1"></a>to_extract <span class="ot">&lt;-</span> <span class="st">&quot;Bip&quot;</span></span>
-<span id="cb182-3"><a href="vectors.html#cb182-3" aria-hidden="true" tabindex="-1"></a>expr_values[to_extract]</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="vectors.html#cb182-1" tabindex="-1"></a><span class="co"># a variable</span></span>
+<span id="cb182-2"><a href="vectors.html#cb182-2" tabindex="-1"></a>to_extract <span class="ot">&lt;-</span> <span class="st">&quot;Bip&quot;</span></span>
+<span id="cb182-3"><a href="vectors.html#cb182-3" tabindex="-1"></a>expr_values[to_extract]</span></code></pre></div>
 <pre class="code-out"><code>Bip 
   1 </code></pre>
 </div>
@@ -482,28 +482,28 @@ The length of a vector, meaning the number of items it is composed by can be ext
 </ol>
 <p><br>
 Having set these concepts, let’s do some examples (I know it can be boring, but these are the fundamentals of data analysis. you really thank me in the future).</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="vectors.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the length of a vector</span></span>
-<span id="cb184-2"><a href="vectors.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">length</span>(expr_values))</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="vectors.html#cb184-1" tabindex="-1"></a><span class="co"># get the length of a vector</span></span>
+<span id="cb184-2"><a href="vectors.html#cb184-2" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">length</span>(expr_values))</span></code></pre></div>
 <pre class="code-out"><code>[1] 5</code></pre>
 <p>Now we know that our expression values vector contains 5 elements, we can now start to index it:</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="vectors.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get first element</span></span>
-<span id="cb186-2"><a href="vectors.html#cb186-2" aria-hidden="true" tabindex="-1"></a>expr_values[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="vectors.html#cb186-1" tabindex="-1"></a><span class="co"># get first element</span></span>
+<span id="cb186-2"><a href="vectors.html#cb186-2" tabindex="-1"></a>expr_values[<span class="dv">1</span>]</span></code></pre></div>
 <pre class="code-out"><code>Adcyp1 
     12 </code></pre>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="vectors.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get first and third element</span></span>
-<span id="cb188-2"><a href="vectors.html#cb188-2" aria-hidden="true" tabindex="-1"></a>expr_values[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="vectors.html#cb188-1" tabindex="-1"></a><span class="co"># get first and third element</span></span>
+<span id="cb188-2"><a href="vectors.html#cb188-2" tabindex="-1"></a>expr_values[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span></code></pre></div>
 <pre class="code-out"><code>Adcyp1  Psd95 
     12     40 </code></pre>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="vectors.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get from element 2 to 4</span></span>
-<span id="cb190-2"><a href="vectors.html#cb190-2" aria-hidden="true" tabindex="-1"></a>expr_values[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>] </span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="vectors.html#cb190-1" tabindex="-1"></a><span class="co"># get from element 2 to 4</span></span>
+<span id="cb190-2"><a href="vectors.html#cb190-2" tabindex="-1"></a>expr_values[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>] </span></code></pre></div>
 <pre class="code-out"><code> Tle4 Psd95   Bip 
   200    40     1 </code></pre>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="vectors.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get from element 3 to the end</span></span>
-<span id="cb192-2"><a href="vectors.html#cb192-2" aria-hidden="true" tabindex="-1"></a>expr_values[<span class="dv">3</span><span class="sc">:</span><span class="fu">length</span>(expr_values)]</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="vectors.html#cb192-1" tabindex="-1"></a><span class="co"># get from element 3 to the end</span></span>
+<span id="cb192-2"><a href="vectors.html#cb192-2" tabindex="-1"></a>expr_values[<span class="dv">3</span><span class="sc">:</span><span class="fu">length</span>(expr_values)]</span></code></pre></div>
 <pre class="code-out"><code>Psd95   Bip   Sst 
    40     1   129 </code></pre>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="vectors.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get every element but the third</span></span>
-<span id="cb194-2"><a href="vectors.html#cb194-2" aria-hidden="true" tabindex="-1"></a>expr_values[<span class="sc">-</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="vectors.html#cb194-1" tabindex="-1"></a><span class="co"># get every element but the third</span></span>
+<span id="cb194-2"><a href="vectors.html#cb194-2" tabindex="-1"></a>expr_values[<span class="sc">-</span><span class="dv">3</span>]</span></code></pre></div>
 <pre class="code-out"><code>Adcyp1   Tle4    Bip    Sst 
     12    200      1    129 </code></pre>
 <p class="plist">
@@ -525,19 +525,19 @@ Ok, now that we have seen some example, we can look at some of them in more deta
 <h3>Using logicals</h3>
 <p>We can also use logical and boolean values to index a vector. This is one of the most used way, and you will use it quite a lot. Why? Let’s see it in action.
 <br></p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="vectors.html#cb196-1" aria-hidden="true" tabindex="-1"></a>expr_values[<span class="fu">c</span>(T, F, F, T, T)]</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="vectors.html#cb196-1" tabindex="-1"></a>expr_values[<span class="fu">c</span>(T, F, F, T, T)]</span></code></pre></div>
 <pre class="code-out"><code>Adcyp1    Bip    Sst 
     12      1    129 </code></pre>
 <p>What has happened?
 <br>
 When indexed with boolean, only the values in which is <code>TRUE</code> (<code>T</code>) are returned, and this is super cool. Do you remember in the previous chapter how we get boolean as results from an expression?! Great, so we can use expressions that returns TRUE or FALSE and use them to index a vector:</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="vectors.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="co"># retrieve values &lt; 59</span></span>
-<span id="cb198-2"><a href="vectors.html#cb198-2" aria-hidden="true" tabindex="-1"></a>expr_values[expr_values <span class="sc">&lt;</span> <span class="dv">59</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="vectors.html#cb198-1" tabindex="-1"></a><span class="co"># retrieve values &lt; 59</span></span>
+<span id="cb198-2"><a href="vectors.html#cb198-2" tabindex="-1"></a>expr_values[expr_values <span class="sc">&lt;</span> <span class="dv">59</span>]</span></code></pre></div>
 <pre class="code-out"><code>Adcyp1  Psd95    Bip 
     12     40      1 </code></pre>
 <p>We can use also a more complicated expression:</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="vectors.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="co"># retrieve values &lt; 30 or &gt; 150</span></span>
-<span id="cb200-2"><a href="vectors.html#cb200-2" aria-hidden="true" tabindex="-1"></a>expr_values[(expr_values <span class="sc">&lt;</span> <span class="dv">30</span>) <span class="sc">|</span> (expr_values <span class="sc">&gt;</span> <span class="dv">150</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="vectors.html#cb200-1" tabindex="-1"></a><span class="co"># retrieve values &lt; 30 or &gt; 150</span></span>
+<span id="cb200-2"><a href="vectors.html#cb200-2" tabindex="-1"></a>expr_values[(expr_values <span class="sc">&lt;</span> <span class="dv">30</span>) <span class="sc">|</span> (expr_values <span class="sc">&gt;</span> <span class="dv">150</span>)]</span></code></pre></div>
 <pre class="code-out"><code>Adcyp1   Tle4    Bip 
     12    200      1 </code></pre>
 <p>Do you see how useful it could be in an analysis? I’m sure you do, so let’s move on!</p>
@@ -548,22 +548,22 @@ When indexed with boolean, only the values in which is <code>TRUE</code> (<code>
 <p>We’ve just seen a feature of the vectors: we can apply a function to each element of the vector. Previously we have evaluated if each element of the vector was &lt; 59 (or &lt; 30 or &gt; 150).
 <br>
 Now, we will see more examples, starting from numeric vectors.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="vectors.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># operations can be performed to each value</span></span>
-<span id="cb202-2"><a href="vectors.html#cb202-2" aria-hidden="true" tabindex="-1"></a>expr_values <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="vectors.html#cb202-1" tabindex="-1"></a><span class="co"># operations can be performed to each value</span></span>
+<span id="cb202-2"><a href="vectors.html#cb202-2" tabindex="-1"></a>expr_values <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div>
 <pre class="code-out"><code>Adcyp1   Tle4  Psd95    Bip    Sst 
     24    400     80      2    258 </code></pre>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="vectors.html#cb204-1" aria-hidden="true" tabindex="-1"></a>expr_values <span class="sc">/</span> <span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="vectors.html#cb204-1" tabindex="-1"></a>expr_values <span class="sc">/</span> <span class="dv">10</span></span></code></pre></div>
 <pre class="code-out"><code>Adcyp1   Tle4  Psd95    Bip    Sst 
    1.2   20.0    4.0    0.1   12.9 </code></pre>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="vectors.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tranform a numeric vector to a character one</span></span>
-<span id="cb206-2"><a href="vectors.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(expr_values)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="vectors.html#cb206-1" tabindex="-1"></a><span class="co"># tranform a numeric vector to a character one</span></span>
+<span id="cb206-2"><a href="vectors.html#cb206-2" tabindex="-1"></a><span class="fu">as.character</span>(expr_values)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;12&quot;  &quot;200&quot; &quot;40&quot;  &quot;1&quot;   &quot;129&quot;</code></pre>
 <p>With character vectors we can do:</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="vectors.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate number of characters</span></span>
-<span id="cb208-2"><a href="vectors.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(genes)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="vectors.html#cb208-1" tabindex="-1"></a><span class="co"># calculate number of characters</span></span>
+<span id="cb208-2"><a href="vectors.html#cb208-2" tabindex="-1"></a><span class="fu">nchar</span>(genes)</span></code></pre></div>
 <pre class="code-out"><code>[1] 6 4 5 3 3</code></pre>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="vectors.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use grep to see which genes start with letter T</span></span>
-<span id="cb210-2"><a href="vectors.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="at">pattern =</span> <span class="st">&quot;^T&quot;</span>, <span class="at">x =</span> genes, <span class="at">value =</span> T) <span class="co"># ^ indicates the start of the line, can you guess why we used it?</span></span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="vectors.html#cb210-1" tabindex="-1"></a><span class="co"># use grep to see which genes start with letter T</span></span>
+<span id="cb210-2"><a href="vectors.html#cb210-2" tabindex="-1"></a><span class="fu">grep</span>(<span class="at">pattern =</span> <span class="st">&quot;^T&quot;</span>, <span class="at">x =</span> genes, <span class="at">value =</span> T) <span class="co"># ^ indicates the start of the line, can you guess why we used it?</span></span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;Tle4&quot;</code></pre>
 </div>
 <div id="functions-specific-of-vectors" class="section level2 unnumbered">
@@ -573,49 +573,49 @@ Now, we will see more examples, starting from numeric vectors.</p>
 <div class="example">
 <p><span id="exm:mice-cage" class="example"><strong>Example 8.1  </strong></span>Let’s say we have a mice and we want to test the time spent in a cage, in particular we want to calculate the sum, the mean and the sd of the time spent not in the center of the cage.</p>
 </div>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="vectors.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the named vector</span></span>
-<span id="cb212-2"><a href="vectors.html#cb212-2" aria-hidden="true" tabindex="-1"></a>areas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;top&quot;</span>, <span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>, <span class="st">&quot;left&quot;</span>)</span>
-<span id="cb212-3"><a href="vectors.html#cb212-3" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">22</span>, <span class="dv">29</span>, <span class="dv">12</span>, <span class="dv">2</span>)</span>
-<span id="cb212-4"><a href="vectors.html#cb212-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(time) <span class="ot">&lt;-</span> areas</span>
-<span id="cb212-5"><a href="vectors.html#cb212-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb212-6"><a href="vectors.html#cb212-6" aria-hidden="true" tabindex="-1"></a><span class="co"># extrapolate data not in center</span></span>
-<span id="cb212-7"><a href="vectors.html#cb212-7" aria-hidden="true" tabindex="-1"></a>not_center <span class="ot">&lt;-</span> time[<span class="sc">-</span>(<span class="fu">names</span>(time) <span class="sc">==</span> <span class="st">&quot;center&quot;</span>)]</span>
-<span id="cb212-8"><a href="vectors.html#cb212-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb212-9"><a href="vectors.html#cb212-9" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate mean, sum and sd</span></span>
-<span id="cb212-10"><a href="vectors.html#cb212-10" aria-hidden="true" tabindex="-1"></a>sum_time <span class="ot">&lt;-</span> <span class="fu">sum</span>(not_center)</span>
-<span id="cb212-11"><a href="vectors.html#cb212-11" aria-hidden="true" tabindex="-1"></a>mean_time <span class="ot">&lt;-</span> <span class="fu">mean</span>(not_center)</span>
-<span id="cb212-12"><a href="vectors.html#cb212-12" aria-hidden="true" tabindex="-1"></a>sd_time <span class="ot">&lt;-</span> <span class="fu">sd</span>(not_center)</span>
-<span id="cb212-13"><a href="vectors.html#cb212-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb212-14"><a href="vectors.html#cb212-14" aria-hidden="true" tabindex="-1"></a><span class="co"># print results</span></span>
-<span id="cb212-15"><a href="vectors.html#cb212-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;The mice spent&quot;</span>, sum_time, </span>
-<span id="cb212-16"><a href="vectors.html#cb212-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;seconds not in the center of the cage, with a mean of&quot;</span>, mean_time, </span>
-<span id="cb212-17"><a href="vectors.html#cb212-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;seconds in each area and a sd of&quot;</span>, sd_time))</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="vectors.html#cb212-1" tabindex="-1"></a><span class="co"># create the named vector</span></span>
+<span id="cb212-2"><a href="vectors.html#cb212-2" tabindex="-1"></a>areas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;top&quot;</span>, <span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>, <span class="st">&quot;left&quot;</span>)</span>
+<span id="cb212-3"><a href="vectors.html#cb212-3" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">22</span>, <span class="dv">29</span>, <span class="dv">12</span>, <span class="dv">2</span>)</span>
+<span id="cb212-4"><a href="vectors.html#cb212-4" tabindex="-1"></a><span class="fu">names</span>(time) <span class="ot">&lt;-</span> areas</span>
+<span id="cb212-5"><a href="vectors.html#cb212-5" tabindex="-1"></a></span>
+<span id="cb212-6"><a href="vectors.html#cb212-6" tabindex="-1"></a><span class="co"># extrapolate data not in center</span></span>
+<span id="cb212-7"><a href="vectors.html#cb212-7" tabindex="-1"></a>not_center <span class="ot">&lt;-</span> time[<span class="sc">-</span>(<span class="fu">names</span>(time) <span class="sc">==</span> <span class="st">&quot;center&quot;</span>)]</span>
+<span id="cb212-8"><a href="vectors.html#cb212-8" tabindex="-1"></a></span>
+<span id="cb212-9"><a href="vectors.html#cb212-9" tabindex="-1"></a><span class="co"># calculate mean, sum and sd</span></span>
+<span id="cb212-10"><a href="vectors.html#cb212-10" tabindex="-1"></a>sum_time <span class="ot">&lt;-</span> <span class="fu">sum</span>(not_center)</span>
+<span id="cb212-11"><a href="vectors.html#cb212-11" tabindex="-1"></a>mean_time <span class="ot">&lt;-</span> <span class="fu">mean</span>(not_center)</span>
+<span id="cb212-12"><a href="vectors.html#cb212-12" tabindex="-1"></a>sd_time <span class="ot">&lt;-</span> <span class="fu">sd</span>(not_center)</span>
+<span id="cb212-13"><a href="vectors.html#cb212-13" tabindex="-1"></a></span>
+<span id="cb212-14"><a href="vectors.html#cb212-14" tabindex="-1"></a><span class="co"># print results</span></span>
+<span id="cb212-15"><a href="vectors.html#cb212-15" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;The mice spent&quot;</span>, sum_time, </span>
+<span id="cb212-16"><a href="vectors.html#cb212-16" tabindex="-1"></a>            <span class="st">&quot;seconds not in the center of the cage, with a mean of&quot;</span>, mean_time, </span>
+<span id="cb212-17"><a href="vectors.html#cb212-17" tabindex="-1"></a>            <span class="st">&quot;seconds in each area and a sd of&quot;</span>, sd_time))</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;The mice spent 65 seconds not in the center of the cage, with a mean of 16.25 seconds in each area and a sd of 11.7862914721581&quot;</code></pre>
 <p>This example implemented lots of things we have seen up to now, and it shows how on numerical vectors we can calculate sum, mean and sd; but these are not the only functions, we have also var (variance), min, max and others. We are going to see them later when needed.</p>
 <div id="sorting-a-vector" class="section level3 unnumbered">
 <h3>Sorting a vector</h3>
 <p>Another important function is <code>sort()</code> as it gives us the possibility to sort the values of the vectors.</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="vectors.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(expr_values)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="vectors.html#cb214-1" tabindex="-1"></a><span class="fu">sort</span>(expr_values)</span></code></pre></div>
 <pre class="code-out"><code>   Bip Adcyp1  Psd95    Sst   Tle4 
      1     12     40    129    200 </code></pre>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="vectors.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(expr_values, <span class="at">decreasing =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="vectors.html#cb216-1" tabindex="-1"></a><span class="fu">sort</span>(expr_values, <span class="at">decreasing =</span> T)</span></code></pre></div>
 <pre class="code-out"><code>  Tle4    Sst  Psd95 Adcyp1    Bip 
    200    129     40     12      1 </code></pre>
 <p>By default, it sorts in ascending order, we can change the behavior by setting <code>decreasing = T</code>.</p>
 <p>Let’s see a couple of trick with sorting:</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="vectors.html#cb218-1" aria-hidden="true" tabindex="-1"></a>features <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;gene&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span>
-<span id="cb218-2"><a href="vectors.html#cb218-2" aria-hidden="true" tabindex="-1"></a>features</span></code></pre></div>
-<pre class="code-out"><code> [1] &quot;gene1&quot;  &quot;gene2&quot;  &quot;gene3&quot;  &quot;gene4&quot;  &quot;gene5&quot;  &quot;gene6&quot;  &quot;gene7&quot;  &quot;gene8&quot;  &quot;gene9&quot;  &quot;gene10&quot;
-[11] &quot;gene11&quot; &quot;gene12&quot; &quot;gene13&quot; &quot;gene14&quot; &quot;gene15&quot; &quot;gene16&quot; &quot;gene17&quot; &quot;gene18&quot; &quot;gene19&quot; &quot;gene20&quot;</code></pre>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="vectors.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(features)</span></code></pre></div>
-<pre class="code-out"><code> [1] &quot;gene1&quot;  &quot;gene10&quot; &quot;gene11&quot; &quot;gene12&quot; &quot;gene13&quot; &quot;gene14&quot; &quot;gene15&quot; &quot;gene16&quot; &quot;gene17&quot; &quot;gene18&quot;
-[11] &quot;gene19&quot; &quot;gene2&quot;  &quot;gene20&quot; &quot;gene3&quot;  &quot;gene4&quot;  &quot;gene5&quot;  &quot;gene6&quot;  &quot;gene7&quot;  &quot;gene8&quot;  &quot;gene9&quot; </code></pre>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="vectors.html#cb218-1" tabindex="-1"></a>features <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;gene&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="cb218-2"><a href="vectors.html#cb218-2" tabindex="-1"></a>features</span></code></pre></div>
+<pre class="code-out"><code> [1] &quot;gene1&quot;  &quot;gene2&quot;  &quot;gene3&quot;  &quot;gene4&quot;  &quot;gene5&quot;  &quot;gene6&quot;  &quot;gene7&quot;  &quot;gene8&quot;  &quot;gene9&quot;  &quot;gene10&quot; &quot;gene11&quot;
+[12] &quot;gene12&quot; &quot;gene13&quot; &quot;gene14&quot; &quot;gene15&quot; &quot;gene16&quot; &quot;gene17&quot; &quot;gene18&quot; &quot;gene19&quot; &quot;gene20&quot;</code></pre>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="vectors.html#cb220-1" tabindex="-1"></a><span class="fu">sort</span>(features)</span></code></pre></div>
+<pre class="code-out"><code> [1] &quot;gene1&quot;  &quot;gene10&quot; &quot;gene11&quot; &quot;gene12&quot; &quot;gene13&quot; &quot;gene14&quot; &quot;gene15&quot; &quot;gene16&quot; &quot;gene17&quot; &quot;gene18&quot; &quot;gene19&quot;
+[12] &quot;gene2&quot;  &quot;gene20&quot; &quot;gene3&quot;  &quot;gene4&quot;  &quot;gene5&quot;  &quot;gene6&quot;  &quot;gene7&quot;  &quot;gene8&quot;  &quot;gene9&quot; </code></pre>
 <p>What can we see here? First of all, a cool method to create a vector of words with increasing numbers (the combination paste and 1:20); then, we see that sorting has put “gene2” after all “gene1X”, because it sorts in alphabetical order. For this reason, it is recommended to use 01, 02, 03 ecc if we know that we have more than 9 elements (this works also for computer file names).
 <br>
 ::: {.example #sort-names}
 Here we want to sort the expression levels based on their names.
 :::</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="vectors.html#cb222-1" aria-hidden="true" tabindex="-1"></a>expr_values[<span class="fu">sort</span>(<span class="fu">names</span>(expr_values))]</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="vectors.html#cb222-1" tabindex="-1"></a>expr_values[<span class="fu">sort</span>(<span class="fu">names</span>(expr_values))]</span></code></pre></div>
 <pre class="code-out"><code>Adcyp1    Bip  Psd95    Sst   Tle4 
     12      1     40    129    200 </code></pre>
 <p>Tadaaa, we used sort on the names of expression levels and used the sorted names to index the named vector.</p>
@@ -623,10 +623,10 @@ Here we want to sort the expression levels based on their names.
 <div id="unique-values" class="section level3 unnumbered">
 <h3>Unique values</h3>
 <p>As the title suggests, there is a function (<code>unique()</code>) that returns tha unique values of a vector. It is useful in different situations, we will use it a lot. The usage is so simple:</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="vectors.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a vector with repeated values</span></span>
-<span id="cb224-2"><a href="vectors.html#cb224-2" aria-hidden="true" tabindex="-1"></a>my_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>) <span class="co"># can you guess the values of this vector without typing it in R?</span></span>
-<span id="cb224-3"><a href="vectors.html#cb224-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb224-4"><a href="vectors.html#cb224-4" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(my_vector)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="vectors.html#cb224-1" tabindex="-1"></a><span class="co"># create a vector with repeated values</span></span>
+<span id="cb224-2"><a href="vectors.html#cb224-2" tabindex="-1"></a>my_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>) <span class="co"># can you guess the values of this vector without typing it in R?</span></span>
+<span id="cb224-3"><a href="vectors.html#cb224-3" tabindex="-1"></a></span>
+<span id="cb224-4"><a href="vectors.html#cb224-4" tabindex="-1"></a><span class="fu">unique</span>(my_vector)</span></code></pre></div>
 <pre class="code-out"><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 </div>
 <div id="logical-vectors-sum-and-mean" class="section level3 unnumbered">
@@ -635,17 +635,17 @@ Here we want to sort the expression levels based on their names.
 <div class="example">
 <p><span id="exm:logical-sum" class="example"><strong>Example 8.2  </strong></span>We have a vector representing the response to a treatment of different patient, the vector is coded by logicals. Here is the vector: c(T, F, T, T, T, F, T, F, F, T, F, F, F, F, F, T, T). Calculate the number and the percentage of responders (2 decimal places).</p>
 </div>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="vectors.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create the vector</span></span>
-<span id="cb226-2"><a href="vectors.html#cb226-2" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">c</span>(T, F, T, T, T, F, T, F, F, T, F, F, F, F, F, T, T)</span>
-<span id="cb226-3"><a href="vectors.html#cb226-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-4"><a href="vectors.html#cb226-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate the number of responders</span></span>
-<span id="cb226-5"><a href="vectors.html#cb226-5" aria-hidden="true" tabindex="-1"></a>n_responders <span class="ot">&lt;-</span> <span class="fu">sum</span>(response)</span>
-<span id="cb226-6"><a href="vectors.html#cb226-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-7"><a href="vectors.html#cb226-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calculate the percentage of responders</span></span>
-<span id="cb226-8"><a href="vectors.html#cb226-8" aria-hidden="true" tabindex="-1"></a>p_responders <span class="ot">&lt;-</span> <span class="fu">mean</span>(response) <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb226-9"><a href="vectors.html#cb226-9" aria-hidden="true" tabindex="-1"></a>p_responders <span class="ot">&lt;-</span> <span class="fu">round</span>(p_responders, <span class="dv">2</span>)</span>
-<span id="cb226-10"><a href="vectors.html#cb226-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-11"><a href="vectors.html#cb226-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;There are&quot;</span>, n_responders, <span class="st">&quot;responders, corresponding to&quot;</span>, p_responders, <span class="st">&quot;% of total patients.&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="vectors.html#cb226-1" tabindex="-1"></a><span class="co"># 1. Create the vector</span></span>
+<span id="cb226-2"><a href="vectors.html#cb226-2" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">c</span>(T, F, T, T, T, F, T, F, F, T, F, F, F, F, F, T, T)</span>
+<span id="cb226-3"><a href="vectors.html#cb226-3" tabindex="-1"></a></span>
+<span id="cb226-4"><a href="vectors.html#cb226-4" tabindex="-1"></a><span class="co"># 2. Calculate the number of responders</span></span>
+<span id="cb226-5"><a href="vectors.html#cb226-5" tabindex="-1"></a>n_responders <span class="ot">&lt;-</span> <span class="fu">sum</span>(response)</span>
+<span id="cb226-6"><a href="vectors.html#cb226-6" tabindex="-1"></a></span>
+<span id="cb226-7"><a href="vectors.html#cb226-7" tabindex="-1"></a><span class="co"># 3. Calculate the percentage of responders</span></span>
+<span id="cb226-8"><a href="vectors.html#cb226-8" tabindex="-1"></a>p_responders <span class="ot">&lt;-</span> <span class="fu">mean</span>(response) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb226-9"><a href="vectors.html#cb226-9" tabindex="-1"></a>p_responders <span class="ot">&lt;-</span> <span class="fu">round</span>(p_responders, <span class="dv">2</span>)</span>
+<span id="cb226-10"><a href="vectors.html#cb226-10" tabindex="-1"></a></span>
+<span id="cb226-11"><a href="vectors.html#cb226-11" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;There are&quot;</span>, n_responders, <span class="st">&quot;responders, corresponding to&quot;</span>, p_responders, <span class="st">&quot;% of total patients.&quot;</span>))</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;There are 8 responders, corresponding to 47.06 % of total patients.&quot;</code></pre>
 <p>What happened here? The trick is that R interprets TRUE as 1 and FALSE as 0. <b>Remember this also for future applications</b>.</p>
 </div>
@@ -659,30 +659,30 @@ Here we want to sort the expression levels based on their names.
 <div class="example">
 <p><span id="exm:operations-vectors" class="example"><strong>Example 8.3  </strong></span>Let’s say we have 3 vectors representing the total amount of aminoacids found in three different samples for 5 proteins. We want to calculate, for each protein, the fraction of aminoacids in each sample.</p>
 </div>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="vectors.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Define starting vectors</span></span>
-<span id="cb228-2"><a href="vectors.html#cb228-2" aria-hidden="true" tabindex="-1"></a>proteins <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span>, <span class="st">&quot;BIP&quot;</span>, <span class="st">&quot;CD4&quot;</span>, <span class="st">&quot;RSPO2&quot;</span>, <span class="st">&quot;LDB2&quot;</span>)</span>
-<span id="cb228-3"><a href="vectors.html#cb228-3" aria-hidden="true" tabindex="-1"></a>sample1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">52</span>, <span class="dv">14</span>, <span class="dv">33</span>, <span class="dv">22</span>)</span>
-<span id="cb228-4"><a href="vectors.html#cb228-4" aria-hidden="true" tabindex="-1"></a>sample2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">69</span>, <span class="dv">26</span>, <span class="dv">45</span>, <span class="dv">3</span>)</span>
-<span id="cb228-5"><a href="vectors.html#cb228-5" aria-hidden="true" tabindex="-1"></a>sample3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">20</span>, <span class="dv">5</span>, <span class="dv">39</span>, <span class="dv">48</span>)</span>
-<span id="cb228-6"><a href="vectors.html#cb228-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb228-7"><a href="vectors.html#cb228-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sample1) <span class="ot">&lt;-</span> <span class="fu">names</span>(sample2) <span class="ot">&lt;-</span> <span class="fu">names</span>(sample3) <span class="ot">&lt;-</span> proteins</span>
-<span id="cb228-8"><a href="vectors.html#cb228-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb228-9"><a href="vectors.html#cb228-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate sum of aa for each protein</span></span>
-<span id="cb228-10"><a href="vectors.html#cb228-10" aria-hidden="true" tabindex="-1"></a>sum_aa <span class="ot">&lt;-</span> sample1 <span class="sc">+</span> sample2 <span class="sc">+</span> sample3</span>
-<span id="cb228-11"><a href="vectors.html#cb228-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb228-12"><a href="vectors.html#cb228-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calculate the fraction for each sample</span></span>
-<span id="cb228-13"><a href="vectors.html#cb228-13" aria-hidden="true" tabindex="-1"></a>sample1_fr <span class="ot">&lt;-</span> sample1 <span class="sc">/</span> sum_aa <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb228-14"><a href="vectors.html#cb228-14" aria-hidden="true" tabindex="-1"></a>sample2_fr <span class="ot">&lt;-</span> sample2 <span class="sc">/</span> sum_aa <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb228-15"><a href="vectors.html#cb228-15" aria-hidden="true" tabindex="-1"></a>sample3_fr <span class="ot">&lt;-</span> sample3 <span class="sc">/</span> sum_aa <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb228-16"><a href="vectors.html#cb228-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb228-17"><a href="vectors.html#cb228-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Print the results</span></span>
-<span id="cb228-18"><a href="vectors.html#cb228-18" aria-hidden="true" tabindex="-1"></a>sample1_fr</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="vectors.html#cb228-1" tabindex="-1"></a><span class="co"># 1. Define starting vectors</span></span>
+<span id="cb228-2"><a href="vectors.html#cb228-2" tabindex="-1"></a>proteins <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span>, <span class="st">&quot;BIP&quot;</span>, <span class="st">&quot;CD4&quot;</span>, <span class="st">&quot;RSPO2&quot;</span>, <span class="st">&quot;LDB2&quot;</span>)</span>
+<span id="cb228-3"><a href="vectors.html#cb228-3" tabindex="-1"></a>sample1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">52</span>, <span class="dv">14</span>, <span class="dv">33</span>, <span class="dv">22</span>)</span>
+<span id="cb228-4"><a href="vectors.html#cb228-4" tabindex="-1"></a>sample2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">69</span>, <span class="dv">26</span>, <span class="dv">45</span>, <span class="dv">3</span>)</span>
+<span id="cb228-5"><a href="vectors.html#cb228-5" tabindex="-1"></a>sample3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">20</span>, <span class="dv">5</span>, <span class="dv">39</span>, <span class="dv">48</span>)</span>
+<span id="cb228-6"><a href="vectors.html#cb228-6" tabindex="-1"></a></span>
+<span id="cb228-7"><a href="vectors.html#cb228-7" tabindex="-1"></a><span class="fu">names</span>(sample1) <span class="ot">&lt;-</span> <span class="fu">names</span>(sample2) <span class="ot">&lt;-</span> <span class="fu">names</span>(sample3) <span class="ot">&lt;-</span> proteins</span>
+<span id="cb228-8"><a href="vectors.html#cb228-8" tabindex="-1"></a></span>
+<span id="cb228-9"><a href="vectors.html#cb228-9" tabindex="-1"></a><span class="co"># 2. Calculate sum of aa for each protein</span></span>
+<span id="cb228-10"><a href="vectors.html#cb228-10" tabindex="-1"></a>sum_aa <span class="ot">&lt;-</span> sample1 <span class="sc">+</span> sample2 <span class="sc">+</span> sample3</span>
+<span id="cb228-11"><a href="vectors.html#cb228-11" tabindex="-1"></a></span>
+<span id="cb228-12"><a href="vectors.html#cb228-12" tabindex="-1"></a><span class="co"># 3. Calculate the fraction for each sample</span></span>
+<span id="cb228-13"><a href="vectors.html#cb228-13" tabindex="-1"></a>sample1_fr <span class="ot">&lt;-</span> sample1 <span class="sc">/</span> sum_aa <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb228-14"><a href="vectors.html#cb228-14" tabindex="-1"></a>sample2_fr <span class="ot">&lt;-</span> sample2 <span class="sc">/</span> sum_aa <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb228-15"><a href="vectors.html#cb228-15" tabindex="-1"></a>sample3_fr <span class="ot">&lt;-</span> sample3 <span class="sc">/</span> sum_aa <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb228-16"><a href="vectors.html#cb228-16" tabindex="-1"></a></span>
+<span id="cb228-17"><a href="vectors.html#cb228-17" tabindex="-1"></a><span class="co"># 4. Print the results</span></span>
+<span id="cb228-18"><a href="vectors.html#cb228-18" tabindex="-1"></a>sample1_fr</span></code></pre></div>
 <pre class="code-out"><code>  SEC24C      BIP      CD4    RSPO2     LDB2 
 48.00000 36.87943 31.11111 28.20513 30.13699 </code></pre>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="vectors.html#cb230-1" aria-hidden="true" tabindex="-1"></a>sample2_fr</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="vectors.html#cb230-1" tabindex="-1"></a>sample2_fr</span></code></pre></div>
 <pre class="code-out"><code>   SEC24C       BIP       CD4     RSPO2      LDB2 
 20.000000 48.936170 57.777778 38.461538  4.109589 </code></pre>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="vectors.html#cb232-1" aria-hidden="true" tabindex="-1"></a>sample3_fr</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="vectors.html#cb232-1" tabindex="-1"></a>sample3_fr</span></code></pre></div>
 <pre class="code-out"><code>  SEC24C      BIP      CD4    RSPO2     LDB2 
 32.00000 14.18440 11.11111 33.33333 65.75342 </code></pre>
 <p class="plist">
@@ -700,22 +700,22 @@ Since the vectors have the same size, we can sum them together. <strong>IMPORTAN
 <div id="different-and-common-elements" class="section level3 unnumbered">
 <h3>Different and common elements</h3>
 <p>Usually we want to compare two vectors to find distinct and common elements (eg. upregulated genes in two analysis). To do it, we can use two functions: <code>intersect()</code> (which find the common elements between two vectors), and <code>setdiff()</code> (which returns the element in the first vector not present in the second).</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="vectors.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Define 2 vectors</span></span>
-<span id="cb234-2"><a href="vectors.html#cb234-2" aria-hidden="true" tabindex="-1"></a>upregulated_1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;NCOA1&quot;</span>, <span class="st">&quot;CENPO&quot;</span>, <span class="st">&quot;ASXL2&quot;</span>, <span class="st">&quot;HADHA&quot;</span>, <span class="st">&quot;ADGRF3&quot;</span>)</span>
-<span id="cb234-3"><a href="vectors.html#cb234-3" aria-hidden="true" tabindex="-1"></a>upregulated_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ADGRF3&quot;</span>, <span class="st">&quot;SLC5A6&quot;</span>, <span class="st">&quot;NRBP1&quot;</span>, <span class="st">&quot;NCOA1&quot;</span>, <span class="st">&quot;HADHA&quot;</span>)</span>
-<span id="cb234-4"><a href="vectors.html#cb234-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb234-5"><a href="vectors.html#cb234-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Find common genes</span></span>
-<span id="cb234-6"><a href="vectors.html#cb234-6" aria-hidden="true" tabindex="-1"></a>common <span class="ot">&lt;-</span> <span class="fu">intersect</span>(upregulated_1, upregulated_2)</span>
-<span id="cb234-7"><a href="vectors.html#cb234-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb234-8"><a href="vectors.html#cb234-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Find different genes</span></span>
-<span id="cb234-9"><a href="vectors.html#cb234-9" aria-hidden="true" tabindex="-1"></a>only_1 <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(upregulated_1, upregulated_2)</span>
-<span id="cb234-10"><a href="vectors.html#cb234-10" aria-hidden="true" tabindex="-1"></a>only_2 <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(upregulated_2, upregulated_1)</span>
-<span id="cb234-11"><a href="vectors.html#cb234-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb234-12"><a href="vectors.html#cb234-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Print results</span></span>
-<span id="cb234-13"><a href="vectors.html#cb234-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cat</span>(<span class="st">&quot;Common genes are:&quot;</span>, <span class="fu">paste</span>(common, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
-<span id="cb234-14"><a href="vectors.html#cb234-14" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;Genes specifically upregulated in analysis 1 are:&quot;</span>, <span class="fu">paste</span>(only_1, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb234-15"><a href="vectors.html#cb234-15" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;Genes specifically upregulated in analysis 2 are:&quot;</span>, <span class="fu">paste</span>(only_2, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb234-16"><a href="vectors.html#cb234-16" aria-hidden="true" tabindex="-1"></a>      )</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="vectors.html#cb234-1" tabindex="-1"></a><span class="co"># 1. Define 2 vectors</span></span>
+<span id="cb234-2"><a href="vectors.html#cb234-2" tabindex="-1"></a>upregulated_1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;NCOA1&quot;</span>, <span class="st">&quot;CENPO&quot;</span>, <span class="st">&quot;ASXL2&quot;</span>, <span class="st">&quot;HADHA&quot;</span>, <span class="st">&quot;ADGRF3&quot;</span>)</span>
+<span id="cb234-3"><a href="vectors.html#cb234-3" tabindex="-1"></a>upregulated_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ADGRF3&quot;</span>, <span class="st">&quot;SLC5A6&quot;</span>, <span class="st">&quot;NRBP1&quot;</span>, <span class="st">&quot;NCOA1&quot;</span>, <span class="st">&quot;HADHA&quot;</span>)</span>
+<span id="cb234-4"><a href="vectors.html#cb234-4" tabindex="-1"></a></span>
+<span id="cb234-5"><a href="vectors.html#cb234-5" tabindex="-1"></a><span class="co"># 2. Find common genes</span></span>
+<span id="cb234-6"><a href="vectors.html#cb234-6" tabindex="-1"></a>common <span class="ot">&lt;-</span> <span class="fu">intersect</span>(upregulated_1, upregulated_2)</span>
+<span id="cb234-7"><a href="vectors.html#cb234-7" tabindex="-1"></a></span>
+<span id="cb234-8"><a href="vectors.html#cb234-8" tabindex="-1"></a><span class="co"># 3. Find different genes</span></span>
+<span id="cb234-9"><a href="vectors.html#cb234-9" tabindex="-1"></a>only_1 <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(upregulated_1, upregulated_2)</span>
+<span id="cb234-10"><a href="vectors.html#cb234-10" tabindex="-1"></a>only_2 <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(upregulated_2, upregulated_1)</span>
+<span id="cb234-11"><a href="vectors.html#cb234-11" tabindex="-1"></a></span>
+<span id="cb234-12"><a href="vectors.html#cb234-12" tabindex="-1"></a><span class="co"># 4. Print results</span></span>
+<span id="cb234-13"><a href="vectors.html#cb234-13" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cat</span>(<span class="st">&quot;Common genes are:&quot;</span>, <span class="fu">paste</span>(common, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb234-14"><a href="vectors.html#cb234-14" tabindex="-1"></a>          <span class="st">&quot;Genes specifically upregulated in analysis 1 are:&quot;</span>, <span class="fu">paste</span>(only_1, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb234-15"><a href="vectors.html#cb234-15" tabindex="-1"></a>          <span class="st">&quot;Genes specifically upregulated in analysis 2 are:&quot;</span>, <span class="fu">paste</span>(only_2, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb234-16"><a href="vectors.html#cb234-16" tabindex="-1"></a>      )</span></code></pre></div>
 <pre class="code-out"><code>Common genes are: NCOA1, HADHA, ADGRF3 
  Genes specifically upregulated in analysis 1 are: CENPO, ASXL2 
  Genes specifically upregulated in analysis 2 are: SLC5A6, NRBP1 
@@ -737,7 +737,7 @@ when pasting a vector, an additional argument <code>collapse = "&lt;chr&gt;"</co
 <div id="in" class="section level3 unnumbered">
 <h3>%in%</h3>
 <p>A slightly different function (if we can call it this way) is <code>%in%</code>. When comparing two vectors, it returns TRUE or FALSE for each element of the first vector based on the presence of that element in the second vector:</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="vectors.html#cb236-1" aria-hidden="true" tabindex="-1"></a>upregulated_1 <span class="sc">%in%</span> upregulated_2</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="vectors.html#cb236-1" tabindex="-1"></a>upregulated_1 <span class="sc">%in%</span> upregulated_2</span></code></pre></div>
 <pre class="code-out"><code>[1]  TRUE FALSE FALSE  TRUE  TRUE</code></pre>
 <p>Sometimes it is useful to index a vector based on another vector. We will see some usages.</p>
 </div>
@@ -746,33 +746,33 @@ when pasting a vector, an additional argument <code>collapse = "&lt;chr&gt;"</co
 <p>Last but not least, the <code>match()</code> function. It takes two vectors into consideration and returns, for each element of the first vector, the position of that element in the second vector. If an element is not present, it will return <code>NA</code>, we will describe this element in a dedicated chapter.
 <br>
 So, how can it be useful? Usually it is done to rearrange and reorder a vector to match another vector. For example, let’s say that two vectors of example <a href="vectors.html#exm:operations-vectors">8.3</a> have names in different order; prior to do all calculation we need to match the names order.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="vectors.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Define starting vectors</span></span>
-<span id="cb238-2"><a href="vectors.html#cb238-2" aria-hidden="true" tabindex="-1"></a>proteins1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span>, <span class="st">&quot;BIP&quot;</span>, <span class="st">&quot;CD4&quot;</span>, <span class="st">&quot;RSPO2&quot;</span>, <span class="st">&quot;LDB2&quot;</span>)</span>
-<span id="cb238-3"><a href="vectors.html#cb238-3" aria-hidden="true" tabindex="-1"></a>proteins2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CD4&quot;</span>, <span class="st">&quot;RSPO2&quot;</span>, <span class="st">&quot;BIP&quot;</span>, <span class="st">&quot;LDB2&quot;</span>, <span class="st">&quot;SEC24C&quot;</span>)</span>
-<span id="cb238-4"><a href="vectors.html#cb238-4" aria-hidden="true" tabindex="-1"></a>sample1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">52</span>, <span class="dv">14</span>, <span class="dv">33</span>, <span class="dv">22</span>)</span>
-<span id="cb238-5"><a href="vectors.html#cb238-5" aria-hidden="true" tabindex="-1"></a>sample2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">69</span>, <span class="dv">26</span>, <span class="dv">45</span>, <span class="dv">3</span>)</span>
-<span id="cb238-6"><a href="vectors.html#cb238-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb238-7"><a href="vectors.html#cb238-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sample1) <span class="ot">&lt;-</span> proteins1</span>
-<span id="cb238-8"><a href="vectors.html#cb238-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sample2) <span class="ot">&lt;-</span> proteins2</span>
-<span id="cb238-9"><a href="vectors.html#cb238-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb238-10"><a href="vectors.html#cb238-10" aria-hidden="true" tabindex="-1"></a>sample1</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="vectors.html#cb238-1" tabindex="-1"></a><span class="co"># 1. Define starting vectors</span></span>
+<span id="cb238-2"><a href="vectors.html#cb238-2" tabindex="-1"></a>proteins1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span>, <span class="st">&quot;BIP&quot;</span>, <span class="st">&quot;CD4&quot;</span>, <span class="st">&quot;RSPO2&quot;</span>, <span class="st">&quot;LDB2&quot;</span>)</span>
+<span id="cb238-3"><a href="vectors.html#cb238-3" tabindex="-1"></a>proteins2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CD4&quot;</span>, <span class="st">&quot;RSPO2&quot;</span>, <span class="st">&quot;BIP&quot;</span>, <span class="st">&quot;LDB2&quot;</span>, <span class="st">&quot;SEC24C&quot;</span>)</span>
+<span id="cb238-4"><a href="vectors.html#cb238-4" tabindex="-1"></a>sample1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">52</span>, <span class="dv">14</span>, <span class="dv">33</span>, <span class="dv">22</span>)</span>
+<span id="cb238-5"><a href="vectors.html#cb238-5" tabindex="-1"></a>sample2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">69</span>, <span class="dv">26</span>, <span class="dv">45</span>, <span class="dv">3</span>)</span>
+<span id="cb238-6"><a href="vectors.html#cb238-6" tabindex="-1"></a></span>
+<span id="cb238-7"><a href="vectors.html#cb238-7" tabindex="-1"></a><span class="fu">names</span>(sample1) <span class="ot">&lt;-</span> proteins1</span>
+<span id="cb238-8"><a href="vectors.html#cb238-8" tabindex="-1"></a><span class="fu">names</span>(sample2) <span class="ot">&lt;-</span> proteins2</span>
+<span id="cb238-9"><a href="vectors.html#cb238-9" tabindex="-1"></a></span>
+<span id="cb238-10"><a href="vectors.html#cb238-10" tabindex="-1"></a>sample1</span></code></pre></div>
 <pre class="code-out"><code>SEC24C    BIP    CD4  RSPO2   LDB2 
     12     52     14     33     22 </code></pre>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="vectors.html#cb240-1" aria-hidden="true" tabindex="-1"></a>sample2</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="vectors.html#cb240-1" tabindex="-1"></a>sample2</span></code></pre></div>
 <pre class="code-out"><code>   CD4  RSPO2    BIP   LDB2 SEC24C 
      5     69     26     45      3 </code></pre>
 <p>As we can see, the names are in different order, so we want to fix this:</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="vectors.html#cb242-1" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">match</span>(<span class="fu">names</span>(sample1), <span class="fu">names</span>(sample2))</span>
-<span id="cb242-2"><a href="vectors.html#cb242-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb242-3"><a href="vectors.html#cb242-3" aria-hidden="true" tabindex="-1"></a>idx</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="vectors.html#cb242-1" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">match</span>(<span class="fu">names</span>(sample1), <span class="fu">names</span>(sample2))</span>
+<span id="cb242-2"><a href="vectors.html#cb242-2" tabindex="-1"></a></span>
+<span id="cb242-3"><a href="vectors.html#cb242-3" tabindex="-1"></a>idx</span></code></pre></div>
 <pre class="code-out"><code>[1] 5 3 1 2 4</code></pre>
 <p>We can use these indexes to index our sample2.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="vectors.html#cb244-1" aria-hidden="true" tabindex="-1"></a>sample2 <span class="ot">&lt;-</span> sample2[idx]</span>
-<span id="cb244-2"><a href="vectors.html#cb244-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb244-3"><a href="vectors.html#cb244-3" aria-hidden="true" tabindex="-1"></a>sample1</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="vectors.html#cb244-1" tabindex="-1"></a>sample2 <span class="ot">&lt;-</span> sample2[idx]</span>
+<span id="cb244-2"><a href="vectors.html#cb244-2" tabindex="-1"></a></span>
+<span id="cb244-3"><a href="vectors.html#cb244-3" tabindex="-1"></a>sample1</span></code></pre></div>
 <pre class="code-out"><code>SEC24C    BIP    CD4  RSPO2   LDB2 
     12     52     14     33     22 </code></pre>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="vectors.html#cb246-1" aria-hidden="true" tabindex="-1"></a>sample2</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="vectors.html#cb246-1" tabindex="-1"></a>sample2</span></code></pre></div>
 <pre class="code-out"><code>SEC24C    BIP    CD4  RSPO2   LDB2 
      3     26      5     69     45 </code></pre>
 <p>Now they are in the same order, so we can continue the analysis.</p>
@@ -792,22 +792,22 @@ It doesn’t matter if you will do them in a different way, as long as the resul
 <summary>
 Solution
 </summary>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="vectors.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create the vector</span></span>
-<span id="cb248-2"><a href="vectors.html#cb248-2" aria-hidden="true" tabindex="-1"></a>expr_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span> <span class="ot">=</span> <span class="dv">52</span>, <span class="st">&quot;MT-ATP8&quot;</span> <span class="ot">=</span> <span class="dv">14</span>, <span class="st">&quot;LDB2&quot;</span> <span class="ot">=</span> <span class="dv">22</span>, <span class="st">&quot;MT-CO3&quot;</span> <span class="ot">=</span> <span class="dv">16</span>, <span class="st">&quot;MT-ND4&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">33</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">20</span>, <span class="st">&quot;MT-ND5&quot;</span> <span class="ot">=</span> <span class="dv">42</span>)</span>
-<span id="cb248-3"><a href="vectors.html#cb248-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb248-4"><a href="vectors.html#cb248-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get names of mitochondrial genes</span></span>
-<span id="cb248-5"><a href="vectors.html#cb248-5" aria-hidden="true" tabindex="-1"></a>mito_genes <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="at">pattern =</span> <span class="st">&quot;^MT-&quot;</span>, <span class="at">x =</span> <span class="fu">names</span>(expr_levels), <span class="at">value =</span> T)</span>
-<span id="cb248-6"><a href="vectors.html#cb248-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb248-7"><a href="vectors.html#cb248-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calculate total number of counts for each category</span></span>
-<span id="cb248-8"><a href="vectors.html#cb248-8" aria-hidden="true" tabindex="-1"></a>total_mito <span class="ot">&lt;-</span> <span class="fu">sum</span>(expr_levels[mito_genes])</span>
-<span id="cb248-9"><a href="vectors.html#cb248-9" aria-hidden="true" tabindex="-1"></a>total_no_mito <span class="ot">&lt;-</span> <span class="fu">sum</span>(expr_levels[<span class="sc">-</span>(<span class="fu">names</span>(expr_levels) <span class="sc">%in%</span> (mito_genes))])</span>
-<span id="cb248-10"><a href="vectors.html#cb248-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb248-11"><a href="vectors.html#cb248-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Calculate %</span></span>
-<span id="cb248-12"><a href="vectors.html#cb248-12" aria-hidden="true" tabindex="-1"></a>perc_mito <span class="ot">&lt;-</span> <span class="fu">round</span>(total_mito <span class="sc">/</span> <span class="fu">sum</span>(expr_levels) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span>
-<span id="cb248-13"><a href="vectors.html#cb248-13" aria-hidden="true" tabindex="-1"></a>perc_no_mito <span class="ot">&lt;-</span> <span class="fu">round</span>(total_no_mito <span class="sc">/</span> <span class="fu">sum</span>(expr_levels) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span>
-<span id="cb248-14"><a href="vectors.html#cb248-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb248-15"><a href="vectors.html#cb248-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Print results</span></span>
-<span id="cb248-16"><a href="vectors.html#cb248-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Reads mapping to mitochondrial genes are&quot;</span>, total_mito, <span class="st">&quot;(&quot;</span>, perc_mito, <span class="st">&quot;%), while the ones mapping to other genes are&quot;</span>, total_no_mito, <span class="st">&quot;(&quot;</span>, perc_no_mito, <span class="st">&quot;%)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="vectors.html#cb248-1" tabindex="-1"></a><span class="co"># 1. Create the vector</span></span>
+<span id="cb248-2"><a href="vectors.html#cb248-2" tabindex="-1"></a>expr_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span> <span class="ot">=</span> <span class="dv">52</span>, <span class="st">&quot;MT-ATP8&quot;</span> <span class="ot">=</span> <span class="dv">14</span>, <span class="st">&quot;LDB2&quot;</span> <span class="ot">=</span> <span class="dv">22</span>, <span class="st">&quot;MT-CO3&quot;</span> <span class="ot">=</span> <span class="dv">16</span>, <span class="st">&quot;MT-ND4&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">33</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">20</span>, <span class="st">&quot;MT-ND5&quot;</span> <span class="ot">=</span> <span class="dv">42</span>)</span>
+<span id="cb248-3"><a href="vectors.html#cb248-3" tabindex="-1"></a></span>
+<span id="cb248-4"><a href="vectors.html#cb248-4" tabindex="-1"></a><span class="co"># 2. Get names of mitochondrial genes</span></span>
+<span id="cb248-5"><a href="vectors.html#cb248-5" tabindex="-1"></a>mito_genes <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="at">pattern =</span> <span class="st">&quot;^MT-&quot;</span>, <span class="at">x =</span> <span class="fu">names</span>(expr_levels), <span class="at">value =</span> T)</span>
+<span id="cb248-6"><a href="vectors.html#cb248-6" tabindex="-1"></a></span>
+<span id="cb248-7"><a href="vectors.html#cb248-7" tabindex="-1"></a><span class="co"># 3. Calculate total number of counts for each category</span></span>
+<span id="cb248-8"><a href="vectors.html#cb248-8" tabindex="-1"></a>total_mito <span class="ot">&lt;-</span> <span class="fu">sum</span>(expr_levels[mito_genes])</span>
+<span id="cb248-9"><a href="vectors.html#cb248-9" tabindex="-1"></a>total_no_mito <span class="ot">&lt;-</span> <span class="fu">sum</span>(expr_levels[<span class="sc">-</span>(<span class="fu">names</span>(expr_levels) <span class="sc">%in%</span> (mito_genes))])</span>
+<span id="cb248-10"><a href="vectors.html#cb248-10" tabindex="-1"></a></span>
+<span id="cb248-11"><a href="vectors.html#cb248-11" tabindex="-1"></a><span class="co"># 4. Calculate %</span></span>
+<span id="cb248-12"><a href="vectors.html#cb248-12" tabindex="-1"></a>perc_mito <span class="ot">&lt;-</span> <span class="fu">round</span>(total_mito <span class="sc">/</span> <span class="fu">sum</span>(expr_levels) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb248-13"><a href="vectors.html#cb248-13" tabindex="-1"></a>perc_no_mito <span class="ot">&lt;-</span> <span class="fu">round</span>(total_no_mito <span class="sc">/</span> <span class="fu">sum</span>(expr_levels) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb248-14"><a href="vectors.html#cb248-14" tabindex="-1"></a></span>
+<span id="cb248-15"><a href="vectors.html#cb248-15" tabindex="-1"></a><span class="co"># 5. Print results</span></span>
+<span id="cb248-16"><a href="vectors.html#cb248-16" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Reads mapping to mitochondrial genes are&quot;</span>, total_mito, <span class="st">&quot;(&quot;</span>, perc_mito, <span class="st">&quot;%), while the ones mapping to other genes are&quot;</span>, total_no_mito, <span class="st">&quot;(&quot;</span>, perc_no_mito, <span class="st">&quot;%)&quot;</span>)</span></code></pre></div>
 <pre class="code-out"><code>Reads mapping to mitochondrial genes are 74 ( 36.82 %), while the ones mapping to other genes are 149 ( 74.13 %)</code></pre>
 </details>
 <div class="exercise">
@@ -817,24 +817,24 @@ Solution
 <summary>
 Solution
 </summary>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="vectors.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create the vectors</span></span>
-<span id="cb250-2"><a href="vectors.html#cb250-2" aria-hidden="true" tabindex="-1"></a>patient1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;CDH7&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;LDB2&quot;</span> <span class="ot">=</span> <span class="dv">13</span>, <span class="st">&quot;SEM3A&quot;</span> <span class="ot">=</span> <span class="dv">16</span>, <span class="st">&quot;FEZF2&quot;</span> <span class="ot">=</span> <span class="dv">21</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">43</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">29</span>, <span class="st">&quot;HOMER&quot;</span> <span class="ot">=</span> <span class="dv">22</span>)</span>
-<span id="cb250-3"><a href="vectors.html#cb250-3" aria-hidden="true" tabindex="-1"></a>patient2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;CDH7&quot;</span> <span class="ot">=</span> <span class="dv">11</span>, <span class="st">&quot;SEM5A&quot;</span> <span class="ot">=</span> <span class="dv">13</span>, <span class="st">&quot;HCN1&quot;</span> <span class="ot">=</span> <span class="dv">22</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">31</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;HOMER&quot;</span> <span class="ot">=</span> <span class="dv">8</span>)</span>
-<span id="cb250-4"><a href="vectors.html#cb250-4" aria-hidden="true" tabindex="-1"></a>patient3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24B&quot;</span> <span class="ot">=</span> <span class="dv">20</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;HOMER&quot;</span> <span class="ot">=</span> <span class="dv">13</span>, <span class="st">&quot;SEM3A&quot;</span> <span class="ot">=</span> <span class="dv">49</span>, <span class="st">&quot;HCN1&quot;</span> <span class="ot">=</span> <span class="dv">16</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">27</span>)</span>
-<span id="cb250-5"><a href="vectors.html#cb250-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb250-6"><a href="vectors.html#cb250-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Identify common genes</span></span>
-<span id="cb250-7"><a href="vectors.html#cb250-7" aria-hidden="true" tabindex="-1"></a>common1_2 <span class="ot">&lt;-</span> <span class="fu">intersect</span>(<span class="fu">names</span>(patient1), <span class="fu">names</span>(patient2))</span>
-<span id="cb250-8"><a href="vectors.html#cb250-8" aria-hidden="true" tabindex="-1"></a>common_all <span class="ot">&lt;-</span> <span class="fu">intersect</span>(common1_2, <span class="fu">names</span>(patient3))</span>
-<span id="cb250-9"><a href="vectors.html#cb250-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb250-10"><a href="vectors.html#cb250-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Subset for common genes</span></span>
-<span id="cb250-11"><a href="vectors.html#cb250-11" aria-hidden="true" tabindex="-1"></a>patien1_sub <span class="ot">&lt;-</span> patient1[common_all]</span>
-<span id="cb250-12"><a href="vectors.html#cb250-12" aria-hidden="true" tabindex="-1"></a>patien2_sub <span class="ot">&lt;-</span> patient2[common_all]</span>
-<span id="cb250-13"><a href="vectors.html#cb250-13" aria-hidden="true" tabindex="-1"></a>patien3_sub <span class="ot">&lt;-</span> patient3[common_all]</span>
-<span id="cb250-14"><a href="vectors.html#cb250-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb250-15"><a href="vectors.html#cb250-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Calculate the mean for each gene</span></span>
-<span id="cb250-16"><a href="vectors.html#cb250-16" aria-hidden="true" tabindex="-1"></a>common_mean <span class="ot">&lt;-</span> (patien1_sub <span class="sc">+</span> patien2_sub <span class="sc">+</span> patien3_sub) <span class="sc">/</span> <span class="dv">3</span></span>
-<span id="cb250-17"><a href="vectors.html#cb250-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb250-18"><a href="vectors.html#cb250-18" aria-hidden="true" tabindex="-1"></a>common_mean</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="vectors.html#cb250-1" tabindex="-1"></a><span class="co"># 1. Create the vectors</span></span>
+<span id="cb250-2"><a href="vectors.html#cb250-2" tabindex="-1"></a>patient1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;CDH7&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;LDB2&quot;</span> <span class="ot">=</span> <span class="dv">13</span>, <span class="st">&quot;SEM3A&quot;</span> <span class="ot">=</span> <span class="dv">16</span>, <span class="st">&quot;FEZF2&quot;</span> <span class="ot">=</span> <span class="dv">21</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">43</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">29</span>, <span class="st">&quot;HOMER&quot;</span> <span class="ot">=</span> <span class="dv">22</span>)</span>
+<span id="cb250-3"><a href="vectors.html#cb250-3" tabindex="-1"></a>patient2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24C&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;CDH7&quot;</span> <span class="ot">=</span> <span class="dv">11</span>, <span class="st">&quot;SEM5A&quot;</span> <span class="ot">=</span> <span class="dv">13</span>, <span class="st">&quot;HCN1&quot;</span> <span class="ot">=</span> <span class="dv">22</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">31</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;HOMER&quot;</span> <span class="ot">=</span> <span class="dv">8</span>)</span>
+<span id="cb250-4"><a href="vectors.html#cb250-4" tabindex="-1"></a>patient3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC24B&quot;</span> <span class="ot">=</span> <span class="dv">20</span>, <span class="st">&quot;BIP&quot;</span> <span class="ot">=</span> <span class="dv">12</span>, <span class="st">&quot;HOMER&quot;</span> <span class="ot">=</span> <span class="dv">13</span>, <span class="st">&quot;SEM3A&quot;</span> <span class="ot">=</span> <span class="dv">49</span>, <span class="st">&quot;HCN1&quot;</span> <span class="ot">=</span> <span class="dv">16</span>, <span class="st">&quot;NTMT1&quot;</span> <span class="ot">=</span> <span class="dv">27</span>)</span>
+<span id="cb250-5"><a href="vectors.html#cb250-5" tabindex="-1"></a></span>
+<span id="cb250-6"><a href="vectors.html#cb250-6" tabindex="-1"></a><span class="co"># 2. Identify common genes</span></span>
+<span id="cb250-7"><a href="vectors.html#cb250-7" tabindex="-1"></a>common1_2 <span class="ot">&lt;-</span> <span class="fu">intersect</span>(<span class="fu">names</span>(patient1), <span class="fu">names</span>(patient2))</span>
+<span id="cb250-8"><a href="vectors.html#cb250-8" tabindex="-1"></a>common_all <span class="ot">&lt;-</span> <span class="fu">intersect</span>(common1_2, <span class="fu">names</span>(patient3))</span>
+<span id="cb250-9"><a href="vectors.html#cb250-9" tabindex="-1"></a></span>
+<span id="cb250-10"><a href="vectors.html#cb250-10" tabindex="-1"></a><span class="co"># 3. Subset for common genes</span></span>
+<span id="cb250-11"><a href="vectors.html#cb250-11" tabindex="-1"></a>patien1_sub <span class="ot">&lt;-</span> patient1[common_all]</span>
+<span id="cb250-12"><a href="vectors.html#cb250-12" tabindex="-1"></a>patien2_sub <span class="ot">&lt;-</span> patient2[common_all]</span>
+<span id="cb250-13"><a href="vectors.html#cb250-13" tabindex="-1"></a>patien3_sub <span class="ot">&lt;-</span> patient3[common_all]</span>
+<span id="cb250-14"><a href="vectors.html#cb250-14" tabindex="-1"></a></span>
+<span id="cb250-15"><a href="vectors.html#cb250-15" tabindex="-1"></a><span class="co"># 4. Calculate the mean for each gene</span></span>
+<span id="cb250-16"><a href="vectors.html#cb250-16" tabindex="-1"></a>common_mean <span class="ot">&lt;-</span> (patien1_sub <span class="sc">+</span> patien2_sub <span class="sc">+</span> patien3_sub) <span class="sc">/</span> <span class="dv">3</span></span>
+<span id="cb250-17"><a href="vectors.html#cb250-17" tabindex="-1"></a></span>
+<span id="cb250-18"><a href="vectors.html#cb250-18" tabindex="-1"></a>common_mean</span></code></pre></div>
 <pre class="code-out"><code>   NTMT1      BIP    HOMER 
 33.66667 17.66667 14.33333 </code></pre>
 </details>

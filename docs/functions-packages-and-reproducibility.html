@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2024-02-23" />
+<meta name="date" content="2025-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -70,7 +70,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -80,7 +80,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -405,7 +405,7 @@ However, there are lots and lots of functions created by different “users” a
 As we are going to use CRAN packages, here I show you how to install those packages.
 <br>
 Let’s say we want to install <code>tidyverse</code> (which is a collection of packages that I love for data analysis), we will use the command <code>install.packages("&lt;name_of_the_package&gt;")</code>.</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="functions-packages-and-reproducibility.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="functions-packages-and-reproducibility.html#cb360-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
 <p>I strongly suggest you to run this code and follow the instructions that pop up in the console.
 <br>
 The process will take a while and if all worked fine, it should prompt “DONE The downloaded source packages are in….” at the end.</p>
@@ -415,7 +415,7 @@ The process will take a while and if all worked fine, it should prompt “DONE T
 <p>Installing a package is not sufficient to be able to use its functions, you have to load it in every session you want to use it. So, I now it sounds like a big deal, but it’s easier than it seems: at the beginning of your script you have to write <code>library(&lt;name_of_the_package&gt;)</code> for each package you want to load.
 <br>
 For example, in our case we will write:</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="functions-packages-and-reproducibility.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="functions-packages-and-reproducibility.html#cb361-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>Now that we have loaded the package, we are able to use its functions.<br></p>
 </div>
 </div>
@@ -445,17 +445,17 @@ So, how to control it?</p>
 <div id="control-package-versions" class="section level3 unnumbered">
 <h3>Control package versions</h3>
 <p>To check which version of a package you have installed you can use the command <code>packageVersion("&lt;name_of_the_package&gt;")</code>. For example:</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="functions-packages-and-reproducibility.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="functions-packages-and-reproducibility.html#cb362-1" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
 <pre class="code-out"><code>[1] &#39;2.0.0&#39;</code></pre>
 <p>I have installed version 2.0.0 of tidyverse. DON’T worry if your version is not the same as mine (I know it sounds controversial, but here we are explaining things, you should stick with you own version).</p>
 </div>
 <div id="session-info" class="section level3 unnumbered">
 <h3>Session info</h3>
 <p>Another way is to look at the sessionInfo, which returns all the package loaded in the current session (remember, a session starts when you start R and ends when you exit or restart R).</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="functions-packages-and-reproducibility.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="functions-packages-and-reproducibility.html#cb364-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre class="code-out"><code>R version 4.1.0 (2021-05-18)
 Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS 12.7
+Running under: macOS 13.7.2
 
 Matrix products: default
 LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib

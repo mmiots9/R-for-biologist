@@ -22,7 +22,7 @@ See? Just adding the double/single quotes it changes everything.
 <strong>IMPORTANT</strong>: R interprets <u>everything</u> that is between a pair of single/double quotes as character, so if you forget to close a quote, nothing will work. Moreover, you can't use a single quote to close a character opened with a double quote and <em>vice versa</em>.
 
 ## Concatenate strings {-}
-Sometimes you want to concatenate different string into one single string, and we can to it with two similar functions: `paste()` and `paste0()`. The unique difference among them is that in the former you can decide what character to use to separate what you are concatenating (default is a white space), while the latter do not insert any character.
+Sometimes you want to concatenate different string into one single string, and we can to it with two similar functions: `paste()` and `paste0()`. The unique difference among them is that in the former you can decide what character to use to separate what you are concatenating (default is a white space), while the latter does not insert any character.
 <br>
 For example, let's say you have a variable `condition` and a variable `treatment`, and you want to concatenate them to create the variable `sample`; you will do:
 ```{r}
@@ -84,7 +84,7 @@ print(gsub_all)
 This is the basic way of using these functions, but they can be very useful in complex analysis, but we will see them later on.
 
 ## Grep {-}
-Further parents of substitution, are `grep()` and its brother `grepl()`: they are used to check if a particular pattern is present in a character variable. The first one returns the index (we'll see this concept in few chapters) or the value of the variable that match the pattern, the second one returns a boolean value (TRUE or FALSE) indicatung the presence of the pattern in the variable.
+Further parents of substitution, are `grep()` and its brother `grepl()`: they are used to check if a particular pattern is present in a character variable. The first one returns the index (we'll see this concept in few chapters) or the value of the variable that match the pattern, the second one returns a boolean value (TRUE or FALSE) indicating the presence of the pattern in the variable.
 <br>
 Let's see few example right away:
 ```{r}
@@ -126,7 +126,8 @@ typeof(ml_to_add)
 This is an important lesson: in R variables can be overwritten with other types of data (this can't be done in other languages such as Java, C++, ecc.). This can be both handy and risky at the same time: handy because we can save memory by overwriting useless variables, risky because we can overwrite a variable without checking if the type is maintained (maybe it is important).
 
 ## Exercises {-}
-::: {.exercise #sd-calc}
+
+::: {.exercise #gsub-ex}
 In a list of genes to test, you found a gene called "NRG_1" and one called "SST R". In the report you have to present you want to print out "Involved genes are NRG1 and SSTR2". How to do it?
 :::
 
@@ -146,7 +147,7 @@ print(all_string)
 ```
 </details>
 
-::: {.exercise #sd-calc}
+::: {.exercise #paste-ex}
 In a variable you have the gene name "HCN1" and in another you have its number of aa (890, as numeric!!!). Print out the string "HCN1 protein is 890 aa long"
 :::
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2024-02-23" />
+<meta name="date" content="2025-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -70,7 +70,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -80,7 +80,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -410,25 +410,25 @@ There are 3 types of test we can use, based on the type of data we have:
 </ul>
 <p>We’ll see in detail the Pearson test, as in our example we have two continuous variables, then we will briefly see the other two tests.</p>
 <p>Let’s load the data:</p>
-<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="correlation.html#cb587-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
-<span id="cb587-2"><a href="correlation.html#cb587-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb587-3"><a href="correlation.html#cb587-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
-<span id="cb587-4"><a href="correlation.html#cb587-4" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggpubr))</span>
-<span id="cb587-5"><a href="correlation.html#cb587-5" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(gginnards))</span>
-<span id="cb587-6"><a href="correlation.html#cb587-6" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(glue))</span>
-<span id="cb587-7"><a href="correlation.html#cb587-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb587-8"><a href="correlation.html#cb587-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
-<span id="cb587-9"><a href="correlation.html#cb587-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Stat-test-dataset.csv&quot;</span>)</span>
-<span id="cb587-10"><a href="correlation.html#cb587-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb587-11"><a href="correlation.html#cb587-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Change come column types</span></span>
-<span id="cb587-12"><a href="correlation.html#cb587-12" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb587-13"><a href="correlation.html#cb587-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
-<span id="cb587-14"><a href="correlation.html#cb587-14" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;treatment&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T1&quot;</span>, <span class="st">&quot;Untreated&quot;</span>)),</span>
-<span id="cb587-15"><a href="correlation.html#cb587-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Task1&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task1, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
-<span id="cb587-16"><a href="correlation.html#cb587-16" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Task2&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task2, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
-<span id="cb587-17"><a href="correlation.html#cb587-17" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb587-18"><a href="correlation.html#cb587-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb587-19"><a href="correlation.html#cb587-19" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="correlation.html#cb587-1" tabindex="-1"></a><span class="co"># 1. Load packages </span></span>
+<span id="cb587-2"><a href="correlation.html#cb587-2" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb587-3"><a href="correlation.html#cb587-3" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
+<span id="cb587-4"><a href="correlation.html#cb587-4" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggpubr))</span>
+<span id="cb587-5"><a href="correlation.html#cb587-5" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(gginnards))</span>
+<span id="cb587-6"><a href="correlation.html#cb587-6" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(glue))</span>
+<span id="cb587-7"><a href="correlation.html#cb587-7" tabindex="-1"></a></span>
+<span id="cb587-8"><a href="correlation.html#cb587-8" tabindex="-1"></a><span class="co"># 2. Load data</span></span>
+<span id="cb587-9"><a href="correlation.html#cb587-9" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Stat-test-dataset.csv&quot;</span>)</span>
+<span id="cb587-10"><a href="correlation.html#cb587-10" tabindex="-1"></a></span>
+<span id="cb587-11"><a href="correlation.html#cb587-11" tabindex="-1"></a><span class="co"># 3. Change come column types</span></span>
+<span id="cb587-12"><a href="correlation.html#cb587-12" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb587-13"><a href="correlation.html#cb587-13" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb587-14"><a href="correlation.html#cb587-14" tabindex="-1"></a>         <span class="st">&quot;treatment&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T1&quot;</span>, <span class="st">&quot;Untreated&quot;</span>)),</span>
+<span id="cb587-15"><a href="correlation.html#cb587-15" tabindex="-1"></a>         <span class="st">&quot;Task1&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task1, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb587-16"><a href="correlation.html#cb587-16" tabindex="-1"></a>         <span class="st">&quot;Task2&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Task2, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb587-17"><a href="correlation.html#cb587-17" tabindex="-1"></a>         )</span>
+<span id="cb587-18"><a href="correlation.html#cb587-18" tabindex="-1"></a></span>
+<span id="cb587-19"><a href="correlation.html#cb587-19" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>&#39;data.frame&#39;:   600 obs. of  7 variables:
  $ sex      : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 1 2 1 2 1 2 1 2 1 ...
  $ age      : int  3 3 3 3 3 3 3 3 3 3 ...
@@ -441,14 +441,14 @@ There are 3 types of test we can use, based on the type of data we have:
 <h2>Pearson’s test</h2>
 <p>We want to know if weight and Task3 are correlated in both males and females.
 The first thing to do is, as always, plot the variables to have a look at them:</p>
-<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="correlation.html#cb589-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
-<span id="cb589-2"><a href="correlation.html#cb589-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> Task3, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
-<span id="cb589-3"><a href="correlation.html#cb589-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Task3 (s)&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">color =</span> <span class="st">&quot;Sex&quot;</span>) <span class="sc">+</span></span>
-<span id="cb589-4"><a href="correlation.html#cb589-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="correlation.html#cb589-1" tabindex="-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb589-2"><a href="correlation.html#cb589-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> Task3, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
+<span id="cb589-3"><a href="correlation.html#cb589-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Task3 (s)&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Weight (g)&quot;</span>, <span class="at">color =</span> <span class="st">&quot;Sex&quot;</span>) <span class="sc">+</span></span>
+<span id="cb589-4"><a href="correlation.html#cb589-4" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/pearson-1.svg" width="85%" style="display: block; margin: auto;" /></p>
 <p>Just visually, we can say that there is no positive or negative correlation between them. To claim it, let’s apply the Pearson’s test: the function to use is <code>cor.test()</code>, specifying <code>method = "pearson"</code>; the order of the variables is not important.</p>
-<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="correlation.html#cb590-1" aria-hidden="true" tabindex="-1"></a>pearson_res <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(df<span class="sc">$</span>weight, df<span class="sc">$</span>Task3, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>)</span>
-<span id="cb590-2"><a href="correlation.html#cb590-2" aria-hidden="true" tabindex="-1"></a>pearson_res</span></code></pre></div>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="correlation.html#cb590-1" tabindex="-1"></a>pearson_res <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(df<span class="sc">$</span>weight, df<span class="sc">$</span>Task3, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>)</span>
+<span id="cb590-2"><a href="correlation.html#cb590-2" tabindex="-1"></a>pearson_res</span></code></pre></div>
 <pre class="code-out"><code>
     Pearson&#39;s product-moment correlation
 
