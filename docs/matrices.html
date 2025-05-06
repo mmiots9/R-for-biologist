@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2025-01-31" />
+<meta name="date" content="2025-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -682,27 +682,20 @@ MIR1302-10   0   0   0   0   0   0   0   0   0   0   0   0</code></pre>
 <br>
 Here comes the function <code>summary()</code>:</p>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="matrices.html#cb310-1" tabindex="-1"></a><span class="fu">summary</span>(expr_data)</span></code></pre></div>
-<pre class="code-out"><code>      wt1                wt2                wt3                wt4             wt5          
- Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0   Min.   :     0.0  
- 1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0   1st Qu.:     0.0  
- Median :    19.0   Median :    16.0   Median :    16.0   Median :   15   Median :    16.0  
- Mean   :   411.4   Mean   :   324.4   Mean   :   326.7   Mean   :  274   Mean   :   317.3  
- 3rd Qu.:   272.0   3rd Qu.:   214.0   3rd Qu.:   218.0   3rd Qu.:  186   3rd Qu.:   212.0  
- Max.   :327719.0   Max.   :536733.0   Max.   :377069.0   Max.   :90474   Max.   :352034.0  
-      wt6                ko1               ko2                ko3                ko4          
- Min.   :     0.0   Min.   :    0.0   Min.   :     0.0   Min.   :     0.0   Min.   :     0.0  
- 1st Qu.:     0.0   1st Qu.:    0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0  
- Median :    17.0   Median :   13.0   Median :    18.0   Median :    19.0   Median :    17.0  
- Mean   :   316.6   Mean   :  250.1   Mean   :   378.2   Mean   :   351.4   Mean   :   373.8  
- 3rd Qu.:   224.0   3rd Qu.:  179.0   3rd Qu.:   245.0   3rd Qu.:   246.0   3rd Qu.:   255.0  
- Max.   :209954.0   Max.   :61650.0   Max.   :641616.0   Max.   :497463.0   Max.   :236803.0  
-      ko5               ko6          
- Min.   :    0.0   Min.   :     0.0  
- 1st Qu.:    0.0   1st Qu.:     0.0  
- Median :   17.0   Median :    19.0  
- Mean   :  319.8   Mean   :   423.4  
- 3rd Qu.:  233.0   3rd Qu.:   288.0  
- Max.   :62660.0   Max.   :338679.0  </code></pre>
+<pre class="code-out"><code>      wt1                wt2                wt3                wt4             wt5                wt6                ko1         
+ Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0   Min.   :     0.0   Min.   :     0.0   Min.   :    0.0  
+ 1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0.0  
+ Median :    19.0   Median :    16.0   Median :    16.0   Median :   15   Median :    16.0   Median :    17.0   Median :   13.0  
+ Mean   :   411.4   Mean   :   324.4   Mean   :   326.7   Mean   :  274   Mean   :   317.3   Mean   :   316.6   Mean   :  250.1  
+ 3rd Qu.:   272.0   3rd Qu.:   214.0   3rd Qu.:   218.0   3rd Qu.:  186   3rd Qu.:   212.0   3rd Qu.:   224.0   3rd Qu.:  179.0  
+ Max.   :327719.0   Max.   :536733.0   Max.   :377069.0   Max.   :90474   Max.   :352034.0   Max.   :209954.0   Max.   :61650.0  
+      ko2                ko3                ko4                ko5               ko6          
+ Min.   :     0.0   Min.   :     0.0   Min.   :     0.0   Min.   :    0.0   Min.   :     0.0  
+ 1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:     0.0   1st Qu.:    0.0   1st Qu.:     0.0  
+ Median :    18.0   Median :    19.0   Median :    17.0   Median :   17.0   Median :    19.0  
+ Mean   :   378.2   Mean   :   351.4   Mean   :   373.8   Mean   :  319.8   Mean   :   423.4  
+ 3rd Qu.:   245.0   3rd Qu.:   246.0   3rd Qu.:   255.0   3rd Qu.:  233.0   3rd Qu.:   288.0  
+ Max.   :641616.0   Max.   :497463.0   Max.   :236803.0   Max.   :62660.0   Max.   :338679.0  </code></pre>
 <p>For each column it returns some descriptive. But, ehi, on the columns we have the samples, we want this statistics for the genes, how can we do it? Here comes <code>t()</code> that transpose the matrix so that rows became columns and <i>vice versa</i>.</p>
 <div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="matrices.html#cb312-1" tabindex="-1"></a>expr_data_t <span class="ot">&lt;-</span> <span class="fu">t</span>(expr_data)</span>
 <span id="cb312-2"><a href="matrices.html#cb312-2" tabindex="-1"></a></span>
@@ -724,20 +717,13 @@ wt5       1    192         0         0         0         0         0          0<
 <span id="cb314-8"><a href="matrices.html#cb314-8" tabindex="-1"></a></span>
 <span id="cb314-9"><a href="matrices.html#cb314-9" tabindex="-1"></a><span class="co"># 3. Get the summary of sliced expr_data_t</span></span>
 <span id="cb314-10"><a href="matrices.html#cb314-10" tabindex="-1"></a><span class="fu">summary</span>(expr_data_t[, r_numb])</span></code></pre></div>
-<pre class="code-out"><code>      GPX2            BTN3A3           KRT17         USP17L2        PHF19            DBT        
- Min.   :0.0000   Min.   :  5.00   Min.   :0.00   Min.   :0.0   Min.   : 10.0   Min.   :  23.0  
- 1st Qu.:0.0000   1st Qu.: 15.00   1st Qu.:0.00   1st Qu.:0.0   1st Qu.: 20.0   1st Qu.: 415.2  
- Median :0.5000   Median : 24.00   Median :0.00   Median :0.0   Median : 97.0   Median : 753.0  
- Mean   :0.5833   Mean   : 35.67   Mean   :0.25   Mean   :0.5   Mean   :112.2   Mean   : 642.8  
- 3rd Qu.:1.0000   3rd Qu.: 32.50   3rd Qu.:0.00   3rd Qu.:1.0   3rd Qu.:168.5   3rd Qu.: 938.2  
- Max.   :2.0000   Max.   :150.00   Max.   :2.00   Max.   :3.0   Max.   :324.0   Max.   :1107.0  
-     PPM1B       
- Min.   :  73.0  
- 1st Qu.: 392.5  
- Median : 562.0  
- Mean   : 632.7  
- 3rd Qu.: 838.0  
- Max.   :1466.0  </code></pre>
+<pre class="code-out"><code>      GPX2            BTN3A3           KRT17         USP17L2        PHF19            DBT             PPM1B       
+ Min.   :0.0000   Min.   :  5.00   Min.   :0.00   Min.   :0.0   Min.   : 10.0   Min.   :  23.0   Min.   :  73.0  
+ 1st Qu.:0.0000   1st Qu.: 15.00   1st Qu.:0.00   1st Qu.:0.0   1st Qu.: 20.0   1st Qu.: 415.2   1st Qu.: 392.5  
+ Median :0.5000   Median : 24.00   Median :0.00   Median :0.0   Median : 97.0   Median : 753.0   Median : 562.0  
+ Mean   :0.5833   Mean   : 35.67   Mean   :0.25   Mean   :0.5   Mean   :112.2   Mean   : 642.8   Mean   : 632.7  
+ 3rd Qu.:1.0000   3rd Qu.: 32.50   3rd Qu.:0.00   3rd Qu.:1.0   3rd Qu.:168.5   3rd Qu.: 938.2   3rd Qu.: 838.0  
+ Max.   :2.0000   Max.   :150.00   Max.   :2.00   Max.   :3.0   Max.   :324.0   Max.   :1107.0   Max.   :1466.0  </code></pre>
 <p>Here we have some interesting descriptive for each gene: we can see, for example, that DBT has more counts than GPX2, or that PPM1B has the higher Max. counts of all these 7 genes.
 <br>
 There are two new functions here: <code>set.seed</code> and <code>runif</code>. Let’s start from the latter, it returns <code>n</code> random number uniformly distributed between <code>min</code> and <code>max</code> included. Do you understand why I used <code>max = ncol(expr_data_t)</code>? I’m sure you do. But to be sure that it is clear, I did it because I don’t want to hard code (insert the real number) of the number of columns of the expression matrix, because if I change matrix I have to change this number as well. So, I let R calculate it for me. As it is random, in order to let you have the same number as me, I set a seed. The theory behind “randomness” in computer science is complex, so I’m not going to deep it. If you want, there are plenty of resources on the internet on this topic.

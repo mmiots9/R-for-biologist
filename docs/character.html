@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2025-01-31" />
+<meta name="date" content="2025-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -519,12 +519,12 @@ Solution
 <span id="cb120-3"><a href="character.html#cb120-3" tabindex="-1"></a></span>
 <span id="cb120-4"><a href="character.html#cb120-4" tabindex="-1"></a><span class="co"># correct gene names</span></span>
 <span id="cb120-5"><a href="character.html#cb120-5" tabindex="-1"></a>gene1 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">&quot;_&quot;</span>, <span class="at">replacement =</span> <span class="st">&quot;&quot;</span>, gene1)</span>
-<span id="cb120-6"><a href="character.html#cb120-6" tabindex="-1"></a>gene2 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">&quot; R&quot;</span>, <span class="at">replacement =</span> <span class="st">&quot; R2&quot;</span>, gene1)</span>
+<span id="cb120-6"><a href="character.html#cb120-6" tabindex="-1"></a>gene2 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">&quot; R&quot;</span>, <span class="at">replacement =</span> <span class="st">&quot;R2&quot;</span>, gene2)</span>
 <span id="cb120-7"><a href="character.html#cb120-7" tabindex="-1"></a></span>
 <span id="cb120-8"><a href="character.html#cb120-8" tabindex="-1"></a><span class="co"># concatenate all the string</span></span>
 <span id="cb120-9"><a href="character.html#cb120-9" tabindex="-1"></a>all_string <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Involved genes are&quot;</span>, gene1, <span class="st">&quot;and&quot;</span>, gene2)</span>
 <span id="cb120-10"><a href="character.html#cb120-10" tabindex="-1"></a><span class="fu">print</span>(all_string)</span></code></pre></div>
-<pre class="code-out"><code>[1] &quot;Involved genes are NRG1 and NRG1&quot;</code></pre>
+<pre class="code-out"><code>[1] &quot;Involved genes are NRG1 and SSTR2&quot;</code></pre>
 </details>
 <div class="exercise">
 <p><span id="exr:paste-ex" class="exercise"><strong>Exercise 6.2  </strong></span>In a variable you have the gene name “HCN1” and in another you have its number of aa (890, as numeric!!!). Print out the string “HCN1 protein is 890 aa long”</p>

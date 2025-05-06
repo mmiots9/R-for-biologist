@@ -24,7 +24,7 @@
 <meta name="author" content="Matteo Miotto" />
 
 
-<meta name="date" content="2025-01-31" />
+<meta name="date" content="2025-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -416,11 +416,11 @@ you can export the notebook as html/pdf and share it with your colleagues (I pre
 <h2>Load packages and data</h2>
 <p>At the beginning of every analysis, it is strongly suggested to load any external package you want to use, in our case <em>tidyverse</em>.
 Why using tidyverse? Because it is super useful, easy to learn, intuitive and it is the main package used for data analysis with R. We have seen in the last chapter how to install and load it in our session, so let’s do it:</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="tidyverse-manage.html#cb366-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="tidyverse-manage.html#cb367-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p><br>
 Next, we will load the dataset to analyze. It is taken from <a href="https://www.nature.com/articles/s41514-020-00052-5" target="_blank">this</a> paper, in particular it is Supplementary Table 13 (<a href="data/Supplementary_table_13.csv" download>Download</a>).</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="tidyverse-manage.html#cb367-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Supplementary_table_13.csv&quot;</span>)</span>
-<span id="cb367-2"><a href="tidyverse-manage.html#cb367-2" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="tidyverse-manage.html#cb368-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Supplementary_table_13.csv&quot;</span>)</span>
+<span id="cb368-2"><a href="tidyverse-manage.html#cb368-2" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>  SampleID Diagnosis Braak sex AOD PMI RIN CDR Area dataset
 1 1005_TCX        AD     6   F  90   8 8.6  NA   TL    MAYO
 2 1019_TCX        AD     6   F  86   4 7.8  NA   TL    MAYO
@@ -434,7 +434,7 @@ Next, we will load the dataset to analyze. It is taken from <a href="https://www
 <p>The very first thing to do is to explore the dataset, in particular the number of rows/columns and the type of columns. We can do it through <code>str()</code>, which returns the dimensions of the dataframe and some info about each column.
 <br>
 Here it is:</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="tidyverse-manage.html#cb369-1" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="tidyverse-manage.html#cb370-1" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>&#39;data.frame&#39;:   1493 obs. of  10 variables:
  $ SampleID : chr  &quot;1005_TCX&quot; &quot;1019_TCX&quot; &quot;1029_TCX&quot; &quot;1034_TCX&quot; ...
  $ Diagnosis: chr  &quot;AD&quot; &quot;AD&quot; &quot;AD&quot; &quot;AD&quot; ...
@@ -465,7 +465,7 @@ We have NAs in some variables. I see your face asking yourself “What the hell 
 </li>
 </ul>
 <p>Let’s now check if SampleID are unique identifiers; to do it, we evaluate whether the number of unique values in that column is equal to the number of total values of that column:</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="tidyverse-manage.html#cb371-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(df<span class="sc">$</span>SampleID)) <span class="sc">==</span> <span class="fu">length</span>(df<span class="sc">$</span>SampleID)</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="tidyverse-manage.html#cb372-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(df<span class="sc">$</span>SampleID)) <span class="sc">==</span> <span class="fu">length</span>(df<span class="sc">$</span>SampleID)</span></code></pre></div>
 <pre class="code-out"><code>[1] TRUE</code></pre>
 <p>Yes, they are unique identifiers.</p>
 <div id="change-column-type" class="section level3 unnumbered">
@@ -475,13 +475,13 @@ We have NAs in some variables. I see your face asking yourself “What the hell 
 “Factors?! Why are you telling me about this data type now?” Yes, this is another data type, but don’t worry, you just have to know the two advantages aforementioned and how to create it (we will see it now).
 <br>
 An you know what?! As I know you’re doing great, let’s introduce our first function of the magic tidyverse world: <code>mutate</code>:</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="tidyverse-manage.html#cb373-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb373-2"><a href="tidyverse-manage.html#cb373-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;Diagnosis&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Diagnosis),</span>
-<span id="cb373-3"><a href="tidyverse-manage.html#cb373-3" tabindex="-1"></a>         <span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
-<span id="cb373-4"><a href="tidyverse-manage.html#cb373-4" tabindex="-1"></a>         <span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Area),</span>
-<span id="cb373-5"><a href="tidyverse-manage.html#cb373-5" tabindex="-1"></a>         <span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(dataset))</span>
-<span id="cb373-6"><a href="tidyverse-manage.html#cb373-6" tabindex="-1"></a></span>
-<span id="cb373-7"><a href="tidyverse-manage.html#cb373-7" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="tidyverse-manage.html#cb374-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb374-2"><a href="tidyverse-manage.html#cb374-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;Diagnosis&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Diagnosis),</span>
+<span id="cb374-3"><a href="tidyverse-manage.html#cb374-3" tabindex="-1"></a>         <span class="st">&quot;sex&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb374-4"><a href="tidyverse-manage.html#cb374-4" tabindex="-1"></a>         <span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Area),</span>
+<span id="cb374-5"><a href="tidyverse-manage.html#cb374-5" tabindex="-1"></a>         <span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(dataset))</span>
+<span id="cb374-6"><a href="tidyverse-manage.html#cb374-6" tabindex="-1"></a></span>
+<span id="cb374-7"><a href="tidyverse-manage.html#cb374-7" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>&#39;data.frame&#39;:   1493 obs. of  10 variables:
  $ SampleID : chr  &quot;1005_TCX&quot; &quot;1019_TCX&quot; &quot;1029_TCX&quot; &quot;1034_TCX&quot; ...
  $ Diagnosis: Factor w/ 2 levels &quot;AD&quot;,&quot;Control&quot;: 1 1 1 1 1 1 1 1 1 1 ...
@@ -519,19 +519,19 @@ Great! It worked! Let’s dissect this code:
 As you can see, the four columns we changed inside <code>mutate</code> has now changed their output: from chr they became Factor w/ n levels and a bunch of numbers instead of the values. I’m sure you have already understood what does it mean, but to be sure: with “levels”, R stores the unique values of that vector (remember, each column of a dataframe is a vector!), and then it uses, for each element, integers to refer to the corresponding levels. This ensure memory optimization (integers takes less memory/space than words).
 <br>
 But, don’t worry, when you ask R to visualize the values of a factor, it returns the value and not the numbers:</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="tidyverse-manage.html#cb375-1" tabindex="-1"></a>df<span class="sc">$</span>Diagnosis[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="tidyverse-manage.html#cb376-1" tabindex="-1"></a>df<span class="sc">$</span>Diagnosis[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
 <pre class="code-out"><code>[1] AD AD AD AD AD
 Levels: AD Control</code></pre>
 </div>
 <div id="reorder-levels-of-a-factor" class="section level3 unnumbered">
 <h3>Reorder levels of a factor</h3>
 <p>There is a cool feature about factors: you can order the levels of it. In fact, by default levels are in alphabetical order. We can see it here, using the function <code>levels()</code>:</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="tidyverse-manage.html#cb377-1" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>Diagnosis)</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="tidyverse-manage.html#cb378-1" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>Diagnosis)</span></code></pre></div>
 <pre class="code-out"><code>[1] &quot;AD&quot;      &quot;Control&quot;</code></pre>
 <p>Sometimes, it is useful to change the order of them: think about times (20 weeks comes before 3 days alphabetically), or having a control reference as first in plots (when plotting categorical variable, the order of the levels is the order in the plot). <br>
 So, let’s see how we can change the order of the levels using <code>factor</code>:</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="tidyverse-manage.html#cb379-1" tabindex="-1"></a>df<span class="sc">$</span>Diagnosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Diagnosis, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;AD&quot;</span>), <span class="at">ordered =</span> T)</span>
-<span id="cb379-2"><a href="tidyverse-manage.html#cb379-2" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="tidyverse-manage.html#cb380-1" tabindex="-1"></a>df<span class="sc">$</span>Diagnosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Diagnosis, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;AD&quot;</span>), <span class="at">ordered =</span> T)</span>
+<span id="cb380-2"><a href="tidyverse-manage.html#cb380-2" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>&#39;data.frame&#39;:   1493 obs. of  10 variables:
  $ SampleID : chr  &quot;1005_TCX&quot; &quot;1019_TCX&quot; &quot;1029_TCX&quot; &quot;1034_TCX&quot; ...
  $ Diagnosis: Ord.factor w/ 2 levels &quot;Control&quot;&lt;&quot;AD&quot;: 2 2 2 2 2 2 2 2 2 2 ...
@@ -551,23 +551,23 @@ Having said that, we can now see in the result of <code>str()</code> that now Di
 <div id="summary" class="section level2 unnumbered">
 <h2>Summary</h2>
 <p>Ok, now that we have fixed some columns, let’s evaluate the values of the dataframe, we will use <code>summary()</code>:</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="tidyverse-manage.html#cb381-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
-<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN       
- Length:1493        Control:626   Min.   :0.000   F:890   Min.   :53.00   Min.   : 1.000   Min.   : 1.00  
- Class :character   AD     :867   1st Qu.:3.000   M:603   1st Qu.:79.00   1st Qu.: 3.917   1st Qu.: 5.60  
- Mode  :character                 Median :4.000           Median :86.00   Median : 5.500   Median : 6.80  
-                                  Mean   :3.909           Mean   :83.59   Mean   : 7.471   Mean   : 6.67  
-                                  3rd Qu.:6.000           3rd Qu.:90.00   3rd Qu.: 9.167   3rd Qu.: 7.80  
-                                  Max.   :6.000           Max.   :90.00   Max.   :38.000   Max.   :10.00  
-                                  NA&#39;s   :97                              NA&#39;s   :45                      
-      CDR           Area       dataset   
- Min.   :0.000   BM10 :233   MAYO  :160  
- 1st Qu.:0.500   BM22 :238   MSBB  :930  
- Median :2.000   BM36 :232   ROSMAP:403  
- Mean   :2.368   BM44 :227               
- 3rd Qu.:4.000   DLPFC:403               
- Max.   :5.000   TL   :160               
- NA&#39;s   :563                             </code></pre>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="tidyverse-manage.html#cb382-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN             CDR       
+ Length:1493        Control:626   Min.   :0.000   F:890   Min.   :53.00   Min.   : 1.000   Min.   : 1.00   Min.   :0.000  
+ Class :character   AD     :867   1st Qu.:3.000   M:603   1st Qu.:79.00   1st Qu.: 3.917   1st Qu.: 5.60   1st Qu.:0.500  
+ Mode  :character                 Median :4.000           Median :86.00   Median : 5.500   Median : 6.80   Median :2.000  
+                                  Mean   :3.909           Mean   :83.59   Mean   : 7.471   Mean   : 6.67   Mean   :2.368  
+                                  3rd Qu.:6.000           3rd Qu.:90.00   3rd Qu.: 9.167   3rd Qu.: 7.80   3rd Qu.:4.000  
+                                  Max.   :6.000           Max.   :90.00   Max.   :38.000   Max.   :10.00   Max.   :5.000  
+                                  NA&#39;s   :97                              NA&#39;s   :45                       NA&#39;s   :563    
+    Area       dataset   
+ BM10 :233   MAYO  :160  
+ BM22 :238   MSBB  :930  
+ BM36 :232   ROSMAP:403  
+ BM44 :227               
+ DLPFC:403               
+ TL   :160               
+                         </code></pre>
 <p class="plist">
 How does summary works? It depends on the type of data of the column:
 <p>
@@ -599,29 +599,29 @@ Usually, NA’s comes with downloaded data or data from different sources. You c
 <p>If you want to exclude all rows that have a missing value in any of the column, you should use <code>na.omit</code> function (I won’t show it because I don’t want to apply this filter to our data, but it is important that you know this function).
 <br>
 Instead, I propose an example on how to delete rows that have missing values in column PMI. We will use the function <code>is.na()</code> that evaluates values of a vector and returns a boolean (TRUE/FALSE) vector on whether a value is NA or not:</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="tidyverse-manage.html#cb383-1" tabindex="-1"></a><span class="co"># 1. Example of is.na</span></span>
-<span id="cb383-2"><a href="tidyverse-manage.html#cb383-2" tabindex="-1"></a><span class="fu">is.na</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">12</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="tidyverse-manage.html#cb384-1" tabindex="-1"></a><span class="co"># 1. Example of is.na</span></span>
+<span id="cb384-2"><a href="tidyverse-manage.html#cb384-2" tabindex="-1"></a><span class="fu">is.na</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">12</span>))</span></code></pre></div>
 <pre class="code-out"><code>[1] FALSE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
 <p>You should now tell me how to use it to exclude rows from a dataframe based on whether a value of a column is NA or not.<br></p>
 <p>Here is you should have answered:</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="tidyverse-manage.html#cb385-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span><span class="fu">is.na</span>(df<span class="sc">$</span>PMI), ]</span>
-<span id="cb385-2"><a href="tidyverse-manage.html#cb385-2" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
-<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN        
- Length:1448        Control:612   Min.   :0.000   F:864   Min.   :58.00   Min.   : 1.000   Min.   : 1.000  
- Class :character   AD     :836   1st Qu.:3.000   M:584   1st Qu.:79.00   1st Qu.: 3.917   1st Qu.: 5.600  
- Mode  :character                 Median :4.000           Median :86.00   Median : 5.500   Median : 6.700  
-                                  Mean   :3.881           Mean   :83.65   Mean   : 7.471   Mean   : 6.623  
-                                  3rd Qu.:6.000           3rd Qu.:90.00   3rd Qu.: 9.167   3rd Qu.: 7.800  
-                                  Max.   :6.000           Max.   :90.00   Max.   :38.000   Max.   :10.000  
-                                  NA&#39;s   :87                                                               
-      CDR           Area       dataset   
- Min.   :0.000   BM10 :233   MAYO  :117  
- 1st Qu.:0.500   BM22 :238   MSBB  :930  
- Median :2.000   BM36 :232   ROSMAP:401  
- Mean   :2.368   BM44 :227               
- 3rd Qu.:4.000   DLPFC:401               
- Max.   :5.000   TL   :117               
- NA&#39;s   :518                             </code></pre>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="tidyverse-manage.html#cb386-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span><span class="fu">is.na</span>(df<span class="sc">$</span>PMI), ]</span>
+<span id="cb386-2"><a href="tidyverse-manage.html#cb386-2" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN              CDR       
+ Length:1448        Control:612   Min.   :0.000   F:864   Min.   :58.00   Min.   : 1.000   Min.   : 1.000   Min.   :0.000  
+ Class :character   AD     :836   1st Qu.:3.000   M:584   1st Qu.:79.00   1st Qu.: 3.917   1st Qu.: 5.600   1st Qu.:0.500  
+ Mode  :character                 Median :4.000           Median :86.00   Median : 5.500   Median : 6.700   Median :2.000  
+                                  Mean   :3.881           Mean   :83.65   Mean   : 7.471   Mean   : 6.623   Mean   :2.368  
+                                  3rd Qu.:6.000           3rd Qu.:90.00   3rd Qu.: 9.167   3rd Qu.: 7.800   3rd Qu.:4.000  
+                                  Max.   :6.000           Max.   :90.00   Max.   :38.000   Max.   :10.000   Max.   :5.000  
+                                  NA&#39;s   :87                                                                NA&#39;s   :518    
+    Area       dataset   
+ BM10 :233   MAYO  :117  
+ BM22 :238   MSBB  :930  
+ BM36 :232   ROSMAP:401  
+ BM44 :227               
+ DLPFC:401               
+ TL   :117               
+                         </code></pre>
 <p>Great, we have no more NAs in PMI. If you don’t remember what <code>!</code> stands for, go back and check the <a href="boolean-chapter.html#boolean-chapter">boolean chapter</a>.
 <br></p>
 </div>
@@ -629,57 +629,49 @@ Instead, I propose an example on how to delete rows that have missing values in 
 <h2>Filter a dataframe</h2>
 <p>We have just filtered out some rows, and guess what?! Tidyverse has a function to filter values, it is called…… <code>filter</code>. <br>
 This function takes as input an expression that returns a vector of boolean. Let’s try it to retrieve a dataframe of control males with CDR greater than 4:</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="tidyverse-manage.html#cb387-1" tabindex="-1"></a>df_male_ctrl_cdr4 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb387-2"><a href="tidyverse-manage.html#cb387-2" tabindex="-1"></a>  <span class="fu">filter</span>(Diagnosis <span class="sc">==</span> <span class="st">&quot;Control&quot;</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> CDR <span class="sc">&gt;</span> <span class="dv">4</span>)</span>
-<span id="cb387-3"><a href="tidyverse-manage.html#cb387-3" tabindex="-1"></a></span>
-<span id="cb387-4"><a href="tidyverse-manage.html#cb387-4" tabindex="-1"></a><span class="fu">summary</span>(df_male_ctrl_cdr4)</span></code></pre></div>
-<pre class="code-out"><code>   SampleID           Diagnosis     Braak     sex        AOD          PMI             RIN             CDR   
- Length:3           Control:3   Min.   : NA   F:0   Min.   :89   Min.   :2.667   Min.   :4.900   Min.   :5  
- Class :character   AD     :0   1st Qu.: NA   M:3   1st Qu.:89   1st Qu.:2.667   1st Qu.:5.100   1st Qu.:5  
- Mode  :character               Median : NA         Median :89   Median :2.667   Median :5.300   Median :5  
-                                Mean   :NaN         Mean   :89   Mean   :2.667   Mean   :5.367   Mean   :5  
-                                3rd Qu.: NA         3rd Qu.:89   3rd Qu.:2.667   3rd Qu.:5.600   3rd Qu.:5  
-                                Max.   : NA         Max.   :89   Max.   :2.667   Max.   :5.900   Max.   :5  
-                                NA&#39;s   :3                                                                   
-    Area     dataset 
- BM10 :1   MAYO  :0  
- BM22 :1   MSBB  :3  
- BM36 :1   ROSMAP:0  
- BM44 :0             
- DLPFC:0             
- TL   :0             
-                     </code></pre>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="tidyverse-manage.html#cb388-1" tabindex="-1"></a>df_male_ctrl_cdr4 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb388-2"><a href="tidyverse-manage.html#cb388-2" tabindex="-1"></a>  <span class="fu">filter</span>(Diagnosis <span class="sc">==</span> <span class="st">&quot;Control&quot;</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> CDR <span class="sc">&gt;</span> <span class="dv">4</span>)</span>
+<span id="cb388-3"><a href="tidyverse-manage.html#cb388-3" tabindex="-1"></a></span>
+<span id="cb388-4"><a href="tidyverse-manage.html#cb388-4" tabindex="-1"></a><span class="fu">summary</span>(df_male_ctrl_cdr4)</span></code></pre></div>
+<pre class="code-out"><code>   SampleID           Diagnosis     Braak     sex        AOD          PMI             RIN             CDR       Area     dataset 
+ Length:3           Control:3   Min.   : NA   F:0   Min.   :89   Min.   :2.667   Min.   :4.900   Min.   :5   BM10 :1   MAYO  :0  
+ Class :character   AD     :0   1st Qu.: NA   M:3   1st Qu.:89   1st Qu.:2.667   1st Qu.:5.100   1st Qu.:5   BM22 :1   MSBB  :3  
+ Mode  :character               Median : NA         Median :89   Median :2.667   Median :5.300   Median :5   BM36 :1   ROSMAP:0  
+                                Mean   :NaN         Mean   :89   Mean   :2.667   Mean   :5.367   Mean   :5   BM44 :0             
+                                3rd Qu.: NA         3rd Qu.:89   3rd Qu.:2.667   3rd Qu.:5.600   3rd Qu.:5   DLPFC:0             
+                                Max.   : NA         Max.   :89   Max.   :2.667   Max.   :5.900   Max.   :5   TL   :0             
+                                NA&#39;s   :3                                                                                        </code></pre>
 <p>We have just 3 observations that matches our request.<br></p>
 <p>We can also use functions to evaluate thresholds etc. For example, let’s take the female whose RIN is above 3rd quartile (75th quantile):</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="tidyverse-manage.html#cb389-1" tabindex="-1"></a>df_female_rin3q <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb389-2"><a href="tidyverse-manage.html#cb389-2" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> RIN <span class="sc">&gt;</span> <span class="fu">quantile</span>(df<span class="sc">$</span>RIN, <span class="at">p =</span> <span class="fl">0.75</span>))</span>
-<span id="cb389-3"><a href="tidyverse-manage.html#cb389-3" tabindex="-1"></a></span>
-<span id="cb389-4"><a href="tidyverse-manage.html#cb389-4" tabindex="-1"></a><span class="fu">summary</span>(df_female_rin3q)</span></code></pre></div>
-<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN        
- Length:199         Control: 87   Min.   :0.000   F:199   Min.   :58.00   Min.   : 1.000   Min.   : 7.900  
- Class :character   AD     :112   1st Qu.:3.000   M:  0   1st Qu.:83.00   1st Qu.: 3.500   1st Qu.: 8.100  
- Mode  :character                 Median :4.000           Median :88.00   Median : 4.750   Median : 8.500  
-                                  Mean   :3.899           Mean   :85.07   Mean   : 5.855   Mean   : 8.708  
-                                  3rd Qu.:5.000           3rd Qu.:90.00   3rd Qu.: 6.500   3rd Qu.: 9.200  
-                                  Max.   :6.000           Max.   :90.00   Max.   :30.000   Max.   :10.000  
-                                  NA&#39;s   :10                                                               
-      CDR           Area      dataset  
- Min.   :0.000   BM10 :13   MAYO  :45  
- 1st Qu.:0.500   BM22 : 9   MSBB  :90  
- Median :2.000   BM36 :14   ROSMAP:64  
- Mean   :1.978   BM44 :54              
- 3rd Qu.:3.000   DLPFC:64              
- Max.   :5.000   TL   :45              
- NA&#39;s   :109                           </code></pre>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="tidyverse-manage.html#cb390-1" tabindex="-1"></a>df_female_rin3q <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb390-2"><a href="tidyverse-manage.html#cb390-2" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> RIN <span class="sc">&gt;</span> <span class="fu">quantile</span>(df<span class="sc">$</span>RIN, <span class="at">p =</span> <span class="fl">0.75</span>))</span>
+<span id="cb390-3"><a href="tidyverse-manage.html#cb390-3" tabindex="-1"></a></span>
+<span id="cb390-4"><a href="tidyverse-manage.html#cb390-4" tabindex="-1"></a><span class="fu">summary</span>(df_female_rin3q)</span></code></pre></div>
+<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN              CDR       
+ Length:199         Control: 87   Min.   :0.000   F:199   Min.   :58.00   Min.   : 1.000   Min.   : 7.900   Min.   :0.000  
+ Class :character   AD     :112   1st Qu.:3.000   M:  0   1st Qu.:83.00   1st Qu.: 3.500   1st Qu.: 8.100   1st Qu.:0.500  
+ Mode  :character                 Median :4.000           Median :88.00   Median : 4.750   Median : 8.500   Median :2.000  
+                                  Mean   :3.899           Mean   :85.07   Mean   : 5.855   Mean   : 8.708   Mean   :1.978  
+                                  3rd Qu.:5.000           3rd Qu.:90.00   3rd Qu.: 6.500   3rd Qu.: 9.200   3rd Qu.:3.000  
+                                  Max.   :6.000           Max.   :90.00   Max.   :30.000   Max.   :10.000   Max.   :5.000  
+                                  NA&#39;s   :10                                                                NA&#39;s   :109    
+    Area      dataset  
+ BM10 :13   MAYO  :45  
+ BM22 : 9   MSBB  :90  
+ BM36 :14   ROSMAP:64  
+ BM44 :54              
+ DLPFC:64              
+ TL   :45              
+                       </code></pre>
 <p>There are 199 female samples with a RIN above 3rd quartile. We get it thanks to <code>quantile</code> function, which accept a vector and returns the quartile values; if you want a particular quantile (as in our case), you can give as input <code>p</code>, which is the quantile you want to calculate.</p>
 </div>
 <div id="sort-for-the-value-of-a-column" class="section level2 unnumbered">
 <h2>Sort for the value of a column</h2>
 <p>You can also sort the entire dataframe based on the values of a column (or more columns if ties are present). We do it through <code>arrange</code> function of tidyverse. <br>
 For example, let’s sort the dataframe based on RIN:</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="tidyverse-manage.html#cb391-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb391-2"><a href="tidyverse-manage.html#cb391-2" tabindex="-1"></a>  <span class="fu">arrange</span>(RIN) <span class="sc">%&gt;%</span></span>
-<span id="cb391-3"><a href="tidyverse-manage.html#cb391-3" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="tidyverse-manage.html#cb392-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb392-2"><a href="tidyverse-manage.html#cb392-2" tabindex="-1"></a>  <span class="fu">arrange</span>(RIN) <span class="sc">%&gt;%</span></span>
+<span id="cb392-3"><a href="tidyverse-manage.html#cb392-3" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre class="code-out"><code>               SampleID Diagnosis Braak sex AOD       PMI RIN CDR Area dataset
 1          hB_RNA_12624        AD     6   F  90  3.250000 1.0   4 BM10    MSBB
 2          hB_RNA_12768        AD     6   M  82  6.833333 1.5   4 BM10    MSBB
@@ -711,11 +703,11 @@ Row 6 and 7 have the same RIN value, in this case we can add another column to <
 <p>Sometimes, you want to merge two columns, and guess what?! There is a function for it ahahah
 <br>
 Let’s merge Area and dataset columns using <code>unite()</code>:</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="tidyverse-manage.html#cb393-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb393-2"><a href="tidyverse-manage.html#cb393-2" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="at">col =</span> <span class="st">&quot;Area_dataset&quot;</span>, Area, dataset, </span>
-<span id="cb393-3"><a href="tidyverse-manage.html#cb393-3" tabindex="-1"></a>        <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="at">remove =</span> T)</span>
-<span id="cb393-4"><a href="tidyverse-manage.html#cb393-4" tabindex="-1"></a></span>
-<span id="cb393-5"><a href="tidyverse-manage.html#cb393-5" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="tidyverse-manage.html#cb394-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb394-2"><a href="tidyverse-manage.html#cb394-2" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="at">col =</span> <span class="st">&quot;Area_dataset&quot;</span>, Area, dataset, </span>
+<span id="cb394-3"><a href="tidyverse-manage.html#cb394-3" tabindex="-1"></a>        <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="at">remove =</span> T)</span>
+<span id="cb394-4"><a href="tidyverse-manage.html#cb394-4" tabindex="-1"></a></span>
+<span id="cb394-5"><a href="tidyverse-manage.html#cb394-5" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>  SampleID Diagnosis Braak sex AOD PMI  RIN CDR Area_dataset
 1 1005_TCX        AD     6   F  90   8  8.6  NA      TL_MAYO
 2 1019_TCX        AD     6   F  86   4  7.8  NA      TL_MAYO
@@ -746,12 +738,12 @@ Looking at the code:
 <h2>Split two columns</h2>
 <p>Obviously, there is also a function to split a column based on a patter: <code>separate</code>. <br>
 We use it to separate the newly created Area_dataset column into the original ones:</p>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="tidyverse-manage.html#cb395-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb395-2"><a href="tidyverse-manage.html#cb395-2" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> Area_dataset, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;Area&quot;</span>, <span class="st">&quot;dataset&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="at">remove =</span> F) <span class="sc">%&gt;%</span></span>
-<span id="cb395-3"><a href="tidyverse-manage.html#cb395-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Area),</span>
-<span id="cb395-4"><a href="tidyverse-manage.html#cb395-4" tabindex="-1"></a>         <span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(dataset))</span>
-<span id="cb395-5"><a href="tidyverse-manage.html#cb395-5" tabindex="-1"></a></span>
-<span id="cb395-6"><a href="tidyverse-manage.html#cb395-6" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="tidyverse-manage.html#cb396-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb396-2"><a href="tidyverse-manage.html#cb396-2" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> Area_dataset, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;Area&quot;</span>, <span class="st">&quot;dataset&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="at">remove =</span> F) <span class="sc">%&gt;%</span></span>
+<span id="cb396-3"><a href="tidyverse-manage.html#cb396-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(Area),</span>
+<span id="cb396-4"><a href="tidyverse-manage.html#cb396-4" tabindex="-1"></a>         <span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(dataset))</span>
+<span id="cb396-5"><a href="tidyverse-manage.html#cb396-5" tabindex="-1"></a></span>
+<span id="cb396-6"><a href="tidyverse-manage.html#cb396-6" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>  SampleID Diagnosis Braak sex AOD PMI  RIN CDR Area_dataset Area dataset
 1 1005_TCX        AD     6   F  90   8  8.6  NA      TL_MAYO   TL    MAYO
 2 1019_TCX        AD     6   F  86   4  7.8  NA      TL_MAYO   TL    MAYO
@@ -769,14 +761,14 @@ As you may have guessed, <code>into =</code> is used to set the names of the col
 This is useful when, for example, you have the output of a differential gene expression with ensemble gene id and another dataframe which associates the ensemble gene ids with gene names, chromosome position etc etc. In this way, you can bring the information of the second dataframe into the first one.
 <br>
 In our case, I found in the paper the extended names of the Area abbreviations, and I want to add this info to our table. To do so, let’s first create the dataframe of abbreviations and full names:</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="tidyverse-manage.html#cb397-1" tabindex="-1"></a><span class="co"># 1. Create vectors</span></span>
-<span id="cb397-2"><a href="tidyverse-manage.html#cb397-2" tabindex="-1"></a>abbreviations <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;BM10&quot;</span>, <span class="st">&quot;BM22&quot;</span>, <span class="st">&quot;BM36&quot;</span>, <span class="st">&quot;BM44&quot;</span>, <span class="st">&quot;DLPFC&quot;</span>, <span class="st">&quot;TL&quot;</span>)</span>
-<span id="cb397-3"><a href="tidyverse-manage.html#cb397-3" tabindex="-1"></a>full_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Broadmann area 10&quot;</span>, <span class="st">&quot;Broadmann area 22&quot;</span>, <span class="st">&quot;Broadmann area 36&quot;</span>, <span class="st">&quot;Broadmann area 44&quot;</span>,  <span class="st">&quot;Dorsolateral prefronal cortex&quot;</span>, <span class="st">&quot;Temporal lobe&quot;</span>)</span>
-<span id="cb397-4"><a href="tidyverse-manage.html#cb397-4" tabindex="-1"></a></span>
-<span id="cb397-5"><a href="tidyverse-manage.html#cb397-5" tabindex="-1"></a><span class="co"># 2. Create dataframe</span></span>
-<span id="cb397-6"><a href="tidyverse-manage.html#cb397-6" tabindex="-1"></a>area_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(abbreviations, full_name)</span>
-<span id="cb397-7"><a href="tidyverse-manage.html#cb397-7" tabindex="-1"></a></span>
-<span id="cb397-8"><a href="tidyverse-manage.html#cb397-8" tabindex="-1"></a>area_df</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="tidyverse-manage.html#cb398-1" tabindex="-1"></a><span class="co"># 1. Create vectors</span></span>
+<span id="cb398-2"><a href="tidyverse-manage.html#cb398-2" tabindex="-1"></a>abbreviations <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;BM10&quot;</span>, <span class="st">&quot;BM22&quot;</span>, <span class="st">&quot;BM36&quot;</span>, <span class="st">&quot;BM44&quot;</span>, <span class="st">&quot;DLPFC&quot;</span>, <span class="st">&quot;TL&quot;</span>)</span>
+<span id="cb398-3"><a href="tidyverse-manage.html#cb398-3" tabindex="-1"></a>full_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Broadmann area 10&quot;</span>, <span class="st">&quot;Broadmann area 22&quot;</span>, <span class="st">&quot;Broadmann area 36&quot;</span>, <span class="st">&quot;Broadmann area 44&quot;</span>,  <span class="st">&quot;Dorsolateral prefronal cortex&quot;</span>, <span class="st">&quot;Temporal lobe&quot;</span>)</span>
+<span id="cb398-4"><a href="tidyverse-manage.html#cb398-4" tabindex="-1"></a></span>
+<span id="cb398-5"><a href="tidyverse-manage.html#cb398-5" tabindex="-1"></a><span class="co"># 2. Create dataframe</span></span>
+<span id="cb398-6"><a href="tidyverse-manage.html#cb398-6" tabindex="-1"></a>area_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(abbreviations, full_name)</span>
+<span id="cb398-7"><a href="tidyverse-manage.html#cb398-7" tabindex="-1"></a></span>
+<span id="cb398-8"><a href="tidyverse-manage.html#cb398-8" tabindex="-1"></a>area_df</span></code></pre></div>
 <pre class="code-out"><code>  abbreviations                     full_name
 1          BM10             Broadmann area 10
 2          BM22             Broadmann area 22
@@ -785,10 +777,10 @@ In our case, I found in the paper the extended names of the Area abbreviations, 
 5         DLPFC Dorsolateral prefronal cortex
 6            TL                 Temporal lobe</code></pre>
 <p>Next, to insert full_name info into our original dataframe we have to use one of the <code>join</code> functions from <code>dplyr</code> package of the tidyverse universe:</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="tidyverse-manage.html#cb399-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb399-2"><a href="tidyverse-manage.html#cb399-2" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="at">y =</span> area_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="st">&quot;abbreviations&quot;</span>))</span>
-<span id="cb399-3"><a href="tidyverse-manage.html#cb399-3" tabindex="-1"></a></span>
-<span id="cb399-4"><a href="tidyverse-manage.html#cb399-4" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="tidyverse-manage.html#cb400-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb400-2"><a href="tidyverse-manage.html#cb400-2" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="at">y =</span> area_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Area&quot;</span> <span class="ot">=</span> <span class="st">&quot;abbreviations&quot;</span>))</span>
+<span id="cb400-3"><a href="tidyverse-manage.html#cb400-3" tabindex="-1"></a></span>
+<span id="cb400-4"><a href="tidyverse-manage.html#cb400-4" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
 <pre class="code-out"><code>  SampleID Diagnosis Braak sex AOD PMI  RIN CDR Area_dataset Area dataset     full_name
 1 1005_TCX        AD     6   F  90   8  8.6  NA      TL_MAYO   TL    MAYO Temporal lobe
 2 1019_TCX        AD     6   F  86   4  7.8  NA      TL_MAYO   TL    MAYO Temporal lobe
@@ -843,28 +835,28 @@ Change full_name to a factor</p>
 <summary>
 Solution
 </summary>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="tidyverse-manage.html#cb401-1" tabindex="-1"></a>df_filtered <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb401-2"><a href="tidyverse-manage.html#cb401-2" tabindex="-1"></a>  <span class="fu">filter</span>((sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> full_name <span class="sc">==</span> <span class="st">&quot;Temporal lobe&quot;</span>) <span class="sc">|</span></span>
-<span id="cb401-3"><a href="tidyverse-manage.html#cb401-3" tabindex="-1"></a>           (sex <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> full_name <span class="sc">==</span> <span class="st">&quot;Dorsolateral prefronal cortex&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb401-4"><a href="tidyverse-manage.html#cb401-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;full_name&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(full_name))</span>
-<span id="cb401-5"><a href="tidyverse-manage.html#cb401-5" tabindex="-1"></a></span>
-<span id="cb401-6"><a href="tidyverse-manage.html#cb401-6" tabindex="-1"></a><span class="fu">summary</span>(df_filtered)</span></code></pre></div>
-<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN        
- Length:318         Control:152   Min.   :0.000   F:263   Min.   :61.00   Min.   : 1.000   Min.   : 5.000  
- Class :character   AD     :166   1st Qu.:3.000   M: 55   1st Qu.:84.45   1st Qu.: 4.021   1st Qu.: 6.500  
- Mode  :character                 Median :4.000           Median :89.20   Median : 5.375   Median : 7.400  
-                                  Mean   :3.751           Mean   :86.37   Mean   : 7.143   Mean   : 7.271  
-                                  3rd Qu.:5.000           3rd Qu.:90.00   3rd Qu.: 8.167   3rd Qu.: 8.000  
-                                  Max.   :6.000           Max.   :90.00   Max.   :33.000   Max.   :10.000  
-                                  NA&#39;s   :25                                                               
-      CDR      Area_dataset           Area             dataset                            full_name  
- Min.   : NA   Length:318         Length:318         MAYO  : 55   Dorsolateral prefronal cortex:263  
- 1st Qu.: NA   Class :character   Class :character   MSBB  :  0   Temporal lobe                : 55  
- Median : NA   Mode  :character   Mode  :character   ROSMAP:263                                      
- Mean   :NaN                                                                                         
- 3rd Qu.: NA                                                                                         
- Max.   : NA                                                                                         
- NA&#39;s   :318                                                                                         </code></pre>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="tidyverse-manage.html#cb402-1" tabindex="-1"></a>df_filtered <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb402-2"><a href="tidyverse-manage.html#cb402-2" tabindex="-1"></a>  <span class="fu">filter</span>((sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> full_name <span class="sc">==</span> <span class="st">&quot;Temporal lobe&quot;</span>) <span class="sc">|</span></span>
+<span id="cb402-3"><a href="tidyverse-manage.html#cb402-3" tabindex="-1"></a>           (sex <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> full_name <span class="sc">==</span> <span class="st">&quot;Dorsolateral prefronal cortex&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb402-4"><a href="tidyverse-manage.html#cb402-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;full_name&quot;</span> <span class="ot">=</span> <span class="fu">factor</span>(full_name))</span>
+<span id="cb402-5"><a href="tidyverse-manage.html#cb402-5" tabindex="-1"></a></span>
+<span id="cb402-6"><a href="tidyverse-manage.html#cb402-6" tabindex="-1"></a><span class="fu">summary</span>(df_filtered)</span></code></pre></div>
+<pre class="code-out"><code>   SampleID           Diagnosis       Braak       sex          AOD             PMI              RIN              CDR     
+ Length:318         Control:152   Min.   :0.000   F:263   Min.   :61.00   Min.   : 1.000   Min.   : 5.000   Min.   : NA  
+ Class :character   AD     :166   1st Qu.:3.000   M: 55   1st Qu.:84.45   1st Qu.: 4.021   1st Qu.: 6.500   1st Qu.: NA  
+ Mode  :character                 Median :4.000           Median :89.20   Median : 5.375   Median : 7.400   Median : NA  
+                                  Mean   :3.751           Mean   :86.37   Mean   : 7.143   Mean   : 7.271   Mean   :NaN  
+                                  3rd Qu.:5.000           3rd Qu.:90.00   3rd Qu.: 8.167   3rd Qu.: 8.000   3rd Qu.: NA  
+                                  Max.   :6.000           Max.   :90.00   Max.   :33.000   Max.   :10.000   Max.   : NA  
+                                  NA&#39;s   :25                                                                NA&#39;s   :318  
+ Area_dataset           Area             dataset                            full_name  
+ Length:318         Length:318         MAYO  : 55   Dorsolateral prefronal cortex:263  
+ Class :character   Class :character   MSBB  :  0   Temporal lobe                : 55  
+ Mode  :character   Mode  :character   ROSMAP:263                                      
+                                                                                       
+                                                                                       
+                                                                                       
+                                                                                       </code></pre>
 It is important to note that, since we have one condition OR another, and both have multiple conditions in them, we must use parenthesis to separate the conditions to evaluate. In fact, it works as in math: first parenthesis and then from left to right.
 </details>
 <p><br>
